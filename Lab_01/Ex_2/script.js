@@ -123,3 +123,25 @@ function handleContactSubmit(event) {
 if (contactForm) {
     contactForm.addEventListener("submit", handleContactSubmit);
 }
+
+// Decoupled Audio Engine Logic
+function playSound(key) {
+  const pad = document.querySelector(
+    `.drum-pad[data-key="${key.toLowerCase()}"]`
+  );
+
+  if (!pad) return;
+
+  const soundPath = pad.dataset.sound;
+  if (!soundPath) return;
+
+  const audio = new Audio(soundPath);
+  audio.currentTime = 0;
+  audio.play();
+
+  pad.classList.add("active");
+
+  setTimeout(() => {
+    pad.classList.remove("active");
+  }, 100);
+}
