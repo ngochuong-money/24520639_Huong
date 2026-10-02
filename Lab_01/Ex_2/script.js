@@ -145,3 +145,10 @@ function playSound(key) {
     pad.classList.remove("active");
   }, 100);
 }
+
+// Keyboard Event Binding with Repeat Throttling
+window.addEventListener("keydown", (event) => {
+  if (event.repeat) return;
+
+  playSound(event.key);
+});
