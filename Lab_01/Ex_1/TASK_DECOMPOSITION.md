@@ -1087,3 +1087,71 @@ Chrome DevTools
 Keep the semantic HTML implementation separate from CSS work.
 
 Do not combine CSS and HTML changes in the required semantic HTML atomic commit.
+
+---
+
+# Exercise 4 — Resilient Component Architecture
+
+## State Machine Definition
+
+The resilient component follows a four-state contract:
+
+1. Loading State
+   - The component is waiting for data.
+   - A pure CSS shimmer skeleton is displayed.
+
+2. Live Data State
+   - Data has loaded successfully.
+   - Metadata badges are arranged with Flexbox.
+   - The data list is arranged with CSS Grid.
+
+3. Empty State
+   - Data loading succeeds, but no data is available.
+   - An empty-state interface is displayed.
+
+4. Error State
+   - Data loading fails.
+   - An accessible retry trigger is provided.
+
+## State Flow
+
+Loading
+├── Success with data → Live Data
+├── Success without data → Empty
+└── Failure → Error
+
+Error
+└── Retry → Loading
+
+## SUB-TASK T-03A — Loading Skeleton
+
+### Objective
+
+Implement the Loading State of the resilient component using a pure CSS shimmer skeleton.
+
+### Requirements
+
+- Implement only the Loading State in this sub-task.
+- Use a pure CSS shimmer gradient.
+- Use `.skeleton-item` for skeleton placeholders.
+- Use the `shimmer` animation.
+- The shimmer animation runs continuously while the component is loading.
+- Do not implement the Live Data, Empty, or Error states in this sub-task.
+
+### Decomposition Rule
+
+T-03A is implemented and committed independently before proceeding to the remaining states.
+
+### Completion Criteria
+
+T-03A is complete when:
+
+- The loading skeleton is visible.
+- Skeleton placeholders use the CSS shimmer gradient.
+- The shimmer animation works continuously.
+- The implementation does not include the Live Data, Empty, or Error states.
+- The Loading State is committed independently.
+
+### Required Commit
+
+git commit -m "feat(css): skeleton"
