@@ -501,3 +501,59 @@ nav ul {
         background-position: -200% 0;
     }
 }
+
+/* =========================================================
+   Exercise 4
+   SUB-TASK T-03B — Live Data State
+   ========================================================= */
+
+
+/* =========================
+   FLEXBOX METADATA BADGES
+   ========================= */
+
+.metadata-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+
+    list-style: none;
+}
+
+.metadata-badge {
+    padding: var(--space-xs) var(--space-sm);
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+/* =========================
+   GRID LIVE DATA LIST
+   ========================= */
+
+.live-data-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.live-data-item {
+    padding: var(--space-md);
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.live-data-item p {
+    margin-top: var(--space-sm);
+}

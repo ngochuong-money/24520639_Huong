@@ -1155,3 +1155,49 @@ T-03A is complete when:
 ### Required Commit
 
 git commit -m "feat(css): skeleton"
+
+## SUB-TASK T-03B — Live Data State
+
+### Objective
+
+Implement the Live Data State of the resilient component.
+
+### Requirements
+
+- Implement only the Live Data State in this sub-task.
+- Display successfully loaded data.
+- Use Flexbox for metadata badges.
+- Use CSS Grid for the live data list.
+- Keep the Loading State from T-03A as a separate state.
+- Do not implement the Empty State in this sub-task.
+- Do not implement the Error State in this sub-task.
+- Do not implement the retry trigger in this sub-task.
+
+### State Transition
+
+Loading
+└── Success with data → Live Data
+
+### Live Data Structure
+
+Live Data State
+├── Metadata → Flexbox badges
+└── Data List → CSS Grid
+
+### Decomposition Rule
+
+T-03B is implemented separately after T-03A and before T-03C.
+
+The Live Data State must not be combined with the Empty or Error states in this implementation step.
+
+### Completion Criteria
+
+T-03B is complete when:
+
+- The Live Data State is present.
+- Successfully loaded data is visible.
+- Metadata badges are arranged using Flexbox.
+- The live data list is arranged using CSS Grid.
+- The Loading State remains independently defined.
+- Empty and Error states have not been implemented.
+- T-03B is committed independently.
