@@ -1,0 +1,92 @@
+"use strict";
+
+/* =========================================================
+   Exercise 2 — Enterprise Developer Portfolio
+   SUB-TASK T-02C: Theme Engine
+   ========================================================= */
+
+const THEME_KEY = "theme";
+const LIGHT_THEME = "light";
+const DARK_THEME = "dark";
+
+const themeToggle = document.getElementById("theme-toggle");
+
+
+/* =========================
+   APPLY THEME
+   ========================= */
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+
+    if (themeToggle) {
+        const isDark = theme === DARK_THEME;
+
+        themeToggle.setAttribute("aria-pressed", String(isDark));
+
+        themeToggle.textContent = isDark
+            ? "Switch to light mode"
+            : "Switch to dark mode";
+    }
+}
+
+
+/* =========================
+   LOAD SAVED THEME
+   ========================= */
+
+function getSavedTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+
+    if (
+        savedTheme === LIGHT_THEME ||
+        savedTheme === DARK_THEME
+    ) {
+        return savedTheme;
+    }
+
+    return LIGHT_THEME;
+}
+
+
+/* =========================
+   SAVE THEME
+   ========================= */
+
+function saveTheme(theme) {
+    localStorage.setItem(THEME_KEY, theme);
+}
+
+
+/* =========================
+   TOGGLE THEME
+   ========================= */
+
+function toggleTheme() {
+    const currentTheme =
+        document.documentElement.dataset.theme;
+
+    const nextTheme =
+        currentTheme === DARK_THEME
+            ? LIGHT_THEME
+            : DARK_THEME;
+
+    applyTheme(nextTheme);
+    saveTheme(nextTheme);
+}
+
+
+/* =========================
+   INITIALIZE THEME
+   ========================= */
+
+applyTheme(getSavedTheme());
+
+
+/* =========================
+   THEME TOGGLE EVENT
+   ========================= */
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+}

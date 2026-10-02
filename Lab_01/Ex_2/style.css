@@ -41,6 +41,22 @@
     --border-width: 1px;
     --border-radius: 0.5rem;
 }
+/* =========================
+   DARK THEME TOKENS
+   ========================= */
+
+:root[data-theme="dark"] {
+    --color-background: #111827;
+    --color-surface: #1f2937;
+
+    --color-text: #f9fafb;
+    --color-text-secondary: #e5e7eb;
+
+    --color-primary: #93c5fd;
+    --color-primary-text: #111827;
+
+    --color-border: #9ca3af;
+}
 
 
 /* =========================
@@ -207,6 +223,7 @@ main > section {
 
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--border-radius);
+    background-color: var(--color-surface);
 }
 
 
