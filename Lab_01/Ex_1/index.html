@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML Exercise</title>
+</head>
+
+<body>
+
+    <!-- Accessible Skip Link -->
+    <a href="#main-content" class="skip-link">
+        Skip to main content
+    </a>
+
+
+    <!-- Header -->
+    <header role="banner">
+        <h1>Jane Doe, Lead Engineer</h1>
+    </header>
+
+
+    <!-- Primary Navigation -->
+    <nav role="navigation" aria-label="Primary">
+        <ul>
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+
+            <li>
+                <a href="#media">Media</a>
+            </li>
+
+            <li>
+                <a href="#academic-progress">Academic Progress</a>
+            </li>
+
+            <li>
+                <a href="#application">Application</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+
+        <!-- About -->
+        <section id="about">
+
+            <h2>About</h2>
+
+            <p>
+                Jane Doe is a <strong>Lead Engineer</strong>
+                specializing in <em>accessible web development</em>.
+            </p>
+
+            <blockquote>
+                Semantic HTML provides meaning to web content.
+            </blockquote>
+
+            <address>
+                Contact: jane@example.com
+            </address>
+
+            <p>
+                Example inline code:
+                <code>&lt;main&gt;</code>
+            </p>
+
+            <pre><code>&lt;header&gt;
+    &lt;h1&gt;Jane Doe, Lead Engineer&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+
+            <h3>Text Formatting</h3>
+
+            <p>
+                Removed information:
+                <del>Old project information</del>
+            </p>
+
+            <p>
+                Outdated information:
+                <s>Available for projects in 2025</s>
+            </p>
+
+            <p>
+                Water formula: H<sub>2</sub>O
+            </p>
+
+            <p>
+                Power calculation:
+                2<sup>10</sup> = 1024
+            </p>
+
+            <p>
+                &copy; Jane Doe &mdash;
+                HTML elements use
+                &lt; and &gt; characters.
+            </p>
+
+        </section>
+
+
+        <!-- Projects -->
+        <section id="projects">
+
+            <h2>Projects</h2>
+
+            <article>
+                <h3>Accessible Web Project</h3>
+
+                <p>
+                    A project demonstrating semantic HTML and accessibility.
+                </p>
+            </article>
+
+        </section>
+
+
+        <!-- Media -->
+        <section id="media">
+
+            <h2>Media Assets</h2>
+
+            <h3>Profile Image</h3>
+
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2QAewp3RA7qPqVTZLplVcp7jL7RC8XzZv0tI-VL2pKw&s=10"
+                alt="Portrait of a Senior Developer"
+                width="400"
+                height="400"
+                loading="lazy"
+                decoding="async">
+
+            <h3>Responsive Conference Image</h3>
+
+            <picture>
+
+                <source
+                    type="image/avif"
+                    srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNEYTxabCEurJ4dwbjpgFlFoKwSiNpCoeB55up26u7OI9KZlaV6aS7bl1b&s=10">
+
+                <source
+                    type="image/webp"
+                    srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmqCE9GdKf-0yjPk4rweNHYE7jvzG4mbP6DHLtWNux6pyIVV1TCvNlHJY&s=10">
+
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIe3jSN3GcRZ0AWNqqu_76AeJFGwRvSi7e8hgDd5ngV5J2xm6Xe9Evvs&s=10"
+                    alt="Tech Conference"
+                    width="1200"
+                    height="600">
+
+            </picture>
+
+        </section>
+
+
+        <!-- Semantic Table -->
+        <section id="academic-progress">
+
+            <h2>Academic Progress</h2>
+
+            <table>
+
+                <caption>
+                    Student Academic Progression
+                </caption>
+
+                <thead>
+                    <tr>
+                        <th scope="col">Course Code</th>
+                        <th scope="col">Subject Title</th>
+                        <th scope="col">Grade</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <th scope="row">SE104</th>
+                        <td>Web Application Development</td>
+                        <td>A+</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">IS201</th>
+                        <td>Information Systems</td>
+                        <td>A</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">CS101</th>
+                        <td>Programming Fundamentals</td>
+                        <td>B+</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Summary</th>
+                        <td colspan="2">
+                            Academic Progression Complete
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row" rowspan="2">
+                            Status
+                        </th>
+                        <td>Semester 1</td>
+                        <td>Completed</td>
+                    </tr>
+
+                    <tr>
+                        <td>Semester 2</td>
+                        <td>In Progress</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- Modern Form -->
+        <section id="application">
+
+            <h2>Application Form</h2>
+
+            <form action="/api/register" method="POST">
+
+                <!-- Name -->
+                <p>
+                    <label for="applicant-name">
+                        Full Name:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="applicant-name"
+                        name="name"
+                        required
+                        minlength="3">
+                </p>
+
+
+                <!-- Email -->
+                <p>
+                    <label for="applicant-email">
+                        Institutional Email:
+                    </label>
+
+                    <input
+                        type="email"
+                        id="applicant-email"
+                        name="email"
+                        required>
+                </p>
+
+
+                <!-- Telephone -->
+                <p>
+                    <label for="applicant-phone">
+                        Telephone:
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="applicant-phone"
+                        name="phone"
+                        pattern="[0-9]{10}">
+                </p>
+
+
+                <!-- Date -->
+                <p>
+                    <label for="application-date">
+                        Application Date:
+                    </label>
+
+                    <input
+                        type="date"
+                        id="application-date"
+                        name="application-date">
+                </p>
+
+
+                <!-- Number -->
+                <p>
+                    <label for="experience">
+                        Years of Experience:
+                    </label>
+
+                    <input
+                        type="number"
+                        id="experience"
+                        name="experience"
+                        min="0"
+                        max="50">
+                </p>
+
+
+                <!-- URL -->
+                <p>
+                    <label for="portfolio">
+                        Portfolio URL:
+                    </label>
+
+                    <input
+                        type="url"
+                        id="portfolio"
+                        name="portfolio"
+                        aria-describedby="portfolio-hint">
+
+                    <small id="portfolio-hint">
+                        Enter the full URL of your portfolio.
+                    </small>
+                </p>
+
+
+                <!-- Search -->
+                <p>
+                    <label for="project-search">
+                        Search Projects:
+                    </label>
+
+                    <input
+                        type="search"
+                        id="project-search"
+                        name="search">
+                </p>
+
+
+                <!-- Submit -->
+                <button type="submit">
+                    Submit Application
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Native Dialog -->
+        <section id="dialog-example">
+
+            <h2>Native Dialog</h2>
+
+            <button type="button" id="open-dialog">
+                Open Dialog
+            </button>
+
+            <dialog id="application-dialog">
+
+                <h3>Application Information</h3>
+
+                <p>
+                    Review your application information before continuing.
+                </p>
+
+                <button type="button" id="close-dialog">
+                    Close
+                </button>
+
+            </dialog>
+
+        </section>
+
+    </main>
+
+
+    <script>
+        const dialog = document.getElementById("application-dialog");
+        const openButton = document.getElementById("open-dialog");
+        const closeButton = document.getElementById("close-dialog");
+
+        openButton.addEventListener("click", () => {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+    </script>
+
+</body>
+
+</html>
