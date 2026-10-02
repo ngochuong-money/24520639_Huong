@@ -25,8 +25,8 @@ function applyTheme(theme) {
         themeToggle.setAttribute("aria-pressed", String(isDark));
 
         themeToggle.textContent = isDark
-            ? "Switch to light mode"
-            : "Switch to dark mode";
+            ? "☀ Switch to light mode"
+            : "☾ Switch to dark mode";
     }
 }
 
@@ -89,4 +89,37 @@ applyTheme(getSavedTheme());
 
 if (themeToggle) {
     themeToggle.addEventListener("click", toggleTheme);
+}
+
+
+/* =========================================================
+   Exercise 3 — Contact Form State Handling
+   ========================================================= */
+
+const contactForm = document.getElementById("contact-form");
+const formStatus = document.getElementById("form-status");
+
+const contactState = {
+    submitted: false
+};
+
+function handleContactSubmit(event) {
+    event.preventDefault();
+
+    if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+    }
+
+    contactState.submitted = true;
+
+    if (formStatus) {
+        formStatus.textContent = "Message submitted successfully.";
+    }
+
+    contactForm.reset();
+}
+
+if (contactForm) {
+    contactForm.addEventListener("submit", handleContactSubmit);
 }

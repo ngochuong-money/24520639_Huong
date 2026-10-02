@@ -17,8 +17,18 @@
 
 
     <!-- Header -->
-    <header role="banner">
-        <h1>Jane Doe, Lead Engineer</h1>
+    <header class="hero" role="banner">
+        <img class="hero-portrait" src="assets/avatar.webp" alt="Portrait of a Senior Developer" width="400"
+            height="400">
+
+        <section class="hero-content">
+            <h1>Jane Doe, Lead Engineer</h1>
+
+            <p>
+                Building accessible, responsive, and maintainable
+                web applications.
+            </p>
+        </section>
     </header>
 
 
@@ -27,6 +37,9 @@
         <ul>
             <li>
                 <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
             </li>
 
             <li>
@@ -45,12 +58,12 @@
                 <a href="#application">Application</a>
             </li>
             <li>
-                <button
-                    type="button"
-                    id="theme-toggle"
-                    aria-pressed="false">
+                <button type="button" id="theme-toggle" aria-pressed="false">
                     Switch to dark mode
                 </button>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
             </li>
         </ul>
     </nav>
@@ -114,59 +127,62 @@
             </p>
 
         </section>
+        <section id="skills">
+            <h2>Skills Matrix</h2>
+
+            <ul class="skills-grid">
+                <li class="badge">HTML</li>
+                <li class="badge">CSS</li>
+                <li class="badge">JavaScript</li>
+                <li class="badge">TypeScript</li>
+                <li class="badge">Accessibility</li>
+                <li class="badge">Responsive Design</li>
+            </ul>
+        </section>
+        
 
 
         <!-- Projects -->
         <section id="projects">
-
             <h2>Projects</h2>
 
-            <article>
-                <h3>Accessible Web Project</h3>
+            <section class="project-grid">
 
-                <p>
-                    A project demonstrating semantic HTML and accessibility.
-                </p>
-            </article>
+                <article class="project-card" data-category="frontend">
+                    <header class="card-header">
+                        <h3>Distributed State Engine</h3>
+                        <span class="badge">TypeScript</span>
+                    </header>
 
-        </section>
+                    <p>
+                        Lightweight event bus built without external libraries.
+                    </p>
 
+                    <footer class="card-footer">
+                        <a href="#" aria-label="View State Engine repository">
+                            Source Code
+                        </a>
+                    </footer>
+                </article>
 
-        <!-- Media -->
-        <section id="media">
+                <article class="project-card" data-category="frontend">
+                    <header class="card-header">
+                        <h3>Accessible Portfolio</h3>
+                        <span class="badge">HTML</span>
+                    </header>
 
-            <h2>Media Assets</h2>
+                    <p>
+                        Semantic and accessible developer portfolio.
+                    </p>
 
-            <h3>Profile Image</h3>
+                    <footer class="card-footer">
+                        <a href="#" aria-label="View Accessible Portfolio repository">
+                            Source Code
+                        </a>
+                    </footer>
+                </article>
 
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2QAewp3RA7qPqVTZLplVcp7jL7RC8XzZv0tI-VL2pKw&s=10"
-                alt="Portrait of a Senior Developer"
-                width="400"
-                height="400"
-                loading="lazy"
-                decoding="async">
-
-            <h3>Responsive Conference Image</h3>
-
-            <picture>
-
-                <source
-                    type="image/avif"
-                    srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNEYTxabCEurJ4dwbjpgFlFoKwSiNpCoeB55up26u7OI9KZlaV6aS7bl1b&s=10">
-
-                <source
-                    type="image/webp"
-                    srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmqCE9GdKf-0yjPk4rweNHYE7jvzG4mbP6DHLtWNux6pyIVV1TCvNlHJY&s=10">
-
-                <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIe3jSN3GcRZ0AWNqqu_76AeJFGwRvSi7e8hgDd5ngV5J2xm6Xe9Evvs&s=10"
-                    alt="Tech Conference"
-                    width="1200"
-                    height="600">
-
-            </picture>
-
+            </section>
         </section>
 
 
@@ -249,12 +265,7 @@
                         Full Name:
                     </label>
 
-                    <input
-                        type="text"
-                        id="applicant-name"
-                        name="name"
-                        required
-                        minlength="3">
+                    <input type="text" id="applicant-name" name="name" required minlength="3">
                 </p>
 
 
@@ -264,11 +275,7 @@
                         Institutional Email:
                     </label>
 
-                    <input
-                        type="email"
-                        id="applicant-email"
-                        name="email"
-                        required>
+                    <input type="email" id="applicant-email" name="email" required>
                 </p>
 
 
@@ -278,11 +285,7 @@
                         Telephone:
                     </label>
 
-                    <input
-                        type="tel"
-                        id="applicant-phone"
-                        name="phone"
-                        pattern="[0-9]{10}">
+                    <input type="tel" id="applicant-phone" name="phone" pattern="[0-9]{10}">
                 </p>
 
 
@@ -292,10 +295,7 @@
                         Application Date:
                     </label>
 
-                    <input
-                        type="date"
-                        id="application-date"
-                        name="application-date">
+                    <input type="date" id="application-date" name="application-date">
                 </p>
 
 
@@ -305,12 +305,7 @@
                         Years of Experience:
                     </label>
 
-                    <input
-                        type="number"
-                        id="experience"
-                        name="experience"
-                        min="0"
-                        max="50">
+                    <input type="number" id="experience" name="experience" min="0" max="50">
                 </p>
 
 
@@ -320,11 +315,7 @@
                         Portfolio URL:
                     </label>
 
-                    <input
-                        type="url"
-                        id="portfolio"
-                        name="portfolio"
-                        aria-describedby="portfolio-hint">
+                    <input type="url" id="portfolio" name="portfolio" aria-describedby="portfolio-hint">
 
                     <small id="portfolio-hint">
                         Enter the full URL of your portfolio.
@@ -338,10 +329,7 @@
                         Search Projects:
                     </label>
 
-                    <input
-                        type="search"
-                        id="project-search"
-                        name="search">
+                    <input type="search" id="project-search" name="search">
                 </p>
 
 
@@ -379,6 +367,33 @@
             </dialog>
 
         </section>
+        <section id="contact">
+            <h2>Contact</h2>
+
+            <form id="contact-form">
+                <p>
+                    <label for="contact-name">Name:</label>
+                    <input type="text" id="contact-name" name="name" required minlength="2">
+                </p>
+
+                <p>
+                    <label for="contact-email">Email:</label>
+                    <input type="email" id="contact-email" name="email" required>
+                </p>
+
+                <p>
+                    <label for="contact-message">Message:</label>
+                    <textarea id="contact-message" name="message" required minlength="10"></textarea>
+                </p>
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+                <p id="form-status" aria-live="polite"></p>
+            </form>
+        </section>
+        
 
     </main>
 

@@ -304,3 +304,166 @@ select {
         max-width: 100%;
     }
 }
+
+/* =========================================================
+   Exercise 3 — Component Architecture & State Modeling
+   ========================================================= */
+
+
+/* =========================
+   MODERN GLOBAL RESET
+   ========================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    color-scheme: light dark;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FLEXBOX — 1D NAVIGATION
+   ========================= */
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-lg);
+
+    list-style: none;
+}
+
+
+/* =========================
+   HERO COMPONENT
+   ========================= */
+
+.hero {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+}
+
+.hero-portrait {
+    width: min(100%, 25rem);
+    height: auto;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+
+/* =========================
+   SKILLS MATRIX
+   ========================= */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+
+    gap: var(--space-md);
+
+    padding: var(--space-lg) 0;
+    list-style: none;
+}
+
+.badge {
+    padding: var(--space-sm) var(--space-md);
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+
+/* =========================
+   CSS GRID — 2D PROJECTS
+   ========================= */
+
+.project-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+}
+
+
+/* =========================
+   PROJECT CARD COMPONENT
+   ========================= */
+
+.project-card {
+    padding: var(--space-lg);
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.card-header,
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.project-card p {
+    margin-block: var(--space-md);
+}
+
+
+/* =========================
+   CONTACT FORM
+   ========================= */
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+#contact-form p {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: var(--space-sm);
+
+    color: var(--color-text);
+    background-color: var(--color-background);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+#contact-form textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
