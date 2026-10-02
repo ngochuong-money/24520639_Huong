@@ -141,3 +141,149 @@ select:focus-visible {
 .skip-link:focus {
     transform: translateY(0);
 }
+
+/* =========================================================
+   Exercise 2 — Enterprise Developer Portfolio
+   SUB-TASK T-02B: Responsive 2D Grid Layout
+   ========================================================= */
+
+
+/* =========================
+   PAGE CONTAINER
+   ========================= */
+
+header,
+nav,
+main {
+    width: min(100% - (2 * var(--space-md)), var(--content-max-width));
+    margin-inline: auto;
+}
+
+
+/* =========================
+   PRIMARY NAVIGATION
+   ========================= */
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+
+    margin: 0;
+    padding: var(--space-md) 0;
+
+    list-style: none;
+}
+
+nav a {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+}
+
+
+/* =========================
+   RESPONSIVE 2D GRID
+   ========================= */
+
+main {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+
+    gap: var(--space-lg);
+
+    padding-block: var(--space-lg);
+}
+
+
+/* =========================
+   GRID ITEMS
+   ========================= */
+
+main > section {
+    min-width: 0;
+    padding: var(--space-md);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+
+/* =========================
+   LARGE CONTENT
+   ========================= */
+
+pre,
+table {
+    max-width: 100%;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+}
+
+
+/* =========================
+   RESPONSIVE TABLE
+   ========================= */
+
+#academic-progress {
+    overflow-x: auto;
+}
+
+
+/* =========================
+   RESPONSIVE FORM CONTROLS
+   ========================= */
+
+input,
+textarea,
+select {
+    max-width: 100%;
+}
+
+
+/* =========================
+   MOBILE — 375px
+   ========================= */
+
+@media (max-width: 23.4375rem) {
+
+    header,
+    nav,
+    main {
+        width: calc(100% - (2 * var(--space-sm)));
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    nav a {
+        width: 100%;
+    }
+
+    main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-md);
+        padding-block: var(--space-md);
+    }
+
+    main > section {
+        min-width: 0;
+        padding: var(--space-sm);
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        max-width: 100%;
+    }
+}
