@@ -557,3 +557,47 @@ nav ul {
 .live-data-item p {
     margin-top: var(--space-sm);
 }
+
+/* =========================================================
+   Exercise 4
+   SUB-TASK T-03C — Empty & Error States
+   ========================================================= */
+
+.empty-state,
+.error-state {
+    padding: var(--space-lg);
+    margin-top: var(--space-md);
+
+    color: var(--color-text);
+    background-color: var(--color-surface);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.empty-state p,
+.error-state p {
+    margin-top: var(--space-sm);
+}
+
+
+/* Accessible Retry Trigger */
+
+.retry-button {
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+
+    color: var(--color-primary-text);
+    background-color: var(--color-primary);
+
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+
+    font: inherit;
+    cursor: pointer;
+}
+
+.retry-button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}

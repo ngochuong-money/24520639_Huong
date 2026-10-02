@@ -1201,3 +1201,69 @@ T-03B is complete when:
 - The Loading State remains independently defined.
 - Empty and Error states have not been implemented.
 - T-03B is committed independently.
+
+## SUB-TASK T-03C — Empty & Error States
+
+### Objective
+
+Implement the Empty State and Error State of the resilient component with an accessible retry trigger.
+
+### Requirements
+
+- Implement the Empty State.
+- Implement the Error State.
+- Provide an accessible retry trigger for the Error State.
+- Use a native button element for the retry trigger so it supports keyboard interaction.
+- Keep the Loading State from T-03A.
+- Keep the Live Data State from T-03B.
+- Do not modify the previously completed state contracts unnecessarily.
+
+### State Transitions
+
+Loading
+├── Success with data → Live Data
+├── Success without data → Empty
+└── Failure → Error
+
+Error
+└── Retry → Loading
+
+### Empty State
+
+The Empty State represents a successful data request that returns no available data.
+
+### Error State
+
+The Error State represents a failed data request.
+
+The Error State provides an accessible retry trigger that allows the user to attempt loading again.
+
+### Accessibility Contract
+
+The retry trigger must:
+
+- Use a native `<button>` element.
+- Be reachable using the Tab key.
+- Be activatable using the Enter or Space key.
+- Have visible text describing the retry action.
+
+### Decomposition Rule
+
+T-03C is implemented only after T-03A and T-03B have been completed separately.
+
+This sub-task implements only the remaining Empty and Error states.
+
+### Completion Criteria
+
+T-03C is complete when:
+
+- The Empty State is present.
+- The Error State is present.
+- The Error State contains an accessible retry button.
+- The retry button is keyboard accessible.
+- The four-state component contract is complete:
+  - Loading
+  - Live Data
+  - Empty
+  - Error
+- T-03C is committed separately from T-03A and T-03B.
