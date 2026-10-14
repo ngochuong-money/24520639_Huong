@@ -51,7 +51,8 @@ const submitButton =
 
 const formStatus =
     document.getElementById("form-status");
-
+const confirmationMessage =
+    document.getElementById("confirmation-message");
 const FORM_STATE = {
     IDLE: "idle",
     SUBMITTING: "submitting",
@@ -95,6 +96,9 @@ function setFormState(state) {
 
 async function handleSubmit(event) {
     event.preventDefault();
+    if (currentFormState === FORM_STATE.SUBMITTING) {
+        return;
+    }
 
     setFormState(FORM_STATE.SUBMITTING);
 
@@ -105,6 +109,11 @@ async function handleSubmit(event) {
         });
 
         setFormState(FORM_STATE.SUCCESS);
+        const formData = new FormData(registrationForm);
+        const name = formData.get("name");
+
+        confirmationMessage.textContent =
+            `Thank you, ${name}. Your registration was received.`;
         registrationForm.reset();
 
     } catch (error) {
