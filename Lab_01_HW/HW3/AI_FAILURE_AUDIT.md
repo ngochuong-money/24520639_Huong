@@ -19,7 +19,7 @@ A state guard was added before starting the submission process:
 if (currentFormState === FORM_STATE.SUBMITTING) {
     return;
 }
-
+```js
 ## Defect 2 — Undefined `confirmationMessage`
 
 ### Defect Description
