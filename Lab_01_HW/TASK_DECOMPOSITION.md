@@ -55,3 +55,22 @@
 
 ### Result
 ✅ Strict CSP and zero inline handlers completed.
+
+## M4 — Lighthouse 100 Audit
+
+### Audit
+- Ran a Lighthouse audit on the production portfolio.
+- Performance score: **100**
+- Accessibility score: **100**
+- Best Practices score: **100**
+- SEO score: **100**
+
+### Changes
+- Added a meta description to improve SEO.
+- Verified that the portfolio maintains a Lighthouse Performance score of 100.
+
+### Source Code
+- [HTML — Meta Description](../Lab_01/Ex_1/index.html)
+
+### Result
+✅ Lighthouse audit completed with 100 scores across all categories.
