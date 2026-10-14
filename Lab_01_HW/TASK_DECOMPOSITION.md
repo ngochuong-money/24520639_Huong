@@ -12,9 +12,8 @@
 - Kept the existing accessible skip link and primary navigation.
 
 ### Source Code
-- [HTML](../Ex_1/index.html)
-- [CSS](../Ex_2/style.css)
-
+- [HTML](../Lab_01/Ex_1/index.html)
+- [CSS](../Lab_01/Ex_2/style.css)
 ### Result
 ✅ WCAG 2.2 AA contrast and landmark audit completed.
 
@@ -32,9 +31,9 @@
 - Improved the visible focus indicator for the `Retry` button.
 
 ### Source Code
-- [HTML — Dialog Structure](../Ex_1/index.html)
-- [JavaScript — Dialog Focus Management](../Ex_2/script.js)
-- [CSS — Focus Indicator](../Ex_2/style.css)
+- [HTML — Dialog Structure](../Lab_01/Ex_1/index.html)
+- [JavaScript — Dialog Focus Management](../Lab_01/Ex_2/script.js)
+- [CSS — Focus Indicator](../Lab_01/Ex_2/style.css)
 
 ### Result
 ✅ Keyboard navigation and focus trap audit completed.
