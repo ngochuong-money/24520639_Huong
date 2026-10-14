@@ -124,6 +124,37 @@ if (contactForm) {
     contactForm.addEventListener("submit", handleContactSubmit);
 }
 
+/* =========================================================
+   Keyboard Accessibility — Dialog Focus Management
+   ========================================================= */
+
+const applicationDialog =
+    document.getElementById("application-dialog");
+
+const openDialogButton =
+    document.getElementById("open-dialog");
+
+const closeDialogButton =
+    document.getElementById("close-dialog");
+
+if (
+    applicationDialog &&
+    openDialogButton &&
+    closeDialogButton
+) {
+    openDialogButton.addEventListener("click", () => {
+        applicationDialog.showModal();
+        closeDialogButton.focus();
+    });
+
+    closeDialogButton.addEventListener("click", () => {
+        applicationDialog.close();
+    });
+
+    applicationDialog.addEventListener("close", () => {
+        openDialogButton.focus();
+    });
+}
 // Decoupled Audio Engine Logic
 function playSound(key) {
   const pad = document.querySelector(

@@ -20,6 +20,7 @@
     --color-primary-text: #ffffff;
 
     --color-border: #767676;
+    --color-focus: #000000;
 
     /* Typography */
     --font-family-base: Arial, Helvetica, sans-serif;
@@ -56,6 +57,7 @@
     --color-primary-text: #111827;
 
     --color-border: #9ca3af;
+    --color-focus: #ffffff;
 }
 
 
@@ -598,8 +600,8 @@ nav ul {
 }
 
 .retry-button:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 3px;
+    outline: 3px solid var(--color-focus);
+    outline-offset: 4px;
 }
 .site-footer {
     width: min(100% - (2 * var(--space-md)), var(--content-max-width));

@@ -17,3 +17,24 @@
 
 ### Result
 ✅ WCAG 2.2 AA contrast and landmark audit completed.
+
+## M2 — Focus Trap Audit
+
+### Audit
+- Tested keyboard navigation using `Tab`, `Shift + Tab`, `Enter`, and `Esc`.
+- Verified that interactive elements have visible focus indicators.
+- Verified that keyboard focus does not move to page controls behind the modal dialog.
+
+### Changes
+- Added dialog focus management.
+- Moved focus to the `Close` button when the dialog opens.
+- Returned focus to the `Open Dialog` button when the dialog closes.
+- Improved the visible focus indicator for the `Retry` button.
+
+### Source Code
+- [HTML — Dialog Structure](../Ex_1/index.html)
+- [JavaScript — Dialog Focus Management](../Ex_2/script.js)
+- [CSS — Focus Indicator](../Ex_2/style.css)
+
+### Result
+✅ Keyboard navigation and focus trap audit completed.
