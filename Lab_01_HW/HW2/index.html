@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Drum Kit Engine</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Drum Kit Engine</h1>
+        <p>Press a drum key to play a sound.</p>
+    </header>
+
+    <main>
+        <section aria-labelledby="drum-kit-title">
+
+            <h2 id="drum-kit-title">Drum Pads</h2>
+
+            <div class="drum-kit">
+
+                <button
+                    type="button"
+                    class="drum-pad"
+                    data-key="a"
+                    data-sound="assets/sounds/kick.wav"
+                >
+                    A — Kick
+                </button>
+
+                <button
+                    type="button"
+                    class="drum-pad"
+                    data-key="s"
+                    data-sound="assets/sounds/snare.wav"
+                >
+                    S — Snare
+                </button>
+
+                <button
+                    type="button"
+                    class="drum-pad"
+                    data-key="d"
+                    data-sound="assets/sounds/hihat.wav"
+                >
+                    D — Hi-Hat
+                </button>
+
+                <button
+                    type="button"
+                    class="drum-pad"
+                    data-key="f"
+                    data-sound="assets/sounds/clap.wav"
+                >
+                    F — Clap
+                </button>
+
+            </div>
+
+        </section>
+    </main>
+
+</body>
+
+</html>
