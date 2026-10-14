@@ -1,0 +1,105 @@
+/* =========================================================
+   RESPONSIVE & ACCESSIBILITY
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: #111111;
+    background-color: #ffffff;
+}
+
+header,
+main {
+    width: min(100% - 2rem, 900px);
+    margin-inline: auto;
+}
+
+header {
+    padding-block: 2rem 1rem;
+}
+
+main {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+section {
+    padding: 1.25rem;
+    border: 1px solid #767676;
+    border-radius: 8px;
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+}
+
+form p {
+    margin: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 0.65rem;
+    font: inherit;
+}
+
+button {
+    padding: 0.7rem 1rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   MOBILE — 375px
+   ========================================================= */
+
+@media (max-width: 375px) {
+    header,
+    main {
+        width: calc(100% - 1rem);
+    }
+
+    header {
+        padding-top: 1rem;
+    }
+
+    section {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    button {
+        width: 100%;
+    }
+}
