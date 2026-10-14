@@ -19,3 +19,20 @@ A state guard was added before starting the submission process:
 if (currentFormState === FORM_STATE.SUBMITTING) {
     return;
 }
+
+## Defect 2 — Undefined `confirmationMessage`
+
+### Defect Description
+The generated form submission logic attempted to use:
+
+```js
+confirmationMessage.textContent =
+    `Thank you, ${name}. Your registration was received.`;
+    
+## Defect 3 — Missing Stylesheet File
+
+### Defect Description
+The generated HTML referenced the following stylesheet:
+
+```html
+<link rel="stylesheet" href="style.css">
