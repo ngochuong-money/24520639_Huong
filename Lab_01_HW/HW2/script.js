@@ -7,7 +7,7 @@
 function playSound(soundPath) {
     if (!soundPath) return;
 
-    console.count("playSound called");
+
 
     const audio = new Audio(soundPath);
 
@@ -22,6 +22,7 @@ function playPad(pad) {
     const soundPath = pad.dataset.sound;
 
     playSound(soundPath);
+    recordBeat(pad);
 }
 const drumPads = document.querySelectorAll(".drum-pad");
 
@@ -37,6 +38,11 @@ drumPads.forEach((pad) => {
 const pressedKeys = new Set();
 
 function handleKeydown(event) {
+    console.log(
+        "key =", event.key,
+        "code =", event.code,
+        "repeat =", event.repeat
+    );
     const key = event.key.toLowerCase();
 
     // Ignore browser-generated repeated keydown events
@@ -62,3 +68,34 @@ function handleKeyup(event) {
 
 window.addEventListener("keydown", handleKeydown);
 window.addEventListener("keyup", handleKeyup);
+window.addEventListener("blur", () => {
+    pressedKeys.clear();
+});
+
+/* =========================================================
+   STEP 4 — FIFO Beat Recorder
+   ========================================================= */
+
+const beatQueue = [];
+let recordingStartTime = null;
+
+function recordBeat(pad) {
+    if (!pad) return;
+
+    if (recordingStartTime === null) {
+        recordingStartTime = performance.now();
+    }
+
+    const beatEvent = {
+        key: pad.dataset.key,
+        sound: pad.dataset.sound,
+        timestamp: Math.round(
+            performance.now() - recordingStartTime
+        )
+    };
+
+    beatQueue.push(beatEvent);
+
+    console.log("Recorded beat:", beatEvent);
+    console.log("Beat queue:", [...beatQueue]);
+}
