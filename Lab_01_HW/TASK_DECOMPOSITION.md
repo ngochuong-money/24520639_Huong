@@ -37,3 +37,21 @@
 
 ### Result
 ✅ Keyboard navigation and focus trap audit completed.
+## M3 — Strict CSP & Zero Inline Handlers
+
+### Audit
+- Verified that inline JavaScript is blocked by the Content Security Policy.
+- Verified that JavaScript is loaded from external files.
+- Checked that no inline event handlers such as `onclick`, `onsubmit`, or `onkeydown` are used.
+
+### Changes
+- Added a strict Content Security Policy.
+- Removed inline script usage.
+- Kept event handling inside `script.js` using `addEventListener()`.
+
+### Source Code
+- [HTML — Content Security Policy](../Lab_01/Ex_1/index.html)
+- [JavaScript — External Event Handlers](../Lab_01/Ex_2/script.js)
+
+### Result
+✅ Strict CSP and zero inline handlers completed.
