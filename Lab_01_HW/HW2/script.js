@@ -7,8 +7,8 @@
 function playSound(soundPath) {
     if (!soundPath) return;
 
-    // Create a new audio instance for every playback.
-    // This allows multiple sounds to overlap.
+    console.count("playSound called");
+
     const audio = new Audio(soundPath);
 
     audio.play().catch((error) => {
@@ -30,3 +30,35 @@ drumPads.forEach((pad) => {
         playPad(pad);
     });
 });
+/* =========================================================
+   STEP 3 — Keyboard Input + Repeat Throttling
+   ========================================================= */
+
+const pressedKeys = new Set();
+
+function handleKeydown(event) {
+    const key = event.key.toLowerCase();
+
+    // Ignore browser-generated repeated keydown events
+    if (event.repeat) return;
+
+    // Ignore the key if it is already being held
+    if (pressedKeys.has(key)) return;
+
+    const pad = document.querySelector(
+        `.drum-pad[data-key="${key}"]`
+    );
+
+    if (!pad) return;
+
+    pressedKeys.add(key);
+    playPad(pad);
+}
+
+function handleKeyup(event) {
+    const key = event.key.toLowerCase();
+    pressedKeys.delete(key);
+}
+
+window.addEventListener("keydown", handleKeydown);
+window.addEventListener("keyup", handleKeyup);
