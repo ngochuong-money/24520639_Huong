@@ -22,6 +22,29 @@
                 Loading countdown...
             </p>
         </section>
+        <section aria-labelledby="registration-title">
+            <h2 id="registration-title">Event Registration</h2>
+
+            <form id="registration-form">
+                <p>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </p>
+
+                <p>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </p>
+
+                <button type="submit" id="submit-button">
+                    Register
+                </button>
+
+                <p id="form-status" aria-live="polite">
+                    Ready to submit.
+                </p>
+            </form>
+        </section>
     </main>
 
     <script src="script.js"></script>
