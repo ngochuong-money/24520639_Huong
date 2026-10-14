@@ -139,7 +139,7 @@
                 <li class="badge">Responsive Design</li>
             </ul>
         </section>
-        
+
 
 
         <!-- Projects -->
@@ -188,19 +188,14 @@
         <section id="resilient-component" aria-labelledby="resilient-title">
             <h2 id="resilient-title">Resilient Component</h2>
 
-            <section
-                class="loading-state"
-                aria-label="Loading content"
-                aria-busy="true">
+            <section class="loading-state" aria-label="Loading content" aria-busy="true">
 
                 <div class="skeleton-item"></div>
                 <div class="skeleton-item"></div>
                 <div class="skeleton-item"></div>
 
             </section>
-            <section
-                class="live-state"
-                aria-labelledby="live-state-title">
+            <section class="live-state" aria-labelledby="live-state-title">
 
                 <h3 id="live-state-title">Live Data</h3>
 
@@ -232,29 +227,25 @@
             </section>
 
             <!-- SUB-TASK T-03C — Empty State -->
-        <section
-            class="empty-state"
-            aria-labelledby="empty-state-title">
+            <section class="empty-state" aria-labelledby="empty-state-title">
 
-            <h3 id="empty-state-title">No Data Available</h3>
-            <p>There are currently no items to display.</p>
+                <h3 id="empty-state-title">No Data Available</h3>
+                <p>There are currently no items to display.</p>
 
+            </section>
+
+            <!-- SUB-TASK T-03C — Error State -->
+            <section class="error-state" aria-labelledby="error-state-title">
+
+                <h3 id="error-state-title">Unable to Load Data</h3>
+                <p>The data could not be loaded.</p>
+
+                <button type="button" class="retry-button">
+                    Retry
+                </button>
+
+            </section>
         </section>
-
-        <!-- SUB-TASK T-03C — Error State -->
-        <section
-            class="error-state"
-            aria-labelledby="error-state-title">
-
-            <h3 id="error-state-title">Unable to Load Data</h3>
-            <p>The data could not be loaded.</p>
-
-            <button type="button" class="retry-button">
-                Retry
-            </button>
-
-        </section>
-                </section>
 
 
         <!-- Semantic Table -->
@@ -464,22 +455,28 @@
                 <p id="form-status" aria-live="polite"></p>
             </form>
         </section>
-        
+
 
     </main>
 
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Jane Doe. All rights reserved.</p>
+    </footer>
 
     <script>
-        const dialog = document.getElementById("application-dialog");
-        const openButton = document.getElementById("open-dialog");
-        const closeButton = document.getElementById("close-dialog");
+        <script>
+            const dialog = document.getElementById("application-dialog");
+            const openButton = document.getElementById("open-dialog");
+            const closeButton = document.getElementById("close-dialog");
 
         openButton.addEventListener("click", () => {
-            dialog.showModal();
+                dialog.showModal();
         });
 
         closeButton.addEventListener("click", () => {
-            dialog.close();
+                dialog.close();
         });
     </script>
     <script src="../Ex_2/script.js"></script>
