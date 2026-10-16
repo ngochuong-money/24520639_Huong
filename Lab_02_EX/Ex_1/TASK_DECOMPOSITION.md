@@ -63,13 +63,13 @@ Follow the four-stage engineering workflow:
 
 #### Task 1.3 — Implement createElement()
 
-- [ ] Accept `type`, `props`, and `...children`.
-- [ ] Handle nullish props safely.
-- [ ] Flatten nested children arrays.
-- [ ] Filter nullish and boolean children.
-- [ ] Convert primitive text into text VNodes.
-- [ ] Preserve valid existing VNodes.
-- [ ] Test nested elements.
+- [x] Accept `type`, `props`, and `...children`.
+- [x] Handle nullish props safely.
+- [x] Flatten nested children arrays.
+- [x] Filter nullish and boolean children.
+- [x] Convert primitive text into text VNodes.
+- [x] Preserve valid existing VNodes.
+- [x] Test nested elements.
 
 **Acceptance Criteria**
 
