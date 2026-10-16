@@ -3,60 +3,84 @@ const stateStore = [];
 let cursor = 0;
 
 export function resetCursor() {
-  cursor = 0;
+    cursor = 0;
 }
 
 export function useState(initialValue) {
-  const currentIndex = cursor;
+    const currentIndex = cursor;
 
-  if (currentIndex >= stateStore.length) {
-    stateStore.push(initialValue);
-  }
+    if (currentIndex >= stateStore.length) {
+        stateStore.push(initialValue);
+    }
 
-  const state = stateStore[currentIndex];
+    const state = stateStore[currentIndex];
 
-  function setState(newValue) {
-    stateStore[currentIndex] =
-      typeof newValue === "function"
-        ? newValue(stateStore[currentIndex])
-        : newValue;
+    function setState(newValue) {
+        stateStore[currentIndex] =
+            typeof newValue === "function"
+                ? newValue(stateStore[currentIndex])
+                : newValue;
 
-    renderApp();
-  }
+        renderApp();
+    }
 
-  cursor++;
+    cursor++;
 
-  return [state, setState];
+    return [state, setState];
 }
 
 
 export function attachRootEventListener(root) {
-  root.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
+    root.addEventListener("click", (event) => {
+        const button = event.target.closest("button");
 
-    if (!button || !root.contains(button)) {
-      return;
-    }
+        if (!button || !root.contains(button)) {
+            return;
+        }
 
-    if (typeof button._onClick === "function") {
-      button._onClick(event);
-    }
-  });
+        if (typeof button._onClick === "function") {
+            button._onClick(event);
+        }
+    });
 
-  root.addEventListener("keydown", (event) => {
-    if (event.key !== "Enter" && event.key !== " ") {
-      return;
-    }
+    root.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") {
+            return;
+        }
 
-    const target = event.target;
+        const target = event.target;
 
-    if (!(target instanceof Element) || !root.contains(target)) {
-      return;
-    }
+        if (!(target instanceof Element) || !root.contains(target)) {
+            return;
+        }
 
-    // Native buttons already support keyboard activation.
-    if (target.matches("button")) {
-      return;
-    }
-  });
+        // Native buttons already support keyboard activation.
+        if (target.matches("button")) {
+            return;
+        }
+    });
 }
+
+let root = null;
+let App = null;
+
+export function renderApp(component, container) {
+    if (component) {
+        App = component;
+    }
+
+    if (container) {
+        root = container;
+        attachRootEventListener(root);
+    }
+
+    if (!App || !root) {
+        return;
+    }
+
+    resetCursor();
+
+    const view = App();
+    root.replaceChildren(view);
+}
+
