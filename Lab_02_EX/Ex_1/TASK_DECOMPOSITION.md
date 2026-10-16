@@ -86,14 +86,14 @@ Follow the four-stage engineering workflow:
 
 #### Task 1.4 — Implement Recursive renderToDOM()
 
-- [ ] Validate VNode inputs using type guards.
-- [ ] Create real text nodes with `document.createTextNode()`.
-- [ ] Create HTML elements with `document.createElement()`.
-- [ ] Assign supported DOM attributes.
-- [ ] Handle `className` and `style`.
-- [ ] Attach event handlers with `addEventListener()`.
-- [ ] Recursively render child VNodes.
-- [ ] Return the constructed DOM node.
+- [x] Validate VNode inputs using type guards.
+- [x] Create real text nodes with `document.createTextNode()`.
+- [x] Create HTML elements with `document.createElement()`.
+- [x] Assign supported DOM attributes.
+- [x] Handle `className` and `style`.
+- [x] Attach event handlers with `addEventListener()`.
+- [x] Recursively render child VNodes.
+- [x] Return the constructed DOM node.
 
 **Acceptance Criteria**
 
@@ -105,11 +105,11 @@ Follow the four-stage engineering workflow:
 
 #### Task 1.5 — Implement Root Mounting
 
-- [ ] Create a root container with `id="app"`.
-- [ ] Construct a semantic VNode tree.
-- [ ] Convert the VNode tree using `renderToDOM()`.
-- [ ] Mount the result using `replaceChildren()`.
-- [ ] Verify the resulting DOM hierarchy.
+- [x] Create a root container with `id="app"`.
+- [x] Construct a semantic VNode tree.
+- [x] Convert the VNode tree using `renderToDOM()`.
+- [x] Mount the result using `replaceChildren()`.
+- [x] Verify the resulting DOM hierarchy.
 
 **Acceptance Criteria**
 
@@ -122,13 +122,13 @@ Follow the four-stage engineering workflow:
 
 #### Task 1.6 — Run Checkpoint Tests
 
-- [ ] Create or configure `test-runner.js`.
-- [ ] Import `createElement()` and `renderToDOM()`.
-- [ ] Test nested VNode rendering.
-- [ ] Test text normalization.
-- [ ] Test event handlers.
-- [ ] Test XSS payloads.
-- [ ] Test root mounting with `console.assert()`.
+- [x] Create or configure `test-runner.js`.
+- [x] Import `createElement()` and `renderToDOM()`.
+- [x] Test nested VNode rendering.
+- [x] Test text normalization.
+- [x] Test event handlers.
+- [x] Test XSS payloads.
+- [x] Test root mounting with `console.assert()`.
 
 **Acceptance Criteria**
 
@@ -139,13 +139,13 @@ Follow the four-stage engineering workflow:
 
 #### Task 1.7 — DevTools Audit
 
-- [ ] Open the browser DevTools.
-- [ ] Inspect the Elements panel.
-- [ ] Confirm semantic HTML tags.
-- [ ] Confirm the expected parent-child hierarchy.
-- [ ] Confirm no unnecessary div wrappers.
-- [ ] Check the Console for errors.
-- [ ] Capture verification screenshots if required.
+- [x] Open the browser DevTools.
+- [x] Inspect the Elements panel.
+- [x] Confirm semantic HTML tags.
+- [x] Confirm the expected parent-child hierarchy.
+- [x] Confirm no unnecessary div wrappers.
+- [x] Check the Console for errors.
+- [x] Capture verification screenshots if required.
 
 **Acceptance Criteria**
 
