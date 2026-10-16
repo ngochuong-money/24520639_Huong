@@ -28,3 +28,35 @@ export function useState(initialValue) {
 
   return [state, setState];
 }
+
+
+export function attachRootEventListener(root) {
+  root.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+
+    if (!button || !root.contains(button)) {
+      return;
+    }
+
+    if (typeof button._onClick === "function") {
+      button._onClick(event);
+    }
+  });
+
+  root.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    const target = event.target;
+
+    if (!(target instanceof Element) || !root.contains(target)) {
+      return;
+    }
+
+    // Native buttons already support keyboard activation.
+    if (target.matches("button")) {
+      return;
+    }
+  });
+}
