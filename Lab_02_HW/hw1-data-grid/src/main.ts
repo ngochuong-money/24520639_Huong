@@ -9,12 +9,14 @@ interface Student {
   age: number;
 }
 
-const students: Student[] = [
-  { id: 1, name: 'An', age: 20 },
-  { id: 2, name: 'Binh', age: 21 },
-  { id: 3, name: 'Chi', age: 22 },
-  { id: 4, name: 'Dung', age: 23 },
-];
+const students: Student[] = Array.from(
+  { length: 25 },
+  (_, index) => ({
+    id: index + 1,
+    name: `Student ${index + 1}`,
+    age: 18 + (index % 5),
+  })
+);
 
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -30,10 +32,11 @@ main.appendChild(heading);
 
 const grid = createDataGrid<Student>({
   data: students,
- columns: [
-  { header: 'Name', accessorKey: 'name' },
-  { header: 'Age', accessorKey: 'age' },
-],
+  columns: [
+    { header: 'ID', accessorKey: 'id', sortable: true },
+    { header: 'Name', accessorKey: 'name', sortable: true },
+    { header: 'Age', accessorKey: 'age', sortable: false },
+  ],
   ariaLabel: 'Student data grid',
   onRowSelect: (student) => {
     console.log('Selected student:', student);
