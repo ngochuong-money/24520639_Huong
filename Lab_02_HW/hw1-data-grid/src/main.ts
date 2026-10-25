@@ -43,7 +43,16 @@ const grid = createDataGrid<Student>({
   },
 });
 
-main.appendChild(grid);
+
+const gridContainer = document.createElement('div');
+gridContainer.className = 'data-grid-container';
+gridContainer.setAttribute('role', 'region');
+gridContainer.setAttribute('aria-label', 'Student data table');
+gridContainer.tabIndex = 0;
+
+gridContainer.appendChild(grid);
+main.appendChild(gridContainer);
+
 app.appendChild(main);
 
 
