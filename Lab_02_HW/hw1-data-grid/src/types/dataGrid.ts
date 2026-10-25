@@ -8,6 +8,6 @@ export interface ColumnDef<T> {
 export interface DataGridProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
-  onRowSelect: (item: T) => void;
+  onRowSelect?: (item: T) => void;
   ariaLabel: string;
 }
