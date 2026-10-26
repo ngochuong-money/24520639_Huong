@@ -1,0 +1,148 @@
+
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #e2e8f0;
+  background: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+.audio-app {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+h1 {
+  margin-bottom: 8px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 24px 0;
+  background: #111e36;
+  border: 1px solid #334155;
+  border-radius: 12px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+button,
+select {
+  padding: 10px 14px;
+  border: 1px solid #64748b;
+  border-radius: 8px;
+  font: inherit;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+select {
+  background: #1e293b;
+  color: white;
+}
+
+.results {
+  padding-left: 24px;
+  overflow-wrap: anywhere;
+}
+
+.results li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .audio-app {
+    padding: 20px 12px;
+  }
+
+  .controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+/* Multi-file upload */
+input[type="file"] {
+  display: block;
+  margin: 12px 0 20px;
+  padding: 12px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px dashed #64748b;
+  border-radius: 8px;
+  color: #e2e8f0;
+  background: #1e293b;
+  font: inherit;
+}
+
+input[type="file"]:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+/* Queue results */
+.results {
+  margin-top: 12px;
+  padding-left: 28px;
+}
+
+.results li {
+  padding: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #334155;
+  overflow-wrap: anywhere;
+}
+
+.now-playing {
+  margin: 12px 0 20px;
+  padding: 14px 18px;
+  background: #1e293b;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #93c5fd;
+}
+
+.results li button {
+  margin-left: 12px;
+  padding: 6px 14px;
+  font-size: 14px;
+}
