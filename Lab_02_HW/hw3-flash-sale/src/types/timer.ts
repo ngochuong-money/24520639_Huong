@@ -10,6 +10,7 @@ export type TimerTickCallback = (
 ) => void;
 
 export type TimerCleanup = () => void;
+export type TimerCompleteCallback = () => void;
 
 export interface TimerState {
   status: TimerStatus;
