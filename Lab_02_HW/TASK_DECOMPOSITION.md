@@ -353,4 +353,287 @@ The following details are not explicitly defined in the provided assignment imag
 - Check for persistent resource leaks using browser DevTools.
 - Confirm all four project specifications are implemented and functional.
 
+# Homework 3:
+
+## Exercise 1: Project Setup & TypeScript Contracts
+
+- [x] Task 1.1: Initialize Vite and TypeScript project [Required]
+- [x] Task 1.2: Define flash-sale timer, inventory, and order state contracts [Required]
+- [x] Task 1.3: Test project setup and production build [Required]
+- [x] Task 1.4: Atomic Git Commit: "feat(core): initialize flash-sale project and contracts"
+
+### Constraints
+
+**Technology:**
+- Use Vite and TypeScript with strict type checking.
+- Use modern browser APIs and DOM APIs.
+- Keep the project structure simple and maintainable.
+
+**Core Contracts:**
+- Define timer contracts for countdown start, tick callback, and cleanup.
+- Define inventory state machine contracts for reservation, lock expiry, and checkout.
+- Define product and flash-sale UI state contracts before implementing dependent features.
+- Keep types explicit and avoid unnecessary `any`.
+
+**Validation:**
+- Run `npx tsc --noEmit`.
+- Run `npm run build`.
+- Verify project initialization without TypeScript or build errors.
+
+---
+
+## Exercise 2: Zero-Drift Countdown Timer Engine
+
+- [x] Task 2.1: Implement anti-drift countdown timer using `Date.now()` delta [Required]
+- [x] Task 2.2: Implement timer start, tick, complete, and cleanup lifecycle [Required]
+- [x] Task 2.3: Test and fix countdown accuracy and timer cleanup [Required]
+- [x] Task 2.4: Atomic Git Commit: "feat(timer): implement anti-drift countdown engine"
+
+### Constraints
+
+**Timer Requirements:**
+- Implement accurate millisecond countdown timing.
+- Use `Date.now()` delta against a fixed target time.
+- Avoid drift-prone `setInterval` timing as the main countdown engine.
+- Provide a tick callback with remaining time.
+- Clamp remaining time to `0`.
+- Stop the timer cleanly when the countdown completes.
+- Return a cleanup function that cancels future ticks.
+- Prevent duplicate concurrent timer loops for the same countdown instance.
+
+**Validation:**
+- Compare displayed remaining time against the expected target end time.
+- Confirm countdown reaches `0` accurately.
+- Test repeated start/stop cycles.
+- Test cleanup when the timer is cancelled before completion.
+- Use DevTools Performance when timing behavior needs investigation.
+- Run TypeScript check, production build, and `git diff`.
+
+---
+
+## Exercise 3: Inventory Lock State Machine
+
+- [x] Task 3.1: Implement optimistic inventory reservation state machine [Required]
+- [x] Task 3.2: Implement lock expiry, release, and checkout transitions [Required]
+- [x] Task 3.3: Test and fix inventory reservation rules and invalid transitions [Required]
+- [x] Task 3.4: Atomic Git Commit: "feat(inventory): implement optimistic lock state machine"
+
+### Constraints
+
+**Inventory State Machine:**
+- Handle inventory reservation for a flash-sale product.
+- Support finite states for available stock, reserved lock, expired lock, checked out, and sold out.
+- Prevent invalid transitions and negative stock.
+- Track reservation ownership and lock expiration time.
+- Release stock correctly when a lock expires or is cancelled.
+- Finalize stock correctly on checkout success.
+- Prevent double checkout or reuse of an expired reservation.
+- Keep state transitions deterministic and explicit.
+
+**Validation:**
+- Reserve inventory successfully while stock is available.
+- Reject reservations when stock is exhausted.
+- Expire locks and restore inventory correctly.
+- Complete checkout and reduce final stock correctly.
+- Verify invalid transition attempts are blocked.
+- Run TypeScript check, production build, and `git diff`.
+
+---
+
+## Exercise 4: Flash-Sale Purchase Flow Integration
+
+- [x] Task 4.1: Integrate countdown timer with inventory lock lifecycle [Required]
+- [x] Task 4.2: Implement reserve, expire, cancel, and checkout purchase flow [Required]
+- [x] Task 4.3: Test and fix end-to-end flash-sale state transitions [Required]
+- [x] Task 4.4: Atomic Git Commit: "feat(flow): integrate timer and flash-sale checkout flow"
+
+### Constraints
+
+**Purchase Flow:**
+- Start reservation lock timing when inventory is reserved.
+- Expire the reservation automatically when the lock time ends.
+- Cancel reservation cleanly when the user abandons or releases it.
+- Complete checkout only when the reservation is still valid.
+- Prevent checkout after lock expiry.
+- Keep countdown state and inventory state synchronized.
+- Preserve existing correct behavior when integrating new logic.
+
+**Validation:**
+- Reserve a product and verify lock timer starts immediately.
+- Let the reservation expire and verify stock returns.
+- Checkout before expiry and verify stock is committed.
+- Attempt checkout after expiry and verify it is blocked.
+- Test repeated reserve/cancel/checkout cycles.
+- Run TypeScript check, production build, and `git diff`.
+
+---
+
+## Exercise 5: Flash-Sale UI & User Interaction
+
+- [x] Task 5.1: Implement responsive flash-sale product and countdown interface [Required]
+- [x] Task 5.2: Implement reservation, cancel, and checkout controls [Required]
+- [x] Task 5.3: Implement inventory status, sold-out feedback, and accessible UI states [Required]
+- [x] Task 5.4: Test and fix integrated flash-sale interactions [Required]
+- [x] Task 5.5: Atomic Git Commit: "feat(ui): implement flash-sale interface and controls"
+
+### Constraints
+
+**UI Requirements:**
+- Build a realistic Vietnam market flash-sale scenario.
+- Present the product and flash-sale state clearly.
+- Display a live countdown timer.
+- Display current inventory and reservation status.
+- Provide functional Reserve, Cancel, and Checkout controls.
+- Show clear states such as active sale, reservation active, lock expired, sold out, checkout success, and errors.
+- Keep the UI responsive for desktop, tablet, and mobile.
+
+**Accessibility:**
+- Use semantic HTML and native controls.
+- Provide meaningful labels, status messages, and feedback.
+- Keep controls keyboard-operable.
+- Provide visible focus indicators.
+- Maintain applicable WCAG 2.2 AA contrast and interaction requirements.
+- Avoid misleading or inaccessible disabled states.
+
+**Validation:**
+- Verify all controls work through the real reservation and checkout logic.
+- Verify the countdown updates on screen correctly.
+- Verify sold-out, expired, and success states are visible and understandable.
+- Test keyboard-only operation and status feedback.
+- Run TypeScript check, production build, and `git diff`.
+
+---
+
+## Exercise 6: High-Concurrency Reservation Simulation
+
+- [x] Task 6.1: Implement concurrent purchase attempt simulation [Required]
+- [x] Task 6.2: Test and fix optimistic lock behavior under contention [Required]
+- [x] Task 6.3: Verify stock consistency under concurrent reservation and checkout attempts [Required]
+- [x] Task 6.4: Atomic Git Commit: "test(concurrency): validate high-contention reservation flow"
+
+### Constraints
+
+**Concurrency Requirements:**
+- Simulate multiple users competing for limited inventory.
+- Ensure the optimistic inventory lock prevents overselling.
+- Keep final inventory consistent under contention.
+- Ensure only valid reservations can proceed to checkout.
+- Expired or failed reservations must not consume inventory permanently.
+- Preserve deterministic state updates and avoid double-commit behavior.
+
+**Validation:**
+- Simulate multiple simultaneous reserve attempts for limited stock.
+- Confirm successful reservations do not exceed available stock.
+- Confirm final stock never becomes negative.
+- Confirm rejected or expired reservations do not oversell inventory.
+- Inspect logs and UI state to verify transition correctness.
+- Run TypeScript check, production build, and `git diff`.
+
+---
+
+## Exercise 7: AI Failure Audit & Quality Review
+
+- [x] Task 7.1: Record at least 3 AI-generated failures in `AI_FAILURE_AUDIT.md` [Required]
+- [x] Task 7.2: Review and fix defects discovered from AI-generated code [Required]
+- [x] Task 7.3: Test and verify corrected behavior after fixes [Required]
+- [x] Task 7.4: Atomic Git Commit: "docs(audit): record AI failures and manual fixes"
+
+### Constraints
+
+**AI Failure Audit Requirements:**
+- `AI_FAILURE_AUDIT.md` is mandatory.
+- Record at least 3 AI flaws.
+- Each failure entry must include:
+  - Original Prompt
+  - AI-Generated Code
+  - Technical Error
+  - Error Detection Method
+  - Manual Fix
+- Only record genuine AI-generated mistakes or requirement mismatches.
+- Keep the audit factual and specific.
+
+**Validation:**
+- Confirm the file includes at least 3 complete failure entries.
+- Ensure each entry refers to an actual project issue.
+- Verify related manual fixes are reflected in the codebase when applicable.
+- Review changes using `git diff`.
+
+---
+
+## Exercise 8: Final Validation & Release Readiness
+
+- [x] Task 8.1: Run final functional, timer, inventory, and accessibility verification [Required]
+- [x] Task 8.2: Verify minimum 8 atomic commits and project completeness [Required]
+- [x] Task 8.3: Atomic Git Commit: "test(final): verify flash-sale engine and release readiness"
+
+### Constraints
+
+**Final Acceptance Criteria:**
+- Zero-drift countdown uses `Date.now()` delta and reaches `0` accurately.
+- Inventory state machine correctly handles reservation, lock expiry, and checkout.
+- High-concurrency purchase attempts do not oversell inventory.
+- Flash-sale UI is functional, responsive, and accessible.
+- `AI_FAILURE_AUDIT.md` includes at least 3 AI failures.
+- The repository contains at least 8 discrete Conventional Commits.
+- TypeScript check passes.
+- Production build passes.
+- No unresolved critical runtime errors remain.
+
+**Validation:**
+- Run `npx tsc --noEmit`.
+- Run `npm run build`.
+- Run end-to-end tests of reserve, expire, cancel, and checkout flows.
+- Verify responsive UI and keyboard accessibility.
+- Review final changes using `git diff`.
+- Verify commit history with `git log --oneline`.
+
+---
+
+## Commit Plan Requirement
+
+The assignment requires **at least 8 discrete Conventional Commits**.  
+The required commit tasks in this WBS are:
+
+- [x] Task 1.4
+- [x] Task 2.4
+- [x] Task 3.4
+- [x] Task 4.4
+- [x] Task 5.5
+- [x] Task 6.4
+- [x] Task 7.4
+- [x] Task 8.3
+
+---
+
+## Optional Enhancements
+
+The following features are not explicitly required by the image and should only be implemented if later requested.
+
+- [ ] Optional 1: Implement multiple flash-sale products [Optional]
+- [ ] Optional 2: Implement reservation queue or waitlist messaging [Optional]
+- [ ] Optional 3: Persist flash-sale state in local storage [Optional]
+- [ ] Optional 4: Add analytics dashboard for reservation and checkout statistics [Optional]
+
+### Optional Constraints
+
+- Optional features must not weaken timer accuracy or inventory consistency.
+- Optional features must not reduce accessibility or maintainability.
+- Implement only after all required tasks are complete and explicitly requested.
+
+---
+
+## Clarifications
+
+1. **Domain Scope:** The image specifies a Vietnam mega-sale simulation (Shopee / Lazada 11.11 / Midnight Flash Sale), but does not require brand-specific assets or APIs. The implementation can use a generic flash-sale product experience.
+
+2. **Timer Technology:** The image requires zero-drift behavior using `Date.now()` delta. It does not explicitly require `requestAnimationFrame`, but that is acceptable if the timer logic still depends on target-time delta rather than interval drift.
+
+3. **Lock Duration:** The image requires lock expiry handling, but does not specify the exact reservation duration. A fixed configurable duration should be used.
+
+4. **Checkout Scope:** The image requires checkout handling, but does not require full payment processing. A simulated checkout confirmation is sufficient.
+
+5. **Concurrency Testing:** The image requires an optimistic inventory lock and high-concurrency behavior, but does not specify the exact number of simulated users. The implementation should test multiple simultaneous reservation attempts.
+
+6. **Accessibility Score:** The image does not explicitly require a Lighthouse 100/100 score, but the UI must still satisfy applicable accessibility expectations and semantic correctness.
+
 
