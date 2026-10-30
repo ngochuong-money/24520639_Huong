@@ -1,21 +1,69 @@
 
 .card {
-  display: block;
+  --card-bg: #ffffff;
+  --card-text: #0f172a;
+  --card-muted: #64748b;
+  --card-primary: #2563eb;
+  --card-border: #e2e8f0;
+  --card-surface: #f8fafc;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 720px;
+  margin: 24px auto;
+  padding: clamp(16px, 4vw, 32px);
+  background: var(--card-bg);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 6%);
+  font-family: Inter, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.card *,
+.card *::before,
+.card *::after {
+  box-sizing: border-box;
 }
 
 .header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 20px;
+  min-width: 0;
+  margin-bottom: 24px;
+}
+
+.header hgroup {
+  min-width: 0;
+}
+
+.header h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.3;
+}
+
+.header p {
+  margin: 0;
+  color: var(--card-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .avatar {
   display: inline-grid;
   place-items: center;
+  flex: 0 0 64px;
   width: 64px;
   height: 64px;
-  flex-shrink: 0;
   overflow: hidden;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .avatar img {
@@ -26,9 +74,92 @@
 }
 
 .metrics {
-  margin-block: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 20px;
+  margin: 0 0 24px;
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--card-surface);
+}
+
+.metrics dt {
+  min-width: 0;
+  color: var(--card-muted);
+  font-weight: 500;
+}
+
+.metrics dd {
+  min-width: 0;
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
 .skills {
-  padding-inline-start: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills li {
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: var(--card-primary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .card {
+    margin: 16px auto;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .header {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .avatar {
+    flex-basis: 56px;
+    width: 56px;
+    height: 56px;
+    font-size: 1rem;
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+  }
+
+  .header p {
+    font-size: 0.875rem;
+  }
+
+  .metrics {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .skills {
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card * {
+    scroll-behavior: auto;
+    animation: none;
+    transition: none;
+  }
 }
