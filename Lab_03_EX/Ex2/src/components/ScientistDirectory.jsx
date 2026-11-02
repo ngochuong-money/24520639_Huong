@@ -114,7 +114,6 @@ export default function ScientistDirectory({
 
         <output
           id={statusId}
-          role="status"
           aria-live="polite"
           aria-atomic="true"
         >
