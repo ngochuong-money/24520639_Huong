@@ -1,7 +1,12 @@
 
+import { useId, useState } from 'react'
 import { PUBG_VN_SQUADS } from './data/pubgVnSquads'
+import PubgMatchTelemetry from './components/PubgMatchTelemetry'
 
 function App() {
+  const [selectedSquadId, setSelectedSquadId] = useState('te')
+  const squadSelectId = useId()
+
   return (
     <main>
       <h1>PUBG Vietnam Series — Live Telemetry</h1>
@@ -9,36 +14,26 @@ function App() {
       <section aria-labelledby="squads-heading">
         <h2 id="squads-heading">PUBG VN Squads</h2>
 
-        <ul>
+        <label htmlFor={squadSelectId}>
+          Select squad
+        </label>
+
+        <select
+          id={squadSelectId}
+          value={selectedSquadId}
+          onChange={(event) => {
+            setSelectedSquadId(event.target.value)
+          }}
+        >
           {PUBG_VN_SQUADS.map((squad) => (
-            <li key={squad.id}>
-              <article>
-                <h3>{squad.name}</h3>
-
-                <dl>
-                  <dt>Map</dt>
-                  <dd>{squad.map}</dd>
-
-                  <dt>Phase</dt>
-                  <dd>{squad.phase}</dd>
-
-                  <dt>Alive</dt>
-                  <dd>{squad.alive}</dd>
-
-                  <dt>Kills</dt>
-                  <dd>{squad.kills}</dd>
-
-                  <dt>WWCD Probability</dt>
-                  <dd>{squad.wwcdProb}</dd>
-
-                  <dt>Status</dt>
-                  <dd>{squad.status}</dd>
-                </dl>
-              </article>
-            </li>
+            <option key={squad.id} value={squad.id}>
+              {squad.name}
+            </option>
           ))}
-        </ul>
+        </select>
       </section>
+
+      <PubgMatchTelemetry squadId={selectedSquadId} />
     </main>
   )
 }
