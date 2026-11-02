@@ -1,11 +1,12 @@
 
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { SMART_PEOPLE } from "../data/smartPeople.js";
 import styles from "./ScientistDirectory.module.css";
 
 export default function ScientistDirectory({
   initialData = SMART_PEOPLE,
 }) {
+  const [people, setPeople] = useState(() => [...initialData]);
   const [query, setQuery] = useState("");
   const [minIq, setMinIq] = useState(0);
   const [sortBy, setSortBy] = useState("iq-desc");
@@ -13,8 +14,12 @@ export default function ScientistDirectory({
   const searchId = useId();
   const minIqId = useId();
   const sortId = useId();
+  const statusId = useId();
 
-  const visiblePeople = initialData
+  const resetButtonRef = useRef(null);
+  const deleteButtonRefs = useRef(new Map());
+
+  const visiblePeople = people
     .filter((person) =>
       person.name.toLowerCase().includes(query.trim().toLowerCase()),
     )
@@ -22,6 +27,31 @@ export default function ScientistDirectory({
     .toSorted((a, b) =>
       sortBy === "age-asc" ? a.age - b.age : b.iq - a.iq,
     );
+
+  function handleDelete(id) {
+    const index = visiblePeople.findIndex((person) => person.id === id);
+
+    const nextPerson = visiblePeople[index + 1] ?? visiblePeople[index - 1];
+    const nextButton = nextPerson
+      ? deleteButtonRefs.current.get(nextPerson.id)
+      : resetButtonRef.current;
+
+    setPeople((previous) =>
+      previous.filter((person) => person.id !== id),
+    );
+
+    requestAnimationFrame(() => {
+      if (nextButton?.isConnected) {
+        nextButton.focus();
+      } else {
+        resetButtonRef.current?.focus();
+      }
+    });
+  }
+
+  function handleReset() {
+    setPeople([...initialData]);
+  }
 
   return (
     <section
@@ -81,8 +111,25 @@ export default function ScientistDirectory({
 
       <div className={styles.resultsHeading}>
         <h3>Scientists</h3>
-        <span>{visiblePeople.length} results</span>
+
+        <output
+          id={statusId}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {visiblePeople.length} results
+        </output>
       </div>
+
+      <button
+        ref={resetButtonRef}
+        type="button"
+        className={styles.resetButton}
+        onClick={handleReset}
+      >
+        Reset scientists
+      </button>
 
       {visiblePeople.length === 0 ? (
         <p className={styles.empty}>
@@ -94,10 +141,27 @@ export default function ScientistDirectory({
             <li key={person.id} className={styles.listItem}>
               <article className={styles.card}>
                 <h4>{person.name}</h4>
+
                 <div className={styles.details}>
                   <p>Age: {person.age}</p>
                   <p>IQ (demo): {person.iq}</p>
                 </div>
+
+                <button
+                  ref={(element) => {
+                    if (element) {
+                      deleteButtonRefs.current.set(person.id, element);
+                    } else {
+                      deleteButtonRefs.current.delete(person.id);
+                    }
+                  }}
+                  type="button"
+                  className={styles.deleteButton}
+                  aria-label={`Delete ${person.name}`}
+                  onClick={() => handleDelete(person.id)}
+                >
+                  Delete
+                </button>
               </article>
             </li>
           ))}
