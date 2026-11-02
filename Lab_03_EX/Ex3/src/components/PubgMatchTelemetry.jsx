@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { fetchTelemetry } from '../services/telemetry'
-
+import styles from './PubgMatchTelemetry.module.css'
 export default function PubgMatchTelemetry({
     squadId = 'te',
 }) {
@@ -57,27 +57,90 @@ export default function PubgMatchTelemetry({
             controller.abort()
         }
     }, [squadId, retryTick])
+    const handleRetry = () => {
+        setRetryTick((current) => current + 1)
+    }
 
     return (
-        <section aria-labelledby="telemetry-heading">
-            <h2 id="telemetry-heading">Match Telemetry</h2>
+        <section
+            className={styles.telemetry}
+            aria-labelledby="telemetry-heading"
+        >
+            <header className={styles.header}>
+                <div>
+                    <p className={styles.eyebrow}>KRAFTON × PUBG Vietnam</p>
+                    <h2 id="telemetry-heading">Live Match Radar</h2>
+                    <p className={styles.subtitle}>
+                        Real-time squad telemetry simulation
+                    </p>
+                </div>
 
-            <p>Status: {view.status}</p>
+                <span className={styles.status} data-status={view.status}>
+                    {view.status}
+                </span>
+            </header>
 
-            {view.status === 'SUCCESS' && (
-                <article>
-                    <h3>{view.data.name}</h3>
-                    <p>Map: {view.data.map}</p>
-                    <p>Phase: {view.data.phase}</p>
-                    <p>Alive: {view.data.alive}</p>
-                    <p>Kills: {view.data.kills}</p>
-                    <p>WWCD Probability: {view.data.wwcdProb}</p>
-                    <p>Position: {view.data.status}</p>
-                </article>
+            {view.status === 'IDLE' && (
+                <p className={styles.message}>Waiting for telemetry...</p>
+            )}
+
+            {view.status === 'LOADING' && (
+                <section
+                    className={styles.skeleton}
+                    aria-label="Loading match telemetry"
+                    aria-busy="true"
+                    role="status"
+                >
+                    <span className={styles.skeletonCircle} aria-hidden="true" />
+                    <p>Syncing KRAFTON Radar...</p>
+                </section>
             )}
 
             {view.status === 'ERROR' && (
-                <p>Telemetry error: {view.error}</p>
+                <section className={styles.error} role="alert">
+                    <h3>Blue-Zone Link Lost</h3>
+                    <p>{view.error}</p>
+                    <button
+                        type="button"
+                        className={styles.retryButton}
+                        onClick={handleRetry}
+                    >
+                        Reconnect Satellite (Retry)
+                    </button>
+                </section>
+            )}
+
+            {view.status === 'SUCCESS' && view.data && (
+                <article className={styles.radar} aria-live="polite">
+                    <h3>{view.data.name}</h3>
+
+                    <dl className={styles.stats}>
+                        <div>
+                            <dt>Map</dt>
+                            <dd>{view.data.map}</dd>
+                        </div>
+                        <div>
+                            <dt>Phase</dt>
+                            <dd>{view.data.phase}</dd>
+                        </div>
+                        <div>
+                            <dt>Alive</dt>
+                            <dd>{view.data.alive}</dd>
+                        </div>
+                        <div>
+                            <dt>Kills</dt>
+                            <dd>{view.data.kills}</dd>
+                        </div>
+                        <div>
+                            <dt>WWCD Probability</dt>
+                            <dd>{view.data.wwcdProb}</dd>
+                        </div>
+                        <div>
+                            <dt>Position</dt>
+                            <dd>{view.data.status}</dd>
+                        </div>
+                    </dl>
+                </article>
             )}
         </section>
     )
