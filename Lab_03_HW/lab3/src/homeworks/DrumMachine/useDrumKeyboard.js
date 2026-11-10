@@ -1,9 +1,15 @@
 import { useEffect, useEffectEvent } from 'react';
 
-const TYPING_TAGS = new Set(['INPUT', 'TEXTAREA', 'SELECT']);
+const NON_TEXT_INPUT_TYPES = new Set([
+  'button', 'checkbox', 'color', 'file', 'image', 'radio', 'range', 'reset', 'submit',
+]);
 
+/** True when the user is entering text, where letter keys must not trigger drums. */
 function isTypingTarget(target) {
-  return target instanceof HTMLElement && (TYPING_TAGS.has(target.tagName) || target.isContentEditable);
+  if (!(target instanceof HTMLElement)) return false;
+  if (target.isContentEditable) return true;
+  if (target instanceof HTMLInputElement) return !NON_TEXT_INPUT_TYPES.has(target.type);
+  return target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement;
 }
 
 function hasShortcutModifier(event) {
