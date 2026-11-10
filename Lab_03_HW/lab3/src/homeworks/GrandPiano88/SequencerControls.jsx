@@ -3,17 +3,21 @@ import { midiToNoteName } from './pianoKeys.js';
 
 const SPEEDS = [0.5, 1, 2];
 
-function getStatusMessage(seqState, eventCount, speed) {
+function getStatusMessage(seqState, eventCount, speed, playbackResult) {
   if (seqState === 'recording') return 'Recording… play some notes, then press Stop Recording.';
   if (seqState === 'playing') return `Playing ${eventCount} notes at ${speed.toFixed(1)}x…`;
   if (eventCount === 0) return 'Press Record, then play some notes.';
-  return `${eventCount} note${eventCount === 1 ? '' : 's'} in the queue. Press Play to replay.`;
+  const queue = `${eventCount} note${eventCount === 1 ? '' : 's'} in the queue. Press Play to replay.`;
+  if (playbackResult === 'finished') return `Playback finished. ${queue}`;
+  if (playbackResult === 'stopped') return `Playback stopped. ${queue}`;
+  return queue;
 }
 
 export default function SequencerControls({
   seqState,
   events,
   speed,
+  playbackResult,
   onRecordToggle,
   onPlay,
   onStop,
@@ -70,7 +74,7 @@ export default function SequencerControls({
         })}
       </fieldset>
       <output className="sequencer__status" aria-live="polite">
-        {getStatusMessage(seqState, events.length, speed)}
+        {getStatusMessage(seqState, events.length, speed, playbackResult)}
       </output>
       <details>
         <summary>Recorded notes ({events.length})</summary>

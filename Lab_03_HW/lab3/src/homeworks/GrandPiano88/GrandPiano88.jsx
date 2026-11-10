@@ -28,6 +28,7 @@ export default function GrandPiano88() {
   const [seqState, setSeqState] = useState('idle'); // 'idle' | 'recording' | 'playing'
   const [recording, setRecording] = useState([]); // FIFO queue of RecordedNote
   const [speed, setSpeed] = useState(1); // 0.5 | 1 | 2
+  const [playbackResult, setPlaybackResult] = useState(null); // null | 'finished' | 'stopped'
 
   const synthRef = useRef(null);
   const seqStateRef = useRef('idle'); // read by stable note handlers
@@ -107,13 +108,16 @@ export default function GrandPiano88() {
       return;
     }
     if (!dispatchSeq('RECORD')) return;
+    if (!dispatchSeq('RECORD')) return;
+    setPlaybackResult(null);
     noteStartRef.current.clear();
     lastNoteOnRef.current = null;
     setRecording([]);
   };
 
-    const handlePlay = async () => {
+      const handlePlay = async () => {
     if (recording.length === 0 || !dispatchSeq('PLAY')) return;
+    setPlaybackResult(null);
     const controller = new AbortController();
     abortRef.current = controller;
     try {
@@ -123,8 +127,10 @@ export default function GrandPiano88() {
         onNoteOn: handleNoteOn,
         onNoteOff: handleNoteOff,
       });
+      setPlaybackResult('finished');
     } catch (error) {
       if (error?.name !== 'AbortError') throw error; // Stop/unmount is expected; real errors still surface
+      setPlaybackResult('stopped');
     } finally {
       if (abortRef.current === controller) abortRef.current = null;
       dispatchSeq('FINISH');
@@ -138,9 +144,10 @@ export default function GrandPiano88() {
     setPressedNotes(new Set());
   };
 
-  const handleClear = () => {
+    const handleClear = () => {
     if (seqStateRef.current !== 'idle') return;
     setRecording([]);
+    setPlaybackResult(null);
   };
 
   const renderKey = (key) => (
@@ -166,6 +173,7 @@ export default function GrandPiano88() {
         seqState={seqState}
         events={recording}
         speed={speed}
+        playbackResult={playbackResult}
         onRecordToggle={handleRecordToggle}
         onPlay={handlePlay}
         onStop={handleStop}

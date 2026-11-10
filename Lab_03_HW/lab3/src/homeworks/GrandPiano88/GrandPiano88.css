@@ -6,7 +6,7 @@
 }
 
 .piano {
-  --white-w: clamp(2rem, 2.5vw, 2.75rem);
+  --white-w: clamp(2.5rem, 2.5vw, 2.75rem); /* min 40px white -> black key >= 24px (WCAG 2.2 SC 2.5.8) */
   --white-h: clamp(9rem, 22vw, 13rem);
   --black-w: calc(var(--white-w) * 0.6);
   --black-h: calc(var(--white-h) * 0.62);
@@ -129,4 +129,10 @@
 .sequencer__speed {
   /* ...giữ nguyên các dòng cũ... */
   justify-self: start;
+}
+.sequencer button:focus-visible,
+.sequencer input:focus-visible,
+.sequencer summary:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
 }
