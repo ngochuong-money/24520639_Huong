@@ -1,0 +1,86 @@
+.grand-piano {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.piano {
+  --white-w: clamp(2rem, 2.5vw, 2.75rem);
+  --white-h: clamp(9rem, 22vw, 13rem);
+  --black-w: calc(var(--white-w) * 0.6);
+  --black-h: calc(var(--white-h) * 0.62);
+
+  display: flex;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 0.5rem;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+}
+
+.piano__slot {
+  position: relative;
+  flex: 0 0 var(--white-w);
+}
+
+.key {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 0 0.4rem;
+  border: 1px solid #333;
+  font: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+.key--white {
+  width: 100%;
+  height: var(--white-h);
+  border-radius: 0 0 4px 4px;
+  background: #fff;
+  color: #222;
+}
+
+.key--black {
+  position: absolute;
+  top: 0;
+  right: calc(var(--black-w) / -2);
+  z-index: 1;
+  width: var(--black-w);
+  height: var(--black-h);
+  border-radius: 0 0 3px 3px;
+  background: #111;
+  color: #fff;
+}
+
+.key--white[aria-pressed='true'] {
+  background: #cfe3ff;
+}
+
+.key--black[aria-pressed='true'] {
+  background: #3a5a8c;
+}
+
+.key:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: -3px;
+}
+
+.key__label {
+  font-size: 0.65rem;
+  pointer-events: none;
+}
+
+/* Black keys are too narrow for visible text; keep the name for assistive tech */
+.key--black .key__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
