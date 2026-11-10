@@ -82,3 +82,6 @@ export const DRUM_PADS = Object.freeze([
 
 /** Physical key code → pad, built once at module load. */
 export const PAD_MAP = new Map(DRUM_PADS.map((pad) => [pad.code, pad]));
+
+/** Pad id → pad, for looking up display data from a hit. */
+export const PAD_BY_ID = new Map(DRUM_PADS.map((pad) => [pad.id, pad]));
