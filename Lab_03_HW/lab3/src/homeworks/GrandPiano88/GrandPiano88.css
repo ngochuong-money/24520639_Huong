@@ -113,3 +113,20 @@
   margin: 0.5rem 0 0;
   overflow-y: auto;
 }
+.sequencer__speed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.sequencer__speed-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.sequencer__speed {
+  /* ...giữ nguyên các dòng cũ... */
+  justify-self: start;
+}
