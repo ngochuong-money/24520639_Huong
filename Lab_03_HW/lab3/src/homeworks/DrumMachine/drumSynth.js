@@ -1,17 +1,24 @@
 import { DRUM_PADS } from './drumPads.js';
 
-/** Meter range in dBFS; consumed by LevelMeter (Task 1.7). */
+/** Meter range in dBFS; consumed by LevelMeter. */
 export const LEVEL_MIN_DB = -12;
 export const LEVEL_MAX_DB = 0;
 
 const SILENCE = 0.0001; // exponential ramps cannot reach 0
 const STOP_PADDING = 0.05; // seconds after envelope ends
 const NOISE_SECONDS = 2; // longer than the longest decay (crash 1.2s)
+const UNLOCK_EVENTS = ['pointerup', 'keydown', 'click'];
 
 const VOICE_BY_ID = new Map(DRUM_PADS.map(({ id, voice }) => [id, voice]));
 
 let audioContext = null;
 let noiseBuffer = null;
+let pendingVoice = null;
+
+/** Chrome only allows audio after an activation event; touch `pointerdown` is not one. */
+function hasUserActivation() {
+  return audioContext !== null || navigator.userActivation?.hasBeenActive !== false;
+}
 
 /** Lazily creates the single shared AudioContext; resumes it if the browser suspended it. */
 function getAudioContext() {
@@ -56,18 +63,7 @@ function gainToDb(gain) {
   return Math.round(clamped * 10) / 10;
 }
 
-/**
- * Plays one drum hit. Must be called from a user gesture handler the first time
- * so the browser allows audio.
- * @param {string} padId - An id from DRUM_PADS.
- * @returns {number} Peak hit level in dBFS (LEVEL_MIN_DB…LEVEL_MAX_DB).
- */
-export function playVoice(padId) {
-  const voice = VOICE_BY_ID.get(padId);
-  if (!voice) {
-    throw new Error(`Unknown drum pad id: ${padId}`);
-  }
-
+function scheduleVoice(voice) {
   const ctx = getAudioContext();
   const startTime = ctx.currentTime;
   const endTime = startTime + voice.decay;
@@ -91,6 +87,44 @@ export function playVoice(padId) {
 
   source.start(startTime);
   source.stop(endTime + STOP_PADDING);
+}
+
+/** Plays the most recent voice requested before activation on the next activating event. */
+function unlockOnNextGesture(voice) {
+  const isWaiting = pendingVoice !== null;
+  pendingVoice = voice;
+  if (isWaiting) return;
+
+  const unlock = () => {
+    for (const type of UNLOCK_EVENTS) {
+      window.removeEventListener(type, unlock, true);
+    }
+    scheduleVoice(pendingVoice);
+    pendingVoice = null;
+  };
+
+  for (const type of UNLOCK_EVENTS) {
+    window.addEventListener(type, unlock, true);
+  }
+}
+
+/**
+ * Plays one drum hit, or defers it to the next activating gesture if the page
+ * has not been activated yet (first touch on mobile).
+ * @param {string} padId - An id from DRUM_PADS.
+ * @returns {number} Peak hit level in dBFS (LEVEL_MIN_DB…LEVEL_MAX_DB).
+ */
+export function playVoice(padId) {
+  const voice = VOICE_BY_ID.get(padId);
+  if (!voice) {
+    throw new Error(`Unknown drum pad id: ${padId}`);
+  }
+
+  if (hasUserActivation()) {
+    scheduleVoice(voice);
+  } else {
+    unlockOnNextGesture(voice);
+  }
 
   return gainToDb(voice.gain);
 }
