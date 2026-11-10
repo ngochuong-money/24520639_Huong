@@ -9,7 +9,7 @@ export default function SessionControls({ isKeyboardEnabled, onKeyboardEnabledCh
   const [notes, setNotes] = useState('');
 
   return (
-    <fieldset>
+    <fieldset className="session-controls">
       <legend>Session controls</legend>
       <p>
         <input

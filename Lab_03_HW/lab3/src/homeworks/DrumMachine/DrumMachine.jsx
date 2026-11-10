@@ -6,7 +6,7 @@ import SessionControls from './SessionControls.jsx';
 import { DRUM_PADS, PAD_BY_ID, PAD_MAP } from './drumPads.js';
 import { LEVEL_MIN_DB, playVoice } from './drumSynth.js';
 import { useDrumKeyboard } from './useDrumKeyboard.js';
-
+import './DrumMachine.css';
 const MAX_HITS = 8;
 
 export default function DrumMachine() {
@@ -37,14 +37,14 @@ export default function DrumMachine() {
   useDrumKeyboard(PAD_MAP, handlePress, handleRelease, isKeyboardEnabled);
 
   return (
-    <section aria-labelledby={headingId}>
+    <section className="drum-machine" aria-labelledby={headingId}>
       <h2 id={headingId}>Production Studio Drum Kit</h2>
       <SessionControls
         isKeyboardEnabled={isKeyboardEnabled}
         onKeyboardEnabledChange={setIsKeyboardEnabled}
         onClearLog={handleClearLog}
       />
-      <ul aria-label="Drum pads">
+      <ul className="drum-pads" aria-label="Drum pads">
         {DRUM_PADS.map((pad) => (
           <li key={pad.id}>
             <DrumPad

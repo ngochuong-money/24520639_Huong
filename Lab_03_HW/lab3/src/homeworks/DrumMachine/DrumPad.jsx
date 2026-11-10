@@ -37,7 +37,7 @@ export default function DrumPad({ pad, isActive = false, onPress, onRelease }) {
   };
 
   return (
-    <button
+    <button className="drum-pad"
       type="button"
       aria-pressed={isActive}
       aria-keyshortcuts={pad.keyLabel}

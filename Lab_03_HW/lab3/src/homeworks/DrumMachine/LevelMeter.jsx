@@ -26,7 +26,7 @@ export default function LevelMeter({ level, hitTime, min = LEVEL_MIN_DB, max = L
   const displayed = Math.round((level - (level - min) * progress) * 10) / 10;
 
   return (
-    <p>
+    <p className="level-meter">
       <label htmlFor={meterId}>Hit level</label>{' '}
       <meter id={meterId} min={min} max={max} low={-6} high={-2} optimum={min} value={displayed}>
         {displayed} dB

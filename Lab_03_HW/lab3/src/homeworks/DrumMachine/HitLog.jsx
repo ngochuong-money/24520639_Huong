@@ -10,7 +10,7 @@ export default function HitLog({ hits, latestHit }) {
   const headingId = useId();
 
   return (
-    <section aria-labelledby={headingId}>
+    <section className="hit-log" aria-labelledby={headingId}>
       <h3 id={headingId}>Hit log</h3>
       <output aria-live="polite">
         {latestHit ? (
