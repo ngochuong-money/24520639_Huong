@@ -96,3 +96,108 @@
   margin: 0 0 1rem;
   font-weight: 600;
 }
+.pubg-arena .leaderboard-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+}
+
+.pubg-arena .leaderboard-controls legend {
+  padding: 0 0.25rem;
+  font-weight: 700;
+}
+
+.pubg-arena .leaderboard-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.pubg-arena .leaderboard-control label {
+  font-weight: 600;
+}
+
+.pubg-arena .leaderboard-control select {
+  min-height: 2.75rem;
+  padding: 0.25rem 0.5rem;
+  font: inherit;
+}
+
+.pubg-arena .leaderboard-control select:focus-visible {
+  outline: 3px solid #1a5fb4;
+  outline-offset: 2px;
+}
+
+.pubg-arena .leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.pubg-arena .leaderboard caption {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.pubg-arena .leaderboard th,
+.pubg-arena .leaderboard td {
+  padding: 0.5rem;
+  border-bottom: 1px solid currentColor;
+  text-align: left;
+}
+
+.pubg-arena .leaderboard td:not(:first-child),
+.pubg-arena .leaderboard thead th:nth-child(n + 3) {
+  text-align: right;
+}
+
+.pubg-arena .leaderboard .is-sorted {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.pubg-arena .kill-feed {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+}
+
+.pubg-arena .kill-feed:focus-visible {
+  outline: 3px solid #1a5fb4;
+  outline-offset: 2px;
+}
+
+.pubg-arena .kill-feed__spacer {
+  margin: 0;
+  padding: 0;
+}
+
+.pubg-arena .kill-feed__row {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0.75rem;
+  overflow: hidden;
+  border-bottom: 1px solid #767676;
+}
+
+.pubg-arena .kill-feed__line {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pubg-arena .kill-feed__meta {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}

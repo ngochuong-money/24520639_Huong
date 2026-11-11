@@ -38,3 +38,11 @@ export const formatDropTitle = (drop) =>
   drop.kind === DROP_KIND.G_COIN_CRATE
     ? `${drop.title} (${formatCount(drop.gCoinAmount)} G-Coin)`
     : drop.title;
+const clockFormatter = new Intl.DateTimeFormat('vi-VN', {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+});
+
+/** "23:01:05" */
+export const formatClock = (epochMs) => clockFormatter.format(epochMs);
