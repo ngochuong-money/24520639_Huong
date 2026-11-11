@@ -341,3 +341,12 @@ Fixed in `TASK_DECOMPOSITION.md` before implementation; correct markup shipped i
 - **Engineering Fix:** If no AudioContext exists and `navigator.userActivation.hasBeenActive` is false, the synth stores the note as pending and listens (capture phase, AbortController-managed) for activation events; on activation it creates the context and plays still-held notes. `noteOff` drops pending notes; `stopAll` clears them and removes the listeners.
 - **Verification:** After reload, the first mouse click plays immediately with no Console warnings; keyboard, Record/Play and voice stealing unchanged. ![after](./screenshots/failure-3-after.png)
 - **Git Commit:** `<hash>` — `fix(hw2): defer AudioContext creation until user activation`
+
+## HW3 Failure: Leaderboard caused horizontal page overflow
+
+- **Reported request:** "bị tràn ngang rồi fix lỗi giúp ik". The original generation prompt for the affected layout is not recorded here.
+- **Faulty layout:** `SquadLeaderboard.jsx` rendered `<table className="leaderboard">` directly inside the panel. The CSS used `width: 100%` without a containing horizontal scroll region.
+- **Root cause:** The table's intrinsic minimum width (about 369px) exceeded the available content width on a 375px viewport. `width: 100%` alone could not shrink the table below that minimum, so it expanded the document's scrollable width.
+- **Evidence before the fix:** The user's Console screenshot showed `document.documentElement.scrollWidth <= document.documentElement.clientWidth` returning `false`. A Chrome check on `#krafton-pubg-vn-arena` at a 375px viewport reproduced `clientWidth: 360` and `scrollWidth: 385` (the vertical scrollbar accounts for the reduced client width).
+- **Engineering fix:** In `SquadLeaderboard.jsx`, wrap the table in a labelled `<section className="leaderboard-scroll">` with `tabIndex={0}` so keyboard users can scroll it. In `KraftonPubgVnArena.css`, apply `max-width: 100%`, `overflow-x: auto`, `overscroll-behavior-x: contain`, and a visible focus outline to that region. The table retains its native semantics and all columns remain accessible.
+- **Verification (2026-11-12):** Chrome checks at 375, 768, 960 and 1440px confirmed document `scrollWidth === clientWidth` across HW1, HW2 and HW3. At 375px, HW3 changed from `385 > 360` to `360 === 360`. `npm.cmd run lint` and `npm.cmd run build` both passed.
