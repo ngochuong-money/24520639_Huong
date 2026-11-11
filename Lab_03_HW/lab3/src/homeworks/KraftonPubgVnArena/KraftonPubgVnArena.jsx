@@ -40,6 +40,10 @@ export default function KraftonPubgVnArena() {
   return (
     <section className="pubg-arena" aria-labelledby={headingId}>
       <h2 id={headingId}>KRAFTON x PUBG Vietnam Arena</h2>
+      <p className="pubg-arena__intro">
+        PVS Finals Ticket &amp; G-Coin Contraband Crate Arena: claim drops the moment they go live,
+        then follow the Vietnamese squad standings and the live kill-feed.
+      </p>
       <section aria-labelledby={dropsHeadingId}>
         <h3 id={dropsHeadingId}>Airdrops</h3>
         <p role="status" className="claim-status">

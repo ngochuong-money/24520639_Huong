@@ -24,7 +24,7 @@ export default function SquadLeaderboard({ squads, selectedSquadId, onSelectedSq
   const selectedSquad = squads.find((squad) => squad.squadId === selectedSquadId);
 
   return (
-    <section aria-labelledby={headingId}>
+    <section className="pubg-arena__panel" aria-labelledby={headingId}>
       <h3 id={headingId}>Live PUBG VN Leaderboard</h3>
 
       <fieldset className="leaderboard-controls">
@@ -60,40 +60,47 @@ export default function SquadLeaderboard({ squads, selectedSquadId, onSelectedSq
         </p>
       </fieldset>
 
-      <table className="leaderboard">
-        <caption>
-          Standings sorted by {sortLabel}, highest first
-          {selectedSquad ? `, showing ${selectedSquad.squadName}` : ''}
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Rank</th>
-            <th scope="col">Squad</th>
-            {COLUMNS.map((column) => (
-              <th
-                key={column.key}
-                scope="col"
-                aria-sort={column.key === sortKey ? 'descending' : undefined}
-                className={column.key === sortKey ? 'is-sorted' : undefined}
-              >
-                {column.label}
-                {column.key === sortKey && <span aria-hidden="true"> ▼</span>}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.squadId}>
-              <td>{row.rank}</td>
-              <th scope="row">{row.squadName}</th>
+      <section
+        className="leaderboard-scroll"
+        aria-label="Squad standings"
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- scrollable table must support keyboard scrolling
+        tabIndex={0}
+      >
+        <table className="leaderboard">
+          <caption>
+            Standings sorted by {sortLabel}, highest first
+            {selectedSquad ? `, showing ${selectedSquad.squadName}` : ''}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Squad</th>
               {COLUMNS.map((column) => (
-                <td key={column.key}>{row[column.key]}</td>
+                <th
+                  key={column.key}
+                  scope="col"
+                  aria-sort={column.key === sortKey ? 'descending' : undefined}
+                  className={column.key === sortKey ? 'is-sorted' : undefined}
+                >
+                  {column.label}
+                  {column.key === sortKey && <span aria-hidden="true"> ▼</span>}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.squadId}>
+                <td>{row.rank}</td>
+                <th scope="row">{row.squadName}</th>
+                {COLUMNS.map((column) => (
+                  <td key={column.key}>{row[column.key]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
     </section>
   );
 }

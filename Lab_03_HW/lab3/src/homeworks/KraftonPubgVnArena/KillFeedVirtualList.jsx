@@ -20,7 +20,7 @@ export default function KillFeedVirtualList({ entries, squadName }) {
   };
 
   return (
-    <section aria-labelledby={headingId}>
+    <section className="pubg-arena__panel" aria-labelledby={headingId}>
       <h3 id={headingId}>Kill-feed</h3>
       <p id={summaryId}>
         {entries.length} kills{squadName ? ` involving ${squadName}` : ''}, newest first.

@@ -133,6 +133,17 @@
   outline-offset: 2px;
 }
 
+.pubg-arena .leaderboard-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.pubg-arena .leaderboard-scroll:focus-visible {
+  outline: 3px solid #1a5fb4;
+  outline-offset: 2px;
+}
+
 .pubg-arena .leaderboard {
   width: 100%;
   border-collapse: collapse;
@@ -200,4 +211,33 @@
 .pubg-arena .kill-feed__meta {
   font-size: 0.875rem;
   font-variant-numeric: tabular-nums;
+}
+.pubg-arena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem 2rem;
+  align-items: start;
+}
+
+.pubg-arena > * {
+  grid-column: 1 / -1;
+}
+
+.pubg-arena > h2,
+.pubg-arena__intro {
+  margin: 0;
+}
+
+.pubg-arena__intro {
+  max-width: 65ch;
+}
+
+@media (min-width: 60rem) {
+  .pubg-arena {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pubg-arena > .pubg-arena__panel {
+    grid-column: auto;
+  }
 }
