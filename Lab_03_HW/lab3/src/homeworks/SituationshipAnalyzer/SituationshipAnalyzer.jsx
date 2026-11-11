@@ -5,7 +5,7 @@ import {
   getEffortError,
   situationshipReducer,
 } from "./situationshipReducer.js";
-
+import "./SituationshipAnalyzer.css";
 const PHASE_DETAILS = {
   STRANGERS: {
     label: "Chưa bắt đầu",
