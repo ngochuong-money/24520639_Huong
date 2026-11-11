@@ -1,3 +1,4 @@
+import { DROP_KIND } from './contract.js';
 const SECOND_MS = 1_000;
 
 const splitDuration = (ms) => {
@@ -24,3 +25,16 @@ export function toIsoDuration(ms) {
   const { hours, minutes, seconds } = splitDuration(ms);
   return `PT${hours}H${minutes}M${seconds}S`;
 }
+const vndFormatter = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' });
+const countFormatter = new Intl.NumberFormat('vi-VN');
+
+/** "1.500.000 ₫" */
+export const formatVnd = (amount) => vndFormatter.format(amount);
+
+/** "5.000" */
+export const formatCount = (value) => countFormatter.format(value);
+/** Unique display title, e.g. "G-Coin Contraband Crate (5.000 G-Coin)". */
+export const formatDropTitle = (drop) =>
+  drop.kind === DROP_KIND.G_COIN_CRATE
+    ? `${drop.title} (${formatCount(drop.gCoinAmount)} G-Coin)`
+    : drop.title;
