@@ -1,0 +1,42 @@
+.pubg-arena__drops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.pubg-arena__drop {
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.pubg-arena .phase-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.pubg-arena .phase-badge--warmup { background: #fff4ce; color: #5c4400; }
+.pubg-arena .phase-badge--airdrop_live { background: #dff6dd; color: #0b5a14; }
+.pubg-arena .phase-badge--looted_out { background: #fde7e9; color: #8a1020; }
+.pubg-arena .phase-badge--expired { background: #ececec; color: #3b3b3b; }
+
+.pubg-arena .airdrop-countdown time {
+  font-variant-numeric: tabular-nums;
+}
+
+.pubg-arena .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

@@ -19,11 +19,16 @@ export const DROP_PHASE = Object.freeze({
 
 /**
  * Allowed phase transitions (explicit state machine).
+ * WARMUP may skip forward when a background tab sleeps through a phase.
  * LOOTED_OUT -> AIRDROP_LIVE exists only for optimistic rollback
  * when a claim that took the last unit fails.
  */
 export const PHASE_TRANSITIONS = Object.freeze({
-  [DROP_PHASE.WARMUP]: Object.freeze([DROP_PHASE.AIRDROP_LIVE]),
+  [DROP_PHASE.WARMUP]: Object.freeze([
+    DROP_PHASE.AIRDROP_LIVE,
+    DROP_PHASE.LOOTED_OUT,
+    DROP_PHASE.EXPIRED,
+  ]),
   [DROP_PHASE.AIRDROP_LIVE]: Object.freeze([
     DROP_PHASE.LOOTED_OUT,
     DROP_PHASE.EXPIRED,
