@@ -1,3 +1,53 @@
+.people-page {
+  padding: 24px;
+  text-align: left;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 24px;
+}
+
+.people-grid > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.people-page a.active {
+  font-weight: bold;
+}
+
+.detail-pane {
+  box-sizing: border-box;
+  /* Reserve the same space before and after the lazy route loads. */
+  block-size: 16rem;
+  align-self: start;
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.skeleton-line {
+  display: block;
+  height: 1rem;
+  margin-block: 0.75rem;
+  border-radius: 4px;
+  background: var(--border);
+}
+
+.skeleton-title {
+  width: 40%;
+  height: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
