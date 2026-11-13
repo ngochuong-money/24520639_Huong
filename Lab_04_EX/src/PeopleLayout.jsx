@@ -6,6 +6,10 @@ export default function PeopleLayout() {
   return (
     <main className="people-page">
       <Link to="/">Home</Link>
+      {' · '}
+      <NavLink to="/form" className={({ isActive }) => isActive ? 'active' : undefined}>
+        Form
+      </NavLink>
       <h1>People</h1>
       <section className="people-layout" aria-label="People directory">
         <nav aria-label="People directory">

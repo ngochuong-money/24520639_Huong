@@ -2,6 +2,7 @@
 import { Link, Navigate, Routes, Route } from 'react-router';
 import PeopleLayout from './PeopleLayout.jsx';
 import Skeleton from './Skeleton.jsx';
+import SimpleForm from './SimpleForm.jsx';
 import './App.css';
 
 const PersonDetail = lazy(() => import('./PersonDetail'));
@@ -10,6 +11,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/people" replace />} />
+      <Route path="form" element={<SimpleForm />} />
       <Route path="people" element={<PeopleLayout />}>
         <Route
           index

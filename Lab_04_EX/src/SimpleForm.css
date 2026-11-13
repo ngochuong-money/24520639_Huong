@@ -1,0 +1,48 @@
+.simple-form-page {
+  padding: 24px;
+  text-align: left;
+}
+
+.simple-form-page form {
+  max-width: 32rem;
+}
+
+.simple-form-page fieldset {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.simple-form-page .field {
+  display: grid;
+  gap: 0.4rem;
+  margin-block: 1rem;
+}
+
+.simple-form-page input,
+.simple-form-page button {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.simple-form-page .field-error {
+  font-weight: 700;
+}
+
+.data-inspector {
+  margin-top: 1.5rem;
+}
+
+.data-inspector pre {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.data-inspector code {
+  display: block;
+}
