@@ -1,0 +1,33 @@
+.people-page {
+  padding: 24px;
+  text-align: left;
+}
+
+.people-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.people-layout > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.people-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.people-list a.active,
+.people-list a[aria-current="page"] {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .people-layout {
+    grid-template-columns: 1fr;
+  }
+}

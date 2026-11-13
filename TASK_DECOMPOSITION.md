@@ -6,11 +6,11 @@ Commits: atomic, conventional (feat / fix / test / docs / init), one scope per c
 ---
 
 ## Block 1 — Setup & WBS (0–40m)
-- [ ] 1.0.1 Scaffold React app + `server/` Express folder → `init: scaffold lab 4 multi-route SPA`
-- [ ] 1.0.2 Write `project-rules.md` (4-stage loop, commit rules, banned patterns) → `docs: define contract spec in project-rules.md`
-- [ ] 1.0.3 Write this file (`TASK_DECOMPOSITION.md`)
-- [ ] 1.0.4 `.env` with `MONGODB_URI`, add to `.gitignore`
-- [ ] 1.0.5 Create `AI_FAILURE_AUDIT.md` and log AI failures from now on
+- [x] 1.0.1 Scaffold React app + `server/` Express folder → `init: scaffold lab 4 multi-route SPA`
+- [x] 1.0.2 Write `project-rules.md` (4-stage loop, commit rules, banned patterns) → `docs: define contract spec in project-rules.md`
+- [x] 1.0.3 Write this file (`TASK_DECOMPOSITION.md`)
+- [x] 1.0.4 `.env` with `MONGODB_URI`, add to `.gitignore`
+- [x] 1.0.5 Create `AI_FAILURE_AUDIT.md` and log AI failures from now on
 
 ---
 
@@ -19,26 +19,36 @@ Deliverables: `PeopleLayout.jsx`, `PersonDetail.jsx`
 Commits (required, 2): `feat: router layout`, `feat: detail route handling`
 
 ### Ex 1.1 — Lazy loading & resiliency
-- [ ] Contract: `PersonDetail` is a default export, loaded per route
-- [ ] `const PersonDetail = React.lazy(() => import('./PersonDetail'))`
-- [ ] Wrap route in `<Suspense fallback={<Skeleton aria-busy="true" aria-live="polite" />}>`
-- [ ] Skeleton dimensions match real content (CLS = 0)
+- [x] Contract: `PersonDetail` is a default export, loaded per route
+- [x] `const PersonDetail = React.lazy(() => import('./PersonDetail'))`
+- [x] Wrap route in `<Suspense fallback={<Skeleton aria-busy="true" aria-live="polite" />}>`
+- [x] Skeleton dimensions match real content (CLS = 0)
+### Ex 1.1 — Lazy loading & resiliency
+- [x] Contract:
+  - Data: `src/data/people.js` exports `people` (array of `{ id: string, name: string, role: string }`)
+  - `src/PersonDetail.jsx` has `export default function PersonDetail()` (no props)
+  - Reads `id` via `useParams()`, finds the person in `people`
+  - Valid id → renders `<dl className="person-details">` with name and role
+  - Invalid id → renders `<NotFoundState />`
+  - Loaded per route via `lazy(() => import('./PersonDetail'))` at module level
+  - Rendered inside `<Suspense fallback={<Skeleton aria-busy="true" aria-live="polite" />}>` in the child route of `PeopleLayout`
+  - `<Skeleton />` shares the `.detail-pane` frame with the real content, so dimensions match (CLS = 0)
 
 ### Ex 1.2 / 1.2.1 — React Router v7 syntax & layout
-- [ ] Replace `<Switch>` with `<Routes>` (no `<Redirect>`, no `exact`)
-- [ ] Use `element={<Layout />}` prop syntax
-- [ ] Nested routes: parent layout renders children via `<Outlet />`
-- [ ] Index route (`<Route index element={<Home />} />`)
-- [ ] `NavLink` with `className={({ isActive }) => ...}`
-- [ ] **Commit 1:** `feat: router layout`
+- [x] Replace `<Switch>` with `<Routes>` (no `<Redirect>`, no `exact`)
+- [x] Use `element={<Layout />}` prop syntax
+- [x] Nested routes: parent layout renders children via `<Outlet />`
+- [x] Index route (`<Route index element={<Home />} />`)
+- [x] `NavLink` with `className={({ isActive }) => ...}`
+- [x] **Commit 1:** `feat: router layout`
 
 ### Ex 1.2.2 — Master-detail with CSS Grid
-- [ ] `PeopleLayout`: grid `grid-template-columns: minmax(280px, 1fr) 2fr`, list on the left, `<Outlet />` on the right
-- [ ] `PersonDetail`: `const { id } = useParams()`
-- [ ] Find entity with `people.find(p => p.id === id)`
-- [ ] If not found, render `<NotFoundState />` (404)
-- [ ] Render fields with semantic `<dl>`, `<dt>`, `<dd>`
-- [ ] **Commit 2:** `feat: detail route handling`
+- [x] `PeopleLayout`: grid `grid-template-columns: minmax(280px, 1fr) 2fr`, list on the left, `<Outlet />` on the right
+- [x] `PersonDetail`: `const { id } = useParams()`
+- [x] Find entity with `people.find(p => p.id === id)`
+- [x] If not found, render `<NotFoundState />` (404)
+- [x] Render fields with semantic `<dl>`, `<dt>`, `<dd>`
+- [x] **Commit 2:** `feat: detail route handling`
 
 ### Checkpoint
 - [ ] DevTools: no console warnings
