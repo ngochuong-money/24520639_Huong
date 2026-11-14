@@ -1,6 +1,7 @@
 export type Rule = {
   required?: boolean;
   minLength?: number;
+  maxLength?: number;
 };
 export type Rules = Record<string, Rule>;
 export type Values = Record<string, string>;
@@ -14,6 +15,8 @@ export function evaluateErrors(values: Values, rules: Rules): Errors {
       errors[name] = 'Required';
     } else if (rule.minLength && value.length < rule.minLength) {
       errors[name] = `At least ${rule.minLength} characters`;
+    } else if (rule.maxLength !== undefined && value.length > rule.maxLength) {
+      errors[name] = `At most ${rule.maxLength} characters`;
     }
   }
   return errors;
