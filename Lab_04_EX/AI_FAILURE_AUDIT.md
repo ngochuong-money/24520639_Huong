@@ -52,3 +52,11 @@ The preceding paragraph describes that earlier checkpoint only. Subsequent verif
 - Checked People, person details, Form and Forum at 375px: all document widths were 375px. The empty and loaded profile frames both measured 384px high. This frame measurement alone is not a whole-page CLS audit.
 - Browser Console had no errors/warnings. Lint, typecheck and 99/99 tests passed; production build passed after the final CSS color adjustment.
 - Outstanding limits: no Lighthouse/W3C audit was performed in this verification. These findings describe the tested working tree, not a claim that every possible failure has been tested.
+
+### 2026-11-14 — Lighthouse contrast correction
+
+- Failure: the redesigned People page scored 95 Accessibility in the user's Lighthouse screenshot. The initial styling had not been checked with an automated contrast audit.
+- Diagnosis: axe-core identified insufficient contrast on the heading count and all three avatar initials; the selected person's role text also failed against the selected card background (ratios 2.9–4.41, below the required 4.5).
+- Fix: darkened those five text colors in index.css and PeopleLayout.css. Also changed the brand's accessible name to include the visible mobile logo text `h.` after Lighthouse reported label-content-name-mismatch.
+- Verification: rebuilt the production app and audited the preview on port 4173. axe-core reported no WCAG A/AA violations on People, person details, Form and Forum. The final mobile Lighthouse run on /people scored 100 Accessibility and 100 Best Practices with no failed audits. Lint and production build passed.
+- This updates the earlier Lighthouse limitation for /people only; no W3C audit or full-site Lighthouse audit is claimed.

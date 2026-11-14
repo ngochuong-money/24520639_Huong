@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router';
 export default function AppNav() {
   return (
     <header className="app-header">
-      <Link to="/people" className="brand" aria-label="Workspace home">
+      <Link to="/people" className="brand" aria-label="h. Workspace home">
         <span className="brand-mark" aria-hidden="true">h.</span>
         <span className="brand-name">Workspace<span className="brand-dot">.</span></span>
       </Link>

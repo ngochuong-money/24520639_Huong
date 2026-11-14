@@ -7,12 +7,12 @@
 .people-list a { display: flex; align-items: center; gap: 12px; min-height: 78px; padding: 14px 12px; border: 1px solid transparent; border-radius: 12px; color: var(--text-h); text-decoration: none; transition: border-color 150ms, background 150ms; }
 .people-list a:hover { background: #f7f5fc; }
 .people-list a.active { background: #f6f3ff; border-color: var(--accent-border); }
-.person-avatar { display: grid; flex-shrink: 0; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #ede7fc; color: #8061bb; font-size: 13px; font-weight: 650; }
-.people-list li:nth-child(2) .person-avatar { background: #e7f2ed; color: #598a76; }
-.people-list li:nth-child(3) .person-avatar { background: #fdf0e5; color: #b0875d; }
+.person-avatar { display: grid; flex-shrink: 0; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #ede7fc; color: #6f4ca4; font-size: 13px; font-weight: 650; }
+.people-list li:nth-child(2) .person-avatar { background: #e7f2ed; color: #3d6d58; }
+.people-list li:nth-child(3) .person-avatar { background: #fdf0e5; color: #825731; }
 .person-summary { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 3px; }
 .person-summary strong { font-size: 13px; font-weight: 600; }
-.person-summary > span { color: #776e84; font-size: 11px; }
+.person-summary > span { color: #6d617b; font-size: 11px; }
 .person-arrow { color: #c3baca; font-size: 24px; font-weight: 300; line-height: 1; }
 .people-list a.active .person-summary strong, .people-list a.active .person-arrow { color: var(--accent); }
 
