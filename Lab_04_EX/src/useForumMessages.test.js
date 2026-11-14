@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { cleanup, renderHook, waitFor } from '@testing-library/react';
+import { act, cleanup, renderHook, waitFor } from '@testing-library/react';
 import { useForumMessages } from './useForumMessages';
 
 afterEach(() => {
@@ -52,5 +52,29 @@ describe('useForumMessages', () => {
     await waitFor(() => expect(result.current.error).toBe('HTTP 500'));
     expect(result.current.msgs).toEqual([]);
     expect(json).not.toHaveBeenCalled();
+  });
+
+  it('ignores AbortError without logging or changing error state', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new DOMException('x', 'AbortError')));
+    const log = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { result } = renderHook(() => useForumMessages('nasa'));
+    await act(async () => { await Promise.resolve(); });
+
+    expect(result.current.error).toBeNull();
+    expect(result.current.msgs).toEqual([]);
+    expect(log).not.toHaveBeenCalled();
+  });
+
+  it('logs a real fetch error and stores its message', async () => {
+    const error = new Error('boom');
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(error));
+    const log = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const { result } = renderHook(() => useForumMessages('nasa'));
+
+    await waitFor(() => expect(result.current.error).toBe('boom'));
+    expect(log).toHaveBeenCalledExactlyOnceWith(error);
+    expect(result.current.msgs).toEqual([]);
   });
 });

@@ -20,6 +20,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['server/**/*.js'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     extends: [tseslint.configs.recommended],
   },
