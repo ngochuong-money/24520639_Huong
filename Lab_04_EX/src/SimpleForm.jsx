@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
+import AppNav from './AppNav.jsx';
 import { FormProvider } from './FormContext';
 import { useForm } from './useForm';
 import InputField from './InputField';
@@ -39,9 +39,13 @@ function FormBody() {
 
 export default function SimpleForm() {
   return (
-    <main className="simple-form-page">
-      <Link to="/people">Back to people</Link>
-      <h1>Simple form</h1>
+    <main className="page-shell simple-form-page">
+      <AppNav />
+      <header className="page-heading">
+        <p className="eyebrow">A LITTLE ABOUT YOU</p>
+        <h1>Simple form</h1>
+        <p>Enter your details, then review your submission below.</p>
+      </header>
       <FormProvider rules={rules}>
         <FormBody />
       </FormProvider>

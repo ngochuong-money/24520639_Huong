@@ -12,7 +12,14 @@ export default function PersonDetail() {
 
   return (
     <section className="detail-pane person-detail" aria-labelledby="person-heading">
-      <h2 id="person-heading">{person.name}</h2>
+      <p className="eyebrow">PERSON DETAILS</p>
+      <header className="person-profile">
+        <span className="profile-avatar" aria-hidden="true">
+          {person.name.split(' ').map((part) => part[0]).slice(0, 2).join('')}
+        </span>
+        <h2 id="person-heading">{person.name}</h2>
+        <p>{person.role}</p>
+      </header>
       <dl className="person-details">
         <dt>ID</dt>
         <dd>{person.id}</dd>

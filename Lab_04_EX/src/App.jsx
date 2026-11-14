@@ -4,6 +4,7 @@ import PeopleLayout from './PeopleLayout.jsx';
 import Skeleton from './Skeleton.jsx';
 import SimpleForm from './SimpleForm.jsx';
 import ForumPage from './ForumPage.jsx';
+import PeopleEmptyState from './PeopleEmptyState.jsx';
 import './App.css';
 
 const PersonDetail = lazy(() => import('./PersonDetail'));
@@ -17,7 +18,7 @@ export default function App() {
       <Route path="people" element={<PeopleLayout />}>
         <Route
           index
-          element={<p className="detail-pane">Select a person to view their details.</p>}
+          element={<PeopleEmptyState />}
         />
         <Route
           path=":id"

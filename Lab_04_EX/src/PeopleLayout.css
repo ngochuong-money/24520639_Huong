@@ -1,33 +1,23 @@
-.people-page {
-  padding: 24px;
-  text-align: left;
-}
-
-.people-layout {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) 2fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.people-layout > * {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.people-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.people-list a.active,
-.people-list a[aria-current="page"] {
-  font-weight: 700;
-}
+.people-layout { display: grid; grid-template-columns: minmax(280px, 1fr) 2fr; gap: 24px; align-items: start; }
+.people-layout > * { min-width: 0; overflow-wrap: anywhere; }
+.directory-panel { padding: 20px 14px 14px; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); }
+.directory-heading { display: flex; justify-content: space-between; align-items: center; margin: 0 10px 17px; color: #756a82; font-size: 11px; font-weight: 650; letter-spacing: 0.5px; text-transform: uppercase; }
+.directory-heading span { display: grid; place-items: center; min-width: 22px; height: 22px; border-radius: 6px; background: var(--surface-muted); color: #766b83; font-size: 10px; }
+.people-list { display: grid; gap: 7px; list-style: none; margin: 0; padding: 0; }
+.people-list a { display: flex; align-items: center; gap: 12px; min-height: 78px; padding: 14px 12px; border: 1px solid transparent; border-radius: 12px; color: var(--text-h); text-decoration: none; transition: border-color 150ms, background 150ms; }
+.people-list a:hover { background: #f7f5fc; }
+.people-list a.active { background: #f6f3ff; border-color: var(--accent-border); }
+.person-avatar { display: grid; flex-shrink: 0; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #ede7fc; color: #8061bb; font-size: 13px; font-weight: 650; }
+.people-list li:nth-child(2) .person-avatar { background: #e7f2ed; color: #598a76; }
+.people-list li:nth-child(3) .person-avatar { background: #fdf0e5; color: #b0875d; }
+.person-summary { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 3px; }
+.person-summary strong { font-size: 13px; font-weight: 600; }
+.person-summary > span { color: #776e84; font-size: 11px; }
+.person-arrow { color: #c3baca; font-size: 24px; font-weight: 300; line-height: 1; }
+.people-list a.active .person-summary strong, .people-list a.active .person-arrow { color: var(--accent); }
 
 @media (max-width: 640px) {
-  .people-layout {
-    grid-template-columns: 1fr;
-  }
+  .people-layout { grid-template-columns: 1fr; gap: 18px; }
+  .directory-panel { padding: 18px 12px 12px; }
+  .people-list a { min-height: 69px; padding: 11px 12px; }
 }
