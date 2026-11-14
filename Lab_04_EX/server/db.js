@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+mongoose.connection.on('error', (err) => console.error('Mongo error:', err.message));
+
 export async function connectDb() {
   const uri = process.env.MONGODB_URI;
   if (!uri) {

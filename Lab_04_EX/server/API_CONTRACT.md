@@ -55,6 +55,7 @@ Non-string fields are rejected with `Required`. Missing or non-object bodies (in
 | Status | When | Body |
 |---|---|---|
 | 400 | `channelId` not allowed | `{ "error": "Unknown channel" }` |
+| 400 | Body is not valid JSON | `{ "error": "Invalid JSON" }` |
 | 400 | Validation fails | `{ "error": "Validation failed", "details": { "author": "Required" } }` |
 | 415 | Content-Type is not JSON | `{ "error": "Content-Type must be application/json" }` |
 | 500 | Database/server failure | `{ "error": "Internal server error" }` |

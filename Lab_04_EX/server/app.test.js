@@ -1,5 +1,5 @@
 import { once } from 'node:events';
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createApp } from './app.js';
 import { Message } from './models/Message.js';
 import { validateMessage } from './validation.js';
@@ -17,6 +17,7 @@ beforeAll(async () => {
   baseUrl = `http://127.0.0.1:${server.address().port}/api/channels`;
 });
 
+beforeEach(() => vi.spyOn(console, 'error').mockImplementation(() => {}));
 afterEach(() => vi.restoreAllMocks());
 afterAll(async () => {
   if (server) await new Promise((resolve) => server.close(resolve));
@@ -95,6 +96,25 @@ describe('message validation', () => {
 });
 
 describe('message router', () => {
+  it('returns JSON for malformed JSON without reaching the database', async () => {
+    const create = vi.spyOn(Message, 'create');
+    const response = await fetch(`${baseUrl}/nasa/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Origin: 'http://localhost:5173' },
+      body: '{abc',
+    });
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({ error: 'Invalid JSON' });
+    expect(response.headers.get('access-control-allow-origin')).toBe('http://localhost:5173');
+    expect(create).not.toHaveBeenCalled();
+  });
+
+  it('returns a generic JSON response for unexpected middleware errors', async () => {
+    const response = await post('nasa', { author: 'Huong', text: 'x'.repeat(110000) });
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({ error: 'Internal server error' });
+    expect(console.error).toHaveBeenCalledWith('Unhandled error:', expect.any(String));
+  });
   it.each(messageValidationCases.filter(({ details }) => Object.keys(details).length > 0))(
     'returns all field errors without writing to the database: $name',
     async ({ body, details }) => {
@@ -132,10 +152,16 @@ describe('message router', () => {
   });
 
   it('returns a generic error when reading messages fails', async () => {
-    vi.spyOn(Message, 'find').mockReturnValue({ sort: () => ({ exec: () => Promise.reject(new Error('private database error')) }) });
+    const find = vi.spyOn(Message, 'find').mockReturnValue({ sort: () => ({ exec: () => Promise.reject(new Error('private database error')) }) });
     const response = await fetch(`${baseUrl}/nasa/messages`);
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: 'Internal server error' });
+    expect(console.error).toHaveBeenCalledWith('GET messages failed:', 'private database error');
+    // The same HTTP server must keep serving requests after a rejected query.
+    find.mockReturnValue({ sort: () => ({ exec: () => Promise.resolve([]) }) });
+    const recovered = await fetch(`${baseUrl}/nasa/messages`);
+    expect(recovered.status).toBe(200);
+    expect(await recovered.json()).toEqual([]);
   });
 
   it('rejects a non-JSON Content-Type', async () => {
@@ -170,5 +196,6 @@ describe('message router', () => {
     const response = await post('nasa', { author: 'Huong', text: 'Hello' });
     expect(response.status).toBe(500);
     expect(await response.json()).toEqual({ error: 'Internal server error' });
+    expect(console.error).toHaveBeenCalledWith('POST messages failed:', 'private database error');
   });
 });

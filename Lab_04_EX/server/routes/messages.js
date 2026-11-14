@@ -17,7 +17,8 @@ router.get('/:channelId/messages', checkChannel, async (req, res) => {
       .sort({ createdAt: 1 })
       .exec();
     res.status(200).json(messages);
-  } catch {
+  } catch (err) {
+    console.error('GET messages failed:', err?.message ?? String(err));
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -38,7 +39,8 @@ router.post('/:channelId/messages', checkChannel, async (req, res) => {
       ...value,
     });
     res.status(201).json(created);
-  } catch {
+  } catch (err) {
+    console.error('POST messages failed:', err?.message ?? String(err));
     res.status(500).json({ error: 'Internal server error' });
   }
 });

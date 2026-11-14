@@ -1,6 +1,11 @@
 import 'dotenv/config';
 import { connectDb } from './db.js';
 
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled rejection:', reason?.message ?? String(reason));
+  process.exit(1);
+});
+
 const port = process.env.PORT ?? 3000;
 
 try {
