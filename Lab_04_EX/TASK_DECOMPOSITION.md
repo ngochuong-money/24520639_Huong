@@ -51,8 +51,8 @@ Commits (required, 2): `feat: router layout`, `feat: detail route handling`
 - [x] **Commit 2:** `feat: detail route handling`
 
 ### Checkpoint
-- [ ] DevTools: no console warnings
-- [ ] URL param parsing is clean (valid id, invalid id, missing id)
+- [x] DevTools: no console warnings
+- [x] URL param parsing is clean (valid id, invalid id, missing id)
 
 ---
 
@@ -60,13 +60,13 @@ Commits (required, 2): `feat: router layout`, `feat: detail route handling`
 Deliverables: `SimpleForm.jsx`, `InputField.jsx`, `FormContext.tsx`, `<ShowData />`
 Commits (required, 3): `feat: form context`, `feat: input field validation`, `feat: inspector output`
 
-- [ ] Contract: define `FormState`, `rules` shape, `errors` shape
-- [ ] Fail test: `evaluateErrors(values, rules)` and `isValid`
-- [ ] `FormContext` + `FormProvider`: `errors` and `isValid` computed synchronously during render (**no `useEffect`**) → **Commit 1:** `feat: form context`
-- [ ] `InputField`: `useId()` for stable binding, `aria-invalid`, `aria-describedby` → error message → **Commit 2:** `feat: input field validation`
-- [ ] `SimpleForm`: compose fields, submit only when `isValid`
-- [ ] `<ShowData />`: live JSON inspector after valid submit → **Commit 3:** `feat: inspector output`
-- [ ] Refactor with tests green; confirm no effect loops
+- [x] Contract: define `FormState`, `rules` shape, `errors` shape
+- [x] Fail test: `evaluateErrors(values, rules)` and `isValid`
+- [x] `FormContext` + `FormProvider`: `errors` and `isValid` computed synchronously during render (**no `useEffect`**) → **Commit 1:** `feat: form context`
+- [x] `InputField`: `useId()` for stable binding, `aria-invalid`, `aria-describedby` → error message → **Commit 2:** `feat: input field validation`
+- [x] `SimpleForm`: compose fields, submit only when `isValid`
+- [x] `<ShowData />`: live JSON inspector after valid submit → **Commit 3:** `feat: inspector output`
+- [x] Refactor with tests green; confirm no effect loops
 
 ---
 
@@ -75,40 +75,35 @@ Related: Ex 1.7.1 (Data Fetching & Express Hygiene)
 Commits: not fixed by the slides, split atomically
 
 ### Backend
-- [ ] Contract: `GET /api/channels/:channelId/messages`, `POST` payload schema, error codes
-- [ ] Mongoose 8 connection via `process.env.MONGODB_URI` (no hardcoded string)
-- [ ] `Message` model + async/await handlers (`.exec()`), no callbacks
-- [ ] `cors()` middleware
-- [ ] Strict POST payload validation (must match client rules)
-- [ ] try/catch on all handlers, no unhandled rejections
+- [x] Contract: `GET /api/channels/:channelId/messages`, `POST` payload schema, error codes
+- [x] Mongoose 8 connection via `process.env.MONGODB_URI` (no hardcoded string)
+- [x] `Message` model + async/await handlers (`.exec()`), no callbacks
+- [x] `cors()` middleware
+- [x] Strict POST payload validation (must match client rules)
+- [x] try/catch on all handlers, no unhandled rejections
 
 ### Frontend
-- [ ] `useForumMessages(channelId)` in `useForumMessages.js`
-- [ ] `AbortController` in `useEffect`, pass `signal` to `fetch`, `return () => controller.abort()`
-- [ ] Ignore `AbortError` in `.catch`, log other errors
-- [ ] Dependency array `[channelId]`
-- [ ] UI: channel switcher (`nasa`, `esports-tribunal`, `notNasa`)
-- [ ] Render with `<React.Fragment key={msg.id}>` inside `<dl>`
+- [x] `useForumMessages(channelId)` in `useForumMessages.js`
+- [x] `AbortController` in `useEffect`, pass `signal` to `fetch`, `return () => controller.abort()`
+- [x] Ignore `AbortError` in `.catch`, log other errors
+- [x] Dependency array `[channelId]`
+- [x] UI: channel switcher (`nasa`, `esports-tribunal`, `notNasa`)
+- [x] Render with `<React.Fragment key={msg.id}>` inside `<dl>`
 
 ### Verification
-- [ ] Chrome DevTools → Slow 3G → switch channels rapidly
-- [ ] Confirm in-flight requests are cancelled (screenshot Network tab)
-- [ ] Save full-stack error log
+- [x] Chrome DevTools → Slow 3G → switch channels rapidly
+- [x] Confirm in-flight requests are cancelled (screenshot Network tab)
+- [x] Save full-stack error log
 
 ---
 
 ## Block 5 — Defense & AI Audit (155–180m) — 15% of lab grade
 
-### Live defense (3 min)
-- [ ] Explain architecture and module relationships (router → context → hook → API → DB)
-- [ ] Defend state choices: local vs global (Context) vs persistent (MongoDB)
-- [ ] Practice fixing injected bugs: missing deps, missing key, missing abort/cleanup, wrong param
-
 ### `AI_FAILURE_AUDIT.md`
-- [ ] AI code failures: log every non-functional AI output
-- [ ] Hallucinated APIs & loops: phantom methods, broken effect loops
-- [ ] Engineering verification: manual analysis and exact steps taken to fix
+- [x] AI code failures: log every non-functional AI output
+- [x] Hallucinated APIs & loops: phantom methods, broken effect loops
+- [x] Engineering verification: manual analysis and exact steps taken to fix
 
 ### Final checks
-- [ ] `git log --graph --oneline --decorate` shows clean atomic history
-- [ ] Verification contract: contract-first API, client/server validation parity, zero unhandled rejections, deterministic single-pass state updates
+- [x] `git log --graph --oneline --decorate` shows clean atomic history
+- [x] Verification contract: contract-first API, client/server validation parity, zero unhandled rejections, deterministic single-pass state updates
