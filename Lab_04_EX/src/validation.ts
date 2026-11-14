@@ -1,3 +1,5 @@
+export { messageRules, validateMessage } from '../shared/messageValidation.js';
+
 export type Rule = {
   required?: boolean;
   minLength?: number;

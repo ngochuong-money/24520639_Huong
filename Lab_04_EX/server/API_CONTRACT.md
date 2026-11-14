@@ -39,6 +39,16 @@ Creates a message in a channel.
 
 `channelId` comes from the URL, never from the body. Extra fields are ignored.
 
+**Validation parity**
+Client and server use `shared/messageRules.json` and the same `validateMessage` function in `shared/messageValidation.js`. Both sides trim strings before checking length and return the same field messages:
+
+| Field | Rule | Message |
+|---|---|---|
+| `author` | required, trim, 2-50 | `Required` / `Must be 2-50 characters` |
+| `text` | required, trim, 1-500 | `Required` / `Must be at most 500 characters` |
+
+Non-string fields are rejected with `Required`. Missing or non-object bodies (including `null` and arrays) return 400 `Validation failed` with both fields marked `Required`. All field errors are reported together in `details`. The returned value contains only trimmed `author` and `text`.
+
 **Success: 201 Created**: returns the created message (same shape as GET item).
 
 **Errors**

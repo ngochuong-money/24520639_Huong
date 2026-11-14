@@ -1,0 +1,4 @@
+{
+  "author": { "required": true, "minLength": 2, "maxLength": 50 },
+  "text": { "required": true, "minLength": 1, "maxLength": 500 }
+}

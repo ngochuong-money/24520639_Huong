@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { evaluateErrors, isFormValid } from './validation';
+import { evaluateErrors, isFormValid, validateMessage } from './validation';
+import { messageValidationCases } from '../shared/messageValidationCases.js';
 
 const rules = {
   name: { required: true, minLength: 2 },
@@ -49,5 +50,17 @@ describe('isFormValid', () => {
 
   it('is true when errors is empty', () => {
     expect(isFormValid({})).toBe(true);
+  });
+});
+
+describe('client forum payload validation', () => {
+  it.each(messageValidationCases)('$name', ({ body, details }) => {
+    const result = validateMessage(body);
+    expect(result.details).toEqual(details);
+    if (Object.keys(details).length === 0) {
+      expect(Object.keys(result.value).sort()).toEqual(['author', 'text']);
+      expect(result.value.author).toBe(result.value.author.trim());
+      expect(result.value.text).toBe(result.value.text.trim());
+    }
   });
 });
