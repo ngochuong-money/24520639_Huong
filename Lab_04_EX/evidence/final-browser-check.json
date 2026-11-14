@@ -1,0 +1,15 @@
+{
+  "time": "14/11/2026, 08:54:07",
+  "browser": "157.0.8103.51",
+  "checkedChannels": [
+    "nasa",
+    "esports-tribunal",
+    "notNasa"
+  ],
+  "dimensions": {
+    "viewport": 375,
+    "content": 375
+  },
+  "consoleIssues": [],
+  "backendRestored": true
+}

@@ -1,0 +1,33 @@
+{
+  "time": "14/11/2026, 08:52:50",
+  "frontendUsesViteProxy": true,
+  "alert": "Could not load messages: HTTP 502",
+  "applicationErrorCount": 1,
+  "console": [
+    {
+      "time": "14/11/2026, 08:52:51",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+      "location": {
+        "url": "http://127.0.0.1:5173/api/channels/notNasa/messages",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "time": "14/11/2026, 08:52:51",
+      "type": "error",
+      "text": "Error: HTTP 502\n    at http://127.0.0.1:5173/src/useForumMessages.js:8:23",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "line": 363,
+        "column": 3,
+        "lineNumber": 363,
+        "columnNumber": 3
+      }
+    }
+  ],
+  "note": "With a relative /api URL and Vite proxy, backend connection refusal becomes an HTTP error (observed 502) rather than a direct browser Failed to fetch."
+}

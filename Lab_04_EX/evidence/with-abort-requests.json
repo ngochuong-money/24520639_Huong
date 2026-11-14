@@ -1,0 +1,74 @@
+{
+  "time": "14/11/2026, 08:50:50",
+  "throttling": {
+    "label": "Legacy Slow 3G; Chrome preset label: 3G",
+    "latencyMs": 2000,
+    "downloadBytesPerSecond": 50000,
+    "uploadBytesPerSecond": 50000
+  },
+  "sourceOverrideOnly": false,
+  "requests": [
+    {
+      "requestId": "21604.38",
+      "url": "http://127.0.0.1:5173/api/channels/esports-tribunal/messages",
+      "startedAt": 169175.400488,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED",
+      "finishedAt": 169175.710217
+    },
+    {
+      "requestId": "21604.39",
+      "url": "http://127.0.0.1:5173/api/channels/notNasa/messages",
+      "startedAt": 169175.702525,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED",
+      "finishedAt": 169175.993476
+    },
+    {
+      "requestId": "21604.40",
+      "url": "http://127.0.0.1:5173/api/channels/nasa/messages",
+      "startedAt": 169175.986078,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED",
+      "finishedAt": 169176.276918
+    },
+    {
+      "requestId": "21604.41",
+      "url": "http://127.0.0.1:5173/api/channels/esports-tribunal/messages",
+      "startedAt": 169176.270002,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED",
+      "finishedAt": 169176.577061
+    },
+    {
+      "requestId": "21604.42",
+      "url": "http://127.0.0.1:5173/api/channels/notNasa/messages",
+      "startedAt": 169176.568385,
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED",
+      "finishedAt": 169176.87665
+    },
+    {
+      "requestId": "21604.43",
+      "url": "http://127.0.0.1:5173/api/channels/nasa/messages",
+      "startedAt": 169176.86845,
+      "status": 200,
+      "responseAt": 169178.91119,
+      "finishedAt": 169178.909983
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ]
+}

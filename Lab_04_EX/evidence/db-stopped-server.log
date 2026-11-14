@@ -1,0 +1,3 @@
+[14/11/2026, 08:50:10] backend node index.js (PORT=3001) stdout: MongoDB connected
+[14/11/2026, 08:50:10] backend node index.js (PORT=3001) stdout: Ready on port 3001
+[14/11/2026, 08:50:42] backend node index.js (PORT=3001) stderr: GET messages failed: connect ECONNREFUSED 127.0.0.1:27018

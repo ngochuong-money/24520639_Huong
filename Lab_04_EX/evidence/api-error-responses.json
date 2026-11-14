@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Unknown channel",
+    "time": "14/11/2026, 08:48:07",
+    "finishedAt": "14/11/2026, 08:48:07",
+    "method": "GET",
+    "url": "http://127.0.0.1:3000/api/channels/foo/messages",
+    "status": 400,
+    "body": {
+      "error": "Unknown channel"
+    }
+  },
+  {
+    "name": "Malformed JSON",
+    "time": "14/11/2026, 08:48:07",
+    "finishedAt": "14/11/2026, 08:48:07",
+    "method": "POST",
+    "url": "http://127.0.0.1:3000/api/channels/nasa/messages",
+    "requestBody": "{abc",
+    "status": 400,
+    "body": {
+      "error": "Invalid JSON"
+    }
+  },
+  {
+    "name": "Missing text",
+    "time": "14/11/2026, 08:48:07",
+    "finishedAt": "14/11/2026, 08:48:07",
+    "method": "POST",
+    "url": "http://127.0.0.1:3000/api/channels/nasa/messages",
+    "requestBody": "{\"author\":\"Huong\"}",
+    "status": 400,
+    "body": {
+      "error": "Validation failed",
+      "details": {
+        "text": "Required"
+      }
+    }
+  }
+]

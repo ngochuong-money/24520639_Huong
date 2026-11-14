@@ -1,0 +1,8 @@
+Captured Vite terminal excerpt, 14/11/2026, Asia/Saigon:
+
+8:52:51 AM [vite] http proxy error: /api/channels/notNasa/messages
+AggregateError [ECONNREFUSED]:
+    at internalConnectMultiple (node:net:1430:18)
+    at afterConnectMultiple (node:net:2099:7)
+8:52:51 AM [vite] (client) [console.error] Error: HTTP 502
+    at http://127.0.0.1:5173/src/useForumMessages.js:8:23

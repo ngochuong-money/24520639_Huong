@@ -1,0 +1,74 @@
+{
+  "time": "14/11/2026, 08:51:01",
+  "throttling": {
+    "label": "Legacy Slow 3G; Chrome preset label: 3G",
+    "latencyMs": 2000,
+    "downloadBytesPerSecond": 50000,
+    "uploadBytesPerSecond": 50000
+  },
+  "sourceOverrideOnly": true,
+  "requests": [
+    {
+      "requestId": "23332.38",
+      "url": "http://127.0.0.1:5173/api/channels/esports-tribunal/messages",
+      "startedAt": 169185.816809,
+      "status": 200,
+      "responseAt": 169187.847653,
+      "finishedAt": 169187.846402
+    },
+    {
+      "requestId": "23332.39",
+      "url": "http://127.0.0.1:5173/api/channels/notNasa/messages",
+      "startedAt": 169186.103456,
+      "status": 200,
+      "responseAt": 169188.147398,
+      "finishedAt": 169188.14636
+    },
+    {
+      "requestId": "23332.40",
+      "url": "http://127.0.0.1:5173/api/channels/nasa/messages",
+      "startedAt": 169186.385162,
+      "status": 200,
+      "responseAt": 169188.409812,
+      "finishedAt": 169188.408763
+    },
+    {
+      "requestId": "23332.41",
+      "url": "http://127.0.0.1:5173/api/channels/esports-tribunal/messages",
+      "startedAt": 169186.668081,
+      "status": 200,
+      "responseAt": 169188.721673,
+      "finishedAt": 169188.720409
+    },
+    {
+      "requestId": "23332.42",
+      "url": "http://127.0.0.1:5173/api/channels/notNasa/messages",
+      "startedAt": 169186.951854,
+      "status": 200,
+      "responseAt": 169188.984406,
+      "finishedAt": 169188.983017
+    },
+    {
+      "requestId": "23332.43",
+      "url": "http://127.0.0.1:5173/api/channels/nasa/messages",
+      "startedAt": 169187.234003,
+      "status": 200,
+      "responseAt": 169189.264063,
+      "finishedAt": 169189.262741
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ]
+}

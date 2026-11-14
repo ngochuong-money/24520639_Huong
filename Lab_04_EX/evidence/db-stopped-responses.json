@@ -1,0 +1,29 @@
+{
+  "stoppedAt": "14/11/2026, 08:50:10",
+  "finishedAt": "14/11/2026, 08:50:42",
+  "method": "Actual isolated mongod process terminated, system MongoDB service left running",
+  "dbPort": 27018,
+  "apiPort": 3001,
+  "response": {
+    "status": 500,
+    "body": {
+      "error": "Internal server error"
+    }
+  },
+  "subsequentRequestStatus": 400,
+  "backendExited": false,
+  "clientConsole": [
+    {
+      "type": "debug",
+      "text": "[vite] hot updated: /src/PeopleLayout.css"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] hot updated: /src/PeopleLayout.css"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    }
+  ]
+}

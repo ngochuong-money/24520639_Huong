@@ -1,0 +1,9 @@
+Captured stdout from node index.js in server/ (the application does not timestamp these lines):
+
+MongoDB connected
+Ready on port 3000
+
+After restarting the backend following the backend-off scenario:
+
+MongoDB connected
+Ready on port 3000
