@@ -32,6 +32,14 @@ describe('evaluateErrors', () => {
     const values = { name: 'A' };
     expect(evaluateErrors(values, rules)).toEqual(evaluateErrors(values, rules));
   });
+
+  it('flags a value longer than maxLength', () => {
+    const errors = evaluateErrors(
+      { text: 'a'.repeat(501) },
+      { text: { required: true, maxLength: 500 } },
+    );
+    expect(errors.text).toBeDefined();
+  });
 });
 
 describe('isFormValid', () => {
