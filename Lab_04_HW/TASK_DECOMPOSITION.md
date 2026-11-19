@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 1 / 8 |
+| 4. Gallery | 2 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -115,8 +115,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [ ] **4.6** Previous/next photo in lightbox via `keydown` + `event.key` — commit `feat: lightbox keyboard nav`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.7** Tests: direct link `?category=x&photo=y`, closing modal, invalid params — commit `test: gallery deep linking`
-- [ ] **4.8** `usePhotos`: load `GET /api/photos`, expose `{ photos, status, error }`, and cancel obsolete requests with `AbortController` — commit `feat: photos data hook`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.8** `usePhotos`: load `GET /api/photos`, expose `{ photos, status, error }`, and cancel obsolete requests with `AbortController` — commit `feat: photos hook`
+  - Verification: implemented the supplied hook and minimal `getPhotos` client, with `/api` proxied to Express on port 5000. Lint, build and existing client/server/API suites passed. No dedicated hook lifecycle test or connected GalleryPage UI verification was supplied in this task; integration remains to be checked when the gallery is assembled.
 
 ## 5. Swipe Deck
 
