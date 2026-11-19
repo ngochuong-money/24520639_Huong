@@ -1,6 +1,9 @@
 import cors from 'cors'
 import express from 'express'
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js'
+import { cardsRouter } from './routes/cards.js'
+import { photosRouter } from './routes/photos.js'
+import { swipesRouter } from './routes/swipes.js'
 
 export function createApp() {
   const app = express()
@@ -8,7 +11,9 @@ export function createApp() {
   app.use(cors())
   app.use(express.json())
 
-  // Routers are mounted here under /api from task 2.4 onward.
+  app.use('/api/cards', cardsRouter)
+  app.use('/api/photos', photosRouter)
+  app.use('/api/swipes', swipesRouter)
 
   app.use(notFoundHandler)
   app.use(errorHandler)
