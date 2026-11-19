@@ -4,8 +4,10 @@ export default function DeckPage() {
   const headingId = useId()
 
   return (
-    <section aria-labelledby={headingId}>
-      <h1 id={headingId}>Swipe Deck</h1>
+    <section className="page" aria-labelledby={headingId}>
+      <h1 id={headingId} className="page-title">
+        Swipe Deck
+      </h1>
     </section>
   )
 }

@@ -16,7 +16,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
-| 3. Routing & Layout | 2 / 4 |
+| 3. Routing & Layout | 3 / 4 |
 | 4. Gallery | 0 / 7 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
@@ -91,8 +91,9 @@ Update this table whenever a section is finished (count checked tasks / total).
   - [x] C  [x] T  [x] I  [x] R
 - [x] **3.2** `<Routes>` / `<Route element={...}>`: index route, `/gallery`, `/deck`, `*` — commit `feat: route table`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **3.3** `React.lazy` + `<Suspense fallback={<Skeleton />}>`; Skeleton has `aria-busy="true"`, `aria-live="polite"`, matches final dimensions (CLS = 0) — commit `feat: lazy routes with skeleton`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **3.3** `React.lazy` + `<Suspense fallback={<Skeleton />}>`; Skeleton has `aria-busy="true"`, `aria-live="polite"`, matches final dimensions (CLS = 0) — commit `feat: lazy routes with skeleton`
+  - [x] C  [x] T  [x] I  [x] R
+  - Verification: client 112/112, server unit 134/134 and MongoDB API 93/93 tests passed; lint and build passed. Build emitted separate GalleryPage and DeckPage chunks. Initial red was captured by running the Skeleton test alone (missing Skeleton.jsx); the full pre-implementation client run was interrupted because the async mock gates waited on the old static page imports. Chrome with cache disabled, Slow 3G and paused page-module requests verified both fallbacks at 375px: header/nav remained visible, gallery had 12 tiles, deck had a card and 3 controls, live regions were polite, title height stayed 40px and there was no horizontal overflow or console error/warning. The sampled layout-shift observer recorded no entries with the current title-only pages; this is not a final CLS audit. Repeat layout parity checks with real gallery/deck content and Lighthouse in later tasks. Headless screenshots were blank and are not usable report evidence.
 - [ ] **3.4** Invalid route/ID → `<NotFoundState />` (via `useParams()` where dynamic routes exist) — commit `feat: detail route handling`
   - [ ] C  [ ] T  [ ] I  [ ] R
 

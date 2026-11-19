@@ -1,0 +1,101 @@
+:root {
+  --title-height: 2.5rem;
+  --line-height-fixed: 1.5rem;
+  --control-height: 44px;
+  --page-gap: 1rem;
+  --deck-card-width: 22rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Every page root. */
+.page {
+  display: grid;
+  align-content: start;
+  gap: var(--page-gap);
+}
+
+.page-title {
+  display: block;
+  margin: 0;
+  min-height: var(--title-height);
+  font-size: 1.75rem;
+  line-height: var(--title-height);
+}
+
+/* One reserved text line (score, status). Always rendered, even when empty. */
+.page-line {
+  display: block;
+  min-height: var(--line-height-fixed);
+  margin: 0;
+}
+
+/* Never wraps: it scrolls inside itself, so its height is constant. */
+.filter-row {
+  display: block;
+  height: var(--control-height);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--page-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photo-tile {
+  display: grid;
+  grid-template-rows: auto var(--line-height-fixed);
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.photo-tile-media {
+  display: block;
+  aspect-ratio: 3 / 2;
+}
+
+.photo-tile-caption {
+  display: block;
+  height: var(--line-height-fixed);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The card box is fixed by aspect ratio; name and bio overlay the image. */
+.deck-card {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: min(100%, var(--deck-card-width));
+  aspect-ratio: 3 / 4;
+  margin-inline: auto;
+}
+
+.deck-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: min(100%, var(--deck-card-width));
+  height: var(--control-height);
+  margin-inline: auto;
+}
+
+.deck-control {
+  display: block;
+}
