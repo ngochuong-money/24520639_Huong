@@ -15,7 +15,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 |---|---|
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
-| 2. Backend | 1 / 7 |
+| 2. Backend | 2 / 7 |
 | 3. Routing & Layout | 0 / 4 |
 | 4. Gallery | 0 / 7 |
 | 5. Swipe Deck | 0 / 9 |
@@ -72,8 +72,8 @@ Update this table whenever a section is finished (count checked tasks / total).
 
 - [x] **2.1** Server skeleton, `cors()`, read `process.env.MONGODB_URI`, unified error middleware (no hardcoded connection strings) — commit `feat: express server skeleton`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **2.2** Models `Card`, `Photo`, `Swipe` (Mongoose 8, async/await, `.exec()`) — commit `feat: mongoose models`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **2.2** Models `Card`, `Photo`, `Swipe` (Mongoose 8, async/await, `.exec()`) — commit `feat: mongoose models`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **2.3** Seed script (photos, categories, cards) — commit `feat: seed data`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **2.4** GET endpoints for cards, photos, swipes — commit `feat: read endpoints`
