@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 3 / 8 |
+| 4. Gallery | 4 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -107,8 +107,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] **4.2** Category filter (`<nav>` / `<ul>`, `type="button"`, `aria-pressed`); parent connects selection to `setCategory` — commit `feat: category filter`
   - [x] C  [x] T  [x] I  [x] R
   - Verification: initial client run failed because CategoryFilter.jsx was missing; all 11 supplied component tests passed after implementation. Forcing `aria-pressed={false}` caused 4 failures; the original file was restored and client 161/161, server unit 134/134, MongoDB API 93/93, lint and build passed. The fixed-height `filter-row` class is reused without duplicating its overflow rule. Component tests dispatch clicks explicitly after key events; real keyboard activation, visual checks and changing the URL through GalleryPage remain integration checks for 4.3/4.5. Terminal results are recorded in the session; screenshots were not captured.
-- [ ] **4.3** Photo grid with `<ul>` / `<li>` / `<figure>` / `<figcaption>`, CSS Grid + `@media` (375–1440px), key = `photo.id` — commit `feat: photo grid`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.3** Photo grid with `<ul>` / `<li>` / `<figure>` / `<figcaption>`, shared responsive CSS Grid, key = `photo.id` — commit `feat: photo grid`
+  - [x] C  [x] T  [x] I  [x] R
+  - Verification: initial client run failed because PhotoGrid.jsx was missing; all 10 supplied grid tests passed after implementation. Client 171/171, server unit 134/134, MongoDB API 93/93, lint and build passed. Source inspection confirmed `photo.id` keys and no prohibited wrappers or HTML injection. Temporarily using index keys still passed the supplied tests without React warnings; the original source was restored, so that mutation is a documented test limitation, not evidence of stable keys. The component is not yet mounted in GalleryPage: browser keyboard, responsive geometry, Accessibility Tree for `figure` with `display: contents`, and skeleton parity/CLS checks remain for integration in 4.5 and the later accessibility/performance audits. No screenshot evidence is claimed.
 - [ ] **4.4** `Lightbox` with native `<dialog>`: `showModal()` / `close()` synced with `?photo=`; close via Esc, button, backdrop; return focus to thumbnail; complete `useEffect` deps and cleanup — commit `feat: dialog lightbox`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.5** Invalid `?photo=` / `?category=` handling; browser Back/Forward opens/closes modal correctly — commit `feat: invalid param handling`
