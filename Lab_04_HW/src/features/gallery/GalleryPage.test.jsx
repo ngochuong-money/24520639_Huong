@@ -174,3 +174,27 @@ describe('router history (real browser history is verified separately)', () => {
     expect(within(screen.getByRole('dialog')).getByRole('img', { name: 'Desk with notes' })).toBeInTheDocument()
   })
 })
+
+describe('keyboard navigation through the page (4.6)', () => {
+  it('ArrowRight and ArrowLeft move between photos and replace the history entry', () => {
+    renderGallery('/gallery?category=evidence')
+    fireEvent.click(within(photoGrid()).getAllByRole('button')[0])
+    const dialog = screen.getByRole('dialog', { hidden: true })
+
+    fireEvent.keyDown(dialog, { key: 'ArrowRight' })
+    expect(currentSearch()).toBe(`?category=evidence&photo=${ID_3}`)
+
+    fireEvent.keyDown(dialog, { key: 'ArrowLeft' })
+    expect(currentSearch()).toBe(`?category=evidence&photo=${VALID_ID}`)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Probe back' }))
+    expect(currentSearch()).toBe('?category=evidence')
+    expect(dialog).not.toHaveAttribute('open')
+  })
+
+  it('arrow keys stay inside the filtered category', () => {
+    renderGallery(`/gallery?category=evidence&photo=${ID_3}`)
+    fireEvent.keyDown(screen.getByRole('dialog', { hidden: true }), { key: 'ArrowRight' })
+    expect(currentSearch()).toBe(`?category=evidence&photo=${ID_3}`)
+  })
+})

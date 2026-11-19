@@ -227,3 +227,54 @@ describe('Lightbox focus and console hygiene', () => {
     expect(consoleWarn).not.toHaveBeenCalled()
   })
 })
+
+describe('Lightbox keyboard navigation (4.6)', () => {
+  it('ignores keypress and uses event.key rather than a conflicting legacy keyCode', () => {
+    const { dialog, onNext } = renderLightbox({ photo: PHOTO, hasNext: true })
+    fireEvent.keyPress(dialog, { key: 'ArrowRight', charCode: 13 })
+    expect(onNext).not.toHaveBeenCalled()
+    fireEvent.keyDown(dialog, { key: 'a', keyCode: 39 })
+    expect(onNext).not.toHaveBeenCalled()
+  })
+
+  it('moves focus to Previous when Next is disabled on the last photo', () => {
+    const { rerender } = renderLightbox({ photo: PHOTO, hasPrev: true, hasNext: true })
+    const next = screen.getByRole('button', { name: 'Next' })
+    next.focus()
+
+    rerenderWith(rerender, { photo: PHOTO, hasPrev: true, hasNext: false })
+
+    expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Previous' })).toHaveFocus()
+  })
+
+  it('moves focus to Next when Previous is disabled on the first photo', () => {
+    const { rerender } = renderLightbox({ photo: PHOTO, hasPrev: true, hasNext: true })
+    screen.getByRole('button', { name: 'Previous' }).focus()
+
+    rerenderWith(rerender, { photo: PHOTO, hasPrev: false, hasNext: true })
+
+    expect(screen.getByRole('button', { name: 'Next' })).toHaveFocus()
+  })
+
+  it('does not steal focus when the disabled button was not focused', () => {
+    const { rerender } = renderLightbox({ photo: PHOTO, hasPrev: true, hasNext: true })
+    screen.getByRole('button', { name: 'Close' }).focus()
+
+    rerenderWith(rerender, { photo: PHOTO, hasPrev: true, hasNext: false })
+
+    expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus()
+  })
+
+  it('lets Escape and Tab reach the browser (the handler does not prevent them)', () => {
+    const { dialog, onPrev, onNext } = renderLightbox({ photo: PHOTO, hasPrev: true, hasNext: true })
+    const escape = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true })
+    const tab = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true })
+    dialog.dispatchEvent(escape)
+    dialog.dispatchEvent(tab)
+    expect(escape.defaultPrevented).toBe(false)
+    expect(tab.defaultPrevented).toBe(false)
+    expect(onPrev).not.toHaveBeenCalled()
+    expect(onNext).not.toHaveBeenCalled()
+  })
+})

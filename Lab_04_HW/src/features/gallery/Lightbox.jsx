@@ -11,6 +11,8 @@ export default function Lightbox({
 }) {
   const dialogRef = useRef(null)
   const openerRef = useRef(null)
+  const prevButtonRef = useRef(null)
+  const nextButtonRef = useRef(null)
   const titleId = useId()
 
   // Open or close the native dialog to match the photo prop.
@@ -27,6 +29,20 @@ export default function Lightbox({
       dialog.close()
     }
   }, [photo])
+
+  // Keep keyboard focus inside the dialog when a navigation button becomes disabled.
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog || !dialog.open) {
+      return
+    }
+    const focused = document.activeElement
+    if (focused === prevButtonRef.current && !hasPrev) {
+      nextButtonRef.current?.focus()
+    } else if (focused === nextButtonRef.current && !hasNext) {
+      prevButtonRef.current?.focus()
+    }
+  }, [hasPrev, hasNext])
 
   // Every close (Esc, button, backdrop, or a prop change) ends in the native close event.
   // onClose is idempotent upstream (closePhoto), so a prop-driven close is harmless.
@@ -79,13 +95,13 @@ export default function Lightbox({
             {photo.title}
           </figcaption>
           <footer className="lightbox-controls">
-            <button type="button" onClick={() => onPrev?.()} disabled={!hasPrev}>
+            <button ref={prevButtonRef} type="button" onClick={() => onPrev?.()} disabled={!hasPrev}>
               Previous
             </button>
             <button type="button" onClick={() => dialogRef.current.close()}>
               Close
             </button>
-            <button type="button" onClick={() => onNext?.()} disabled={!hasNext}>
+            <button ref={nextButtonRef} type="button" onClick={() => onNext?.()} disabled={!hasNext}>
               Next
             </button>
           </footer>

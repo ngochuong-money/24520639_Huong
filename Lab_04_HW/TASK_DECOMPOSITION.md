@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 6 / 8 |
+| 4. Gallery | 7 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -116,8 +116,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] **4.5** Invalid `?photo=` / `?category=` handling; browser Back/Forward opens/closes modal correctly — commit `feat: invalid param handling`
   - [x] C  [x] T  [x] I  [x] R
   - Verification: integrated usePhotos, useGalleryParams, CategoryFilter, PhotoGrid and Lightbox. Initial test run against the placeholder page failed; with approved test-selector/probe fixes and raw-param validation, all 18 GalleryPage tests passed. Client 208/208, server unit 134/134, MongoDB API 93/93, lint and build passed. Real Chrome under StrictMode verified thumbnail push, Back close/Forward reopen, native Esc/backdrop close, opener focus, filtered arrow navigation, unknown/malformed parameters without URL rewrites, direct deep links and no console errors/warnings. The viewport was checked at 375px without horizontal page overflow. Category changes while modal were invoked programmatically because native modal makes background controls inert to pointer input. Gallery and Lightbox screenshots are in docs/evidence/4.5-gallery-desktop.png and docs/evidence/4.5-lightbox-desktop.png; final CLS/accessibility audits remain later tasks.
-- [ ] **4.6** Previous/next photo in lightbox via `keydown` + `event.key` — commit `feat: lightbox keyboard nav`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.6** Previous/next photo in lightbox via `keydown` + `event.key`; preserve focus when a navigation button becomes disabled — commit `feat: lightbox keyboard nav`
+  - [x] C  [x] T  [x] I  [x] R
+  - Verification: added 5 Lightbox and 2 GalleryPage tests. Both missing-focus tests were red before implementation; the initial legacy-key test also failed because React normalizes keyCode-only events. With the approved explicit-key test correction, client 215/215, server unit 134/134, MongoDB API 93/93, lint and build passed. Removing the two focus calls made both focus tests fail; the original file was restored. The page test now opens from the grid and asserts Back returns directly to that grid after arrow navigation, proving replace semantics in MemoryRouter. Chrome separately verified native Enter at both list boundaries, focus transfer to the enabled neighbour, filtered arrow navigation, browser Back/Forward, Escape/thumbnail focus, direct deep links and no focus stealing from Close. Tab/Shift+Tab kept focus inside the modal whenever the document had focus; browser-chrome focus transfers were observed separately. Two effects remain, no global keyboard listener and no prohibited keyboard API in production source. No new screenshots were captured.
 - [ ] **4.7** Tests: direct link `?category=x&photo=y`, closing modal, invalid params — commit `test: gallery deep linking`
 - [x] **4.8** `usePhotos`: load `GET /api/photos`, expose `{ photos, status, error }`, and cancel obsolete requests with `AbortController` — commit `feat: photos hook`
   - Verification: implemented the supplied hook and minimal `getPhotos` client, with `/api` proxied to Express on port 5000. Lint, build and existing client/server/API suites passed. No dedicated hook lifecycle test or connected GalleryPage UI verification was supplied in this task; integration remains to be checked when the gallery is assembled.

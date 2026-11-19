@@ -117,7 +117,7 @@ Gallery order: title, filter row, status line, grid (the skeleton shows 12 tiles
 |---|---|
 | Props | `{ photo = null, hasPrev = false, hasNext = false, onClose, onPrev, onNext }`: `photo: Photo \| null` (null = closed) |
 | State | none; a `ref` to the `<dialog>` |
-| Effects | One `useEffect` with deps `[photo]`: open → `dialog.showModal()` if not open; null → `dialog.close()` if open. No cleanup side effects beyond that. |
+| Effects | Open/close effect with deps `[photo]`: open → `dialog.showModal()` if not open; null → `dialog.close()` if open, without a closing cleanup. A second effect with deps `[hasPrev, hasNext]` moves focus from a newly disabled Previous/Next button to the available neighbour. Neither effect installs a global keyboard listener. |
 | Events | `onClose` (native `close` event) → `onClose()`; backdrop click (`event.target === event.currentTarget`) → `onClose()`; `keydown` with `event.key` `ArrowLeft`/`ArrowRight` → `onPrev`/`onNext`; Esc handled natively |
 | Renders | Native `<dialog aria-labelledby={titleId}>` (`useId()`), `<figure>` with `<img>` and `<figcaption>`, buttons Close / Previous / Next (`type="button"`, prev/next `disabled` when unavailable). Content only rendered when `photo` is not null. Focus returns to the opener on close. |
 
