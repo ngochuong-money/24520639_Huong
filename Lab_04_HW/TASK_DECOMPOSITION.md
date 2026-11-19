@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 5 / 8 |
+| 4. Gallery | 6 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -113,8 +113,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] **4.4** `Lightbox` with native `<dialog>`: `showModal()` / `close()` driven by the `photo` prop; native close event, button/backdrop close and opener focus restoration; URL integration in 4.5 — commit `feat: dialog lightbox`
   - [x] C  [x] T  [x] I  [x] R
   - Verification: initial red was missing Lightbox.jsx. With the approved focus-test setup and native-dialog ESLint configuration, all 19 lightbox tests passed; client 190/190, server unit 134/134, MongoDB API 93/93, lint and build passed. Removing focus restoration failed 2 tests; removing the open guard failed the opener-preservation test; both files were restored before the final green run. One effect with `[photo]` is used without a closing cleanup by design. The component is not yet connected to GalleryPage: real-browser Esc, modal focus behaviour, backdrop and URL Back/Forward verification remain for 4.5. No screenshot evidence is claimed.
-- [ ] **4.5** Invalid `?photo=` / `?category=` handling; browser Back/Forward opens/closes modal correctly — commit `feat: invalid param handling`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.5** Invalid `?photo=` / `?category=` handling; browser Back/Forward opens/closes modal correctly — commit `feat: invalid param handling`
+  - [x] C  [x] T  [x] I  [x] R
+  - Verification: integrated usePhotos, useGalleryParams, CategoryFilter, PhotoGrid and Lightbox. Initial test run against the placeholder page failed; with approved test-selector/probe fixes and raw-param validation, all 18 GalleryPage tests passed. Client 208/208, server unit 134/134, MongoDB API 93/93, lint and build passed. Real Chrome under StrictMode verified thumbnail push, Back close/Forward reopen, native Esc/backdrop close, opener focus, filtered arrow navigation, unknown/malformed parameters without URL rewrites, direct deep links and no console errors/warnings. The viewport was checked at 375px without horizontal page overflow. Category changes while modal were invoked programmatically because native modal makes background controls inert to pointer input. Gallery and Lightbox screenshots are in docs/evidence/4.5-gallery-desktop.png and docs/evidence/4.5-lightbox-desktop.png; final CLS/accessibility audits remain later tasks.
 - [ ] **4.6** Previous/next photo in lightbox via `keydown` + `event.key` — commit `feat: lightbox keyboard nav`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.7** Tests: direct link `?category=x&photo=y`, closing modal, invalid params — commit `test: gallery deep linking`
