@@ -15,6 +15,12 @@ Conventions: function components only; destructured props with default parameter
 | `deck` | `DeckPage` via `React.lazy` | `<Suspense fallback={<Skeleton variant="deck" />}>` | |
 | `*` | `<NotFoundState />` | none | Unknown URL |
 
+Matching behaviour (pinned by `src/App.notfound.test.jsx`):
+
+- Trailing slashes are ignored (`/gallery/` renders the gallery) and matching is case-insensitive (`/GALLERY`); both are React Router defaults.
+- Any other path, including nested paths such as `/gallery/<photo id>`, falls through to `*` and shows `<NotFoundState />` inside the layout. Photo deep links use `?photo=`, never a path segment.
+- Homework 1 has no dynamic path segments, so `useParams()` is not used. If a dynamic route is added, an invalid param must render `<NotFoundState />` (project-rules.md, section 3).
+
 - Each lazy route has its own `Suspense` so the skeleton matches that route's final layout (CLS = 0).
 - There is no dynamic path param: the photo deep link uses a query param, so `useParams()` is not needed. If a dynamic route is added later, an invalid ID must render `<NotFoundState />`.
 - Router placement: `main.jsx` renders `<StrictMode><BrowserRouter><App /></BrowserRouter></StrictMode>`; `App.jsx` holds `<Routes>`. Tests wrap components in `<MemoryRouter>`.
