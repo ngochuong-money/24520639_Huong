@@ -145,10 +145,10 @@ Example: `/gallery?category=evidence&photo=64f1a2b3c4d5e6f7a8b9c0d1`
 | `useSwipeDeck` | `()` | `{ cards, history, currentCard, remaining, score, canUndo, swipe, undo, hydrate }` | `useReducer(swipeReducer)`. Derived, not stored: `queue` = cards without a history entry, `currentCard` = `queue[0] ?? null`, `remaining` = `queue.length`, `score` = `calculateScore(history)`, `canUndo` = `history.length > 0`. |
 | `useSwipePersistence` | `()` | `useSwipeDeck` result + `{ status, error, isSyncing, canSwipe }` | On mount loads cards and swipes with one `AbortController` and calls `hydrate`. `swipe` applies optimistically, then `POST /api/swipes`; on failure dispatches `undo` (rollback) and sets `error`. `undo` dispatches `undo`, then `DELETE /api/swipes/last`; on failure re-applies the entry with `swipe` and sets `error`. Input is ignored while `isSyncing` (provisional, keeps requests ordered). |
 | `useDeckKeyboard` | `({ onSwipe, onUndo, enabled = true })` | nothing | `window` `keydown` listener with cleanup and complete deps. `event.key`: `ArrowLeft` → `onSwipe('left')`, `ArrowRight` → `onSwipe('right')`, `z`/`Z`/`Backspace` → `onUndo()` (`preventDefault` on Backspace). Ignores `event.repeat` and events with ctrl/meta/alt. |
-| `calculateScore` | `(history)` | `number` | Pure. Rules are defined in task 1.3; if scoring needs card data, the signature changes here first. |
+| `calculateScore` | `(history)` | `number` | Rules in API_CONTRACT section 7; constants in SCORE_BY_DIRECTION. |
 | `undoStack` | `push(stack, item)`, `pop(stack)`, `peek(stack)` | new stack / `{ stack, item }` / item | Pure and immutable; plain array, last element is the top (same order as `GET /api/swipes`). `pop` on empty returns `{ stack, item: null }`. |
 | `api/client.js` | `getPhotos`, `getCards`, `getSwipes`, `createSwipe`, `undoLastSwipe`, each taking `{ signal }` | parsed JSON | Throws `ApiError { status, code, message, details }` parsed from the contract's error shape. Uses a relative `/api` base (Vite dev proxy to the Express port). |
-| `lib/validation.js` | `isValidId`, `isValidDirection`, `isValidCategory`, `DIRECTIONS` | boolean / array | Shared rules from the contract's parity table. |
+| `shared/validation.js` | `isValidId`, `isValidDirection`, `isValidCategory`, `DIRECTIONS`, `validateSwipeInput` | see API_CONTRACT section 5 | see API_CONTRACT section 5 |
 
 Constants: `SWIPE_THRESHOLD_PX = 100`.
 
@@ -177,5 +177,7 @@ src/
                      swipeReducer.js, useSwipeDeck.js, useSwipePersistence.js, useDeckKeyboard.js,
                      undoStack.js, calculateScore.js
   api/client.js
-  lib/validation.js
+shared/
+  validation.js
+server/
 ```

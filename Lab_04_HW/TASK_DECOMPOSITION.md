@@ -14,7 +14,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | Section | Done / Total |
 |---|---|
 | 0. Setup & Baseline | 4 / 4 |
-| 1. Contract | 0 / 3 |
+| 1. Contract | 3 / 3 |
 | 2. Backend | 0 / 7 |
 | 3. Routing & Layout | 0 / 4 |
 | 4. Gallery | 0 / 7 |
@@ -56,8 +56,8 @@ Update this table whenever a section is finished (count checked tasks / total).
 ## 1. Contract (before any handler code)
 
 - [x] **1.1** API contract: routes, payload schemas, status codes, error format → `docs/API_CONTRACT.md` — commit `docs: api contract`
-- [ ] **1.2** Interface spec: props, state, route table, query params for every component → `docs/INTERFACES.md` — commit `docs: component interface spec`
-- [ ] **1.3** Asymmetric scoring rules (point constants per swipe type) and validation rules shared by client and server — commit `docs: scoring and validation rules`
+- [x] **1.2** Interface spec: props, state, route table, query params for every component → `docs/INTERFACES.md` — commit `docs: component interface spec`
+- [x] **1.3** Asymmetric scoring rules (point constants per swipe type) and validation rules shared by client and server — commit `docs: scoring and validation rules`
 
 **Proposed API:**
 

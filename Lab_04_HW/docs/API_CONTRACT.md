@@ -10,7 +10,7 @@ Status: v1 (contract-first: change this document BEFORE changing handlers or cli
 - IDs are exposed as `id` (string, 24 hex characters, from the Mongo `_id`). `_id` and `__v` are never returned.
 - Timestamps are ISO 8601 UTC strings, e.g. `2026-11-19T08:30:00.000Z`.
 - Success responses return the resource (object or array) directly, with no envelope.
-- The score is NOT stored or served by the API. The client derives it from the swipe history (see task 1.3 for the scoring rules).
+- The score is NOT stored or served by the API. The client derives it from the swipe history (see section 7).
 
 ## 2. Resource schemas
 
@@ -132,18 +132,95 @@ Every error response uses the same shape:
 | 409 | `ALREADY_SWIPED` | POST /api/swipes |
 | 500 | `INTERNAL_ERROR` | any |
 
-## 5. Validation parity (client and server must match)
+## 5. Validation rules (client and server must match)
 
-| Field | Rule | Error |
+Single source of truth: `shared/validation.js`, a plain ES module with no dependencies, imported by both the client (Vite) and the Express server. Neither side re-implements these rules.
+
+### Shared rules
+
+| Field | Rule | Applies to |
 |---|---|---|
-| `cardId` | required, string, `^[0-9a-f]{24}$` | `VALIDATION_ERROR` |
-| `direction` | required, exactly `"left"` or `"right"` | `VALIDATION_ERROR` |
-| `category` (query) | optional, `^[a-z0-9-]{1,32}$` | `VALIDATION_ERROR` |
+| `id` / `cardId` / `photo` param | string, exactly `^[0-9a-f]{24}$` (lowercase hex; no trimming) | POST body, `?photo=` |
+| `direction` | string, exactly `"left"` or `"right"` (case-sensitive, no trimming, no normalization) | POST body |
+| `category` | string, `^[a-z0-9-]{1,32}$` (empty string is invalid) | `?category=` on both client and server |
+| request body | must be a JSON object (not an array, `null`, string or number) | POST body |
 
-The client shares these rules through one constants/validators module; the server re-validates every POST and never trusts the client.
+Exports of `shared/validation.js`:
+
+| Export | Signature | Behaviour |
+|---|---|---|
+| `DIRECTIONS` | `readonly ['left', 'right']` | Allowed swipe directions |
+| `isValidId` | `(value) => boolean` | `typeof value === 'string'` and matches the id regex |
+| `isValidDirection` | `(value) => boolean` | Strict membership in `DIRECTIONS` |
+| `isValidCategory` | `(value) => boolean` | `typeof value === 'string'` and matches the slug regex |
+| `validateSwipeInput` | `(input) => { field, message }[]` | `[]` means valid. Collects ALL errors, never throws. A non-object input returns one error with `field: "body"`. |
+
+Fixed messages (identical on both sides):
+
+| Field | Message |
+|---|---|
+| `body` | `Body must be a JSON object.` |
+| `cardId` | `Must be a 24-character lowercase hex string.` |
+| `direction` | `Must be "left" or "right".` |
+| `category` | `Must be 1-32 characters: lowercase letters, digits or hyphens.` |
+
+### Server-only checks (cannot be shared)
+
+Run in this order for `POST /api/swipes`: JSON parse (`INVALID_JSON`) → `validateSwipeInput` (`VALIDATION_ERROR`) → card exists (`CARD_NOT_FOUND`) → card not already in history (`ALREADY_SWIPED`). The server never trusts the client's pre-check.
+
+For `GET /api/photos`, a repeated query key (`?category=a&category=b`) arrives as an array and is invalid (`VALIDATION_ERROR`).
+
+### Client-only behaviour
+
+- Before `POST`, the client calls `validateSwipeInput` (a guard against programming errors; ids come from loaded cards).
+- URL params are parsed with the same validators. An invalid `category` or `photo` is ignored and a `role="status"` message is shown (see `docs/INTERFACES.md`). `searchParams.get()` returns the first value for a repeated key.
+- Existence checks (category exists among loaded photos, photo exists in the filtered list) are client-only.
+
+### Parity test
+
+One table-driven test file with shared cases (valid and invalid values for each field, including wrong types, uppercase hex, 23/25-char ids, padded strings, `""`, `null`, arrays). The same cases run against `shared/validation.js` (task 5.2/4.7) and against `POST /api/swipes` and `GET /api/photos` (task 2.7).
 
 ## 6. Client behaviour tied to the contract
 
 - Every request is made with an `AbortController` signal; aborted requests are ignored (`AbortError`), not shown as errors.
 - Every `fetch` has `.catch` / `try/catch`; error responses are parsed into the `error` shape above.
 - If `POST /api/swipes` fails, the optimistic UI update is rolled back.
+
+## 7. Scoring (client-side, derived state)
+
+The score is a pure function of the swipe history. It is never stored on the server, never kept in `useState`, and never synchronised with `useEffect`; it is computed during render (or with `useMemo`). Because it depends only on `history`, undo and a page reload both restore the correct score automatically.
+
+### Constants (provisional: confirm against the original assignment)
+
+| Direction | Points | Meaning |
+|---|---|---|
+| `right` | +10 | Reward |
+| `left` | -5 | Penalty (smaller than the reward, hence asymmetric) |
+
+```js
+export const SCORE_BY_DIRECTION = Object.freeze({ right: 10, left: -5 })
+```
+
+Location: `src/features/deck/calculateScore.js`.
+
+### Rules
+
+- `calculateScore(history)` = sum of `SCORE_BY_DIRECTION[entry.direction]` over every `entry` in `history`.
+- Integers only. No clamping: the score may be negative.
+- Order of entries does not affect the result.
+- An entry with an unknown direction contributes 0 (defensive; unreachable because the API validates directions).
+- The function never mutates `history`.
+- Undo removes the last history entry, so the score is `calculateScore(history.slice(0, -1))`.
+
+### Reference cases (used by the tests in task 5.2)
+
+| History (oldest to newest) | Score |
+|---|---|
+| `[]` | 0 |
+| `[right]` | 10 |
+| `[left]` | -5 |
+| `[right, right]` | 20 |
+| `[left, left, left]` | -15 |
+| `[right, left, right]` | 15 |
+| `[right, left, right]` after one undo | 5 |
+| `[right, ???]` where `???` has direction `"up"` | 10 |
