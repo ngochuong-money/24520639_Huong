@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "test": "vitest run",
+    "test": "vitest run && vitest run --root server",
+    "test:client": "vitest run",
+    "test:server": "vitest run --root server",
+    "dev:server": "npm --prefix server run dev",
     "test:watch": "vitest",
     "preview": "vite preview"
   },
