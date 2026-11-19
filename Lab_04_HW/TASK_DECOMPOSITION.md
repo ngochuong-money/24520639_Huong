@@ -48,7 +48,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 
 ## 0. Setup & Baseline
 
-- [ ] **0.1** Init Vite + React 19, `createRoot()`, `<StrictMode>`, Automatic JSX Runtime; run the app and check the Console — commit `init: vite react19 setup`
+- [x] **0.1** Init Vite + React 19, `createRoot()`, `<StrictMode>`, Automatic JSX Runtime; run the app and check the Console — commit `init: vite react19 setup`
 - [ ] **0.2** Install `react-router` v7 — commit `init: add react-router`
 - [ ] **0.3** Create `TASK_DECOMPOSITION.md`, `AI_FAILURE_AUDIT.md`, `server/.env.example`, `.gitignore` (includes `server/.env`) — commit `docs: add task decomposition and audit log`
 - [ ] **0.4** Configure Vitest + Testing Library and ESLint; `npm test` and `npm run lint` work — commit `test: setup vitest`

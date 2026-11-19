@@ -26,3 +26,11 @@ Additional workflow corrections: the first API contract included unrequested det
 ## 3. Engineering Verification
 (Manual analysis and exact steps taken to fix, with DevTools/test evidence)
 
+## Homework 1
+
+### Task 0.2: wrong react-router major version
+- **AI failure:** AI suggested `npm install react-router` without a version tag. npm installed v8.5.2, but the assignment requires v7.
+- **Detection:** `npm ls react-router` showed 8.5.2; `package.json` showed `^8.5.2`.
+- **Fix:** `npm install react-router@7`; re-verified with `npm ls` and `package.json`.
+- **Evidence:** screenshots of `npm ls` before and after (`docs/evidence/0.2-*.png`).
+
