@@ -49,9 +49,25 @@ Example: `/gallery?category=evidence&photo=64f1a2b3c4d5e6f7a8b9c0d1`
 
 | | |
 |---|---|
-| Props | `{ variant = 'gallery' }`, `variant`: `'gallery' \| 'deck'` |
+| Props | `{ variant = 'gallery' }`, `variant`: `'gallery' \| 'deck'` (any other value renders the gallery variant) |
 | State | none |
-| Renders | `<section aria-busy="true" aria-live="polite" aria-label="Loading">` with fixed dimensions equal to the final content for that variant |
+| Renders | `<section className="page" aria-busy="true" aria-live="polite" aria-label="Loading gallery" or "Loading swipe deck">` with a visually hidden `<p>` (the live-region text) and `aria-hidden` placeholder blocks that use the same layout classes as the real page |
+
+#### Layout parity (CLS = 0)
+
+A skeleton and the page it stands in for must occupy exactly the same space. Both use the shared classes in `src/styles/layout.css`. Every height comes from those classes (fixed line heights, aspect ratios, a fixed control height), never from the content.
+
+| Class | Used by | Fixed size |
+|---|---|---|
+| `page` | page root | grid, `gap: 1rem` |
+| `page-title` | `<h1>` / title block | height 2.5rem |
+| `page-line` | score and status paragraphs (always rendered, even when empty) | min-height 1.5rem |
+| `filter-row` | category filter | height 44px, never wraps (scrolls inside itself) |
+| `photo-grid`, `photo-tile`, `photo-tile-media`, `photo-tile-caption` | PhotoGrid | media aspect ratio 3:2, caption 1.5rem on one line (ellipsis) |
+| `deck-card` | SwipeCard | width up to 22rem, aspect ratio 3:4, text overlays the image |
+| `deck-controls`, `deck-control` | DeckControls | 3 equal columns, height 44px |
+
+Gallery order: title, filter row, status line, grid (the skeleton shows 12 tiles, the seeded photo count). Deck order: title, score line, card, controls, status line.
 
 ### NotFoundState
 
