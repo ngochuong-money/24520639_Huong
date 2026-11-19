@@ -181,6 +181,8 @@ For `GET /api/photos`, a repeated query key (`?category=a&category=b`) arrives a
 
 One table-driven test file with shared cases (valid and invalid values for each field, including wrong types, uppercase hex, 23/25-char ids, padded strings, `""`, `null`, arrays). The same cases run against `shared/validation.js` (task 5.2/4.7) and against `POST /api/swipes` and `GET /api/photos` (task 2.7).
 
+Shared cases live in `shared/validation.cases.js`. `shared/validation.test.js` runs them against the validation functions in the client test environment; `server/src/routes/createSwipe.test.js` runs the swipe input cases against `POST /api/swipes`. Category endpoint parity cases are added in task 2.7.
+
 ## 6. Client behaviour tied to the contract
 
 - Every request is made with an `AbortController` signal; aborted requests are ignored (`AbortError`), not shown as errors.

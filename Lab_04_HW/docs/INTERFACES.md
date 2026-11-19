@@ -179,5 +179,7 @@ src/
   api/client.js
 shared/
   validation.js
+  validation.cases.js
+  validation.test.js
 server/
 ```
