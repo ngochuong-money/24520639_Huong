@@ -33,3 +33,7 @@ body {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
+
+a {
+  color: var(--accent);
+}

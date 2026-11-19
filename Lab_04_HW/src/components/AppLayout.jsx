@@ -18,7 +18,7 @@ export default function AppLayout() {
           <ul className="nav-list">
             {NAV_ITEMS.map(({ to, label }) => (
               <li key={to}>
-                <NavLink to={to} className={({ isActive }) => (isActive ? 'nav-link is-active' : 'nav-link')}>
+                <NavLink to={to} end className={({ isActive }) => (isActive ? 'nav-link is-active' : 'nav-link')}>
                   {label}
                 </NavLink>
               </li>
