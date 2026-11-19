@@ -53,13 +53,14 @@ Ordering rule: the history is a LIFO stack. "Last" means the swipe with the grea
 ### GET /api/cards
 
 - Request: no body, no query.
-- 200: `Card[]` in deck order (may be empty).
+- 200: `Card[]` sorted by id ascending (deck order = seed order; may be empty).
 - Errors: 500.
 
 ### GET /api/photos
 
 - Query: `category` (optional), slug matching `^[a-z0-9-]{1,32}$`.
-- 200: `Photo[]`; without `category` returns all photos; a valid slug with no matches returns `[]`.
+- 200: `Photo[]` sorted by id ascending; without `category` returns all photos; a valid slug with no matches returns `[]`.
+- Current categories (from seed): evidence, scenes, documents.
 - 400 `VALIDATION_ERROR`: `category` has an invalid format.
 - Errors: 500.
 - Note: `?photo=` deep links are resolved on the client against this list; there is no `GET /api/photos/:id`.
