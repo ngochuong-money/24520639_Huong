@@ -15,7 +15,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 |---|---|
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
-| 2. Backend | 6 / 7 |
+| 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 0 / 4 |
 | 4. Gallery | 0 / 7 |
 | 5. Swipe Deck | 0 / 9 |
@@ -82,7 +82,8 @@ Update this table whenever a section is finished (count checked tasks / total).
   - [x] C  [x] T  [x] I  [x] R
 - [x] **2.6** `DELETE /api/swipes/last` (LIFO at persistence layer) — commit `feat: undo endpoint`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **2.7** API tests: status codes, bad payloads, empty stack — commit `test: api endpoints`
+- [x] **2.7** API tests: status codes, bad payloads, empty stack — commit `test: api endpoints`
+  - Verification: 93 real MongoDB API tests passed on `lab04_hw_test`; client 82/82, server unit 134/134, lint and build passed. Initial red: missing `test:api` script. Deliberate LIFO mutation failed 1 test; category-filter mutation failed 2 tests; both files restored and the full suite passed afterward. Dev database document hashes were unchanged (10 cards, 12 photos, 1 swipe). The test database has a unique `cardId_1` index. Unavailable port 27999 produced the expected connection error after about 3 seconds per file (about 20 seconds for all 5 files). These deliberate mutations are test evidence, not AI implementation failures. Terminal output is recorded in the session; screenshots and a Compass walkthrough were not captured.
 
 ## 3. Routing & Layout (Sprint 1)
 
