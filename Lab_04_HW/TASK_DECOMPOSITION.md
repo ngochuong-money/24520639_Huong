@@ -55,7 +55,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 
 ## 1. Contract (before any handler code)
 
-- [ ] **1.1** API contract: routes, payload schemas, status codes, error format → `docs/API_CONTRACT.md` — commit `docs: api contract`
+- [x] **1.1** API contract: routes, payload schemas, status codes, error format → `docs/API_CONTRACT.md` — commit `docs: api contract`
 - [ ] **1.2** Interface spec: props, state, route table, query params for every component → `docs/INTERFACES.md` — commit `docs: component interface spec`
 - [ ] **1.3** Asymmetric scoring rules (point constants per swipe type) and validation rules shared by client and server — commit `docs: scoring and validation rules`
 
