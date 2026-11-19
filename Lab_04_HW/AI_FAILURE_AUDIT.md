@@ -34,3 +34,10 @@ Additional workflow corrections: the first API contract included unrequested det
 - **Fix:** `npm install react-router@7`; re-verified with `npm ls` and `package.json`.
 - **Evidence:** screenshots of `npm ls` before and after (`docs/evidence/0.2-*.png`).
 
+### Task 0.4: ESLint peer dependency conflict
+- **AI failure:** Added the jsx-a11y preset before confirming compatibility with the project's ESLint major version.
+- **Detection:** `npm.cmd install -D eslint-plugin-jsx-a11y` failed with `ERESOLVE`: installed `eslint@10.15.0` is outside `eslint-plugin-jsx-a11y@6.10.2`'s peer range (`^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9`).
+- **Fix:** With user approval, installed `eslint@9` and `@eslint/js@9` alongside `eslint-plugin-jsx-a11y`. Resolved versions: ESLint and @eslint/js 9.39.5, jsx-a11y 6.10.2. Did not use `--force` or `--legacy-peer-deps`.
+- **Verification:** The initial `npm.cmd test` failed with `Missing script: "test"`. After configuration, `npm.cmd test` ran once and exited with 1 test passed in jsdom; `npm.cmd run lint` and `npm.cmd run build` passed. Verified Vitest 5.1.1, jsdom 31.0.1 and React Testing Library 16.3.3 with `npm.cmd ls`. Terminal output was captured in the session; no screenshots were created. Implementation commit: `b29cf57` (`test: setup vitest`).
+- **Additional correction:** ESLint 9's core `no-unused-vars` reported JSX imports (`App`, `StrictMode`) as unused. Added the Vite-style `varsIgnorePattern: '^[A-Z_]'` option while retaining the rule as an error, the React Refresh preset and jsx-a11y recommended rules. Inspected imports in the smoke test and setup file; lint passed afterward. Vitest globals remain disabled and DOM cleanup is registered explicitly with `afterEach`.
+
