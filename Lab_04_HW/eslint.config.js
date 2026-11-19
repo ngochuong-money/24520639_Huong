@@ -27,4 +27,14 @@ export default defineConfig([
     files: ['server/**/*.js'],
     languageOptions: { globals: globals.node },
   },
+  {
+    files: ['src/features/gallery/Lightbox.jsx'],
+    rules: {
+      // Native dialog handles backdrop clicks and keyboard navigation.
+      'jsx-a11y/no-noninteractive-element-interactions': [
+        'error',
+        { dialog: ['onClick', 'onKeyDown'] },
+      ],
+    },
+  },
 ])

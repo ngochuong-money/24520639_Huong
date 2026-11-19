@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 4 / 8 |
+| 4. Gallery | 5 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -110,8 +110,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] **4.3** Photo grid with `<ul>` / `<li>` / `<figure>` / `<figcaption>`, shared responsive CSS Grid, key = `photo.id` — commit `feat: photo grid`
   - [x] C  [x] T  [x] I  [x] R
   - Verification: initial client run failed because PhotoGrid.jsx was missing; all 10 supplied grid tests passed after implementation. Client 171/171, server unit 134/134, MongoDB API 93/93, lint and build passed. Source inspection confirmed `photo.id` keys and no prohibited wrappers or HTML injection. Temporarily using index keys still passed the supplied tests without React warnings; the original source was restored, so that mutation is a documented test limitation, not evidence of stable keys. The component is not yet mounted in GalleryPage: browser keyboard, responsive geometry, Accessibility Tree for `figure` with `display: contents`, and skeleton parity/CLS checks remain for integration in 4.5 and the later accessibility/performance audits. No screenshot evidence is claimed.
-- [ ] **4.4** `Lightbox` with native `<dialog>`: `showModal()` / `close()` synced with `?photo=`; close via Esc, button, backdrop; return focus to thumbnail; complete `useEffect` deps and cleanup — commit `feat: dialog lightbox`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.4** `Lightbox` with native `<dialog>`: `showModal()` / `close()` driven by the `photo` prop; native close event, button/backdrop close and opener focus restoration; URL integration in 4.5 — commit `feat: dialog lightbox`
+  - [x] C  [x] T  [x] I  [x] R
+  - Verification: initial red was missing Lightbox.jsx. With the approved focus-test setup and native-dialog ESLint configuration, all 19 lightbox tests passed; client 190/190, server unit 134/134, MongoDB API 93/93, lint and build passed. Removing focus restoration failed 2 tests; removing the open guard failed the opener-preservation test; both files were restored before the final green run. One effect with `[photo]` is used without a closing cleanup by design. The component is not yet connected to GalleryPage: real-browser Esc, modal focus behaviour, backdrop and URL Back/Forward verification remain for 4.5. No screenshot evidence is claimed.
 - [ ] **4.5** Invalid `?photo=` / `?category=` handling; browser Back/Forward opens/closes modal correctly — commit `feat: invalid param handling`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.6** Previous/next photo in lightbox via `keydown` + `event.key` — commit `feat: lightbox keyboard nav`
