@@ -17,7 +17,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
-| 4. Gallery | 0 / 8 |
+| 4. Gallery | 1 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -100,10 +100,10 @@ Update this table whenever a section is finished (count checked tasks / total).
 
 ## 4. Gallery: Deep Linking + Lightbox
 
-Implementation order: complete 4.8 (`usePhotos`) before 4.1 so loaded photos are available for category and photo existence checks.
+Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are available for the category filter and the existence checks in 4.5. Task 4.1 validates formats only and does not depend on loaded photos.
 
-- [ ] **4.1** Hook `useGalleryParams`: read/write `?category=` and `?photo=` via `useSearchParams()`; params are untrusted, validate them; derive state from URL (no copy into `useState`) — commit `feat: gallery search params hook`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **4.1** Hook `useGalleryParams`: read/write `?category=` and `?photo=` via `useSearchParams()`; params are untrusted, validate them; derive state from URL (no copy into `useState`) — commit `feat: gallery search params hook`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **4.2** Category filter (`<nav>` / `<ul>`, `type="button"`, `aria-pressed` or `aria-current`); changing category updates URL — commit `feat: category filter`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.3** Photo grid with `<ul>` / `<li>` / `<figure>` / `<figcaption>`, CSS Grid + `@media` (375–1440px), key = `photo.id` — commit `feat: photo grid`
