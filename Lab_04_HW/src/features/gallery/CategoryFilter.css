@@ -1,0 +1,25 @@
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-button:hover {
+  border-color: var(--accent);
+}
+
+/* Not colour alone: pressed buttons are also bold and filled. */
+.filter-button.is-pressed {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #0b1020;
+  font-weight: 700;
+}
