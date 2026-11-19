@@ -16,7 +16,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
-| 3. Routing & Layout | 0 / 4 |
+| 3. Routing & Layout | 1 / 4 |
 | 4. Gallery | 0 / 7 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
@@ -87,8 +87,8 @@ Update this table whenever a section is finished (count checked tasks / total).
 
 ## 3. Routing & Layout (Sprint 1)
 
-- [ ] **3.1** `AppLayout` with `<Outlet />`, `<nav>` using `NavLink className={({ isActive }) => ...}`, `<main>` — commit `feat: router layout`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **3.1** `AppLayout` with `<Outlet />`, `<nav>` using `NavLink className={({ isActive }) => ...}`, `<main>` — commit `feat: router layout`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **3.2** `<Routes>` / `<Route element={...}>`: index route, `/gallery`, `/deck`, `*` — commit `feat: route table`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **3.3** `React.lazy` + `<Suspense fallback={<Skeleton />}>`; Skeleton has `aria-busy="true"`, `aria-live="polite"`, matches final dimensions (CLS = 0) — commit `feat: lazy routes with skeleton`
