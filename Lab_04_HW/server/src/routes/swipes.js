@@ -8,9 +8,14 @@ export const swipesRouter = Router()
 
 const alreadySwiped = () => new ApiError(409, 'ALREADY_SWIPED', 'Card has already been swiped.')
 
+// Both orders are served by the { createdAt: -1, _id: -1 } index declared in models/Swipe.js.
+// OLDEST_FIRST is the order of GET /api/swipes; NEWEST_FIRST is the order of undo.
+const OLDEST_FIRST = { createdAt: 1, _id: 1 }
+const NEWEST_FIRST = { createdAt: -1, _id: -1 }
+
 // Oldest to newest: the last element is the top of the undo stack.
 swipesRouter.get('/', async (req, res) => {
-  const swipes = await Swipe.find({}).sort({ createdAt: 1, _id: 1 }).exec()
+  const swipes = await Swipe.find({}).sort(OLDEST_FIRST).exec()
   res.json(swipes)
 })
 
@@ -42,4 +47,14 @@ swipesRouter.post('/', async (req, res) => {
     }
     throw error
   }
+})
+
+// Undo = pop the top of the stack: newest first, the exact reverse of GET /api/swipes.
+// One atomic findOneAndDelete, so two concurrent undos can never remove the same swipe.
+swipesRouter.delete('/last', async (req, res) => {
+  const removed = await Swipe.findOneAndDelete({}, { sort: NEWEST_FIRST }).exec()
+  if (!removed) {
+    throw new ApiError(404, 'HISTORY_EMPTY', 'No swipe to undo.')
+  }
+  res.json(removed)
 })

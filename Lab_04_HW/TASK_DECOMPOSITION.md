@@ -15,7 +15,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 |---|---|
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
-| 2. Backend | 5 / 7 |
+| 2. Backend | 6 / 7 |
 | 3. Routing & Layout | 0 / 4 |
 | 4. Gallery | 0 / 7 |
 | 5. Swipe Deck | 0 / 9 |
@@ -80,8 +80,8 @@ Update this table whenever a section is finished (count checked tasks / total).
   - [x] C  [x] T  [x] I  [x] R
 - [x] **2.5** `POST /api/swipes` with server-side validation (parity with client) — commit `feat: swipe create endpoint`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **2.6** `DELETE /api/swipes/last` (LIFO at persistence layer) — commit `feat: undo endpoint`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **2.6** `DELETE /api/swipes/last` (LIFO at persistence layer) — commit `feat: undo endpoint`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **2.7** API tests: status codes, bad payloads, empty stack — commit `test: api endpoints`
 
 ## 3. Routing & Layout (Sprint 1)
