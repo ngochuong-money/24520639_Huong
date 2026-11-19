@@ -16,8 +16,8 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 0. Setup & Baseline | 4 / 4 |
 | 1. Contract | 3 / 3 |
 | 2. Backend | 7 / 7 |
-| 3. Routing & Layout | 3 / 4 |
-| 4. Gallery | 0 / 7 |
+| 3. Routing & Layout | 4 / 4 |
+| 4. Gallery | 0 / 8 |
 | 5. Swipe Deck | 0 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
@@ -94,10 +94,13 @@ Update this table whenever a section is finished (count checked tasks / total).
 - [x] **3.3** `React.lazy` + `<Suspense fallback={<Skeleton />}>`; Skeleton has `aria-busy="true"`, `aria-live="polite"`, matches final dimensions (CLS = 0) — commit `feat: lazy routes with skeleton`
   - [x] C  [x] T  [x] I  [x] R
   - Verification: client 112/112, server unit 134/134 and MongoDB API 93/93 tests passed; lint and build passed. Build emitted separate GalleryPage and DeckPage chunks. Initial red was captured by running the Skeleton test alone (missing Skeleton.jsx); the full pre-implementation client run was interrupted because the async mock gates waited on the old static page imports. Chrome with cache disabled, Slow 3G and paused page-module requests verified both fallbacks at 375px: header/nav remained visible, gallery had 12 tiles, deck had a card and 3 controls, live regions were polite, title height stayed 40px and there was no horizontal overflow or console error/warning. The sampled layout-shift observer recorded no entries with the current title-only pages; this is not a final CLS audit. Repeat layout parity checks with real gallery/deck content and Lighthouse in later tasks. Headless screenshots were blank and are not usable report evidence.
-- [ ] **3.4** Invalid route/ID → `<NotFoundState />` (via `useParams()` where dynamic routes exist) — commit `feat: detail route handling`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **3.4** Not-found handling: the catch-all route (built in 3.2) is pinned by edge-case tests; Homework 1 has no dynamic path routes, so `useParams()` is not used — commit `test: not-found route handling`
+  - [x] C  [x] T  [x] I (no production change)  [x] R
+  - Verification: 13 new edge-case tests passed. Removing the catch-all caused 15 client test failures; case-sensitive gallery matching caused exactly the `/GALLERY` test to fail. Both mutations were restored byte-for-byte. Client 125/125, server unit 134/134, MongoDB API 93/93, lint and build passed. Chrome confirmed `/gallery/64f1a2b3c4d5e6f7a8b9c0d1` renders Page not found inside the layout with one main and one h1, `/GALLERY` renders Gallery and the console has no errors/warnings. Mutation results are deliberate test evidence, not AI implementation failures; screenshots were not captured.
 
 ## 4. Gallery: Deep Linking + Lightbox
+
+Implementation order: complete 4.8 (`usePhotos`) before 4.1 so loaded photos are available for category and photo existence checks.
 
 - [ ] **4.1** Hook `useGalleryParams`: read/write `?category=` and `?photo=` via `useSearchParams()`; params are untrusted, validate them; derive state from URL (no copy into `useState`) — commit `feat: gallery search params hook`
   - [ ] C  [ ] T  [ ] I  [ ] R
@@ -112,6 +115,8 @@ Update this table whenever a section is finished (count checked tasks / total).
 - [ ] **4.6** Previous/next photo in lightbox via `keydown` + `event.key` — commit `feat: lightbox keyboard nav`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **4.7** Tests: direct link `?category=x&photo=y`, closing modal, invalid params — commit `test: gallery deep linking`
+- [ ] **4.8** `usePhotos`: load `GET /api/photos`, expose `{ photos, status, error }`, and cancel obsolete requests with `AbortController` — commit `feat: photos data hook`
+  - [ ] C  [ ] T  [ ] I  [ ] R
 
 ## 5. Swipe Deck
 
