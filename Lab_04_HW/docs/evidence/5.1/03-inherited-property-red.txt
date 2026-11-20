@@ -1,0 +1,40 @@
+$ npm.cmd run test:client -- src/features/deck/calculateScore.test.js
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/calculateScore.test.js
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/calculateScore.test.js (17 tests | 1 failed) 28ms
+   ❯ calculateScore rules (7)
+     × does not read inherited properties such as "constructor" 9ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 16 passed (17)
+   Start at  15:49:15
+   Duration  1.63s (environment 65%, setup 25%, transform 5%, import 3%, tests 2%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/calculateScore.test.js > calculateScore rules > does not read inherited properties such as "constructor"
+AssertionError: expected '0function Object() { [native code] }' to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+"0function Object() { [native code] }"
+
+ ❯ src/features/deck/calculateScore.test.js:61:52
+     59|   })
+     60|   it('does not read inherited properties such as "constructor"', () =>…
+     61|     expect(calculateScore([entry('constructor')])).toBe(0)
+       |                                                    ^
+     62|     expect(calculateScore([entry('toString')])).toBe(0)
+     63|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

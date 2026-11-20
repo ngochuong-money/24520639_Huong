@@ -1,0 +1,3 @@
+Inspected undoStack.js and calculateScore.js: no imports, React hooks or mutating array methods.
+push uses spread; pop uses slice and preserves the original empty stack reference; peek reads the last entry.
+calculateScore uses reduce and Object.hasOwn, without changing history.

@@ -1,0 +1,58 @@
+$ npm.cmd run test:client
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/undoStack.test.js (0 test)
+ ❯ src/features/deck/calculateScore.test.js (0 test)
+
+ Test Files  2 failed | 13 passed (15)
+      Tests  228 passed (228)
+   Start at  15:48:18
+   Duration  47.17s (environment 76%, setup 21%, tests 1%, transform 1%, import 1%)
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/calculateScore.test.js [ src/features/deck/calculateScore.test.js ]
+Error: Failed to resolve import "./calculateScore.js" from "src/features/deck/calculateScore.test.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/calculateScore.test.js:2:51
+  1  |  import { describe, expect, it } from "vitest";
+  2  |  import { SCORE_BY_DIRECTION, calculateScore } from "./calculateScore.js";
+     |                                                      ^
+  3  |  const entry = (direction, cardId = "c") => ({
+  4  |  	cardId,
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:8865:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:8862:14
+ ❯ resolveId node_modules/vite/dist/node/chunks/node.js:26552:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:26651:23
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:26624:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:8636:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20112:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/features/deck/undoStack.test.js [ src/features/deck/undoStack.test.js ]
+Error: Failed to resolve import "./undoStack.js" from "src/features/deck/undoStack.test.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/undoStack.test.js:2:32
+  1  |  import { describe, expect, it } from "vitest";
+  2  |  import { peek, pop, push } from "./undoStack.js";
+     |                                   ^
+  3  |  describe("push", () => {
+  4  |  	it("returns a new array with the item on top", () => {
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:8865:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:8862:14
+ ❯ resolveId node_modules/vite/dist/node/chunks/node.js:26552:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:26651:23
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:26624:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:8636:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20112:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

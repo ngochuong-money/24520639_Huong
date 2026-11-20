@@ -1,0 +1,40 @@
+$ npm.cmd run test:client -- src/features/deck/undoStack.test.js
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/undoStack.test.js
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/undoStack.test.js (10 tests | 1 failed) 24ms
+   ❯ pop (5)
+     × does not mutate the input 11ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  15:49:58
+   Duration  1.87s (environment 74%, setup 18%, transform 3%, import 2%, tests 1%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/undoStack.test.js > pop > does not mutate the input
+AssertionError: expected [Function] to not throw an error but 'TypeError: Cannot delete property \'1…' was thrown
+
+- Expected:
+undefined
+
++ Received:
+"TypeError: Cannot delete property '1' of [object Array]"
+
+ ❯ src/features/deck/undoStack.test.js:32:34
+     30|   it('does not mutate the input', () => {
+     31|     const input = Object.freeze(['a', 'b'])
+     32|     expect(() => pop(input)).not.toThrow()
+       |                                  ^
+     33|     expect(input).toEqual(['a', 'b'])
+     34|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

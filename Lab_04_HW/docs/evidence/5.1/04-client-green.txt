@@ -1,0 +1,38 @@
+$ npm.cmd run test:client
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/gallery/deepLink.integration.test.jsx (13 tests | 1 failed) 1215ms
+   ❯ direct link opens the right view (4)
+     × ?category=evidence&photo=<id> shows the filtered grid with the photo open 630ms
+
+ Test Files  1 failed | 14 passed (15)
+      Tests  1 failed | 254 passed (255)
+   Start at  15:49:18
+   Duration  6.37s (environment 60%, setup 22%, tests 14%, transform 2%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/gallery/deepLink.integration.test.jsx > direct link opens the right view > ?category=evidence&photo=<id> shows the filtered grid with the photo open
+Error: expect(element).toHaveAttribute("open") // element.hasAttribute("open")
+
+Expected the element to have attribute:
+  open
+Received:
+  null
+ ❯ src/features/gallery/deepLink.integration.test.jsx:51:22
+     49|     expect(within(document.querySelector('.photo-grid')).getAllByRole(…
+     50|     expect(screen.getByRole('button', { name: 'Evidence' })).toHaveAtt…
+     51|     expect(dialog()).toHaveAttribute('open')
+       |                      ^
+     52|     expect(within(dialog()).getByRole('img', { name: 'Second desk' }))…
+     53|     expect(screen.getByTestId('deep-link-location').textContent).toBe(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

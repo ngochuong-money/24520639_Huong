@@ -75,3 +75,14 @@ Additional workflow corrections: the first API contract included unrequested det
 - **Browser/test limits:** Chrome CDP checks wait for the DOM disabled state and React effects, not just the earlier URL change. Tab/Shift+Tab can transfer focus to browser chrome (`document.hasFocus() === false`); while the page has focus, the active element remained in the modal and never in background page controls, and re-entry returned to modal controls. This is not claimed as an uninterrupted three-button-only focus cycle. No new screenshots were captured.
 - **Design decision:** Keyboard handling stays on the native dialog's `onKeyDown`, with no window listener or keyboard effect. The two effects are limited to photo-driven opening/closing and availability-driven focus; the latter does not install subscriptions requiring cleanup.
 
+
+### Task 5.1 — Immutable stack and scoring (2026-11-20)
+
+- Contract: docs/INTERFACES.md section 6 and docs/API_CONTRACT.md section 7. The last array element is the LIFO top; empty pop preserves its input reference. Score is derived from SwipeEntry history, never state. +10/-5 remain provisional pending the original assignment.
+- Fail Test: added the supplied tests before either module existed; test:client failed with missing-module imports. Implemented spread/slice stack helpers and the reference scorer.
+- Real defect in the initial reference scorer: looking up SCORE_BY_DIRECTION[direction] with ?? 0 reads inherited constructor/toString properties. Added the supplied regression test, observed the constructor assertion fail, then used Object.hasOwn. No React or state/effect imports were introduced.
+- Mutation checks: replacing slice with stack.pop() made the frozen-input test fail; removing Object.hasOwn made the inherited-property test fail. Both mutations were restored in finally blocks; test:client returned to 255/255 passing.
+- One full-client run after the scoring fix failed an existing Gallery deep-link dialog-open assertion. The same working tree passed on retry and subsequent complete runs; no Gallery source/test was changed. The failed log is retained, not represented as a utility regression.
+- Verification: npm.cmd test (client, server unit and real MongoDB API suites), lint and build all exited 0. The API suite passed 93/93. The purity scan found no import, useState/useEffect or mutating array methods; manually inspected spread, slice, reduce and empty-stack reference behaviour.
+- Evidence: docs/evidence/5.1 contains the command logs and screenshots rendered from those captured outputs; these are explicitly labelled output renders, not screenshots of a native terminal window. No browser UI check is required for these pure modules.
+- WBS decision: tests are included in task 5.1's commit; 5.2 is labelled merged into 5.1 without a separate test commit. Section 5 progress is 1 / 9.

@@ -18,7 +18,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 0 / 9 |
+| 5. Swipe Deck | 1 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
@@ -127,9 +127,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 ## 5. Swipe Deck
 
-- [ ] **5.1** Pure utils: `undoStack` (push/pop/peek, LIFO) and `calculateScore(swipes)` — commit `feat: undo stack and score utils`
-  - [ ] C  [ ] T  [ ] I  [ ] R
-- [ ] **5.2** Tests for 5.1 (written first): LIFO order, undo on empty, asymmetric scoring cases — commit `test: stack and score`
+- [x] **5.1** Pure utils: `undoStack` (push/pop/peek, LIFO) and `calculateScore(swipes)` — commit `feat: undo stack and score utils`
+  - [x] C  [x] T  [x] I  [x] R
+- [ ] **5.2** Tests for 5.1 (written first): LIFO order, undo on empty, asymmetric scoring cases — gộp vào 5.1; tests written first and committed with the implementation (no separate red-test commit)
 - [ ] **5.3** Hook `useSwipeDeck` with `useReducer`: queue + history stack, immutable updates — commit `feat: swipe deck reducer`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **5.4** Score computed during render (or `useMemo`) from history; never sync derived state with `useEffect` — commit `feat: derived score`
