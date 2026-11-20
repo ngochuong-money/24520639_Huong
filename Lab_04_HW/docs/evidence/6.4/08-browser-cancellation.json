@@ -1,0 +1,100 @@
+{
+  "database": "lab04_hw_browser_64_1795179713417_test",
+  "throttling": {
+    "latency": 2000,
+    "downloadBytesPerSecond": 50000,
+    "uploadBytesPerSecond": 50000,
+    "note": "Explicit custom throttling, not a claim about a Chrome named preset."
+  },
+  "cancellations": [
+    {
+      "phase": "warmup",
+      "method": "GET",
+      "path": "/api/cards",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "warmup",
+      "method": "GET",
+      "path": "/api/swipes",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "warmup",
+      "method": "GET",
+      "path": "/api/photos",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "load-unmount",
+      "method": "GET",
+      "path": "/api/cards",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "load-unmount",
+      "method": "GET",
+      "path": "/api/swipes",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "load-unmount",
+      "method": "GET",
+      "path": "/api/cards",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "load-unmount",
+      "method": "GET",
+      "path": "/api/swipes",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "load-unmount",
+      "method": "GET",
+      "path": "/api/photos",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "prepare-post",
+      "method": "GET",
+      "path": "/api/cards",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "prepare-post",
+      "method": "GET",
+      "path": "/api/swipes",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "post-unmount",
+      "method": "POST",
+      "path": "/api/swipes",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    },
+    {
+      "phase": "post-unmount",
+      "method": "GET",
+      "path": "/api/photos",
+      "canceled": true,
+      "errorText": "net::ERR_ABORTED"
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "unhandledRejections": [],
+  "note": "Captured actual Chrome CDP Network.loadingFailed events with canceled=true / net::ERR_ABORTED. Page PNGs are actual screenshots; any event-log render is labelled and is not a DevTools Network-panel screenshot. A canceled POST does not prove the server did not persist it.",
+  "isolatedDatabaseDropped": true
+}

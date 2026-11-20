@@ -1,0 +1,78 @@
+Command: npm.cmd exec vitest run src/features/deck/useSwipePersistence.fetch.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/useSwipePersistence.fetch.test.jsx (11 tests | 3 failed) 812ms
+   ❯ loading goes through fetch with a shared, abortable signal (2)
+     × aborts the in-flight GET requests on unmount and reports no error 14ms
+   ❯ POST abort and rollback through real fetch (4)
+     × aborts a pending POST on unmount without an error or a state update 77ms
+   ❯ DELETE abort and rollback through real fetch (2)
+     × aborts a pending undo on unmount 78ms
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 8 passed (11)
+   Start at  20:00:42
+   Duration  2.69s (environment 49%, tests 33%, setup 12%, transform 3%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/useSwipePersistence.fetch.test.jsx > loading goes through fetch with a shared, abortable signal > aborts the in-flight GET requests on unmount and reports no error
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/features/deck/useSwipePersistence.fetch.test.jsx:85:33
+     83|     })
+     84|
+     85|     expect(init.signal.aborted).toBe(true)
+       |                                 ^
+     86|     expect(hook.result.current.error).toBeNull()
+     87|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/features/deck/useSwipePersistence.fetch.test.jsx > POST abort and rollback through real fetch > aborts a pending POST on unmount without an error or a state update
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/features/deck/useSwipePersistence.fetch.test.jsx:104:40
+    102|     hook.unmount()
+    103|
+    104|     expect(postCall[1].signal.aborted).toBe(true)
+       |                                        ^
+    105|     await act(async () => {
+    106|       pending.reject(new DOMException('Aborted', 'AbortError'))
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/features/deck/useSwipePersistence.fetch.test.jsx > DELETE abort and rollback through real fetch > aborts a pending undo on unmount
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/features/deck/useSwipePersistence.fetch.test.jsx:171:42
+    169|     hook.unmount()
+    170|
+    171|     expect(deleteCall[1].signal.aborted).toBe(true)
+       |                                          ^
+    172|     await act(async () => {
+    173|       pending.reject(new DOMException('Aborted', 'AbortError'))
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+

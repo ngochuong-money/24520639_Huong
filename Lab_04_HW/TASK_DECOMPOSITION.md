@@ -19,7 +19,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
 | 5. Swipe Deck | 9 / 9 |
-| 6. Persistence Integration | 3 / 4 |
+| 6. Persistence Integration | 4 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
 | 9. Documentation & Git | 0 / 3 |
@@ -157,7 +157,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] **6.3** Loading/error states; roll back when POST fails; no unhandled rejections — commit `feat: persistence error handling`
   - [x] C  [x] T  [x] I  [x] R
   - Permanent DeckPage wiring is included in this commit. Vite proxy server-off returns 502/INTERNAL_ERROR (generic fixed alert); NETWORK_ERROR text is covered by component tests.
-- [ ] **6.4** Hook tests: mock fetch, verify abort on unmount — commit `test: persistence hook`
+- [x] **6.4** Hook tests: mock fetch, verify abort on unmount — commit `test: persistence hook`
+  - [x] C  [x] T  [x] I  [x] R — test-only; real client/hook with mocked fetch, two mutations restored, Chrome GET/POST cancellation verified.
 
 ## 7. Accessibility, Performance & Responsive
 

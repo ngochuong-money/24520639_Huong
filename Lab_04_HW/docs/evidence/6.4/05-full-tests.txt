@@ -1,0 +1,52 @@
+Command: npm.cmd test
+Exit: 0
+
+> lab-04-hw@0.0.0 test
+> npm run test:client && npm run test:server && npm run test:api
+
+
+> lab-04-hw@0.0.0 test:client
+> vitest run
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  28 passed (28)
+      Tests  435 passed (435)
+   Start at  20:00:51
+   Duration  8.76s (environment 66%, tests 16%, setup 16%, import 1%, transform 1%)
+
+Environment  jsdom was created 28 times · 69.34s total, 66% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+
+> lab-04-hw@0.0.0 test:server
+> vitest run --root server
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/server
+
+
+ Test Files  9 passed (9)
+      Tests  134 passed (134)
+   Start at  20:01:01
+   Duration  1.87s (import 82%, tests 13%, transform 3%, worker 1%)
+
+
+> lab-04-hw@0.0.0 test:api
+> vitest run --root server --config vitest.api.config.js
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/server
+
+
+ Test Files  5 passed (5)
+      Tests  93 passed (93)
+   Start at  20:01:04
+   Duration  7.18s (setup 43%, tests 38%, import 17%, transform 2%, worker 1%)
+
+    Isolate  5 workers spawned · ~226ms startup each (spawn + environment, per file)
+             at least ~903ms faster with isolate: false — reuses workers across files instead of one per file
+
