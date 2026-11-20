@@ -13,6 +13,7 @@ export function useSwipePersistence() {
   const [status, setStatus] = useState('loading')
   const [error, setError] = useState(null)
   const [pendingCount, setPendingCount] = useState(0)
+  const [loadAttempt, setLoadAttempt] = useState(0)
   const deckRef = useRef(deck)
   const controllerRef = useRef(null)
   // One operation at a time: this also holds the exact entry needed for rollback.
@@ -40,7 +41,7 @@ export function useSwipePersistence() {
       })
 
     return () => controller.abort()
-  }, [])
+  }, [loadAttempt])
 
   const swipe = useCallback(async (direction) => {
     const current = deckRef.current
@@ -88,6 +89,13 @@ export function useSwipePersistence() {
     }
   }, [status])
 
+  const retry = useCallback(() => {
+    if (operationRef.current) return
+    setStatus('loading')
+    setError(null)
+    setLoadAttempt((attempt) => attempt + 1)
+  }, [])
+
   const isSyncing = pendingCount > 0
   return {
     ...deck,
@@ -96,6 +104,7 @@ export function useSwipePersistence() {
     status,
     error,
     isSyncing,
+    retry,
     canSwipe: deck.currentCard !== null && !isSyncing && status === 'ready',
   }
 }

@@ -1,0 +1,295 @@
+Command: npm.cmd exec vitest run src/features/deck/DeckErrorMessage.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/DeckErrorMessage.test.jsx (12 tests | 10 failed) 179ms
+   ❯ DeckErrorMessage (9)
+     × announces a real error with role="alert" 100ms
+     × maps NETWORK_ERROR to a friendly message 8ms
+     × maps ALREADY_SWIPED to a friendly message 8ms
+     × maps CARD_NOT_FOUND to a friendly message 6ms
+     × maps INTERNAL_ERROR to a friendly message 6ms
+     × maps SOMETHING_NEW to a friendly message 4ms
+     × never shows the raw server message 4ms
+   × uses a safe fallback for inherited code constructor 5ms
+   × uses a safe fallback for inherited code toString 4ms
+   × uses a safe fallback for inherited code __proto__ 3ms
+
+ Test Files  1 failed (1)
+      Tests  10 failed | 2 passed (12)
+   Start at  19:45:00
+   Duration  2.01s (environment 66%, setup 17%, tests 10%, transform 4%, import 2%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > announces a real error with role="alert"
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      Connection lost. Your last action was not saved.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:14:19
+     12|   it('announces a real error with role="alert"', () => {
+     13|     render(<DeckErrorMessage error={new ApiError(0, 'NETWORK_ERROR', '…
+     14|     expect(screen.getByRole('alert')).toHaveTextContent(/connection lo…
+       |                   ^
+     15|   })
+     16|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > maps NETWORK_ERROR to a friendly message
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      Connection lost. Your last action was not saved.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:25:19
+     23|   ])('maps %s to a friendly message', (code, pattern) => {
+     24|     render(<DeckErrorMessage error={new ApiError(500, code, 'raw serve…
+     25|     expect(screen.getByRole('alert')).toHaveTextContent(pattern)
+       |                   ^
+     26|   })
+     27|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > maps ALREADY_SWIPED to a friendly message
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      That card was already swiped.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:25:19
+     23|   ])('maps %s to a friendly message', (code, pattern) => {
+     24|     render(<DeckErrorMessage error={new ApiError(500, code, 'raw serve…
+     25|     expect(screen.getByRole('alert')).toHaveTextContent(pattern)
+       |                   ^
+     26|   })
+     27|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > maps CARD_NOT_FOUND to a friendly message
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      That card no longer exists.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:25:19
+     23|   ])('maps %s to a friendly message', (code, pattern) => {
+     24|     render(<DeckErrorMessage error={new ApiError(500, code, 'raw serve…
+     25|     expect(screen.getByRole('alert')).toHaveTextContent(pattern)
+       |                   ^
+     26|   })
+     27|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > maps INTERNAL_ERROR to a friendly message
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > maps SOMETHING_NEW to a friendly message
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      Something went wrong. Please try again.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:25:19
+     23|   ])('maps %s to a friendly message', (code, pattern) => {
+     24|     render(<DeckErrorMessage error={new ApiError(500, code, 'raw serve…
+     25|     expect(screen.getByRole('alert')).toHaveTextContent(pattern)
+       |                   ^
+     26|   })
+     27|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > DeckErrorMessage > never shows the raw server message
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      Something went wrong. Please try again.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:30:19
+     28|   it('never shows the raw server message', () => {
+     29|     render(<DeckErrorMessage error={new ApiError(500, 'INTERNAL_ERROR'…
+     30|     expect(screen.getByRole('alert').textContent).not.toContain('secre…
+       |                   ^
+     31|   })
+     32|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > uses a safe fallback for inherited code constructor
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > uses a safe fallback for inherited code toString
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx > uses a safe fallback for inherited code __proto__
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  paragraph:
+
+  Name "":
+  <p
+    class="page-line deck-error"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <p
+      class="page-line deck-error"
+    >
+      Something went wrong. Please try again.
+    </p>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckErrorMessage.test.jsx:41:19
+     39|   it.each(['constructor', 'toString', '__proto__'])('uses a safe fallb…
+     40|     render(<DeckErrorMessage error={new ApiError(500, code, 'secret')}…
+     41|     expect(screen.getByRole('alert')).toHaveTextContent('Something wen…
+       |                   ^
+     42|   })
+     43|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+

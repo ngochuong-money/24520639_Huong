@@ -19,7 +19,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
 | 5. Swipe Deck | 9 / 9 |
-| 6. Persistence Integration | 2 / 4 |
+| 6. Persistence Integration | 3 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
 | 9. Documentation & Git | 0 / 3 |
@@ -145,7 +145,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.9** Tests for reducer and interactions: swipe, multiple undos, keyboard — commit `test: swipe deck behavior`
   - [x] C  [x] T  [x] I  [x] R — no production change; integration tests and mutation verification.
-  - Section 5 browser acceptance remains open until permanent DeckPage wiring: verify mouse/keyboard/buttons, Results, repeated Undo and F5 reset before closing section 5.
+  - DeckPage wired in 6.3: real-browser mouse/keyboard/buttons each completed all 10 cards with score 25 and Results; repeated Undo restored LIFO order. F5 now preserves server history under section 6 (the earlier local-only reset requirement is superseded).
 
 ## 6. Persistence Integration (separate commits for API / hook / tests)
 
@@ -153,9 +153,10 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **6.2** Hook `useSwipePersistence`: load history, save swipe, undo via API; `AbortController` + `return () => controller.abort()`, no `didCancel` — commit `feat: persistence hook`
   - [x] C  [x] T  [x] I  [x] R
-  - Browser POST/DELETE, refresh persistence, Slow 3G ordering and server-off UI verification remain pending permanent DeckPage integration.
-- [ ] **6.3** Loading/error states; roll back when POST fails; no unhandled rejections — commit `feat: persistence error handling`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+  - Browser checks completed with DeckPage wiring in 6.3: POST 201 / DELETE 200 persist across refresh, 800ms throttling permits one write, server-off save rolls back without unhandled rejection.
+- [x] **6.3** Loading/error states; roll back when POST fails; no unhandled rejections — commit `feat: persistence error handling`
+  - [x] C  [x] T  [x] I  [x] R
+  - Permanent DeckPage wiring is included in this commit. Vite proxy server-off returns 502/INTERNAL_ERROR (generic fixed alert); NETWORK_ERROR text is covered by component tests.
 - [ ] **6.4** Hook tests: mock fetch, verify abort on unmount — commit `test: persistence hook`
 
 ## 7. Accessibility, Performance & Responsive

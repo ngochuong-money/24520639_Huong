@@ -274,3 +274,49 @@ describe('request ordering and cancellation', () => {
     expect(hook.result.current.score).toBe(10)
   })
 })
+
+
+describe('retry and error recovery', () => {
+  it('retries a failed load, clears its error and hydrates the successful response', async () => {
+    apiMock.getCards.mockRejectedValueOnce(new ApiError(0, 'NETWORK_ERROR', 'Network request failed.'))
+    const hook = renderHook(() => useSwipePersistence())
+    await waitFor(() => expect(hook.result.current.status).toBe('error'))
+    act(() => hook.result.current.retry())
+    expect(hook.result.current.status).toBe('loading')
+    expect(hook.result.current.error).toBeNull()
+    await waitFor(() => expect(hook.result.current.status).toBe('ready'))
+    expect(hook.result.current.currentCard).toEqual(cards[0])
+    expect(apiMock.getCards).toHaveBeenCalledTimes(2)
+    expect(apiMock.getSwipes).toHaveBeenCalledTimes(2)
+    expect(apiMock.getCards.mock.calls[0][0].signal.aborted).toBe(true)
+  })
+
+  it('does not refetch when only history changes', async () => {
+    const hook = await ready()
+    await act(async () => { await hook.result.current.swipe('right') })
+    await act(async () => { await hook.result.current.undo() })
+    expect(apiMock.getCards).toHaveBeenCalledTimes(1)
+    expect(apiMock.getSwipes).toHaveBeenCalledTimes(1)
+  })
+
+  it('catches a repeated load failure after retry', async () => {
+    apiMock.getSwipes.mockRejectedValue(new ApiError(0, 'NETWORK_ERROR', 'Network request failed.'))
+    const hook = renderHook(() => useSwipePersistence())
+    await waitFor(() => expect(hook.result.current.status).toBe('error'))
+    act(() => hook.result.current.retry())
+    await waitFor(() => expect(hook.result.current.status).toBe('error'))
+    expect(hook.result.current.error).toBeInstanceOf(ApiError)
+  })
+
+  it('catches a failed DELETE without rejecting undo and clears the error on successful retry', async () => {
+    apiMock.getSwipes.mockResolvedValue([{ cardId: 'a', direction: 'left' }])
+    apiMock.undoLastSwipe.mockRejectedValueOnce(new ApiError(0, 'NETWORK_ERROR', 'Network request failed.'))
+    const hook = await ready()
+    await act(async () => { await expect(hook.result.current.undo()).resolves.toBeUndefined() })
+    expect(hook.result.current.history).toEqual([{ cardId: 'a', direction: 'left' }])
+    expect(hook.result.current.error).toBeInstanceOf(ApiError)
+    await act(async () => { await hook.result.current.undo() })
+    expect(hook.result.current.error).toBeNull()
+    expect(hook.result.current.history).toEqual([])
+  })
+})

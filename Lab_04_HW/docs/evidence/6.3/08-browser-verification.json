@@ -1,0 +1,350 @@
+{
+  "database": "lab04_hw_browser_63_1795178908680_test",
+  "checks": [
+    "Retry after starting real backend loads deck without page reload",
+    "Real duplicate POST returns 409, shows fixed friendly alert and rolls back to same card",
+    "Successful retry clears save alert; POST 201 survives F5",
+    "DELETE 200 survives F5 and restores first card",
+    "Throttled 800ms request: rapid mixed inputs send exactly one POST and all controls disabled pending",
+    "Backend stopped before save: optimistic card restored, generic proxy error shown",
+    "buttons: full deck 10 POST 201, Results score 25",
+    "buttons: repeated Undo restores cards in LIFO order and hides Results",
+    "keyboard: full deck 10 POST 201, Results score 25",
+    "keyboard: repeated Undo restores cards in LIFO order and hides Results",
+    "mouse: full deck 10 POST 201, Results score 25",
+    "mouse: repeated Undo restores cards in LIFO order and hides Results",
+    "375px no horizontal overflow"
+  ],
+  "http": [
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 502
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 502
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 409
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 304
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 304
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 502
+    },
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 304
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 304
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/src/api/client.js",
+      "method": "GET",
+      "status": 304
+    },
+    {
+      "path": "/api/cards",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    },
+    {
+      "path": "/api/swipes/last",
+      "method": "DELETE",
+      "status": 200
+    }
+  ],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+    }
+  ],
+  "uncaught": [],
+  "allUnhandledRejections": [],
+  "initialOffline": "Something went wrong. Please try again.",
+  "saveOffline": "Something went wrong. Please try again.",
+  "unhandledRejections": [],
+  "proxyNote": "A stopped API behind the Vite proxy returns HTTP 502 / INTERNAL_ERROR, so the fixed generic message is correct; NETWORK_ERROR mapping is verified in unit tests. No raw proxy response is displayed.",
+  "isolatedDatabaseDropped": true
+}

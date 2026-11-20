@@ -1,0 +1,551 @@
+Command: npm.cmd exec vitest run src/features/deck/DeckErrorMessage.test.jsx src/features/deck/DeckPage.test.jsx src/features/deck/useSwipePersistence.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/DeckErrorMessage.test.jsx (0 test)
+ ❯ src/features/deck/DeckPage.test.jsx (10 tests | 9 failed) 223ms
+   ❯ DeckPage loading and error states (6)
+     × shows the deck skeleton while loading 148ms
+     × shows a retry button when loading failed 12ms
+     × shows a save error next to the working deck without hiding the card 10ms
+     × disables swiping while saving 9ms
+     × retry reloads the deck through the hook 6ms
+   ❯ DeckPage presentation edge cases (4)
+     × shows an empty state rather than rendering a null SwipeCard 8ms
+     × shows Results and the finished status after a nonempty deck is exhausted 7ms
+     × disables Undo as well as swipe controls while a write is pending 7ms
+     × buttons and keyboard dispatch to the same persistence actions 8ms
+ ❯ src/features/deck/useSwipePersistence.test.jsx (22 tests | 2 failed) 1575ms
+   ❯ retry and error recovery (4)
+     × retries a failed load, clears its error and hydrates the successful response 87ms
+     × catches a repeated load failure after retry 80ms
+
+ Test Files  3 failed (3)
+      Tests  11 failed | 21 passed (32)
+   Start at  19:44:09
+   Duration  3.72s (environment 54%, tests 25%, setup 13%, transform 5%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/DeckErrorMessage.test.jsx [ src/features/deck/DeckErrorMessage.test.jsx ]
+Error: Failed to resolve import "./DeckErrorMessage.jsx" from "src/features/deck/DeckErrorMessage.test.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/DeckErrorMessage.test.jsx:4:29
+  2  |  import { describe, expect, it } from "vitest";
+  3  |  import { ApiError } from "../../api/client.js";
+  4  |  import DeckErrorMessage from "./DeckErrorMessage.jsx";
+     |                                ^
+  5  |  var _jsxFileName = "D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/DeckE...
+  6  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:8865:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:8862:14
+ ❯ resolveId node_modules/vite/dist/node/chunks/node.js:26552:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:26651:23
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:26624:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:8636:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20112:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage loading and error states > shows the deck skeleton while loading
+TestingLibraryElementError: Unable to find an accessible element with the role "region" and name "Loading swipe deck"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_0_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_0_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_0_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_0_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:49:19
+     47|     hookMock.mockReturnValue(base({ status: 'loading', currentCard: nu…
+     48|     renderPage()
+     49|     expect(screen.getByRole('region', { name: 'Loading swipe deck' }))…
+       |                   ^
+     50|   })
+     51|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage loading and error states > shows a retry button when loading failed
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_1_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_1_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_1_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_1_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:56:19
+     54|     hookMock.mockReturnValue(base({ status: 'error', error: failure, c…
+     55|     renderPage()
+     56|     expect(screen.getByRole('alert')).toHaveTextContent(/connection lo…
+       |                   ^
+     57|     expect(screen.getByRole('button', { name: 'Try again' })).toHaveAt…
+     58|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage loading and error states > shows a save error next to the working deck without hiding the card
+TestingLibraryElementError: Unable to find an accessible element with the role "alert"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_2_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_2_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_2_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_2_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:64:19
+     62|     hookMock.mockReturnValue(base({ error: failure }))
+     63|     renderPage()
+     64|     expect(screen.getByRole('alert')).toHaveTextContent(/already swipe…
+       |                   ^
+     65|     expect(screen.getByRole('heading', { level: 2, name: 'Minh Anh' })…
+     66|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage loading and error states > disables swiping while saving
+TestingLibraryElementError: Unable to find an accessible element with the role "region" and name "Deck controls"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_4_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_4_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_4_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_4_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:76:26
+     74|     hookMock.mockReturnValue(base({ isSyncing: true, canSwipe: false }…
+     75|     renderPage()
+     76|     expect(within(screen.getByRole('region', { name: 'Deck controls' }…
+       |                          ^
+     77|   })
+     78|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage loading and error states > retry reloads the deck through the hook
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Try again"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_5_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_5_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_5_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_5_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:83:28
+     81|     hookMock.mockReturnValue(base({ status: 'error', error: new ApiErr…
+     82|     renderPage()
+     83|     fireEvent.click(screen.getByRole('button', { name: 'Try again' }))
+       |                            ^
+     84|     expect(retry).toHaveBeenCalledTimes(1)
+     85|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage presentation edge cases > shows an empty state rather than rendering a null SwipeCard
+TestingLibraryElementError: Unable to find an element with the text: No cards available.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_6_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_6_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:93:19
+     91|     hookMock.mockReturnValue(base({ cards: [], queue: [], currentCard:…
+     92|     renderPage()
+     93|     expect(screen.getByText('No cards available.')).toBeInTheDocument()
+       |                   ^
+     94|     expect(screen.queryByRole('article')).toBeNull()
+     95|     expect(screen.queryByRole('heading', { name: 'Results' })).toBeNul…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage presentation edge cases > shows Results and the finished status after a nonempty deck is exhausted
+TestingLibraryElementError: Unable to find an accessible element with the role "heading" and name "Results"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_7_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_7_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_7_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_7_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:101:19
+     99|     hookMock.mockReturnValue(base({ history: [{ cardId: 'a', direction…
+    100|     renderPage()
+    101|     expect(screen.getByRole('heading', { name: 'Results' })).toBeInThe…
+       |                   ^
+    102|     expect(screen.getByRole('status')).toHaveTextContent('No more card…
+    103|     expect(screen.queryByRole('article')).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage presentation edge cases > disables Undo as well as swipe controls while a write is pending
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Undo"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_8_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_8_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_8_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_8_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:109:19
+    107|     hookMock.mockReturnValue(base({ isSyncing: true, canUndo: true, ca…
+    108|     renderPage()
+    109|     expect(screen.getByRole('button', { name: 'Undo' })).toBeDisabled()
+       |                   ^
+    110|   })
+    111|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯
+
+ FAIL  src/features/deck/DeckPage.test.jsx > DeckPage presentation edge cases > buttons and keyboard dispatch to the same persistence actions
+TestingLibraryElementError: Unable to find an accessible element with the role "button" and name "Swipe left"
+
+Here are the accessible roles:
+
+  region:
+
+  Name "Swipe Deck":
+  <section
+    aria-labelledby="_r_9_"
+    class="page"
+  />
+
+  --------------------------------------------------
+  heading:
+
+  Name "Swipe Deck":
+  <h1
+    class="page-title"
+    id="_r_9_"
+  />
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-labelledby="_r_9_"
+      class="page"
+    >
+      <h1
+        class="page-title"
+        id="_r_9_"
+      >
+        Swipe Deck
+      </h1>
+    </section>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/features/deck/DeckPage.test.jsx:116:28
+    114|     hookMock.mockReturnValue(deck)
+    115|     renderPage()
+    116|     fireEvent.click(screen.getByRole('button', { name: 'Swipe left' }))
+       |                            ^
+    117|     fireEvent.keyDown(window, { key: 'ArrowRight' })
+    118|     expect(deck.swipe.mock.calls).toEqual([['left'], ['right']])
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  src/features/deck/useSwipePersistence.test.jsx > retry and error recovery > retries a failed load, clears its error and hydrates the successful response
+TypeError: hook.result.current.retry is not a function
+ ❯ src/features/deck/useSwipePersistence.test.jsx:284:35
+    282|     const hook = renderHook(() => useSwipePersistence())
+    283|     await waitFor(() => expect(hook.result.current.status).toBe('error…
+    284|     act(() => hook.result.current.retry())
+       |                                   ^
+    285|     expect(hook.result.current.status).toBe('loading')
+    286|     expect(hook.result.current.error).toBeNull()
+ ❯ node_modules/@testing-library/react/dist/act-compat.js:47:24
+ ❯ process.env.NODE_ENV.exports.act node_modules/react/cjs/react.development.js:890:22
+ ❯ Proxy.<anonymous> node_modules/@testing-library/react/dist/act-compat.js:46:25
+ ❯ src/features/deck/useSwipePersistence.test.jsx:284:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  src/features/deck/useSwipePersistence.test.jsx > retry and error recovery > catches a repeated load failure after retry
+TypeError: hook.result.current.retry is not a function
+ ❯ src/features/deck/useSwipePersistence.test.jsx:306:35
+    304|     const hook = renderHook(() => useSwipePersistence())
+    305|     await waitFor(() => expect(hook.result.current.status).toBe('error…
+    306|     act(() => hook.result.current.retry())
+       |                                   ^
+    307|     await waitFor(() => expect(hook.result.current.status).toBe('error…
+    308|     expect(hook.result.current.error).toBeInstanceOf(ApiError)
+ ❯ node_modules/@testing-library/react/dist/act-compat.js:47:24
+ ❯ process.env.NODE_ENV.exports.act node_modules/react/cjs/react.development.js:890:22
+ ❯ Proxy.<anonymous> node_modules/@testing-library/react/dist/act-compat.js:46:25
+ ❯ src/features/deck/useSwipePersistence.test.jsx:306:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
