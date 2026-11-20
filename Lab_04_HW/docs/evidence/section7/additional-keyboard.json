@@ -1,0 +1,37 @@
+{
+  "skipLinkMainFocused": true,
+  "deckTabOrder": [
+    {
+      "text": "Skip to main content",
+      "outline": "rgb(232, 236, 245) solid 3px"
+    },
+    {
+      "text": "Gallery",
+      "outline": "rgb(94, 234, 212) solid 3px"
+    },
+    {
+      "text": "Deck",
+      "outline": "rgb(94, 234, 212) solid 3px"
+    },
+    {
+      "text": "Swipe left",
+      "outline": "rgb(94, 234, 212) solid 3px"
+    },
+    {
+      "text": "Swipe right",
+      "outline": "rgb(94, 234, 212) solid 3px"
+    }
+  ],
+  "lightboxTargets": [
+    {
+      "text": "Close",
+      "width": 303.328125,
+      "height": 44
+    },
+    {
+      "text": "Next",
+      "width": 303.34375,
+      "height": 44
+    }
+  ]
+}

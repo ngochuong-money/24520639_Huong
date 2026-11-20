@@ -1,0 +1,32 @@
+{
+  "responsive": [
+    {
+      "state": "results",
+      "width": 375,
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "pass": true
+    },
+    {
+      "state": "results",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "pass": true
+    }
+  ],
+  "html": {
+    "filtered": {
+      "exit": 0,
+      "output": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    },
+    "not-found": {
+      "exit": 0,
+      "output": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    },
+    "results": {
+      "exit": 0,
+      "output": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    }
+  }
+}

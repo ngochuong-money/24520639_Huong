@@ -1,0 +1,30 @@
+{
+  "tasks": {
+    "7.2": "pass",
+    "7.3": "pass",
+    "7.4": "pass",
+    "7.5": "pass",
+    "7.6": "pass"
+  },
+  "responsiveCases": 47,
+  "lighthouse": {
+    "version": "13.6.0",
+    "mode": "Default mobile / simulated throttling",
+    "gallery": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100
+    },
+    "deck": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100
+    }
+  },
+  "htmlStates": 6,
+  "assetBytes": {
+    "min": 560,
+    "max": 568
+  },
+  "limitations": "Scoped A/AA checks, not a blanket WCAG certification; Lighthouse scores describe these recorded local production runs."
+}

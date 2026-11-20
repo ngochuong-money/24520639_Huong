@@ -1,0 +1,21 @@
+Command: npm.cmd run build
+Exit: 0
+
+> lab-04-hw@0.0.0 build
+> vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 52 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                         0.45 kB │ gzip:  0.29 kB
+dist/assets/DeckPage-BcCsUHEE.css       0.79 kB │ gzip:  0.44 kB
+dist/assets/GalleryPage-U3O3ZmZM.css    1.53 kB │ gzip:  0.56 kB
+dist/assets/index-CQVN7EQb.css          3.13 kB │ gzip:  1.20 kB
+dist/assets/client-e-PHZwWY.js          2.07 kB │ gzip:  0.98 kB
+dist/assets/GalleryPage-BOKsUcNg.js     5.03 kB │ gzip:  1.91 kB
+dist/assets/DeckPage-Bqs7bgsM.js        7.11 kB │ gzip:  2.70 kB
+dist/assets/index-BOWETr9y.js         264.28 kB │ gzip: 84.14 kB
+
+✓ built in 380ms

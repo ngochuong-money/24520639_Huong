@@ -1,0 +1,713 @@
+{
+  "accessibility": {
+    "gallery": {
+      "violations": [],
+      "incomplete": [],
+      "targets": [
+        {
+          "text": "Skip to main content",
+          "width": 188.9375,
+          "height": 48
+        },
+        {
+          "text": "Gallery",
+          "width": 87.359375,
+          "height": 44
+        },
+        {
+          "text": "Deck",
+          "width": 68.9375,
+          "height": 44
+        },
+        {
+          "text": "All",
+          "width": 54.34375,
+          "height": 44
+        },
+        {
+          "text": "Documents",
+          "width": 114.453125,
+          "height": 44
+        },
+        {
+          "text": "Evidence",
+          "width": 96.234375,
+          "height": 44
+        },
+        {
+          "text": "Scenes",
+          "width": 82.46875,
+          "height": 44
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        }
+      ]
+    },
+    "deck": {
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+        }
+      ],
+      "targets": [
+        {
+          "text": "Skip to main content",
+          "width": 188.9375,
+          "height": 48
+        },
+        {
+          "text": "Gallery",
+          "width": 82.546875,
+          "height": 44
+        },
+        {
+          "text": "Deck",
+          "width": 71.078125,
+          "height": 44
+        },
+        {
+          "text": "Swipe left",
+          "width": 112,
+          "height": 44
+        },
+        {
+          "text": "Swipe right",
+          "width": 112,
+          "height": 44
+        }
+      ]
+    },
+    "lightbox": []
+  },
+  "focus": [
+    {
+      "tag": "A",
+      "text": "Skip to main content",
+      "outline": "rgb(232, 236, 245) solid 3px",
+      "width": 188.9375,
+      "height": 48
+    },
+    {
+      "tag": "A",
+      "text": "Gallery",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 87.359375,
+      "height": 44
+    },
+    {
+      "tag": "A",
+      "text": "Deck",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 68.9375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "All",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 54.34375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Documents",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 114.453125,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Evidence",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 96.234375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Scenes",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 82.46875,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Placeholder image for evidence 01",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 272,
+      "height": 182
+    }
+  ],
+  "responsive": [
+    {
+      "width": 375,
+      "route": "gallery",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "pass": true
+    },
+    {
+      "width": 375,
+      "route": "gallery?category=documents",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "pass": true
+    },
+    {
+      "width": 375,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "pass": true
+    },
+    {
+      "width": 375,
+      "route": "deck",
+      "scrollWidth": 375,
+      "clientWidth": 375,
+      "pass": true
+    },
+    {
+      "width": 375,
+      "route": "lightbox",
+      "documentWidth": 375,
+      "clientWidth": 375,
+      "dialogWidth": 335,
+      "dialogClientWidth": 335,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "route": "gallery",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "route": "gallery?category=documents",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "route": "deck",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "route": "lightbox",
+      "documentWidth": 390,
+      "clientWidth": 390,
+      "dialogWidth": 350,
+      "dialogClientWidth": 350,
+      "pass": true
+    },
+    {
+      "width": 414,
+      "route": "gallery",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "pass": true
+    },
+    {
+      "width": 414,
+      "route": "gallery?category=documents",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "pass": true
+    },
+    {
+      "width": 414,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "pass": true
+    },
+    {
+      "width": 414,
+      "route": "deck",
+      "scrollWidth": 414,
+      "clientWidth": 414,
+      "pass": true
+    },
+    {
+      "width": 414,
+      "route": "lightbox",
+      "documentWidth": 414,
+      "clientWidth": 414,
+      "dialogWidth": 374,
+      "dialogClientWidth": 374,
+      "pass": true
+    },
+    {
+      "width": 480,
+      "route": "gallery",
+      "scrollWidth": 480,
+      "clientWidth": 480,
+      "pass": true
+    },
+    {
+      "width": 480,
+      "route": "gallery?category=documents",
+      "scrollWidth": 480,
+      "clientWidth": 480,
+      "pass": true
+    },
+    {
+      "width": 480,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 480,
+      "clientWidth": 480,
+      "pass": true
+    },
+    {
+      "width": 480,
+      "route": "deck",
+      "scrollWidth": 480,
+      "clientWidth": 480,
+      "pass": true
+    },
+    {
+      "width": 480,
+      "route": "lightbox",
+      "documentWidth": 480,
+      "clientWidth": 480,
+      "dialogWidth": 440,
+      "dialogClientWidth": 440,
+      "pass": true
+    },
+    {
+      "width": 640,
+      "route": "gallery",
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "pass": true
+    },
+    {
+      "width": 640,
+      "route": "gallery?category=documents",
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "pass": true
+    },
+    {
+      "width": 640,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "pass": true
+    },
+    {
+      "width": 640,
+      "route": "deck",
+      "scrollWidth": 640,
+      "clientWidth": 640,
+      "pass": true
+    },
+    {
+      "width": 640,
+      "route": "lightbox",
+      "documentWidth": 640,
+      "clientWidth": 640,
+      "dialogWidth": 600,
+      "dialogClientWidth": 600,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "route": "gallery",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "route": "gallery?category=documents",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "route": "deck",
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "route": "lightbox",
+      "documentWidth": 768,
+      "clientWidth": 768,
+      "dialogWidth": 728,
+      "dialogClientWidth": 728,
+      "pass": true
+    },
+    {
+      "width": 1024,
+      "route": "gallery",
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "pass": true
+    },
+    {
+      "width": 1024,
+      "route": "gallery?category=documents",
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "pass": true
+    },
+    {
+      "width": 1024,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "pass": true
+    },
+    {
+      "width": 1024,
+      "route": "deck",
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "pass": true
+    },
+    {
+      "width": 1024,
+      "route": "lightbox",
+      "documentWidth": 1024,
+      "clientWidth": 1024,
+      "dialogWidth": 958,
+      "dialogClientWidth": 958,
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "route": "gallery",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "route": "gallery?category=documents",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "route": "deck",
+      "scrollWidth": 1280,
+      "clientWidth": 1280,
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "route": "lightbox",
+      "documentWidth": 1280,
+      "clientWidth": 1280,
+      "dialogWidth": 958,
+      "dialogClientWidth": 958,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "route": "gallery",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "route": "gallery?category=documents",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "route": "gallery?category=evidence",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "route": "deck",
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "route": "lightbox",
+      "documentWidth": 1440,
+      "clientWidth": 1440,
+      "dialogWidth": 958,
+      "dialogClientWidth": 958,
+      "pass": true
+    }
+  ],
+  "images": [
+    {
+      "src": "/images/photos/evidence-01.svg",
+      "alt": "Placeholder image for evidence 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "eager",
+      "fetchPriority": "high",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-01.svg",
+      "alt": "Placeholder image for scene 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-01.svg",
+      "alt": "Placeholder image for document 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-02.svg",
+      "alt": "Placeholder image for evidence 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-02.svg",
+      "alt": "Placeholder image for scene 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-02.svg",
+      "alt": "Placeholder image for document 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-03.svg",
+      "alt": "Placeholder image for evidence 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-03.svg",
+      "alt": "Placeholder image for scene 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-03.svg",
+      "alt": "Placeholder image for document 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-04.svg",
+      "alt": "Placeholder image for evidence 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-04.svg",
+      "alt": "Placeholder image for scene 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-04.svg",
+      "alt": "Placeholder image for document 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/cards/card-01.svg",
+      "alt": "",
+      "width": "600",
+      "height": "800",
+      "loading": "eager",
+      "fetchPriority": "high",
+      "naturalWidth": 600,
+      "displayWidth": 352
+    }
+  ],
+  "contrast": [
+    {
+      "name": "Text on page",
+      "foreground": "#e8ecf5",
+      "background": "#0b1020",
+      "ratio": 16.000551562477032
+    },
+    {
+      "name": "Text on surface",
+      "foreground": "#e8ecf5",
+      "background": "#141b2f",
+      "ratio": 14.457774862199143
+    },
+    {
+      "name": "Accent focus on page",
+      "foreground": "#5eead4",
+      "background": "#0b1020",
+      "ratio": 12.798162258976799
+    },
+    {
+      "name": "Pressed control text",
+      "foreground": "#0b1020",
+      "background": "#5eead4",
+      "ratio": 12.798162258976799
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "htmlValidation": {
+    "gallery": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    },
+    "deck": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    },
+    "lightbox": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": "{\"version\":\"26.11.20 (14c5cc7)\",\"messages\":[]}\n"
+    }
+  },
+  "dialogFocusTrappedAndRestored": true
+}

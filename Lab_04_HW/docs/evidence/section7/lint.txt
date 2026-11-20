@@ -1,0 +1,5 @@
+Command: npm.cmd run lint
+Exit: 0
+
+> lab-04-hw@0.0.0 lint
+> eslint .

@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:5191",
+  "backendPort": 5002,
+  "database": "lab04_hw_section7_1795194103335_test",
+  "build": "Vite production preview",
+  "chrome": "Installed Google Chrome",
+  "temporaryRoot": "D:/CodexTemp",
+  "isolatedDatabaseDropped": true,
+  "verificationServicesStopped": true
+}
