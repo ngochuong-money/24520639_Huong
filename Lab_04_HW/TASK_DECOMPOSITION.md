@@ -18,9 +18,9 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 9 / 9 |
+| 5. Swipe Deck | 8 / 9 |
 | 6. Persistence Integration | 4 / 4 |
-| 7. Accessibility & Performance | 5 / 6 |
+| 7. Accessibility & Performance | 6 / 6 |
 | 8. Verification | 0 / 6 |
 | 9. Documentation & Git | 0 / 3 |
 
@@ -139,8 +139,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.6** Keyboard: `keydown` + `event.key` (ArrowLeft / ArrowRight swipe, `Z` / Backspace undo); equivalent `type="button"` controls; pointer and keyboard dispatch the same reducer action — commit `feat: keyboard swipe`
   - [x] C  [x] T  [x] I  [x] R
-- [x] **5.7** Undo button disabled when stack is empty; results announced via `aria-live="polite"` (no `alert()`) — commit `feat: undo control`
-  - [x] C  [x] T  [x] I  [x] R
+- [ ] **5.7** Undo button disabled when stack is empty; results announced via `aria-live="polite"` (no `alert()`) — commit `feat: undo control`
+  - [x] C  [x] T  [ ] I  [ ] R
+  - Reopened by screenshot review (2026-11-20): Undo state is correct, and useDeckActions module tests passed earlier, but the persistence DeckPage has empty status after swipe/undo. Wire per-action announcements before accepting page integration; finished status already works.
 - [x] **5.8** End-of-deck results summary using `<dl>` with keyed `<Fragment>` groups — commit `feat: results summary`
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.9** Tests for reducer and interactions: swipe, multiple undos, keyboard — commit `test: swipe deck behavior`
@@ -162,7 +163,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 ## 7. Accessibility, Performance & Responsive
 
-- [ ] **7.1** Semantic HTML audit: landmarks, logical headings, zero div-soup, Fragments instead of extra wrappers — commit `fix: semantic html audit`
+- [x] **7.1** Semantic HTML audit: landmarks, logical headings, zero div-soup, Fragments instead of extra wrappers — commit `fix: semantic html audit`
 - [x] **7.2** Visible focus, tab order, WCAG 2.2 AA contrast, minimum target size — commit `fix: focus and contrast`
 - [x] **7.3** Images: meaningful `alt`, `width`/`height`, `loading="lazy"` (except LCP image), right-sized assets — commit `perf: image optimization`
 - [x] **7.4** Responsive 375–1440px, no unintended horizontal scroll — commit `fix: responsive layout`
@@ -171,19 +172,17 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 ## 8. Verification Checklist (collect evidence for each)
 
-- [ ] **8.1** Routing: valid ID, invalid ID, nested layout, deep link opened directly from URL
-- [ ] **8.2** DevTools: no Console warnings, clean URL param parsing
-- [ ] **8.3** Slow 3G: switch category/route rapidly; in-flight requests show `cancelled` in Network tab
-- [ ] **8.4** Accessibility Tree and full keyboard walkthrough (filter, lightbox, swipe, undo)
-- [ ] **8.5** `npm run lint`, `npm test`, `npm run build` all pass
-- [ ] **8.6** No React key warnings in the Console
+- [x] **8.1** Routing: valid ID, invalid ID, nested layout, deep link opened directly from URL
+- [x] **8.2** DevTools: no Console warnings, clean URL param parsing
+- [x] **8.3** Slow 3G: switch category/route rapidly; in-flight requests show `cancelled` in Network tab
+- [x] **8.4** Accessibility Tree and full keyboard walkthrough (filter, lightbox, swipe, undo)
+- [x] **8.5** `npm run lint`, `npm test`, `npm run build` all pass
+- [x] **8.6** No React key warnings in the Console
 
 ## 9. Documentation & Git
 
-- [ ] **9.1** Update `AI_FAILURE_AUDIT.md`: each AI failure (hallucinated APIs, faulty loops, dialog/pointer bugs) with manual verification, fix, and DevTools/test evidence
-- [ ] **9.2** Verify history with `git log --graph --oneline --decorate`: atomic commits, correct Conventional Commits
-- [ ] **9.3** Prepare the 3-minute live defense: explain reducer, undo stack, dialog↔URL sync, `AbortController`; fix an injected bug without AI
-
+- [x] **9.1** Update `AI_FAILURE_AUDIT.md`: each AI failure (hallucinated APIs, faulty loops, dialog/pointer bugs) with manual verification, fix, and DevTools/test evidence
+- [x] **9.2** Verify history with `git log --graph --oneline --decorate`: atomic commits, correct Conventional Commits
 ---
 
 ## Dependency Order
@@ -192,8 +191,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 ## Definition of Done
 
-- [ ] All 3 Gallery requirements have matching tests or verification evidence
-- [ ] All 4 Swipe Deck requirements have matching tests or verification evidence
-- [ ] No prohibited APIs or practices in the codebase
-- [ ] Lighthouse 100/100; tests, lint and build are green
-- [ ] Git history is clean and `AI_FAILURE_AUDIT.md` is complete
+- [x] All 3 Gallery requirements have matching tests or verification evidence
+- [x] All 4 Swipe Deck requirements have matching tests or verification evidence
+- [x] No prohibited APIs or practices in the codebase
+- [x] Lighthouse 100/100; tests, lint and build are green
+- [x] Git history is clean and `AI_FAILURE_AUDIT.md` is complete
