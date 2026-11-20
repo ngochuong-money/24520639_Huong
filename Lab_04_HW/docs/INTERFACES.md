@@ -149,6 +149,16 @@ Gallery order: title, filter row, status line, grid (the skeleton shows 12 tiles
 | State | none |
 | Renders | `<section aria-label="Deck controls">` with three `type="button"` buttons: Swipe left, Swipe right, Undo (disabled when not allowed). They dispatch the same actions as the keyboard and pointer. |
 
+### DeckStatus
+
+| | |
+|---|---|
+| Props | `{ message = '' }` |
+| State | none |
+| Renders | Always-mounted `<p role="status" aria-live="polite" className="page-line">`, including when empty. Normal actions do not use alerts. |
+
+Messages: `Swiped left: <name>.`, `Swiped right: <name>.`, `Undid swipe on <name>.`; exhausted deck uses `No more cards.`. The event-message string is updated in handlers, not effects; score and queue remain derived from history.
+
 ### ResultsSummary
 
 | | |
@@ -164,7 +174,8 @@ Gallery order: title, filter row, status line, grid (the skeleton shows 12 tiles
 | `usePhotos` | `()` | `{ photos, status, error }`, `status`: `'loading' \| 'ready' \| 'error'` | One `GET /api/photos`; `AbortController` in the effect, `return () => controller.abort()`, ignore `AbortError`. Filtering and categories are derived on the client; `?category=` on the API stays available but the client does not use it. |
 | `useGalleryParams` | `()` | `{ category, photoId, setCategory, openPhoto, closePhoto, replacePhoto }` | Wraps `useSearchParams()`. Parses by format only (invalid format → `'all'` / `null`); existence is checked in `GalleryPage`. Follows the history policy in section 2. |
 | `swipeReducer` | `(state, action)` | new state | Pure. State `{ cards: Card[], history: SwipeEntry[] }`, where `SwipeEntry = { cardId, direction }`. Actions: `{ type: 'hydrate', cards, history }`, `{ type: 'swipe', direction }` (no-op if no card is left), `{ type: 'undo' }` (no-op if history is empty). Never mutates. |
-| `useSwipeDeck` | `()` | `{ cards, history, currentCard, remaining, score, canUndo, swipe, undo, hydrate }` | `useReducer(swipeReducer)`. Derived, not stored: `queue` = cards without a history entry, `currentCard` = `queue[0] ?? null`, `remaining` = `queue.length`, `score` = `calculateScore(history)`, `canUndo` = `history.length > 0`. |
+| `useSwipeDeck` | `(initial = null)` | `{ cards, history, queue, currentCard, remaining, score, canUndo, swipe, undo, hydrate }` | `useReducer(swipeReducer, initial ?? initialDeckState)`. Optional initial `{ cards, history }` is read only on mount; rerender does not reset the deck. Derived, not stored: `queue` = cards without a history entry, `currentCard` = `queue[0] ?? null`, `remaining` = `queue.length`, `score` = `calculateScore(history)`, `canUndo` = `history.length > 0`. |
+| `useDeckActions` | `(cards)` | `useSwipeDeck` result with event-aware `swipe`, `swipeLeft`, `swipeRight`, `undo`, `message` | Starts with `{ cards, history: [] }` without hydration effects. Successful swipe/undo handlers set the last message; invalid/no-card swipe and empty undo do not replace it. All input consumers use these same wrappers. Finished nonempty history derives `No more cards.`; an initially empty deck stays silent. No API calls or automatic keyboard subscription. |
 | `useSwipePersistence` | `()` | `useSwipeDeck` result + `{ status, error, isSyncing, canSwipe }` | On mount loads cards and swipes with one `AbortController` and calls `hydrate`. `swipe` applies optimistically, then `POST /api/swipes`; on failure dispatches `undo` (rollback) and sets `error`. `undo` dispatches `undo`, then `DELETE /api/swipes/last`; on failure re-applies the entry with `swipe` and sets `error`. Input is ignored while `isSyncing` (provisional, keeps requests ordered). |
 | `useDeckKeyboard` | `({ onSwipe, onUndo, enabled = true })` | nothing | `window` `keydown` listener with cleanup and complete deps. `event.key`: `ArrowLeft` → `onSwipe('left')`, `ArrowRight` → `onSwipe('right')`, `z`/`Z`/`Backspace` → `onUndo()` (`preventDefault` on Backspace). Ignores `event.repeat` and events with ctrl/meta/alt. |
 | `calculateScore` | `(history)` | `number` | Rules in API_CONTRACT section 7; constants in SCORE_BY_DIRECTION. |

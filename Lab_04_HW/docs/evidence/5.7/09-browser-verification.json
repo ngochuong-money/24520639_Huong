@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-20",
+  "browser": "157.0.8103.80",
+  "mount": "Temporary isolated real-component consumer; production DeckPage unchanged",
+  "undoDisabledInitially": true,
+  "undoEnabledAfterSwipe": true,
+  "emptyUndoAddsNoMessage": true,
+  "politeStatusAlwaysPresent": true,
+  "statusHeights": {
+    "empty": 24,
+    "populated": 24
+  },
+  "statusDOMChanges": [
+    "Swiped right: Minh Anh.",
+    "Undid swipe on Minh Anh.",
+    "Swiped left: Minh Anh.",
+    "Undid swipe on Minh Anh.",
+    "Swiped right: Minh Anh.",
+    "No more cards.",
+    "Undid swipe on Gia Bao."
+  ],
+  "oneDOMUpdatePerSuccessfulAction": true,
+  "finishedMessage": "No more cards.",
+  "undoFromFinished": "Undid swipe on Gia Bao.",
+  "dialogs": [],
+  "consoleIssues": [],
+  "dimensions": {
+    "viewport": 375,
+    "content": 375
+  },
+  "screenReaderSpeech": "Not tested with NVDA/VoiceOver. DOM mutation counts are not proof of spoken output; confirm after final DeckPage integration."
+}

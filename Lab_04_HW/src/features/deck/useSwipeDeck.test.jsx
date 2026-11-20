@@ -153,3 +153,29 @@ describe('derived score (5.4)', () => {
     expect(spy.mock.calls.length).toBeGreaterThan(before)
   })
 })
+
+describe('optional initial deck state (5.7)', () => {
+  it('reads supplied cards and history synchronously on the first render', () => {
+    const history = [{ cardId: 'a', direction: 'right' }]
+    const { result } = renderHook(() => useSwipeDeck({ cards, history }))
+    expect(result.current.cards).toBe(cards)
+    expect(result.current.history).toBe(history)
+    expect(result.current.currentCard).toEqual(cards[1])
+    expect(result.current.score).toBe(10)
+  })
+
+  it('does not reinitialize the reducer when the initial argument changes', () => {
+    const { result, rerender } = renderHook(({ initial }) => useSwipeDeck(initial), { initialProps: { initial: { cards, history: [] } } })
+    act(() => result.current.swipe('right'))
+    rerender({ initial: { cards: [], history: [] } })
+    expect(result.current.cards).toBe(cards)
+    expect(result.current.history).toEqual([{ cardId: 'a', direction: 'right' }])
+  })
+
+  it('keeps null as the empty default', () => {
+    const { result } = renderHook(() => useSwipeDeck(null))
+    expect(result.current.cards).toEqual([])
+    expect(result.current.history).toEqual([])
+    expect(result.current.currentCard).toBeNull()
+  })
+})

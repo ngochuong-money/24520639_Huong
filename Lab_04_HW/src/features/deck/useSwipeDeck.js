@@ -2,8 +2,8 @@ import { useCallback, useMemo, useReducer } from 'react'
 import { calculateScore } from './calculateScore.js'
 import { initialDeckState, swipeReducer } from './swipeReducer.js'
 
-export function useSwipeDeck() {
-  const [state, dispatch] = useReducer(swipeReducer, initialDeckState)
+export function useSwipeDeck(initial = null) {
+  const [state, dispatch] = useReducer(swipeReducer, initial ?? initialDeckState)
 
   // Stable action creators: they only dispatch, so identity never changes.
   const hydrate = useCallback((cards, history) => dispatch({ type: 'hydrate', cards, history }), [])

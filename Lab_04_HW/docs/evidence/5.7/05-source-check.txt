@@ -1,0 +1,1 @@
+useDeckActions/DeckStatus contain no alert(), role="alert", defaultProps, div or useEffect. Message updates occur only in swipe/undo handlers. useSwipeDeck accepts optional initial reducer state; no one-time hydrate effect/helper. Event-aware swipe overrides the raw deck swipe for common consumers and ignores invalid/no-card swipes.
