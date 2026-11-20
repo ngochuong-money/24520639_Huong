@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-20",
+  "browser": "157.0.8103.80",
+  "mount": "Temporary real-component consumer; production DeckPage unchanged",
+  "visibleOnlyWhenExhausted": true,
+  "firstResults": {
+    "terms": [
+      "Minh Anh",
+      "Gia Bao",
+      "Thu Ha",
+      "Total score"
+    ],
+    "details": [
+      "Right",
+      "Left",
+      "Right",
+      "15"
+    ],
+    "children": [
+      "DT",
+      "DD",
+      "DT",
+      "DD",
+      "DT",
+      "DD",
+      "DT",
+      "DD"
+    ]
+  },
+  "undo": {
+    "summaryHidden": true,
+    "currentCard": "Thu Ha",
+    "score": 5
+  },
+  "reswipe": {
+    "directions": [
+      "Right",
+      "Left",
+      "Left"
+    ],
+    "score": 0
+  },
+  "accessibility": {
+    "descriptionLists": 1,
+    "terms": 4,
+    "definitions": 4
+  },
+  "dimensions": {
+    "viewport": 375,
+    "content": 375
+  },
+  "consoleIssues": [],
+  "screenReaderSpeech": "Not checked with NVDA/VoiceOver; AX roles are structural evidence only."
+}

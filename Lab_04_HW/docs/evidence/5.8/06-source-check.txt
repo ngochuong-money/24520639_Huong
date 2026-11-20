@@ -1,0 +1,1 @@
+Reviewed component: no div, defaultProps, dangerouslySetInnerHTML or index key. Fragment key is entry.cardId; direct dl children are dt/dd, ending with Total score. No component state or visibility condition. Label lookup uses Object.hasOwn for defensive unknown directions. Index-key mutation survived the static DOM suite; source review enforces stable card IDs.

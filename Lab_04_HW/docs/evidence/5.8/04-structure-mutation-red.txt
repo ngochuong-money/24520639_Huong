@@ -1,0 +1,62 @@
+$ npm.cmd run test:client -- src/features/deck/ResultsSummary.test.jsx
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/ResultsSummary.test.jsx
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/ResultsSummary.test.jsx (14 tests | 2 failed) 187ms
+   ❯ ResultsSummary structure (6)
+     × uses only dt, dd and no div elements inside the list 18ms
+     × uses no div elements anywhere 6ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 12 passed (14)
+   Start at  17:16:51
+   Duration  2.02s (environment 67%, setup 16%, tests 11%, transform 4%, import 2%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/ResultsSummary.test.jsx > ResultsSummary structure > uses only dt, dd and no div elements inside the list
+AssertionError: expected <div><dt></dt>
+<dd></dd></div> to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ src/features/deck/ResultsSummary.test.jsx:47:40
+     45|     const { container } = render(<ResultsSummary history={history} car…
+     46|     const dl = container.querySelector('dl')
+     47|     expect(dl.querySelectorAll('div')).toHaveLength(0)
+       |                                        ^
+     48|     Array.from(dl.children).forEach((child) => {
+     49|       expect(['DT', 'DD']).toContain(child.tagName)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/features/deck/ResultsSummary.test.jsx > ResultsSummary structure > uses no div elements anywhere
+AssertionError: expected <div><dt></dt>
+<dd></dd></div> to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ src/features/deck/ResultsSummary.test.jsx:55:47
+     53|   it('uses no div elements anywhere', () => {
+     54|     const { container } = render(<ResultsSummary history={history} car…
+     55|     expect(container.querySelectorAll('div')).toHaveLength(0)
+       |                                               ^
+     56|   })
+     57| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

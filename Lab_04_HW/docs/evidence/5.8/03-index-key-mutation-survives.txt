@@ -1,0 +1,15 @@
+$ npm.cmd run test:client -- src/features/deck/ResultsSummary.test.jsx
+Exit code: 0
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/ResultsSummary.test.jsx
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  17:16:48
+   Duration  2.00s (environment 67%, setup 17%, tests 10%, transform 4%, import 2%)
+

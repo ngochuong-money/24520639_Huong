@@ -165,7 +165,9 @@ Messages: `Swiped left: <name>.`, `Swiped right: <name>.`, `Undid swipe on <name
 |---|---|
 | Props | `{ history, cards, score }`: `history: SwipeEntry[]`, `cards: Card[]`, `score: number` |
 | State | none |
-| Renders | `<section aria-labelledby>` with `<dl>` of `<Fragment key={entry.cardId}><dt>{card name}</dt><dd>{direction}</dd></Fragment>` and the total score |
+| Renders | `<section aria-labelledby>` headed by `<h2>Results</h2>`, then `<dl>` with history-ordered `<Fragment key={entry.cardId}>` pairs: card name / Right or Left. The final pair is Total score / score. Missing card names render Unknown card; the component has no visibility condition or state. |
+
+The owning page renders the summary only when `currentCard === null` and history is nonempty (and persistence is ready once integrated). Defaults are empty history/cards and score 0. Unknown directions defensively render Unknown; label lookup does not read inherited properties. Permanent DeckPage integration remains a separate follow-up.
 
 ## 6. Hooks and utilities
 
