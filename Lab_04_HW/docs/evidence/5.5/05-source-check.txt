@@ -1,0 +1,1 @@
+No keypress, keyCode, alert(), defaultProps, didCancel, div or useEffect in SwipeCard. Only dragX/isDragging are component state. Transition lives in CSS, including dragging and reduced-motion rules. Weak jsdom touch-action test removed; actual browser computed-style verification is required. Unused pointer helper removed.

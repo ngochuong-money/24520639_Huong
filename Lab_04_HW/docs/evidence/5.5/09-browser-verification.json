@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-20",
+  "browser": "157.0.8103.80",
+  "mount": "Temporary isolated consumer of the actual SwipeCard; production DeckPage unchanged",
+  "mouse": {
+    "right": true,
+    "left": true,
+    "shortDragSnapsBack": true,
+    "releaseOutsideWithCapture": true
+  },
+  "computed": {
+    "touchAction": "pan-y",
+    "position": "relative",
+    "aspectRatio": "3 / 4",
+    "inlineTransition": ""
+  },
+  "reducedMotion": {
+    "transitionProperty": "none",
+    "duration": "0s"
+  },
+  "touch": {
+    "method": "Trusted Chrome CDP touch input in a mobile context, not a physical phone",
+    "horizontalCalls": [
+      "right"
+    ],
+    "horizontalScroll": {
+      "x": 0,
+      "y": 0
+    },
+    "verticalCalls": [],
+    "verticalScroll": 145
+  },
+  "consoleErrors": []
+}

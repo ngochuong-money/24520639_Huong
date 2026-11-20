@@ -1,0 +1,45 @@
+$ npm.cmd run test:client -- src/features/deck/SwipeCard.test.jsx
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/SwipeCard.test.jsx
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/SwipeCard.test.jsx (16 tests | 1 failed) 266ms
+   ❯ SwipeCard drag and release (8)
+     × does not swipe for a drag shorter than the threshold and snaps back 17ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  16:27:40
+   Duration  2.11s (environment 64%, setup 15%, tests 14%, transform 4%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/SwipeCard.test.jsx > SwipeCard drag and release > does not swipe for a drag shorter than the threshold and snaps back
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "right",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/features/deck/SwipeCard.test.jsx:73:25
+     71|     firePointer(article, 'pointermove', 250)
+     72|     firePointer(article, 'pointerup', 250)
+     73|     expect(onSwipe).not.toHaveBeenCalled()
+       |                         ^
+     74|     expect(article.style.transform).toBe('translateX(0px)')
+     75|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

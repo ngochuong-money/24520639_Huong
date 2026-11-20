@@ -1,0 +1,44 @@
+.deck-card {
+  touch-action: pan-y;
+  cursor: grab;
+  will-change: transform;
+  transition: transform 180ms ease-out;
+}
+
+.deck-card:active {
+  cursor: grabbing;
+}
+
+.deck-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deck-card-text {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgb(0 0 0 / 0.75));
+  color: #fff;
+}
+
+.deck-card-text h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.deck-card-text p {
+  margin: 0.25rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-card {
+    transition: none !important;
+  }
+}
+
+.deck-card[data-dragging="true"] {
+  transition: none;
+}
