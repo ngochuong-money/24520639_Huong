@@ -155,3 +155,11 @@ describe('SwipeCard contract boundaries', () => {
     expect(article.style.transition).toBe('')
   })
 })
+
+it('prioritizes the active decorative card image without repeating the accessible name', () => {
+  renderCard()
+  const image = screen.getByRole('article').querySelector('img')
+  expect(image).toHaveAttribute('alt', '')
+  expect(image).toHaveAttribute('loading', 'eager')
+  expect(image).toHaveAttribute('fetchpriority', 'high')
+})

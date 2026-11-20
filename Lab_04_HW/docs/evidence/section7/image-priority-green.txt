@@ -1,0 +1,10 @@
+Command: npm.cmd exec vitest run src/features/gallery/PhotoGrid.test.jsx src/features/deck/SwipeCard.test.jsx
+Exit: 0
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  2 passed (2)
+      Tests  27 passed (27)
+   Start at  00:04:27
+   Duration  2.12s (environment 64%, setup 17%, tests 13%, transform 4%, import 2%, worker 1%)

@@ -54,7 +54,7 @@ export default function SwipeCard({ card, onSwipe, disabled = false }) {
       onPointerUp={(event) => finish(event, true)}
       onPointerCancel={(event) => finish(event, false)}
     >
-      <img src={card.imageUrl} alt="" width="600" height="800" decoding="async" draggable={false} />
+      <img src={card.imageUrl} alt="" width="600" height="800" loading="eager" fetchPriority="high" decoding="async" draggable={false} />
       <section className="deck-card-text">
         <h2 id={headingId}>{card.name}</h2>
         <p>{card.bio}</p>

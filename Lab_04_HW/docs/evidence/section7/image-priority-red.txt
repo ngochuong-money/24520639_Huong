@@ -1,0 +1,53 @@
+Command: npm.cmd exec vitest run src/features/gallery/PhotoGrid.test.jsx src/features/deck/SwipeCard.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/gallery/PhotoGrid.test.jsx (10 tests | 1 failed) 225ms
+   ❯ PhotoGrid images (2)
+     × gives images intrinsic sizes and prioritizes the first image while lazy-loading the rest 22ms
+ ❯ src/features/deck/SwipeCard.test.jsx (17 tests | 1 failed) 261ms
+   × prioritizes the active decorative card image without repeating the accessible name 13ms
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 25 passed (27)
+   Start at  00:04:22
+   Duration  3.77s (environment 67%, setup 21%, tests 7%, transform 3%, import 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/gallery/PhotoGrid.test.jsx > PhotoGrid images > gives images intrinsic sizes and prioritizes the first image while lazy-loading the rest
+Error: expect(element).toHaveAttribute("loading", "eager") // element.getAttribute("loading") === "eager"
+
+Expected the element to have attribute:
+  loading="eager"
+Received:
+  loading="lazy"
+ ❯ src/features/gallery/PhotoGrid.test.jsx:56:19
+     54|       expect(img).toHaveAttribute('width', '1200')
+     55|       expect(img).toHaveAttribute('height', '800')
+     56|       expect(img).toHaveAttribute('loading', index === 0 ? 'eager' : '…
+       |                   ^
+     57|       if (index === 0) expect(img).toHaveAttribute('fetchpriority', 'h…
+     58|       expect(img).toHaveAttribute('decoding', 'async')
+ ❯ src/features/gallery/PhotoGrid.test.jsx:52:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/features/deck/SwipeCard.test.jsx > prioritizes the active decorative card image without repeating the accessible name
+Error: expect(element).toHaveAttribute("loading", "eager") // element.getAttribute("loading") === "eager"
+
+Expected the element to have attribute:
+  loading="eager"
+Received:
+  null
+ ❯ src/features/deck/SwipeCard.test.jsx:163:17
+    161|   const image = screen.getByRole('article').querySelector('img')
+    162|   expect(image).toHaveAttribute('alt', '')
+    163|   expect(image).toHaveAttribute('loading', 'eager')
+       |                 ^
+    164|   expect(image).toHaveAttribute('fetchpriority', 'high')
+    165| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯

@@ -3,7 +3,7 @@ import './PhotoGrid.css'
 export default function PhotoGrid({ photos = [], onOpen }) {
   return (
     <ul className="photo-grid">
-      {photos.map((photo) => (
+      {photos.map((photo, index) => (
         <li key={photo.id} className="photo-tile">
           <figure className="photo-tile-figure">
             <button
@@ -18,7 +18,8 @@ export default function PhotoGrid({ photos = [], onOpen }) {
                   alt={photo.alt}
                   width={photo.width}
                   height={photo.height}
-                  loading="lazy"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={index === 0 ? 'high' : undefined}
                   decoding="async"
                 />
               </span>

@@ -45,7 +45,7 @@ describe('PhotoGrid structure', () => {
 })
 
 describe('PhotoGrid images', () => {
-  it('gives each image its alt text, intrinsic size and lazy loading', () => {
+  it('gives images intrinsic sizes and prioritizes the first image while lazy-loading the rest', () => {
     renderGrid()
     const images = screen.getAllByRole('img')
     expect(images).toHaveLength(PHOTOS.length)
@@ -53,7 +53,8 @@ describe('PhotoGrid images', () => {
       expect(img).toHaveAttribute('alt', PHOTOS[index].alt)
       expect(img).toHaveAttribute('width', '1200')
       expect(img).toHaveAttribute('height', '800')
-      expect(img).toHaveAttribute('loading', 'lazy')
+      expect(img).toHaveAttribute('loading', index === 0 ? 'eager' : 'lazy')
+      if (index === 0) expect(img).toHaveAttribute('fetchpriority', 'high')
       expect(img).toHaveAttribute('decoding', 'async')
       expect(img).toHaveAttribute('src', PHOTOS[index].src)
     })

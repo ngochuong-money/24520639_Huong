@@ -20,7 +20,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 4. Gallery | 8 / 8 |
 | 5. Swipe Deck | 9 / 9 |
 | 6. Persistence Integration | 4 / 4 |
-| 7. Accessibility & Performance | 1 / 6 |
+| 7. Accessibility & Performance | 2 / 6 |
 | 8. Verification | 0 / 6 |
 | 9. Documentation & Git | 0 / 3 |
 
@@ -164,7 +164,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 - [ ] **7.1** Semantic HTML audit: landmarks, logical headings, zero div-soup, Fragments instead of extra wrappers — commit `fix: semantic html audit`
 - [x] **7.2** Visible focus, tab order, WCAG 2.2 AA contrast, minimum target size — commit `fix: focus and contrast`
-- [ ] **7.3** Images: meaningful `alt`, `width`/`height`, `loading="lazy"` (except LCP image), right-sized assets — commit `perf: image optimization`
+- [x] **7.3** Images: meaningful `alt`, `width`/`height`, `loading="lazy"` (except LCP image), right-sized assets — commit `perf: image optimization`
 - [ ] **7.4** Responsive 375–1440px, no unintended horizontal scroll — commit `fix: responsive layout`
 - [ ] **7.5** Lighthouse Accessibility, Best Practices, Performance all 100/100 on production build — commit `perf: lighthouse fixes`
 - [ ] **7.6** Validate rendered HTML with W3C Nu HTML Checker — commit `fix: html validation`

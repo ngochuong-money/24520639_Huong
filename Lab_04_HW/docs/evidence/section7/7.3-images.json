@@ -1,0 +1,138 @@
+{
+  "images": [
+    {
+      "src": "/images/photos/evidence-01.svg",
+      "alt": "Placeholder image for evidence 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "eager",
+      "fetchPriority": "high",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-01.svg",
+      "alt": "Placeholder image for scene 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-01.svg",
+      "alt": "Placeholder image for document 01",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-02.svg",
+      "alt": "Placeholder image for evidence 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-02.svg",
+      "alt": "Placeholder image for scene 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-02.svg",
+      "alt": "Placeholder image for document 02",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-03.svg",
+      "alt": "Placeholder image for evidence 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-03.svg",
+      "alt": "Placeholder image for scene 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-03.svg",
+      "alt": "Placeholder image for document 03",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/evidence-04.svg",
+      "alt": "Placeholder image for evidence 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/scenes-04.svg",
+      "alt": "Placeholder image for scene 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/photos/documents-04.svg",
+      "alt": "Placeholder image for document 04",
+      "width": "1200",
+      "height": "800",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "naturalWidth": 1200,
+      "displayWidth": 270
+    },
+    {
+      "src": "/images/cards/card-01.svg",
+      "alt": "",
+      "width": "600",
+      "height": "800",
+      "loading": "eager",
+      "fetchPriority": "high",
+      "naturalWidth": 600,
+      "displayWidth": 352
+    }
+  ],
+  "completion": {
+    "min": 560,
+    "max": 568
+  }
+}
