@@ -86,3 +86,13 @@ Additional workflow corrections: the first API contract included unrequested det
 - Verification: npm.cmd test (client, server unit and real MongoDB API suites), lint and build all exited 0. The API suite passed 93/93. The purity scan found no import, useState/useEffect or mutating array methods; manually inspected spread, slice, reduce and empty-stack reference behaviour.
 - Evidence: docs/evidence/5.1 contains the command logs and screenshots rendered from those captured outputs; these are explicitly labelled output renders, not screenshots of a native terminal window. No browser UI check is required for these pure modules.
 - WBS decision: tests are included in task 5.1's commit; 5.2 is labelled merged into 5.1 without a separate test commit. Section 5 progress is 1 / 9.
+
+### Task 5.3 — Swipe reducer and derived hook (2026-11-20)
+
+- Contract: docs/INTERFACES.md section 6. State holds only cards/history; hydrate replaces them, swipe records the first unswiped card, undo uses the pure stack pop. Exhausted deck, empty undo, unknown action/direction return the same state reference.
+- Fail Test: wrote the two supplied test files before swipeReducer.js/useSwipeDeck.js existed. test:client failed on the missing imports; the command log is retained.
+- Implement: reducer uses shared isValidDirection and undoStack push/pop. Hook uses useReducer, stable useCallback actions and useMemo for queue/currentCard/remaining/score/canUndo; score imports directly from calculateScore.js. Removed the unnecessary scorer import/export from the supplied reducer, as requested. No useEffect/useState, API calls or DeckPage wiring were added.
+- Mutation: temporarily replaced pure push with state.history.push plus the original history reference. Reducer tests failed, including the unchanged-state snapshot assertion. Restored the original source in finally, then all client tests passed again.
+- Verification: npm.cmd test passed the client/server-unit/API suites (277/134/93 tests respectively); lint and build exited 0. The requested forbidden-pattern scan was empty and the reducer/hook were manually inspected.
+- Evidence: docs/evidence/5.3 contains original output and labelled PNG renders of that output (not native terminal captures). No browser UI verification is claimed because the hook is not connected to DeckPage yet.
+- WBS: only task 5.3 C/T/I/R is newly completed; section 5 progress is 3 / 9. Task 5.4 remains separate despite score already being exposed as derived data.

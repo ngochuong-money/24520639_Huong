@@ -1,0 +1,37 @@
+$ npm.cmd run test:client -- src/features/deck/swipeReducer.test.js
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/swipeReducer.test.js
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/swipeReducer.test.js (10 tests | 1 failed) 22ms
+   ❯ swipe (5)
+     × never mutates the previous state 10ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 9 passed (10)
+   Start at  16:03:59
+   Duration  1.91s (environment 72%, setup 20%, transform 4%, import 2%, tests 1%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/swipeReducer.test.js > swipe > never mutates the previous state
+AssertionError: expected '{"cards":[{"id":"a","name":"A"},{"id"…' to be '{"cards":[{"id":"a","name":"A"},{"id"…' // Object.is equality
+
+Expected: "{"cards":[{"id":"a","name":"A"},{"id":"b","name":"B"},{"id":"c","name":"C"}],"history":[{"cardId":"a","direction":"left"}]}"
+Received: "{"cards":[{"id":"a","name":"A"},{"id":"b","name":"B"},{"id":"c","name":"C"}],"history":[{"cardId":"a","direction":"left"},{"cardId":"b","direction":"right"}]}"
+
+ ❯ src/features/deck/swipeReducer.test.js:54:35
+     52|     const snapshot = JSON.stringify(state)
+     53|     swipeReducer(state, { type: 'swipe', direction: 'right' })
+     54|     expect(JSON.stringify(state)).toBe(snapshot)
+       |                                   ^
+     55|   })
+     56| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

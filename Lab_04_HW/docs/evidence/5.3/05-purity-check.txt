@@ -1,0 +1,1 @@
+No useEffect, useState, mutating .push/.splice, or defaultProps. Reducer imports pure undoStack push/pop and shared isValidDirection. Hook uses useReducer and derives queue/currentCard/remaining/score/canUndo in useMemo; callbacks only dispatch. No API calls.
