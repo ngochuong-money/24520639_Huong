@@ -1,0 +1,264 @@
+{
+  "focus": [
+    {
+      "tag": "A",
+      "text": "Skip to main content",
+      "outline": "rgb(232, 236, 245) solid 3px",
+      "width": 188.9375,
+      "height": 48
+    },
+    {
+      "tag": "A",
+      "text": "Gallery",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 87.359375,
+      "height": 44
+    },
+    {
+      "tag": "A",
+      "text": "Deck",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 68.9375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "All",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 54.34375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Documents",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 114.453125,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Evidence",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 96.234375,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Scenes",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 82.46875,
+      "height": 44
+    },
+    {
+      "tag": "BUTTON",
+      "text": "Placeholder image for evidence 01",
+      "outline": "rgb(94, 234, 212) solid 3px",
+      "width": 272,
+      "height": 182
+    }
+  ],
+  "contrast": [
+    {
+      "name": "Text on page",
+      "foreground": "#e8ecf5",
+      "background": "#0b1020",
+      "ratio": 16.000551562477032
+    },
+    {
+      "name": "Text on surface",
+      "foreground": "#e8ecf5",
+      "background": "#141b2f",
+      "ratio": 14.457774862199143
+    },
+    {
+      "name": "Accent focus on page",
+      "foreground": "#5eead4",
+      "background": "#0b1020",
+      "ratio": 12.798162258976799
+    },
+    {
+      "name": "Pressed control text",
+      "foreground": "#0b1020",
+      "background": "#5eead4",
+      "ratio": 12.798162258976799
+    }
+  ],
+  "accessibility": {
+    "gallery": {
+      "violations": [],
+      "incomplete": [],
+      "targets": [
+        {
+          "text": "Skip to main content",
+          "width": 188.9375,
+          "height": 48
+        },
+        {
+          "text": "Gallery",
+          "width": 87.359375,
+          "height": 44
+        },
+        {
+          "text": "Deck",
+          "width": 68.9375,
+          "height": 44
+        },
+        {
+          "text": "All",
+          "width": 54.34375,
+          "height": 44
+        },
+        {
+          "text": "Documents",
+          "width": 114.453125,
+          "height": 44
+        },
+        {
+          "text": "Evidence",
+          "width": 96.234375,
+          "height": 44
+        },
+        {
+          "text": "Scenes",
+          "width": 82.46875,
+          "height": 44
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        },
+        {
+          "text": "",
+          "width": 272,
+          "height": 182
+        }
+      ]
+    },
+    "deck": {
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds"
+        }
+      ],
+      "targets": [
+        {
+          "text": "Skip to main content",
+          "width": 188.9375,
+          "height": 48
+        },
+        {
+          "text": "Gallery",
+          "width": 82.546875,
+          "height": 44
+        },
+        {
+          "text": "Deck",
+          "width": 71.078125,
+          "height": 44
+        },
+        {
+          "text": "Swipe left",
+          "width": 112,
+          "height": 44
+        },
+        {
+          "text": "Swipe right",
+          "width": 112,
+          "height": 44
+        }
+      ]
+    },
+    "lightbox": []
+  },
+  "additionalKeyboard": {
+    "skipLinkMainFocused": true,
+    "deckTabOrder": [
+      {
+        "text": "Skip to main content",
+        "outline": "rgb(232, 236, 245) solid 3px"
+      },
+      {
+        "text": "Gallery",
+        "outline": "rgb(94, 234, 212) solid 3px"
+      },
+      {
+        "text": "Deck",
+        "outline": "rgb(94, 234, 212) solid 3px"
+      },
+      {
+        "text": "Swipe left",
+        "outline": "rgb(94, 234, 212) solid 3px"
+      },
+      {
+        "text": "Swipe right",
+        "outline": "rgb(94, 234, 212) solid 3px"
+      }
+    ],
+    "lightboxTargets": [
+      {
+        "text": "Close",
+        "width": 303.328125,
+        "height": 44
+      },
+      {
+        "text": "Next",
+        "width": 303.34375,
+        "height": 44
+      }
+    ]
+  },
+  "limitations": "Axe and focused manual checks are not a blanket WCAG conformance certification."
+}

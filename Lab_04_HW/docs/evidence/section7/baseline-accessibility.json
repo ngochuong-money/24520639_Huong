@@ -1,0 +1,141 @@
+{
+  "gallery": {
+    "violations": [],
+    "targets": [
+      {
+        "text": "Skip to main content",
+        "width": 188.9375,
+        "height": 48
+      },
+      {
+        "text": "Gallery",
+        "width": 87.359375,
+        "height": 44
+      },
+      {
+        "text": "Deck",
+        "width": 68.9375,
+        "height": 44
+      },
+      {
+        "text": "All",
+        "width": 54.34375,
+        "height": 44
+      },
+      {
+        "text": "Documents",
+        "width": 114.453125,
+        "height": 44
+      },
+      {
+        "text": "Evidence",
+        "width": 96.234375,
+        "height": 44
+      },
+      {
+        "text": "Scenes",
+        "width": 82.46875,
+        "height": 44
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      },
+      {
+        "text": "",
+        "width": 272,
+        "height": 182
+      }
+    ],
+    "firstFocus": {
+      "text": "Skip to main content",
+      "outline": "rgb(232, 236, 245) solid 3px"
+    }
+  },
+  "deck": {
+    "violations": [],
+    "targets": [
+      {
+        "text": "Skip to main content",
+        "width": 188.9375,
+        "height": 48
+      },
+      {
+        "text": "Gallery",
+        "width": 82.546875,
+        "height": 44
+      },
+      {
+        "text": "Deck",
+        "width": 71.078125,
+        "height": 44
+      },
+      {
+        "text": "Swipe left",
+        "width": 112,
+        "height": 44
+      },
+      {
+        "text": "Swipe right",
+        "width": 112,
+        "height": 44
+      }
+    ],
+    "firstFocus": {
+      "text": "Skip to main content",
+      "outline": "rgb(232, 236, 245) solid 3px"
+    }
+  },
+  "lightbox": []
+}
