@@ -1,0 +1,19 @@
+$ npm.cmd run test:client
+Exit code: 0
+
+> lab-04-hw@0.0.0 test:client
+> vitest run
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  17 passed (17)
+      Tests  281 passed (281)
+   Start at  16:12:44
+   Duration  6.81s (environment 66%, setup 16%, tests 15%, import 2%, transform 1%, worker 1%)
+
+Environment  jsdom was created 17 times · 44.34s total, 66% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+

@@ -1,0 +1,1 @@
+No useEffect/useLayoutEffect/useState in useSwipeDeck.js or swipeReducer.js. Reducer contains no score property. Hook has exactly one score property, computed with calculateScore(state.history) inside useMemo. Importing calculateScore is not storing score in state. Production sources match their pre-task contents.

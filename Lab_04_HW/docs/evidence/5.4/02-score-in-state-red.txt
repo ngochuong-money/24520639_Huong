@@ -1,0 +1,40 @@
+$ npm.cmd run test:client -- src/features/deck/swipeReducer.test.js
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/swipeReducer.test.js
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/swipeReducer.test.js (11 tests | 1 failed) 23ms
+   ❯ derived score state invariant (5.4) (1)
+     × the reducer state does not store a score 9ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 passed (11)
+   Start at  16:12:52
+   Duration  1.85s (environment 74%, setup 18%, transform 4%, import 2%, tests 1%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/swipeReducer.test.js > derived score state invariant (5.4) > the reducer state does not store a score
+AssertionError: expected { …(3) } to not have property "score"
+
+- Expected:
+undefined
+
++ Received:
+10
+
+ ❯ src/features/deck/swipeReducer.test.js:91:23
+     89|   it('the reducer state does not store a score', () => {
+     90|     const state = swipeReducer(hydrated(), { type: 'swipe', direction:…
+     91|     expect(state).not.toHaveProperty('score')
+       |                       ^
+     92|   })
+     93| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

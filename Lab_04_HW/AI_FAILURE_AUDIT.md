@@ -96,3 +96,14 @@ Additional workflow corrections: the first API contract included unrequested det
 - Verification: npm.cmd test passed the client/server-unit/API suites (277/134/93 tests respectively); lint and build exited 0. The requested forbidden-pattern scan was empty and the reducer/hook were manually inspected.
 - Evidence: docs/evidence/5.3 contains original output and labelled PNG renders of that output (not native terminal captures). No browser UI verification is claimed because the hook is not connected to DeckPage yet.
 - WBS: only task 5.3 C/T/I/R is newly completed; section 5 progress is 3 / 9. Task 5.4 remains separate despite score already being exposed as derived data.
+
+### Task 5.4 — Derived score regression tests (2026-11-20)
+
+- No production implementation was needed: task 5.3 already calculates score from history in useMemo. The new tests therefore passed immediately; no missing-feature red phase is claimed.
+- Added the supplied equality and spy tests, with a positive spy-call assertion so a disconnected spy cannot produce a false green. The installed Vitest captured calls through the existing named import; no namespace production rewrite or dependency injection was needed. Equality was also checked after hydrating an exhausted deck and undoing afterward.
+- Added a reducer assertion that state does not contain score. Mutation: temporarily imported calculateScore into swipeReducer and added score to the swipe state. This assertion failed, proving the architectural regression is detected even if visible score results could remain correct. Restored the original source in finally and passed the full client suite again.
+- Verification: complete npm.cmd test passed client/server-unit/API suites (281/134/93 respectively), lint and build passed. Source scan found no useEffect/useLayoutEffect/useState; score is absent from reducer state and appears once as a derived return property inside hook useMemo. Production files match their original contents.
+- Evidence: docs/evidence/5.4 includes command output and labelled PNG renders of the captured logs, not native terminal-window screenshots. No browser UI check was required or performed.
+- Commit name is intentionally test: derived score, rather than feat:, because this task adds only tests and documentation. WBS 5.4 C/T/I/R completed; I was already implemented in 5.3; section 5 progress is 4 / 9.
+
+- Retained the first post-restore client failure: the existing Gallery deep-link dialog-open assertion was flaky again. The unchanged working tree passed on retry and in the complete test run; no Gallery code was modified. See 03-restored-green.txt and 03-restored-green-retry.txt.

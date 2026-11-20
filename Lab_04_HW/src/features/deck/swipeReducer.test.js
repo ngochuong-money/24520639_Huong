@@ -84,3 +84,10 @@ describe('unknown action', () => {
     expect(swipeReducer(state, { type: 'nope' })).toBe(state)
   })
 })
+
+describe('derived score state invariant (5.4)', () => {
+  it('the reducer state does not store a score', () => {
+    const state = swipeReducer(hydrated(), { type: 'swipe', direction: 'right' })
+    expect(state).not.toHaveProperty('score')
+  })
+})

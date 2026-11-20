@@ -18,7 +18,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 3 / 9 |
+| 5. Swipe Deck | 4 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
@@ -133,8 +133,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.3** Hook `useSwipeDeck` with `useReducer`: queue + history stack, immutable updates — commit `feat: swipe deck reducer`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **5.4** Score computed during render (or `useMemo`) from history; never sync derived state with `useEffect` — commit `feat: derived score`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **5.4** Score computed during render (or `useMemo`) from history; never sync derived state with `useEffect` — commit `test: derived score` (no production change; implemented in 5.3)
+  - [x] C  [x] T  [x] I (already in 5.3)  [x] R
 - [ ] **5.5** `SwipeCard` with Pointer Events (`onPointerDown/Move/Up/Cancel`, `setPointerCapture`, drag threshold, `touch-action`) — commit `feat: pointer swipe`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **5.6** Keyboard: `keydown` + `event.key` (ArrowLeft / ArrowRight swipe, `Z` / Backspace undo); equivalent `type="button"` controls; pointer and keyboard dispatch the same reducer action — commit `feat: keyboard swipe`

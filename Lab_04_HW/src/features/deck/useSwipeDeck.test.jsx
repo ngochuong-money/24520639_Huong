@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import * as scoreModule from './calculateScore.js'
 import { useSwipeDeck } from './useSwipeDeck.js'
 
 const cards = [
@@ -97,5 +98,58 @@ describe('useSwipeDeck actions', () => {
     const first = result.current.swipe
     rerender()
     expect(result.current.swipe).toBe(first)
+  })
+})
+
+
+describe('derived score (5.4)', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('equals calculateScore(history) after every kind of change', () => {
+    const { result } = setup()
+    const check = () => expect(result.current.score).toBe(scoreModule.calculateScore(result.current.history))
+
+    check()
+    act(() => result.current.swipe('right'))
+    check()
+    act(() => result.current.swipe('left'))
+    check()
+    act(() => result.current.undo())
+    check()
+    act(() => result.current.undo())
+    check()
+    act(() => result.current.hydrate(cards, [{ cardId: 'b', direction: 'right' }]))
+    check()
+    act(() => result.current.hydrate(cards, cards.map((card) => ({ cardId: card.id, direction: 'left' }))))
+    check()
+    expect(result.current.remaining).toBe(0)
+    act(() => result.current.undo())
+    check()
+  })
+
+  it('does not recompute the score when only an unrelated value changes', () => {
+    const spy = vi.spyOn(scoreModule, 'calculateScore')
+    const { result } = setup([{ cardId: 'a', direction: 'right' }])
+    expect(spy).toHaveBeenCalled()
+    const callsAfterSetup = spy.mock.calls.length
+
+    // hydrate with the same history reference keeps state.history identical
+    // only if the reducer returns the same state; re-dispatching an invalid
+    // direction is a no-op that must not trigger a recalculation.
+    act(() => result.current.swipe('sideways'))
+
+    expect(spy.mock.calls.length).toBe(callsAfterSetup)
+  })
+
+  it('recomputes exactly when history changes', () => {
+    const spy = vi.spyOn(scoreModule, 'calculateScore')
+    const { result } = setup()
+    const before = spy.mock.calls.length
+
+    act(() => result.current.swipe('right'))
+
+    expect(spy.mock.calls.length).toBeGreaterThan(before)
   })
 })
