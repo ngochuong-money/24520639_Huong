@@ -1,0 +1,57 @@
+Command: npm.cmd exec vitest run src/features/deck/useSwipePersistence.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/useSwipePersistence.test.jsx (18 tests | 2 failed) 1291ms
+   ❯ loading (4)
+     × aborts in-flight loads on unmount and reports no error 13ms
+   ❯ request ordering and cancellation (6)
+     × aborts an in-flight write on unmount without leaking a rejection 78ms
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 16 passed (18)
+   Start at  19:20:12
+   Duration  3.14s (tests 45%, environment 40%, setup 10%, transform 3%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/useSwipePersistence.test.jsx > loading > aborts in-flight loads on unmount and reports no error
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/features/deck/useSwipePersistence.test.jsx:77:28
+     75|     hook.unmount()
+     76|
+     77|     expect(signal.aborted).toBe(true)
+       |                            ^
+     78|   })
+     79|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/features/deck/useSwipePersistence.test.jsx > request ordering and cancellation > aborts an in-flight write on unmount without leaking a rejection
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/features/deck/useSwipePersistence.test.jsx:248:28
+    246|     const { signal } = apiMock.createSwipe.mock.calls[0][1]
+    247|     hook.unmount()
+    248|     expect(signal.aborted).toBe(true)
+       |                            ^
+    249|     await act(async () => { await expect(saving).resolves.toBeUndefine…
+    250|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+

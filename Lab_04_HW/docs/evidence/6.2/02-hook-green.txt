@@ -1,0 +1,11 @@
+Command: npm.cmd exec vitest run src/features/deck/useSwipePersistence.test.jsx
+Exit: 0
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  1 passed (1)
+      Tests  18 passed (18)
+   Start at  19:20:07
+   Duration  3.15s (tests 44%, environment 40%, setup 10%, transform 4%, import 2%)
+
