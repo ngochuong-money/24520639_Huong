@@ -157,3 +157,12 @@ Additional workflow corrections: the first API contract included unrequested det
 - Accessibility.getFullAXTree exposed one DescriptionList with four terms and four definitions. The rendered dl had exactly eight direct DT/DD children and no div. At 375px the document width was 375px. Console had no key or other warnings/errors. AX structure is not a screen-reader speech test; NVDA/VoiceOver remains unverified.
 - Evidence: docs/evidence/5.8 contains real browser screenshots/report/AX roles and original command logs, plus labelled PNG renders of logs (not native terminal-window screenshots). The temporary HTML/JSX/Vite process were cleaned up; scripts, tool/cache/profile remained on D:/CodexTemp. Production DeckPage was not modified.
 - WBS 5.8 C/T/I/R completed, section 5 progress 8 / 9. No changes to 5.9 or persistence tasks.
+
+### Task 5.9 — Integrated deck behavior (2026-11-20)
+
+- Test-only task: used the supplied 12 integration cases and added one real SwipeCard/buttons/keyboard parity case to meet the pointer requirement missing from the sample. No production change. Hooks, reducer, controls and status are real; only unavailable jsdom pointer-capture methods are platform stubs. Every state-changing event uses act; no timers or sleeps.
+- Initial run: all 13 tests green against existing implementation; no new integration defect discovered. This is integration verification, not a claim of test-first implementation of existing production code.
+- Mutation 1 removed the editable-target guard: typing in a text field test failed (left replaced right). Mutation 2 removed undo setMessage: undo after finishing test failed with stale swipe message. Each production file was restored in finally; all 13 tests green afterward and git diff confirms no production changes.
+- Full verification: client 364, server-unit 134, actual MongoDB API 93 tests passed; lint and production build passed. Forbidden timer scan empty. No unrelated Gallery failure occurred in this run.
+- Evidence: docs/evidence/5.9 contains original command logs and clearly labelled PNG renders of captured output, not native terminal screenshots. Temporary scripts and browser runtime use D:/CodexTemp.
+- WBS 5.9 C/T/I/R completed, progress 9 / 9. Section 5 browser acceptance remains open: permanent DeckPage wiring is a separate follow-up before section 6, including mouse/keyboard/buttons Results parity, repeated Undo, and F5 reset. No browser or screen-reader acceptance claimed for the placeholder production page.

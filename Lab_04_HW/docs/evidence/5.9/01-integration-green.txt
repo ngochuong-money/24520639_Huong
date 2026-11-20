@@ -1,0 +1,11 @@
+Command: npm.cmd exec vitest run src/features/deck/deckBehavior.test.jsx
+Exit: 0
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Start at  17:40:03
+   Duration  2.19s (environment 62%, setup 15%, tests 14%, transform 6%, import 2%)
+

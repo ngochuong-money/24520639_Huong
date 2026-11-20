@@ -18,7 +18,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 8 / 9 |
+| 5. Swipe Deck | 9 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
@@ -143,7 +143,9 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.8** End-of-deck results summary using `<dl>` with keyed `<Fragment>` groups — commit `feat: results summary`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **5.9** Tests for reducer and interactions: swipe, multiple undos, keyboard — commit `test: swipe deck behavior`
+- [x] **5.9** Tests for reducer and interactions: swipe, multiple undos, keyboard — commit `test: swipe deck behavior`
+  - [x] C  [x] T  [x] I  [x] R — no production change; integration tests and mutation verification.
+  - Section 5 browser acceptance remains open until permanent DeckPage wiring: verify mouse/keyboard/buttons, Results, repeated Undo and F5 reset before closing section 5.
 
 ## 6. Persistence Integration (separate commits for API / hook / tests)
 

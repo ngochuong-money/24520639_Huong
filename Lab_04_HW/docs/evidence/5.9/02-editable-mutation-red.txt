@@ -1,0 +1,41 @@
+Command: npm.cmd exec vitest run src/features/deck/deckBehavior.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/deckBehavior.test.jsx (13 tests | 1 failed) 276ms
+   ❯ keyboard parity (keyboard) (4)
+     × typing in a text field does not swipe or undo the deck 69ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  17:40:26
+   Duration  2.11s (environment 64%, setup 16%, tests 15%, transform 3%, import 1%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/deckBehavior.test.jsx > keyboard parity (keyboard) > typing in a text field does not swipe or undo the deck
+AssertionError: expected [ { cardId: 'a', direction: 'left' } ] to deeply equal [ { cardId: 'a', direction: 'right' } ]
+
+- Expected
++ Received
+
+  [
+    {
+      "cardId": "a",
+-     "direction": "right",
++     "direction": "left",
+    },
+  ]
+
+ ❯ src/features/deck/deckBehavior.test.jsx:150:36
+    148|     })
+    149|
+    150|     expect(result.current.history).toEqual([{ cardId: 'a', direction: …
+       |                                    ^
+    151|   })
+    152|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

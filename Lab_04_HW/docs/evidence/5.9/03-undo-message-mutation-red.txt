@@ -1,0 +1,33 @@
+Command: npm.cmd exec vitest run src/features/deck/deckBehavior.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/deckBehavior.test.jsx (13 tests | 1 failed) 270ms
+   ❯ multiple undos (undo) (4)
+     × undo after finishing the deck brings back the last card and clears the finished message 14ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  17:40:30
+   Duration  2.14s (environment 63%, setup 15%, tests 14%, transform 5%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/deckBehavior.test.jsx > multiple undos (undo) > undo after finishing the deck brings back the last card and clears the finished message
+AssertionError: expected 'Swiped right: Minh Anh.' to be 'Undid swipe on Thu Ha.' // Object.is equality
+
+Expected: "Undid swipe on Thu Ha."
+Received: "Swiped right: Minh Anh."
+
+ ❯ src/features/deck/deckBehavior.test.jsx:108:36
+    106|     act(() => result.current.undo())
+    107|     expect(result.current.currentCard.id).toBe('c')
+    108|     expect(result.current.message).toBe('Undid swipe on Thu Ha.')
+       |                                    ^
+    109|   })
+    110| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
