@@ -81,19 +81,21 @@ export default function Lightbox({
       onKeyDown={handleKeyDown}
     >
       {photo && (
-        <figure className="lightbox-figure">
-          <img
-            key={photo.id}
-            className="lightbox-image"
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            decoding="async"
-          />
-          <figcaption id={titleId} className="lightbox-caption">
-            {photo.title}
-          </figcaption>
+        <>
+          <figure className="lightbox-figure">
+            <img
+              key={photo.id}
+              className="lightbox-image"
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              decoding="async"
+            />
+            <figcaption id={titleId} className="lightbox-caption">
+              {photo.title}
+            </figcaption>
+          </figure>
           <footer className="lightbox-controls">
             <button ref={prevButtonRef} type="button" onClick={() => onPrev?.()} disabled={!hasPrev}>
               Previous
@@ -105,7 +107,7 @@ export default function Lightbox({
               Next
             </button>
           </footer>
-        </figure>
+        </>
       )}
     </dialog>
   )

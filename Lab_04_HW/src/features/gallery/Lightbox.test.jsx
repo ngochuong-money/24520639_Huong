@@ -278,3 +278,10 @@ describe('Lightbox keyboard navigation (4.6)', () => {
     expect(onNext).not.toHaveBeenCalled()
   })
 })
+
+it('keeps the footer outside the figure as required by the HTML content model', () => {
+  const { dialog } = renderLightbox({ photo: PHOTO })
+  const footer = dialog.querySelector('footer')
+  expect(footer).not.toBeNull()
+  expect(footer.closest('figure')).toBeNull()
+})

@@ -1,0 +1,72 @@
+Command: npm.cmd exec vitest run src/features/gallery/Lightbox.test.jsx
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/gallery/Lightbox.test.jsx (25 tests | 1 failed) 313ms
+   × keeps the footer outside the figure as required by the HTML content model 19ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 24 passed (25)
+   Start at  00:08:50
+   Duration  2.25s (environment 61%, tests 16%, setup 16%, transform 5%, import 2%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/gallery/Lightbox.test.jsx > keeps the footer outside the figure as required by the HTML content model
+AssertionError: expected <figure class="lightbox-figure">…(3)</figure> to be null
+
+- Expected:
+null
+
++ Received:
+<figure
+  class="lightbox-figure"
+>
+  <img
+    alt="Desk with notes"
+    class="lightbox-image"
+    decoding="async"
+    height="800"
+    src="/images/photos/evidence-01.svg"
+    width="1200"
+  />
+  <figcaption
+    class="lightbox-caption"
+    id="_r_o_"
+  >
+    Evidence 01
+  </figcaption>
+  <footer
+    class="lightbox-controls"
+  >
+    <button
+      disabled=""
+      type="button"
+    >
+      Previous
+    </button>
+    <button
+      type="button"
+    >
+      Close
+    </button>
+    <button
+      disabled=""
+      type="button"
+    >
+      Next
+    </button>
+  </footer>
+</figure>
+
+ ❯ src/features/gallery/Lightbox.test.jsx:286:36
+    284|   const footer = dialog.querySelector('footer')
+    285|   expect(footer).not.toBeNull()
+    286|   expect(footer.closest('figure')).toBeNull()
+       |                                    ^
+    287| })
+    288|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
