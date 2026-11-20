@@ -18,7 +18,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 5 / 9 |
+| 5. Swipe Deck | 6 / 9 |
 | 6. Persistence Integration | 0 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
@@ -137,8 +137,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I (already in 5.3)  [x] R
 - [x] **5.5** `SwipeCard` with Pointer Events (`onPointerDown/Move/Up/Cancel`, `setPointerCapture`, drag threshold, `touch-action`) — commit `feat: pointer swipe`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **5.6** Keyboard: `keydown` + `event.key` (ArrowLeft / ArrowRight swipe, `Z` / Backspace undo); equivalent `type="button"` controls; pointer and keyboard dispatch the same reducer action — commit `feat: keyboard swipe`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **5.6** Keyboard: `keydown` + `event.key` (ArrowLeft / ArrowRight swipe, `Z` / Backspace undo); equivalent `type="button"` controls; pointer and keyboard dispatch the same reducer action — commit `feat: keyboard swipe`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **5.7** Undo button disabled when stack is empty; results announced via `aria-live="polite"` (no `alert()`) — commit `feat: undo control`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **5.8** End-of-deck results summary using `<dl>` with keyed `<Fragment>` groups — commit `feat: results summary`

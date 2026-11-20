@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-20",
+  "browser": "157.0.8103.80",
+  "mount": "Temporary isolated consumer; production DeckPage unchanged",
+  "arrowSwipesAndUppercaseUndo": true,
+  "editableFieldsIgnored": [
+    "Note",
+    "Long note",
+    "Choice",
+    "Editable note"
+  ],
+  "autoRepeat": {
+    "historyLength": 1,
+    "keyEvents": [
+      {
+        "key": "ArrowRight",
+        "repeat": false,
+        "prevented": false,
+        "target": "BODY"
+      },
+      {
+        "key": "ArrowRight",
+        "repeat": true,
+        "prevented": false,
+        "target": "BODY"
+      },
+      {
+        "key": "ArrowRight",
+        "repeat": true,
+        "prevented": false,
+        "target": "BODY"
+      },
+      {
+        "key": "ArrowRight",
+        "repeat": true,
+        "prevented": false,
+        "target": "BODY"
+      }
+    ]
+  },
+  "tabEnterUndo": true,
+  "backspace": {
+    "urlUnchanged": true,
+    "defaultPrevented": true
+  },
+  "unifiedActions": {
+    "pointer": "right",
+    "button": "left",
+    "keyboard": "undo",
+    "finalHistory": [
+      {
+        "cardId": "a",
+        "direction": "right"
+      }
+    ],
+    "score": 10
+  },
+  "dimensions": {
+    "width": 375,
+    "content": 375
+  },
+  "controlHeight": "44px",
+  "consoleErrors": []
+}

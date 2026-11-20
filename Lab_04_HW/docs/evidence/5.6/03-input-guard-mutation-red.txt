@@ -1,0 +1,94 @@
+$ npm.cmd run test:client -- src/features/deck/useDeckKeyboard.test.jsx
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run src/features/deck/useDeckKeyboard.test.jsx
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/useDeckKeyboard.test.jsx (18 tests | 4 failed) 164ms
+   ❯ useDeckKeyboard mapping (13)
+     × does not steal keys typed into a text field 68ms
+   ❯ useDeckKeyboard input and lifecycle contract (5)
+     × does not steal keys from textarea 8ms
+     × does not steal keys from select 6ms
+     × ignores contentEditable targets 6ms
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 14 passed (18)
+   Start at  16:58:26
+   Duration  2.20s (environment 69%, setup 16%, tests 9%, transform 3%, import 2%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/useDeckKeyboard.test.jsx > useDeckKeyboard mapping > does not steal keys typed into a text field
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array []
+
+
+Number of calls: 1
+
+ ❯ src/features/deck/useDeckKeyboard.test.jsx:87:24
+     85|       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLe…
+     86|     })
+     87|     expect(onUndo).not.toHaveBeenCalled()
+       |                        ^
+     88|     expect(onSwipe).not.toHaveBeenCalled()
+     89|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/features/deck/useDeckKeyboard.test.jsx > useDeckKeyboard input and lifecycle contract > does not steal keys from textarea
+ FAIL  src/features/deck/useDeckKeyboard.test.jsx > useDeckKeyboard input and lifecycle contract > does not steal keys from select
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array [
+      "right",
+    ]
+
+
+Number of calls: 1
+
+ ❯ src/features/deck/useDeckKeyboard.test.jsx:108:25
+    106|     act(() => field.dispatchEvent(new KeyboardEvent('keydown', { key: …
+    107|     act(() => field.dispatchEvent(new KeyboardEvent('keydown', { key: …
+    108|     expect(onSwipe).not.toHaveBeenCalled()
+       |                         ^
+    109|     expect(onUndo).not.toHaveBeenCalled()
+    110|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/features/deck/useDeckKeyboard.test.jsx > useDeckKeyboard input and lifecycle contract > ignores contentEditable targets
+AssertionError: expected "vi.fn()" to not be called at all, but actually been called 1 times
+
+Received:
+
+  1st vi.fn() call:
+
+    Array []
+
+
+Number of calls: 1
+
+ ❯ src/features/deck/useDeckKeyboard.test.jsx:121:24
+    119|     const { onUndo } = setup()
+    120|     act(() => field.dispatchEvent(new KeyboardEvent('keydown', { key: …
+    121|     expect(onUndo).not.toHaveBeenCalled()
+       |                        ^
+    122|   })
+    123|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+

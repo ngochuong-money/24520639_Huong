@@ -1,0 +1,1 @@
+No keypress/keyCode/.which/defaultProps/div in hook or controls. Exactly two useEffect calls: update callbacks ref with [onSwipe,onUndo]; attach/remove window keydown with [enabled]. No ref write during render. Controls order: left, right, undo; layout owned by layout.css.

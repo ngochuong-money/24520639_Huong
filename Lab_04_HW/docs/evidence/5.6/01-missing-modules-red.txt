@@ -1,0 +1,87 @@
+$ npm.cmd run test:client
+Exit code: 1
+
+> lab-04-hw@0.0.0 test:client
+> vitest run
+
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/features/deck/useDeckKeyboard.test.jsx (0 test)
+ ❯ src/features/deck/DeckControls.test.jsx (0 test)
+ ❯ src/features/gallery/deepLink.integration.test.jsx (13 tests | 1 failed) 1367ms
+   ❯ direct link opens the right view (4)
+     × ?category=evidence&photo=<id> shows the filtered grid with the photo open 671ms
+
+ Test Files  3 failed | 17 passed (20)
+      Tests  1 failed | 296 passed (297)
+   Start at  16:58:08
+   Duration  7.61s (environment 62%, setup 17%, tests 13%, transform 5%, import 2%)
+
+Environment  jsdom was created 20 times · 51.80s total, 62% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/deck/DeckControls.test.jsx [ src/features/deck/DeckControls.test.jsx ]
+Error: Failed to resolve import "./DeckControls.jsx" from "src/features/deck/DeckControls.test.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/DeckControls.test.jsx:3:25
+  1  |  import { fireEvent, render, screen, within } from "@testing-library/react";
+  2  |  import { describe, expect, it, vi } from "vitest";
+  3  |  import DeckControls from "./DeckControls.jsx";
+     |                            ^
+  4  |  var _jsxFileName = "D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/DeckC...
+  5  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:8865:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:8862:14
+ ❯ resolveId node_modules/vite/dist/node/chunks/node.js:26552:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:26651:23
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:26624:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:8636:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20112:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/features/deck/useDeckKeyboard.test.jsx [ src/features/deck/useDeckKeyboard.test.jsx ]
+Error: Failed to resolve import "./useDeckKeyboard.js" from "src/features/deck/useDeckKeyboard.test.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW/src/features/deck/useDeckKeyboard.test.jsx:3:32
+  1  |  import { act, renderHook } from "@testing-library/react";
+  2  |  import { afterEach, describe, expect, it, vi } from "vitest";
+  3  |  import { useDeckKeyboard } from "./useDeckKeyboard.js";
+     |                                   ^
+  4  |  function setup(options = {}) {
+  5  |  	const onSwipe = vi.fn();
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/node.js:8865:39
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/node.js:8862:14
+ ❯ resolveId node_modules/vite/dist/node/chunks/node.js:26552:18
+ ❯ node_modules/vite/dist/node/chunks/node.js:26651:23
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/node.js:26624:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/node.js:8636:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/node.js:20112:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/features/gallery/deepLink.integration.test.jsx > direct link opens the right view > ?category=evidence&photo=<id> shows the filtered grid with the photo open
+Error: expect(element).toHaveAttribute("open") // element.hasAttribute("open")
+
+Expected the element to have attribute:
+  open
+Received:
+  null
+ ❯ src/features/gallery/deepLink.integration.test.jsx:51:22
+     49|     expect(within(document.querySelector('.photo-grid')).getAllByRole(…
+     50|     expect(screen.getByRole('button', { name: 'Evidence' })).toHaveAtt…
+     51|     expect(dialog()).toHaveAttribute('open')
+       |                      ^
+     52|     expect(within(dialog()).getByRole('img', { name: 'Second desk' }))…
+     53|     expect(screen.getByTestId('deep-link-location').textContent).toBe(…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+

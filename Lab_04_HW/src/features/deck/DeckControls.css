@@ -1,0 +1,19 @@
+.deck-control {
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.deck-control:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.deck-control:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
