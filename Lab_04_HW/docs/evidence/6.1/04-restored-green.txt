@@ -1,0 +1,11 @@
+Command: npm.cmd exec vitest run src/api/client.test.js
+Exit: 0
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+
+ Test Files  1 passed (1)
+      Tests  16 passed (16)
+   Start at  18:04:36
+   Duration  1.78s (environment 76%, setup 19%, tests 2%, transform 2%, import 1%, worker 1%)
+

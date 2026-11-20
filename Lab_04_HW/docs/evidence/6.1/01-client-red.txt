@@ -1,0 +1,219 @@
+Command: npm.cmd exec vitest run src/api/client.test.js
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/api/client.test.js (16 tests | 15 failed) 43ms
+   ❯ request basics (4)
+     × calls /api with the given path and passes the abort signal 15ms
+     × sends Accept: application/json 1ms
+     × appends the category query for getPhotos only when given 10ms
+     × returns parsed JSON on success 1ms
+   ❯ createSwipe (3)
+     × POSTs a JSON body with the swipe fields 1ms
+     × rejects invalid input before sending (client-side parity check) 1ms
+     × forwards the signal to fetch 1ms
+   ❯ undoLastSwipe (1)
+     × sends DELETE /api/swipes/last and returns the removed swipe 1ms
+   ❯ error mapping (6)
+     × maps the contract error shape to ApiError 1ms
+     × maps a non-JSON error body to a generic ApiError without leaking it 1ms
+     × maps a network failure to NETWORK_ERROR 1ms
+     × lets AbortError through unchanged so callers can ignore it 1ms
+     × never logs to the console 1ms
+   ❯ response parsing failures (2)
+     × preserves AbortError while reading the response body 1ms
+     × wraps malformed successful JSON without exposing the raw body 1ms
+
+ Test Files  1 failed (1)
+      Tests  15 failed | 1 passed (16)
+   Start at  18:03:32
+   Duration  2.06s (environment 73%, setup 18%, transform 4%, tests 3%, import 2%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 15 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/client.test.js > request basics > calls /api with the given path and passes the abort signal
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:26:11
+     24|     const controller = new AbortController()
+     25|
+     26|     await getCards({ signal: controller.signal })
+       |           ^
+     27|
+     28|     expect(fetchMock).toHaveBeenCalledWith(
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/15]⎯
+
+ FAIL  src/api/client.test.js > request basics > sends Accept: application/json
+TypeError: getSwipes is not a function
+ ❯ src/api/client.test.js:36:11
+     34|   it('sends Accept: application/json', async () => {
+     35|     fetchMock.mockResolvedValue(jsonResponse(200, []))
+     36|     await getSwipes()
+       |           ^
+     37|     const [, init] = fetchMock.mock.calls[0]
+     38|     expect(init.headers.Accept).toBe('application/json')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/15]⎯
+
+ FAIL  src/api/client.test.js > request basics > appends the category query for getPhotos only when given
+AssertionError: expected '/api/photos' to be '/api/photos?category=evidence' // Object.is equality
+
+Expected: "/api/photos?category=evidence"
+Received: "/api/photos"
+
+ ❯ src/api/client.test.js:46:40
+     44|     await getPhotos({ category: 'evidence' })
+     45|     expect(fetchMock.mock.calls[0][0]).toBe('/api/photos')
+     46|     expect(fetchMock.mock.calls[1][0]).toBe('/api/photos?category=evid…
+       |                                        ^
+     47|   })
+     48|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/15]⎯
+
+ FAIL  src/api/client.test.js > request basics > returns parsed JSON on success
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:51:18
+     49|   it('returns parsed JSON on success', async () => {
+     50|     fetchMock.mockResolvedValue(jsonResponse(200, [{ id: VALID_ID }]))
+     51|     await expect(getCards()).resolves.toEqual([{ id: VALID_ID }])
+       |                  ^
+     52|   })
+     53| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/15]⎯
+
+ FAIL  src/api/client.test.js > createSwipe > POSTs a JSON body with the swipe fields
+TypeError: createSwipe is not a function
+ ❯ src/api/client.test.js:58:11
+     56|   it('POSTs a JSON body with the swipe fields', async () => {
+     57|     fetchMock.mockResolvedValue(jsonResponse(201, { id: VALID_ID }))
+     58|     await createSwipe({ cardId: VALID_ID, direction: 'right' })
+       |           ^
+     59|     const [url, init] = fetchMock.mock.calls[0]
+     60|     expect(url).toBe('/api/swipes')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/15]⎯
+
+ FAIL  src/api/client.test.js > createSwipe > rejects invalid input before sending (client-side parity check)
+TypeError: createSwipe is not a function
+ ❯ src/api/client.test.js:67:18
+     65|
+     66|   it('rejects invalid input before sending (client-side parity check)'…
+     67|     await expect(createSwipe({ cardId: 'bad', direction: 'up' })).reje…
+       |                  ^
+     68|       status: 0,
+     69|       code: 'VALIDATION_ERROR',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/15]⎯
+
+ FAIL  src/api/client.test.js > createSwipe > forwards the signal to fetch
+TypeError: createSwipe is not a function
+ ❯ src/api/client.test.js:77:11
+     75|     fetchMock.mockResolvedValue(jsonResponse(201, {}))
+     76|     const controller = new AbortController()
+     77|     await createSwipe({ cardId: VALID_ID, direction: 'left' }, { signa…
+       |           ^
+     78|     expect(fetchMock.mock.calls[0][1].signal).toBe(controller.signal)
+     79|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/15]⎯
+
+ FAIL  src/api/client.test.js > undoLastSwipe > sends DELETE /api/swipes/last and returns the removed swipe
+TypeError: undoLastSwipe is not a function
+ ❯ src/api/client.test.js:85:18
+     83|   it('sends DELETE /api/swipes/last and returns the removed swipe', as…
+     84|     fetchMock.mockResolvedValue(jsonResponse(200, { id: VALID_ID }))
+     85|     await expect(undoLastSwipe()).resolves.toEqual({ id: VALID_ID })
+       |                  ^
+     86|     expect(fetchMock.mock.calls[0][0]).toBe('/api/swipes/last')
+     87|     expect(fetchMock.mock.calls[0][1].method).toBe('DELETE')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/15]⎯
+
+ FAIL  src/api/client.test.js > error mapping > maps the contract error shape to ApiError
+TypeError: createSwipe is not a function
+ ❯ src/api/client.test.js:98:25
+     96|       }),
+     97|     )
+     98|     const error = await createSwipe({ cardId: VALID_ID, direction: 'le…
+       |                         ^
+     99|     expect(error).toBeInstanceOf(ApiError)
+    100|     expect(error).toMatchObject({
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/15]⎯
+
+ FAIL  src/api/client.test.js > error mapping > maps a non-JSON error body to a generic ApiError without leaking it
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:118:25
+    116|   it('maps a non-JSON error body to a generic ApiError without leaking…
+    117|     fetchMock.mockResolvedValue(new Response('<html>secret stack</html…
+    118|     const error = await getCards().catch((e) => e)
+       |                         ^
+    119|     expect(error).toBeInstanceOf(ApiError)
+    120|     expect(error.status).toBe(502)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/15]⎯
+
+ FAIL  src/api/client.test.js > error mapping > maps a network failure to NETWORK_ERROR
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:128:25
+    126|   it('maps a network failure to NETWORK_ERROR', async () => {
+    127|     fetchMock.mockRejectedValue(new TypeError('Failed to fetch'))
+    128|     const error = await getCards().catch((e) => e)
+       |                         ^
+    129|     expect(error).toBeInstanceOf(ApiError)
+    130|     expect(error.code).toBe('NETWORK_ERROR')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/15]⎯
+
+ FAIL  src/api/client.test.js > error mapping > lets AbortError through unchanged so callers can ignore it
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:137:25
+    135|     const abort = new DOMException('Aborted', 'AbortError')
+    136|     fetchMock.mockRejectedValue(abort)
+    137|     const error = await getCards().catch((e) => e)
+       |                         ^
+    138|     expect(error).toBe(abort)
+    139|     expect(error).not.toBeInstanceOf(ApiError)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/15]⎯
+
+ FAIL  src/api/client.test.js > error mapping > never logs to the console
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:145:11
+    143|     const spies = ['log', 'error', 'warn'].map((m) => vi.spyOn(console…
+    144|     fetchMock.mockRejectedValue(new TypeError('Failed to fetch'))
+    145|     await getCards().catch(() => {})
+       |           ^
+    146|     spies.forEach((spy) => expect(spy).not.toHaveBeenCalled())
+    147|     spies.forEach((spy) => spy.mockRestore())
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/15]⎯
+
+ FAIL  src/api/client.test.js > response parsing failures > preserves AbortError while reading the response body
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:156:18
+    154|     const abort = new DOMException('Aborted', 'AbortError')
+    155|     fetchMock.mockResolvedValue({ ok: true, status: 200, json: () => P…
+    156|     await expect(getCards()).rejects.toBe(abort)
+       |                  ^
+    157|   })
+    158|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/15]⎯
+
+ FAIL  src/api/client.test.js > response parsing failures > wraps malformed successful JSON without exposing the raw body
+TypeError: getCards is not a function
+ ❯ src/api/client.test.js:161:18
+    159|   it('wraps malformed successful JSON without exposing the raw body', …
+    160|     fetchMock.mockResolvedValue(new Response('<html>secret stack</html…
+    161|     await expect(getCards()).rejects.toMatchObject({
+       |                  ^
+    162|       name: 'ApiError', status: 200, code: 'INTERNAL_ERROR', message: …
+    163|     })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/15]⎯
+

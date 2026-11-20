@@ -1,0 +1,30 @@
+Command: npm.cmd exec vitest run src/api/client.test.js
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/api/client.test.js (16 tests | 1 failed) 40ms
+   ❯ request basics (4)
+     × appends the category query for getPhotos only when given 7ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  18:04:02
+   Duration  1.86s (environment 72%, setup 18%, transform 4%, import 3%, tests 3%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/client.test.js > request basics > appends the category query for getPhotos only when given
+ApiError: Something went wrong.
+ ❯ request src/api/client.js:45:11
+     43|       throw error
+     44|     }
+     45|     throw new ApiError(response.status, 'INTERNAL_ERROR', GENERIC_MESS…
+       |           ^
+     46|   }
+     47|
+ ❯ src/api/client.test.js:44:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

@@ -1,0 +1,42 @@
+Command: npm.cmd exec vitest run src/api/client.test.js
+Exit: 1
+
+ RUN  v5.1.1 D:/AppData(important)/.vscode/code/24520639_Đinh Thị Ngọc Hương/Lab_04_HW
+
+ ❯ src/api/client.test.js (16 tests | 1 failed) 47ms
+   ❯ error mapping (6)
+     × lets AbortError through unchanged so callers can ignore it 14ms
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 15 passed (16)
+   Start at  18:04:32
+   Duration  1.86s (environment 72%, setup 18%, transform 4%, tests 3%, import 3%, worker 1%)
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/client.test.js > error mapping > lets AbortError through unchanged so callers can ignore it
+AssertionError: expected ApiError: Network request failed. Check y… { …(3) } to be DOMException{ stack: 'AbortError: Ab…' } // Object.is equality
+
+- Expected
++ Received
+
+- DOMException {}
++ ApiError {
++   "message": "Network request failed. Check your connection.",
++   "name": "ApiError",
++   "status": 0,
++   "code": "NETWORK_ERROR",
++   "details": undefined,
++ }
+
+ ❯ src/api/client.test.js:138:19
+    136|     fetchMock.mockRejectedValue(abort)
+    137|     const error = await getCards().catch((e) => e)
+    138|     expect(error).toBe(abort)
+       |                   ^
+    139|     expect(error).not.toBeInstanceOf(ApiError)
+    140|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+

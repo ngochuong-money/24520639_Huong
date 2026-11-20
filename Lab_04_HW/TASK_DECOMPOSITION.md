@@ -19,7 +19,7 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
 | 5. Swipe Deck | 9 / 9 |
-| 6. Persistence Integration | 0 / 4 |
+| 6. Persistence Integration | 1 / 4 |
 | 7. Accessibility & Performance | 0 / 6 |
 | 8. Verification | 0 / 6 |
 | 9. Documentation & Git | 0 / 3 |
@@ -149,8 +149,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 
 ## 6. Persistence Integration (separate commits for API / hook / tests)
 
-- [ ] **6.1** `api/client.js`: fetch helpers accepting `signal`, `try/catch`, unified error handling; every fetch has `.catch`, ignore `AbortError` — commit `feat: api client`
-  - [ ] C  [ ] T  [ ] I  [ ] R
+- [x] **6.1** `api/client.js`: fetch helpers accepting `signal`, `try/catch`, unified error handling; every fetch has `.catch`, ignore `AbortError` — commit `feat: api client`
+  - [x] C  [x] T  [x] I  [x] R
 - [ ] **6.2** Hook `useSwipePersistence`: load history, save swipe, undo via API; `AbortController` + `return () => controller.abort()`, no `didCancel` — commit `feat: persistence hook`
   - [ ] C  [ ] T  [ ] I  [ ] R
 - [ ] **6.3** Loading/error states; roll back when POST fails; no unhandled rejections — commit `feat: persistence error handling`

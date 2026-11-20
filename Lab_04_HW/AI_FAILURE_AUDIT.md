@@ -166,3 +166,15 @@ Additional workflow corrections: the first API contract included unrequested det
 - Full verification: client 364, server-unit 134, actual MongoDB API 93 tests passed; lint and production build passed. Forbidden timer scan empty. No unrelated Gallery failure occurred in this run.
 - Evidence: docs/evidence/5.9 contains original command logs and clearly labelled PNG renders of captured output, not native terminal screenshots. Temporary scripts and browser runtime use D:/CodexTemp.
 - WBS 5.9 C/T/I/R completed, progress 9 / 9. Section 5 browser acceptance remains open: permanent DeckPage wiring is a separate follow-up before section 6, including mouse/keyboard/buttons Results parity, repeated Undo, and F5 reset. No browser or screen-reader acceptance claimed for the placeholder production page.
+
+### Task 6.1 — API client (2026-11-20)
+
+- Contract: extend the existing client (one ApiError definition) with getCards/getSwipes/createSwipe/undoLastSwipe and optional getPhotos category. Shared validateSwipeInput guards POST; signals are forwarded. No new dependencies. usePhotos remains compatible and unchanged. INTERFACES clarifies network status 0, generic parse errors, and AbortError identity through fetch and JSON parsing.
+- Fail test: supplied 14 tests plus two response-body regressions written before implementation; old client failed 15/16 (missing exports, category and error handling). Original red log retained.
+- Supplied-code issue: response.json().catch(() => null) would swallow AbortError during body consumption and silently return null on malformed successful JSON. Replaced with try/catch preserving AbortError and generic INTERNAL_ERROR otherwise. Added targeted regressions.
+- Supplied-test issue observed after implementation: category test reused one native Response for two requests, so the second body read failed. Corrected the mock to return a fresh Response each call; preserved the failed run separately. Did not weaken production parsing or assertions.
+- Abort mutation: removed fetch AbortError pass-through, identity test failed (wrapped as NETWORK_ERROR), then restored in finally. All 16 client tests passed again. No mutation remains.
+- Full verification passed: client 380, server-unit 134, MongoDB API 93; lint/build pass. Forbidden-pattern scan empty; exactly one client ApiError class.
+- Real Chrome against seeded API/MongoDB: 12 photos loaded through Vite proxy; no console warnings/errors while healthy. Stopped only the backend launched for this check, reloaded, and observed Could not load photos. Browser recorded the expected HTTP 502 resource error from the proxy, zero page errors and zero unhandled rejections. Temporary backend/frontend were stopped afterward.
+- Evidence: docs/evidence/6.1 includes command logs, actual browser screenshots/report and labelled rendered-log PNGs (not terminal screenshots). Tool scripts/runtime remain on D:/CodexTemp; attachments/Chrome executable on C were read only.
+- WBS 6.1 C/T/I/R checked, section 6 progress 1 / 4. Persistence hook, rollback and permanent DeckPage wiring remain separate; no claim they are implemented.
