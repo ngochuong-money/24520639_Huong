@@ -36,7 +36,9 @@ validateAppeal(values, { playerIds } = {}) → { [field]: message }
 - One message per field (first failing rule wins)
 - `playerIds` is optional: when given, `playerId` must be in it (the server always passes it)
 
-## 3. `FormContext` (`client/src/context/FormContext.js`)
+## 3. `FormContext` (`client/src/context/FormContext.jsx`)
+
+> `.jsx` because the file renders `<FormContext.Provider>`; Vite does not parse JSX in `.js` files.
 
 ```js
 FormContext = createContext(null)

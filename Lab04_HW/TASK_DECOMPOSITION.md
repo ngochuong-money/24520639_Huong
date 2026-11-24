@@ -204,7 +204,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 > Priority: **P0 = assignment requirements** → **P1 = project rules** → **P2 = acceptance & submission**
 > Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
 > Commit scope: `type(hw2): message`
-> 📸 = take a screenshot and paste it directly into the report (section named by its ID, e.g. S1a)
+> 📸 = take a screenshot and paste it directly into the Word report (caption = screenshot ID, e.g. S1a)
 
 **Definition of Done:** A user opens a player dossier at `/dossier/:playerID`, reads the case, files an appeal through a validated context-driven form before the SLA deadline expires, the appeal is persisted via the Express API in MongoDB and appears in the dossier's history, and the tribunal channels load with cancellable requests. Every AI failure is logged in `AI_FAILURE_AUDIT.md`.
 
@@ -215,7 +215,7 @@ HW2/
 ├── client/
 │   ├── src/
 │   │   ├── components/   # PeopleLayout, PersonDetail, SimpleForm, InputField, ShowData, Skeleton, NotFoundState
-│   │   ├── context/      # FormContext.js
+│   │   ├── context/      # FormContext.jsx
 │   │   ├── hooks/        # useAppealSlaTimer.js, useForumMessages.js
 │   │   └── data/         # players.js
 │   └── tests/
@@ -263,9 +263,9 @@ HW2/
 
 ### 2. Sprint 2 — Appeal Form Engine (P0 · Req #2)
 
-- [ ] **2.1 [Contract]** Fields: `playerId` (from URL, read-only), `matchId` (required, pattern), `email` + `confirmEmail` (must match), `reason` (select, required), `statement` (30–1000 chars), `evidenceUrl` (optional, https URL); rules live in `shared/validateAppeal.js`
+- [ ] **2.1 [Contract]** `docs/SPRINT2_CONTRACT.md`: field rules + exact error messages, `validateAppeal` signature, `FormContext` value shape, `InputField`/`SimpleForm`/`ShowData` props, submit flow table, 16 test cases → commit `docs(hw2): sprint 2 appeal form contract`
 - [ ] **2.2 [Fail Test]** Errors appear while typing; `isValid` is correct; submit is disabled while invalid; `aria-invalid`/`aria-describedby` are set; email mismatch is caught
-- [ ] **2.3 [Implement]** `context/FormContext.js`: `createContext(null)` + `FormProvider` (values, errors, touched, `handleChange`, `handleBlur`) + `useFormContext()` → commit `feat(hw2): form context`
+- [ ] **2.3 [Implement]** `context/FormContext.jsx`: `createContext(null)` + `FormProvider` (values, touched, `handleChange`, `handleBlur`, `handleSubmit`) + `useFormContext()` → commit `feat(hw2): form context`
 - [ ] **2.4 [Implement]** `errors`/`isValid` derived synchronously in render via `validateAppeal(values)` (`useMemo` if needed) — **no `useEffect`**
 - [ ] **2.5 [Implement]** `InputField.jsx`: `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, error with `role="alert"`, supports input/textarea/select → commit `feat(hw2): input field validation`
 - [ ] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
