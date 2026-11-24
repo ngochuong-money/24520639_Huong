@@ -89,6 +89,10 @@ useFormContext() → {
 - Sprint 2 submit target: `POST /api/appeals` (server built in Sprint 3; until then the request fails and the error message is shown)
 - No `window.alert`
 
+**Labels (exact):** `Player ID`, `Match ID`, `Email`, `Confirm email`, `Reason`, `Statement`, `Evidence URL (optional)`
+**Submit button:** `Submit appeal`
+**Field order (DOM):** Player ID → Contact fieldset (Email, Confirm email) → Appeal fieldset (Match ID, Reason, Statement, Evidence URL)
+
 ## 6. `ShowData` (`client/src/components/ShowData.jsx`)
 
 **Props:** `{ data = {}, title = 'Form state' }`

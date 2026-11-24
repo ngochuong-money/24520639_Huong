@@ -264,7 +264,7 @@ HW2/
 ### 2. Sprint 2 — Appeal Form Engine (P0 · Req #2)
 
 - [ ] **2.1 [Contract]** `docs/SPRINT2_CONTRACT.md`: field rules + exact error messages, `validateAppeal` signature, `FormContext` value shape, `InputField`/`SimpleForm`/`ShowData` props, submit flow table, 16 test cases → commit `docs(hw2): sprint 2 appeal form contract`
-- [ ] **2.2 [Fail Test]** Errors appear while typing; `isValid` is correct; submit is disabled while invalid; `aria-invalid`/`aria-describedby` are set; email mismatch is caught
+- [ ] **2.2 [Fail Test]** `validateAppeal` unit tests (rules, boundaries, cross-field email) + form component tests (real-time errors, `isValid` in ShowData, invalid submit focuses first error, `aria-invalid`/`aria-describedby`, fetch payload, server field errors, context guard) → commit `test(hw2): sprint 2 form tests (red)`
 - [ ] **2.3 [Implement]** `context/FormContext.jsx`: `createContext(null)` + `FormProvider` (values, touched, `handleChange`, `handleBlur`, `handleSubmit`) + `useFormContext()` → commit `feat(hw2): form context`
 - [ ] **2.4 [Implement]** `errors`/`isValid` derived synchronously in render via `validateAppeal(values)` (`useMemo` if needed) — **no `useEffect`**
 - [ ] **2.5 [Implement]** `InputField.jsx`: `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, error with `role="alert"`, supports input/textarea/select → commit `feat(hw2): input field validation`

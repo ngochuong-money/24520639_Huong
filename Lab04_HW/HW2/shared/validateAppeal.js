@@ -14,6 +14,7 @@
  */
 export const APPEAL_REASONS = [];
 
-export function validateAppeal(values = {}) {
+// Stub — implemented in WBS 2.4
+export function validateAppeal(values = {}, { playerIds } = {}) {
   return {};
 }
