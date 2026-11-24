@@ -243,17 +243,27 @@ Additional workflow corrections: the first API contract included unrequested det
 
 ### Failure Log
 
-<!-- Copy this template for each real failure -->
+<!-- Template per real failure: Date / WBS task · AI prompt · Symptom · Root cause · Fix · Evidence -->
 
-#### F-01 — <short title>
+#### F-01 — jest-dom setup fails with "Invalid Chai property"
 
-- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 2.4>
+- **Date / WBS task:** 2026-11-24 · 0.1
 - **AI prompt:**
-  > <exact prompt that produced the faulty code>
-- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
-- **Root cause:** <why the AI output was wrong — e.g. outdated API, missing cleanup, wrong assumption>
-- **Fix:** <what was changed manually, with a short code diff if helpful>
-- **Evidence:** <test name / DevTools observation> — screenshot in report, section F-xx
+  > 0.1 `client/`: scaffold React 19 + Vite (`createRoot`, `<StrictMode>`); install `react-router`, Vitest, Testing Library
+- **Symptom:** The smoke test using `toBeInTheDocument()` failed with `Error: Invalid Chai property: toBeInTheDocument`, although the setup file was confirmed to load.
+- **Root cause:** AI suggested `import '@testing-library/jest-dom/vitest'`; with jest-dom 8 + Vitest 5 and `globals: true`, this entry did not register the matchers on the `expect` used by the tests.
+- **Fix:** `tests/setup.js` now uses `import * as matchers from '@testing-library/jest-dom/matchers'; expect.extend(matchers);`. (Switching `defineConfig` to `'vitest/config'` was tried first and did not fix the error; it was kept only for correct typing of the `test` block.)
+- **Evidence:** `npm.cmd run test:run` — smoke test failed before the change and passed after it.
+
+#### F-02 — JSX inside a `.js` context file
+
+- **Date / WBS task:** 2026-11-24 · 2.1
+- **AI prompt:**
+  > 2.1 [Contract] Fields: … rules live in `shared/validateAppeal.js`
+- **Symptom:** The contract specified `FormContext.js`, but the file renders `<FormContext.Provider>`; Vite does not parse JSX in `.js` files, so the build would fail.
+- **Root cause:** AI copied the filename from the slide (`FormContext.js`) without checking it against the file's content and the Vite toolchain.
+- **Fix:** Renamed to `FormContext.jsx` in the contract and WBS before any implementation.
+- **Evidence:** Caught during contract review, before code was written; no runtime failure occurred. Build verification pending in WBS 2.3.
 
 ---
 
