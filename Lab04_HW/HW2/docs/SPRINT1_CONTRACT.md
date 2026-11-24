@@ -59,8 +59,10 @@
 - **Renders:** `<section aria-labelledby>` → `<h3>File an appeal</h3>` → placeholder text (replaced by `SimpleForm` in Sprint 2)
 
 ## 3. Lazy Loading
-- `PersonDetail`, `AppealPage`, `NotFoundState` → `React.lazy(() => import(...))`
-- Wrapped in `<Suspense fallback={<Skeleton />}>` at the `<Outlet />` in `PeopleLayout`
+- `PersonDetail`, `AppealPage` → `React.lazy(() => import(...))`
+- `NotFoundState` stays static (also imported directly by `PersonDetail`; mixing static + dynamic imports prevents code-splitting)
+- `<Suspense fallback={<Skeleton />}>` wraps `<Outlet />` in `PeopleLayout`
+- `<Suspense fallback={<Skeleton variant="appeal" />}>` wraps `<Outlet />` in `PersonDetail` so loading the appeal chunk does not blank the dossier
 
 ## 4. States & Expected Behaviour
 
