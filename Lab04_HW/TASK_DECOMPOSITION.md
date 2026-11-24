@@ -204,7 +204,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 > Priority: **P0 = assignment requirements** → **P1 = project rules** → **P2 = acceptance & submission**
 > Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
 > Commit scope: `type(hw2): message`
-> 📸 = screenshot for the report, saved to `HW2/docs/screenshots/`
+> 📸 = take a screenshot and paste it directly into the report (section named by its ID, e.g. S1a)
 
 **Definition of Done:** A user opens a player dossier at `/dossier/:playerID`, reads the case, files an appeal through a validated context-driven form before the SLA deadline expires, the appeal is persisted via the Express API in MongoDB and appears in the dossier's history, and the tribunal channels load with cancellable requests. Every AI failure is logged in `AI_FAILURE_AUDIT.md`.
 
@@ -226,8 +226,9 @@ HW2/
 ├── shared/
 │   ├── players.js
 │   └── validateAppeal.js
-├── docs/API_CONTRACT.md
-├── docs/screenshots/
+├── docs/
+│   ├── API_CONTRACT.md
+│   └── SPRINT1_CONTRACT.md
 └── README.md
 ```
 
@@ -240,23 +241,23 @@ HW2/
 - [x] **0.3** Create `shared/validateAppeal.js`, `docs/API_CONTRACT.md`, `README.md` (how to run); add a `## Homework 2` section to the root `AI_FAILURE_AUDIT.md`
 - [x] **0.4** Configure the Vite alias `@shared` → `../shared` (+ `server.fs.allow`) so the client can import the shared validator
 - [x] **0.5** Seed `shared/players.js` (re-exported by `client/src/data/players.js`): `himass` (active), `tanvuu` (expired) — id, name, team, role, violation, matchId, sanction, `appealDeadline`
-- [ ] **0.6** Run client + server, confirm a clean Console → commit `init(hw2): project setup`
-- [ ] 📸 **S0** — App running, Console clean
+- [x] **0.6** Run client + server, confirm a clean Console → commit `init(hw2): project setup`
+- [x] 📸 **S0** — App running, Console clean
 
 ---
 
 ### 1. Sprint 1 — Multi-Route Dossier Navigation `/dossier/:playerID` (P0 · Req #1)
 
-- [ ] **1.1 [Contract]** Routes: `/` → `<Navigate to="/dossier" replace />`, `/dossier` (index: "Select a case"), `/dossier/:playerID`, `/dossier/:playerID/appeal`, `*` → `<NotFoundState />`
-- [ ] **1.2 [Fail Test]** A valid ID renders the dossier; an invalid ID renders `<NotFoundState />`; the sidebar persists across nested routes; the active NavLink has `aria-current="page"`
-- [ ] **1.3 [Implement]** `PeopleLayout.jsx`: `<nav>` + `<ul>` of `NavLink` (`className={({ isActive }) => …}`), `<main>` + `<Outlet />`
-- [ ] **1.4 [Implement]** `PersonDetail.jsx`: `useParams()` → `players.find()` → `<article>` + `<dl>/<dt>/<dd>` case file; link to the appeal route; nested `<Outlet />`
-- [ ] **1.5 [Implement]** `React.lazy` route components + `<Suspense fallback={<Skeleton />}>` (same dimensions as the real content, `aria-busy="true"`, `aria-live="polite"`)
-- [ ] **1.6 [Refactor]** Zero div-soup, Fragments; tests green → commits `feat(hw2): router layout`, `feat(hw2): detail route handling`
-- [ ] 📸 **S1a** — `/dossier/himass`: active NavLink + `<dl>` case file
-- [ ] 📸 **S1b** — `/dossier/unknown`: 404 state
-- [ ] 📸 **S1c** — Skeleton fallback under Slow 3G
-- [ ] 📸 **S1d** — Sprint 1 tests passing
+- [x] **1.1 [Contract]** `docs/SPRINT1_CONTRACT.md`: route table, props of `PeopleLayout`/`PersonDetail`/`SelectCase`/`NotFoundState`/`Skeleton`, URL → behaviour table, 6 test cases → commit `docs(hw2): sprint 1 routing contract`
+- [x] **1.2 [Fail Test]** A valid ID renders the dossier; an invalid ID renders `<NotFoundState />`; the sidebar persists across nested routes; the active NavLink has `aria-current="page"`
+- [x] **1.3 [Implement]** `PeopleLayout.jsx`: `<nav>` + `<ul>` of `NavLink` (`className={({ isActive }) => …}`), `<main>` + `<Outlet />`
+- [x] **1.4 [Implement]** `PersonDetail.jsx`: `useParams()` → `players.find()` → `<article>` + `<dl>/<dt>/<dd>` case file; link to the appeal route; nested `<Outlet />`
+- [x] **1.5 [Implement]** `React.lazy` route components + `<Suspense fallback={<Skeleton />}>` (same dimensions as the real content, `aria-busy="true"`, `aria-live="polite"`)
+- [x] **1.6 [Refactor]** Zero div-soup, Fragments; tests green → commits `feat(hw2): router layout`, `feat(hw2): detail route handling`
+- [x] 📸 **S1a** — `/dossier/himass`: active NavLink + `<dl>` case file
+- [x] 📸 **S1b** — `/dossier/unknown`: 404 state
+- [x] 📸 **S1c** — Skeleton fallback under Slow 3G
+- [x] 📸 **S1d** — Sprint 1 tests passing
 
 ---
 
@@ -321,7 +322,7 @@ HW2/
 - [ ] **5.1** Log each real AI failure when it occurs: *Prompt → Symptom → Root cause → Fix → Evidence*
 - [ ] **5.2** Do not fabricate failures; if a Slide 29 category never occurred, leave it out
 - [ ] **5.3** Write the **Architecture Analysis**: routing tree, form data flow, clock-delta timer design, request cancellation, validation parity → commit `docs(hw2): ai failure audit`
-- [ ] 📸 **S5** — Before/after evidence for each logged failure
+- [ ] 📸 **S5** — Before/after evidence for each logged failure, pasted into the report under its F-xx entry
 
 ---
 
@@ -345,8 +346,8 @@ HW2/
 
 | # | Workstream | Req | Status |
 |---|---|---|---|
-| 0 | Setup | — | ⬜ |
-| 1 | Dossier Routing | #1 | ⬜ |
+| 0 | Setup | — | ✅ |
+| 1 | Dossier Routing | #1 | ✅ |
 | 2 | Appeal Form Engine | #2 | ⬜ |
 | 3 | SLA Timer | #3 | ⬜ |
 | 4 | Backend + Hook | Rules | ⬜ |

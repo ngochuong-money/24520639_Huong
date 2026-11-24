@@ -253,7 +253,7 @@ Additional workflow corrections: the first API contract included unrequested det
 - **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
 - **Root cause:** <why the AI output was wrong — e.g. outdated API, missing cleanup, wrong assumption>
 - **Fix:** <what was changed manually, with a short code diff if helpful>
-- **Evidence:** <test name / DevTools observation / screenshot `docs/screenshots/F-01-*.png`>
+- **Evidence:** <test name / DevTools observation> — screenshot in report, section F-xx
 
 ---
 

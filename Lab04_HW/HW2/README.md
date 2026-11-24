@@ -35,4 +35,4 @@ cd client && npm run test:run
 - `client/` — React 19 + Vite + React Router v7
 - `server/` — Express + Mongoose 8
 - `shared/` — validation shared by client and server
-- `docs/` — API contract and report screenshots
+- `docs/` — API contract and sprint contracts (screenshots live in the report)
