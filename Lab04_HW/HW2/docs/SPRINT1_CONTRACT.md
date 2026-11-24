@@ -55,6 +55,9 @@
 - **Props:** `{ lines = 6 }`
 - **Renders:** `<section aria-busy="true" aria-live="polite">` with a visually hidden "Loading dossier…" label; same dimensions as the `PersonDetail` card (CLS = 0)
 
+### `AppealPage` (Sprint 1 placeholder)
+- **Renders:** `<section aria-labelledby>` → `<h3>File an appeal</h3>` → placeholder text (replaced by `SimpleForm` in Sprint 2)
+
 ## 3. Lazy Loading
 - `PersonDetail`, `AppealPage`, `NotFoundState` → `React.lazy(() => import(...))`
 - Wrapped in `<Suspense fallback={<Skeleton />}>` at the `<Outlet />` in `PeopleLayout`
