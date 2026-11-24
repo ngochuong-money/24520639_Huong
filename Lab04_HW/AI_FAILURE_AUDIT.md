@@ -235,3 +235,27 @@ Additional workflow corrections: the first API contract included unrequested det
 - Evidence in docs/evidence/section7. User Word report preserves seven original captioned images and adds 15 English-captioned captures/summaries plus methods/results; generated summaries are labelled, not passed off as DevTools screenshots. Only dedicated test data was used, with all tools/cache/runtime on D:/CodexTemp. Existing uncommitted 7.1/5.7 review changes were preserved separately. No work on 5.7 message integration is claimed.
 
 - Final helper cleanup: Vite SPA fallback intercepted the appended stop middleware, so its 200 response was not accepted as proof of cleanup. Stopped only the matching verification Node parent/child, validated the isolated database name and dropped it explicitly; dev services/data were untouched.
+
+## Homework 2
+
+> Only real AI-caused failures encountered during development and verification are logged here.
+> No failures are staged or fabricated.
+
+### Failure Log
+
+<!-- Copy this template for each real failure -->
+
+#### F-01 — <short title>
+
+- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 2.4>
+- **AI prompt:**
+  > <exact prompt that produced the faulty code>
+- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
+- **Root cause:** <why the AI output was wrong — e.g. outdated API, missing cleanup, wrong assumption>
+- **Fix:** <what was changed manually, with a short code diff if helpful>
+- **Evidence:** <test name / DevTools observation / screenshot `docs/screenshots/F-01-*.png`>
+
+---
+
+### Architecture Analysis
+_Written in WBS 5.3 after implementation._

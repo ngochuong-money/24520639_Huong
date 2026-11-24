@@ -196,3 +196,161 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 - [x] No prohibited APIs or practices in the codebase
 - [x] Lighthouse 100/100; tests, lint and build are green
 - [x] Git history is clean and `AI_FAILURE_AUDIT.md` is complete
+
+## Homework 2 — Full-Stack Esports Fair-Play Appeal Tribunal
+
+> Case study: Himass & TanVuu · Lab 4 · React 19 + Vite + React Router v7 + Express + MongoDB (Mongoose 8)
+> Location: `Lab04_HW/HW2/` — all paths below are relative to `HW2/` unless stated otherwise
+> Priority: **P0 = assignment requirements** → **P1 = project rules** → **P2 = acceptance & submission**
+> Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
+> Commit scope: `type(hw2): message`
+> 📸 = screenshot for the report, saved to `HW2/docs/screenshots/`
+
+**Definition of Done:** A user opens a player dossier at `/dossier/:playerID`, reads the case, files an appeal through a validated context-driven form before the SLA deadline expires, the appeal is persisted via the Express API in MongoDB and appears in the dossier's history, and the tribunal channels load with cancellable requests. Every AI failure is logged in `AI_FAILURE_AUDIT.md`.
+
+### Folder Structure
+
+```text
+HW2/
+├── client/
+│   ├── src/
+│   │   ├── components/   # PeopleLayout, PersonDetail, SimpleForm, InputField, ShowData, Skeleton, NotFoundState
+│   │   ├── context/      # FormContext.js
+│   │   ├── hooks/        # useAppealSlaTimer.js, useForumMessages.js
+│   │   └── data/         # players.js
+│   └── tests/
+├── server/
+│   ├── models/  routes/  tests/
+│   ├── .env.example
+│   └── server.js
+├── shared/
+│   ├── players.js
+│   └── validateAppeal.js
+├── docs/API_CONTRACT.md
+├── docs/screenshots/
+└── README.md
+```
+
+---
+
+### 0. Setup (P0)
+
+- [x] **0.1** `client/`: scaffold React 19 + Vite (`createRoot`, `<StrictMode>`); install `react-router`, Vitest, Testing Library
+- [x] **0.2** `server/`: Express, `cors`, Mongoose 8, supertest; add `.env.example` (`MONGODB_URI`, `PORT`, `CLIENT_ORIGIN`); git-ignore `server/.env`
+- [x] **0.3** Create `shared/validateAppeal.js`, `docs/API_CONTRACT.md`, `README.md` (how to run); add a `## Homework 2` section to the root `AI_FAILURE_AUDIT.md`
+- [x] **0.4** Configure the Vite alias `@shared` → `../shared` (+ `server.fs.allow`) so the client can import the shared validator
+- [x] **0.5** Seed `shared/players.js` (re-exported by `client/src/data/players.js`): `himass` (active), `tanvuu` (expired) — id, name, team, role, violation, matchId, sanction, `appealDeadline`
+- [ ] **0.6** Run client + server, confirm a clean Console → commit `init(hw2): project setup`
+- [ ] 📸 **S0** — App running, Console clean
+
+---
+
+### 1. Sprint 1 — Multi-Route Dossier Navigation `/dossier/:playerID` (P0 · Req #1)
+
+- [ ] **1.1 [Contract]** Routes: `/` → `<Navigate to="/dossier" replace />`, `/dossier` (index: "Select a case"), `/dossier/:playerID`, `/dossier/:playerID/appeal`, `*` → `<NotFoundState />`
+- [ ] **1.2 [Fail Test]** A valid ID renders the dossier; an invalid ID renders `<NotFoundState />`; the sidebar persists across nested routes; the active NavLink has `aria-current="page"`
+- [ ] **1.3 [Implement]** `PeopleLayout.jsx`: `<nav>` + `<ul>` of `NavLink` (`className={({ isActive }) => …}`), `<main>` + `<Outlet />`
+- [ ] **1.4 [Implement]** `PersonDetail.jsx`: `useParams()` → `players.find()` → `<article>` + `<dl>/<dt>/<dd>` case file; link to the appeal route; nested `<Outlet />`
+- [ ] **1.5 [Implement]** `React.lazy` route components + `<Suspense fallback={<Skeleton />}>` (same dimensions as the real content, `aria-busy="true"`, `aria-live="polite"`)
+- [ ] **1.6 [Refactor]** Zero div-soup, Fragments; tests green → commits `feat(hw2): router layout`, `feat(hw2): detail route handling`
+- [ ] 📸 **S1a** — `/dossier/himass`: active NavLink + `<dl>` case file
+- [ ] 📸 **S1b** — `/dossier/unknown`: 404 state
+- [ ] 📸 **S1c** — Skeleton fallback under Slow 3G
+- [ ] 📸 **S1d** — Sprint 1 tests passing
+
+---
+
+### 2. Sprint 2 — Appeal Form Engine (P0 · Req #2)
+
+- [ ] **2.1 [Contract]** Fields: `playerId` (from URL, read-only), `matchId` (required, pattern), `email` + `confirmEmail` (must match), `reason` (select, required), `statement` (30–1000 chars), `evidenceUrl` (optional, https URL); rules live in `shared/validateAppeal.js`
+- [ ] **2.2 [Fail Test]** Errors appear while typing; `isValid` is correct; submit is disabled while invalid; `aria-invalid`/`aria-describedby` are set; email mismatch is caught
+- [ ] **2.3 [Implement]** `context/FormContext.js`: `createContext(null)` + `FormProvider` (values, errors, touched, `handleChange`, `handleBlur`) + `useFormContext()` → commit `feat(hw2): form context`
+- [ ] **2.4 [Implement]** `errors`/`isValid` derived synchronously in render via `validateAppeal(values)` (`useMemo` if needed) — **no `useEffect`**
+- [ ] **2.5 [Implement]** `InputField.jsx`: `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby`, error with `role="alert"`, supports input/textarea/select → commit `feat(hw2): input field validation`
+- [ ] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
+- [ ] **2.7 [Implement]** `ShowData.jsx`: live state inspector, `<dl>` with keyed `<Fragment>` → commit `feat(hw2): inspector output`
+- [ ] 📸 **S2a** — Real-time error state
+- [ ] 📸 **S2b** — Valid form + `<ShowData />` inspector
+- [ ] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
+- [ ] 📸 **S2d** — Successful submission message
+
+---
+
+### 3. Zero-Drift SLA Countdown `useAppealSlaTimer()` (P0 · Req #3)
+
+- [ ] **3.1 [Contract]** `useAppealSlaTimer(deadlineISO)` → `{ remainingMs, isExpired, parts: { d, h, m, s } }`
+  - `remainingMs = deadline − (Date.now() + clockOffset)`, **recomputed every tick, never decremented**
+  - `clockOffset = serverNow − Date.now()` from `GET /api/time` (corrects client clock skew)
+  - Re-sync on `visibilitychange` (tab sleep/wake)
+- [ ] **3.2 [Fail Test]** Vitest fake timers: jump the system time and the value matches; throttled ticks cause no drift; the countdown clamps at 0 and sets `isExpired`; the interval and listener are removed on unmount
+- [ ] **3.3 [Implement]** Interval (~500 ms) only triggers a re-render; `useEffect` has a full dependency array + cleanup (`clearInterval`, `removeEventListener`, abort the time fetch)
+- [ ] **3.4 [Integrate]** Timer in the dossier header with `<time dateTime>`; a separate `aria-live="polite"` region announces milestones only (1h, 10m, expired); submit disabled when expired; server also rejects with `409`
+- [ ] **3.5 [Refactor]** Tests green → commit `feat(hw2): appeal sla timer`
+- [ ] 📸 **S3a** — Countdown running on the dossier
+- [ ] 📸 **S3b** — Zero-drift proof: compared with the OS clock after several minutes in a background tab + fake-timer test output
+- [ ] 📸 **S3c** — Expired state: submit disabled + server 409
+
+---
+
+### 4. Sprint 3 — Backend API + `useForumMessages` (P1 · rules; completes the full stack)
+
+- [ ] **4.1 [Contract]** Write `docs/API_CONTRACT.md` → commit `docs(hw2): api contract` **before any handler**
+
+  | Method | Route | Success | Errors |
+  |---|---|---|---|
+  | GET | `/api/time` | 200 `{ now }` | — |
+  | GET | `/api/appeals/:playerId` | 200 `[appeal]` | 404 |
+  | POST | `/api/appeals` | 201 `appeal` | 400 validation, 404 player, 409 expired |
+  | GET | `/api/messages/:forum` | 200 `[message]` | 404 unknown channel |
+  | POST | `/api/messages/:forum` | 201 `message` | 400, 404 |
+
+  Error shape: `{ error: string, fields?: { [name]: string } }` — never a stack trace. Channels: `nasa`, `esports-tribunal`, `notNasa`.
+- [ ] **4.2 [Fail Test]** supertest covers every row (valid, invalid payload, unknown ID, expired window) → commit `test(hw2): api tests`
+- [ ] **4.3 [Implement]** `server.js`: `cors({ origin: process.env.CLIENT_ORIGIN })`, `express.json()`, models `Appeal` + `Message`, `async/await` + `.exec()`, `MONGODB_URI` from `process.env`, reuse `shared/validateAppeal.js` (validation parity), central error handler → commit `feat(hw2): api endpoints`
+- [ ] **4.4 [Implement]** `hooks/useForumMessages.js`: `AbortController` per request, `return () => controller.abort()`, ignore `AbortError`, `try/catch/finally` with `signal.aborted` guards, `postMessage()` then refetch → commit `feat(hw2): forum messages hook`
+- [ ] **4.5 [Integrate]** Channel switcher + message list/post form in the dossier; appeal history from `GET /api/appeals/:playerId`, refreshed after submit → commit `test(hw2): hook tests`
+- [ ] 📸 **S4a** — Postman/Thunder: 201, 400 (with `fields`), 409
+- [ ] 📸 **S4b** — Slow 3G Network tab: rapid channel switching → stale requests **(canceled)**
+- [ ] 📸 **S4c** — MongoDB Compass/Atlas showing saved appeals + messages
+- [ ] 📸 **S4d** — Appeal history + channel messages in the UI
+
+---
+
+### 5. Post-Mortem `AI_FAILURE_AUDIT.md` (P0 · Req #4)
+
+- [ ] **5.1** Log each real AI failure when it occurs: *Prompt → Symptom → Root cause → Fix → Evidence*
+- [ ] **5.2** Do not fabricate failures; if a Slide 29 category never occurred, leave it out
+- [ ] **5.3** Write the **Architecture Analysis**: routing tree, form data flow, clock-delta timer design, request cancellation, validation parity → commit `docs(hw2): ai failure audit`
+- [ ] 📸 **S5** — Before/after evidence for each logged failure
+
+---
+
+### 6. Acceptance & Submission (P2)
+
+- [ ] **6.1** End-to-end flow: dossier → appeal → submit → history updates → channel discussion
+- [ ] **6.2** Responsive at 375 / 768 / 1440 px with no horizontal scroll (CSS Grid + `@media`)
+- [ ] **6.3** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean; keyboard-only navigation with visible focus
+- [ ] **6.4** No Console warnings; `npm run lint`, `npm test`, `npm run build` pass for client and server
+- [ ] **6.5** Prohibited-pattern sweep: `<Switch>`, `<Redirect>`, `exact`, `activeClassName`, `var`, `keyCode`, `keypress`, `defaultProps`, `didCancel`, `window.alert`, index keys, hardcoded URIs
+- [ ] **6.6** `git log --graph --oneline --decorate` shows every required commit
+- [ ] **6.7** Live-defense prep (Slide 28): `useSearchParams` sync, cross-field validation, exponential-backoff retry respecting `AbortController`, protected route guard
+- [ ] 📸 **S6a** — Lighthouse 100/100
+- [ ] 📸 **S6b** — 375 px mobile + 1440 px desktop
+- [ ] 📸 **S6c** — Terminal: lint, test, build passing
+- [ ] 📸 **S6d** — `git log --graph`
+
+---
+
+### Progress
+
+| # | Workstream | Req | Status |
+|---|---|---|---|
+| 0 | Setup | — | ⬜ |
+| 1 | Dossier Routing | #1 | ⬜ |
+| 2 | Appeal Form Engine | #2 | ⬜ |
+| 3 | SLA Timer | #3 | ⬜ |
+| 4 | Backend + Hook | Rules | ⬜ |
+| 5 | AI Failure Audit | #4 | ⬜ |
+| 6 | Acceptance | — | ⬜ |
+
+**Report screenshots:** S0 · S1a–d · S2a–d · S3a–c · S4a–d · S5 · S6a–d (24 total)
