@@ -315,10 +315,10 @@ HW2/
 
 ### 6. Acceptance & Submission (P2)
 
-- [ ] **6.1** End-to-end flow: dossier → appeal → submit → history updates → channel discussion
-- [ ] **6.2** Responsive at 375 / 768 / 1440 px with no horizontal scroll (CSS Grid + `@media`)
+- [x] **6.1** End-to-end flow: dossier → appeal → submit → history updates → channel discussion
+- [x] **6.2** Responsive at 375 / 768 / 1440 px with no horizontal scroll (CSS Grid + `@media`)
 - [ ] **6.3** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean; keyboard-only navigation with visible focus
-- [ ] **6.4** No Console warnings; `npm run lint`, `npm test`, `npm run build` pass for client and server
+- [ ] **6.4** No Console warnings; client: `npm run lint`, `npm run test:run`, `npm run build` pass; server: `npm run lint`, `npm run test:run` pass (plain Node ESM, no build step)
 - [ ] **6.5** Prohibited-pattern sweep: `<Switch>`, `<Redirect>`, `exact`, `activeClassName`, `var`, `keyCode`, `keypress`, `defaultProps`, `didCancel`, `window.alert`, index keys, hardcoded URIs
 - [ ] **6.6** `git log --graph --oneline --decorate` shows every required commit
 - [ ] **6.7** Live-defense prep (Slide 28): `useSearchParams` sync, cross-field validation, exponential-backoff retry respecting `AbortController`, protected route guard
