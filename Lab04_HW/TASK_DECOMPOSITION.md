@@ -214,7 +214,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 HW2/
 ├── client/
 │   ├── src/
-│   │   ├── components/   # PeopleLayout, PersonDetail, SimpleForm, InputField, ShowData, Skeleton, NotFoundState
+│   │   ├── components/   # PeopleLayout, PersonDetail, SimpleForm, InputField, ShowData, Skeleton, NotFoundState, SlaCountdown
 │   │   ├── context/      # FormContext.jsx
 │   │   ├── hooks/        # useAppealSlaTimer.js, useForumMessages.js
 │   │   └── data/         # players.js
@@ -270,22 +270,19 @@ HW2/
 - [x] **2.5 [Implement]** `InputField.jsx` (red → green via `tests/inputField.test.jsx`): `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby` (hint + error), error `<p role="alert">`, input/textarea/select, Fragment wrapper → commit `feat(hw2): input field validation`
 - [x] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
 - [x] **2.7 [Implement]** `ShowData.jsx`: live state inspector, `<dl>` with keyed `<Fragment>` → commit `feat(hw2): inspector output`
-- [ ] 📸 **S2a** — Real-time error state
-- [ ] 📸 **S2b** — Valid form + `<ShowData />` inspector
-- [ ] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
+- [x] 📸 **S2a** — Real-time error state
+- [x] 📸 **S2b** — Valid form + `<ShowData />` inspector
+- [x] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
 - [ ] 📸 **S2d** — Successful submission message (taken after WBS 4.3, once `POST /api/appeals` exists)
 
 ---
 
 ### 3. Zero-Drift SLA Countdown `useAppealSlaTimer()` (P0 · Req #3)
 
-- [ ] **3.1 [Contract]** `useAppealSlaTimer(deadlineISO)` → `{ remainingMs, isExpired, parts: { d, h, m, s } }`
-  - `remainingMs = deadline − (Date.now() + clockOffset)`, **recomputed every tick, never decremented**
-  - `clockOffset = serverNow − Date.now()` from `GET /api/time` (corrects client clock skew)
-  - Re-sync on `visibilitychange` (tab sleep/wake)
-- [ ] **3.2 [Fail Test]** Vitest fake timers: jump the system time and the value matches; throttled ticks cause no drift; the countdown clamps at 0 and sets `isExpired`; the interval and listener are removed on unmount
+- [x] **3.1 [Contract]** `docs/SPRINT_SLA_CONTRACT.md`: decrement vs clock-delta rationale, signature `{ remainingMs, isExpired, parts, isSynced }`, midpoint offset from `GET /api/time`, state vs derived table, 3 effects with cleanup, second-aligned ticks, UI + milestone announcements, 14 test cases → commit `docs(hw2): sla timer contract`
+- [ ] **3.2 [Fail Test]** `tests/useAppealSlaTimer.test.jsx` (11 hook tests incl. zero-drift clock jump, offset, fallback, clamp + no timers left, visibility re-sync, unmount cleanup) + `tests/slaCountdown.test.jsx` (3 UI tests) → commit `test(hw2): sla timer tests (red)`
 - [ ] **3.3 [Implement]** Interval (~500 ms) only triggers a re-render; `useEffect` has a full dependency array + cleanup (`clearInterval`, `removeEventListener`, abort the time fetch)
-- [ ] **3.4 [Integrate]** Timer in the dossier header with `<time dateTime>`; a separate `aria-live="polite"` region announces milestones only (1h, 10m, expired); submit disabled when expired; server also rejects with `409`
+- [ ] **3.4 [Integrate]** Hook called once in `PersonDetail`; `SlaCountdown` with `<time dateTime>` + milestone `aria-live`; Outlet context `{ player, isExpired }`; `SimpleForm` disables submit when expired; server `409` in Sprint 3
 - [ ] **3.5 [Refactor]** Tests green → commit `feat(hw2): appeal sla timer`
 - [ ] 📸 **S3a** — Countdown running on the dossier
 - [ ] 📸 **S3b** — Zero-drift proof: compared with the OS clock after several minutes in a background tab + fake-timer test output

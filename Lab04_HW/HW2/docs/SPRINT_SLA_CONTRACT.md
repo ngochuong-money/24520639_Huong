@@ -54,7 +54,7 @@ No `remaining` state exists; nothing is ever subtracted from a previous value.
 | Tick | `[deadlineMs, offset]` | Recursive `setTimeout` aligned to the next whole second of corrected time → `setTickNow(Date.now())`; **stops scheduling once expired** | `clearTimeout` |
 | Visibility | `[]` | On `visibilitychange` → `visible`: `setTickNow(Date.now())` immediately and bump `syncKey` to re-sync | `removeEventListener` |
 
-Tick delay: `1000 − ((Date.now() + offset) % 1000)` (+ a few ms guard) → updates land on second boundaries, with no skipped or doubled seconds.
+Tick delay: `1000 − ((Date.now() + offset) % 1000)` → the next tick lands exactly on the next whole second (setTimeout never fires early, so no guard is needed).
 
 ## 6. UI integration
 
@@ -64,7 +64,8 @@ Tick delay: `1000 − ((Date.now() + offset) % 1000)` (+ a few ms guard) → upd
   - Expired: `<p className="sla sla--expired">Appeal window closed</p>`
   - `isSynced === false` → small note `(local clock)`
   - Screen-reader milestones in a separate visually-hidden `<p aria-live="polite">`, derived from `remainingMs`:
-    `> 24h` → *(empty)* · `≤ 24h` → "Less than 24 hours left to appeal." · `≤ 1h` → "Less than 1 hour left…" · `≤ 10m` → "Less than 10 minutes left…" · `0` → "The appeal window has closed."
+  - Milestone texts (exact): `> 24h` → *(empty)* · `≤ 24h` → `Less than 24 hours left to appeal.` · `≤ 1h` → `Less than 1 hour left to appeal.` · `≤ 10m` → `Less than 10 minutes left to appeal.` · `0` → `The appeal window has closed.`
+  - Countdown text format: `{d}d {hh}h {mm}m {ss}s` (hours/minutes/seconds zero-padded)
     (text changes only when the bucket changes → announced once per milestone, not every second)
 - `SimpleForm` gets `isExpired`: submit button disabled + notice "The appeal window has closed." (server also returns `409`, Sprint 3)
 
