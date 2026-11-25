@@ -280,13 +280,13 @@ HW2/
 ### 3. Zero-Drift SLA Countdown `useAppealSlaTimer()` (P0 · Req #3)
 
 - [x] **3.1 [Contract]** `docs/SPRINT_SLA_CONTRACT.md`: decrement vs clock-delta rationale, signature `{ remainingMs, isExpired, parts, isSynced }`, midpoint offset from `GET /api/time`, state vs derived table, 3 effects with cleanup, second-aligned ticks, UI + milestone announcements, 14 test cases → commit `docs(hw2): sla timer contract`
-- [ ] **3.2 [Fail Test]** `tests/useAppealSlaTimer.test.jsx` (11 hook tests incl. zero-drift clock jump, offset, fallback, clamp + no timers left, visibility re-sync, unmount cleanup) + `tests/slaCountdown.test.jsx` (3 UI tests) → commit `test(hw2): sla timer tests (red)`
-- [ ] **3.3 [Implement]** Interval (~500 ms) only triggers a re-render; `useEffect` has a full dependency array + cleanup (`clearInterval`, `removeEventListener`, abort the time fetch)
-- [ ] **3.4 [Integrate]** Hook called once in `PersonDetail`; `SlaCountdown` with `<time dateTime>` + milestone `aria-live`; Outlet context `{ player, isExpired }`; `SimpleForm` disables submit when expired; server `409` in Sprint 3
-- [ ] **3.5 [Refactor]** Tests green → commit `feat(hw2): appeal sla timer`
-- [ ] 📸 **S3a** — Countdown running on the dossier
-- [ ] 📸 **S3b** — Zero-drift proof: compared with the OS clock after several minutes in a background tab + fake-timer test output
-- [ ] 📸 **S3c** — Expired state: submit disabled + server 409
+- [x] **3.2 [Fail Test]** `tests/useAppealSlaTimer.test.jsx` (11 hook tests incl. zero-drift clock jump, offset, fallback, clamp + no timers left, visibility re-sync, unmount cleanup) + `tests/slaCountdown.test.jsx` (3 UI tests) → commit `test(hw2): sla timer tests (red)`
+- [x] **3.3 [Implement]** `hooks/useAppealSlaTimer.js`: state `tickNow`/`offset`/`isSynced`/`syncKey`; `remainingMs` derived in render; 3 effects with full deps + cleanup (sync → `abort()`, second-aligned recursive `setTimeout` → `clearTimeout`, visibility → `removeEventListener`)
+- [x] **3.4 [Integrate]** Hook called once in `PersonDetail`; `SlaCountdown` with `<time dateTime>` + milestone `aria-live`; Outlet context `{ player, isExpired }`; `SimpleForm` disables submit when expired; server `409` in Sprint 3
+- [x] **3.5 [Refactor]** Tests green → commit `feat(hw2): appeal sla timer`
+- [x] 📸 **S3a** — Countdown running on the dossier
+- [x] 📸 **S3b** — Zero-drift proof: compared with the OS clock after several minutes in a background tab + fake-timer test output
+- [x] 📸 **S3c** — Expired state: submit disabled + server 409
 
 ---
 
@@ -346,7 +346,7 @@ HW2/
 | 0 | Setup | — | ✅ |
 | 1 | Dossier Routing | #1 | ✅ |
 | 2 | Appeal Form Engine | #2 | ✅ |
-| 3 | SLA Timer | #3 | ⬜ |
+| 3 | SLA Timer | #3 | ✅ |
 | 4 | Backend + Hook | Rules | ⬜ |
 | 5 | AI Failure Audit | #4 | ⬜ |
 | 6 | Acceptance | — | ⬜ |
