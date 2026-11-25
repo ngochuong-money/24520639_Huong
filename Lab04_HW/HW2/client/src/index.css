@@ -134,3 +134,34 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .sk-bar { animation: none; }
 }
+
+.appeal-form fieldset {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  min-width: 0;
+}
+.appeal-form legend { font-weight: 600; padding: 0 0.25rem; }
+
+.field-label { font-weight: 600; margin-top: 0.75rem; }
+.field-label:first-of-type { margin-top: 0; }
+
+.field-control {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  border: 1px solid #64748b;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+.field-control:focus-visible { outline: 3px solid #f59e0b; outline-offset: 1px; }
+.field-control[aria-invalid='true'] { border-color: #b91c1c; border-width: 2px; }
+.field-control[readonly] { background: #f1f5f9; }
+textarea.field-control { min-height: 8rem; resize: vertical; }
+
+.field-hint { margin: 0; font-size: 0.875rem; color: #475569; }
+.field-error { margin: 0; font-size: 0.875rem; color: #b91c1c; font-weight: 600; }
+.field-error::before { content: '⚠ '; }
