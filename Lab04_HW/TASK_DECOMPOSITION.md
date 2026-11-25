@@ -373,29 +373,19 @@ HW3/
 
 ### 0. Setup
 
-- [ ] **0.1** Scaffold `client/` (React 19 + Vite, `createRoot`, `<StrictMode>`); install `react-router@7`, Vitest, jsdom, Testing Library, user-event
-- [ ] **0.2** Copy the HW2 test config: `vite.config.js` (`defineConfig` from `'vitest/config'`), `tests/setup.js` (`expect.extend(matchers)`)
-- [ ] **0.3** Add a `<dialog>` polyfill to `tests/setup.js` (jsdom lacks `showModal`/`close`): `showModal` sets `open`, `close` clears `open` and dispatches `close`
-- [ ] **0.4** Seed `src/data/photos.js` (6–9 items: `id`, `title`, `alt`, `src`, `width`, `height`, `credit`) + images in `public/photos/`
-- [ ] **0.5** `README.md` (run/test); add `## Homework 3` section to the root `AI_FAILURE_AUDIT.md`
-- [ ] **0.6** Run the app, confirm a clean Console → commit `init(hw3): project setup`
-- [ ] 📸 **S0** — App running, Console clean
+- [x] **0.1** Scaffold `client/` (React 19 + Vite, `createRoot`, `<StrictMode>`); install `react-router@7`, Vitest, jsdom, Testing Library, user-event
+- [x] **0.2** Copy the HW2 test config: `vite.config.js` (`defineConfig` from `'vitest/config'`), `tests/setup.js` (`expect.extend(matchers)`)
+- [x] **0.3** Add a `<dialog>` polyfill to `tests/setup.js` (jsdom lacks `showModal`/`close`): `showModal` sets `open`, `close` clears `open` and dispatches `close`
+- [x] **0.4** Seed `src/data/photos.js` (6–9 items: `id`, `title`, `alt`, `src`, `width`, `height`, `credit`) + images in `public/photos/`
+- [x] **0.5** `README.md` (run/test); add `## Homework 3` section to the root `AI_FAILURE_AUDIT.md`
+- [x] **0.6** Run the app, confirm a clean Console → commit `init(hw3): project setup`
+- [x] 📸 **S0** — App running, Console clean
 
 ---
 
 ### 1. Contract
 
-- [ ] **1.1 [Contract]** `docs/HW3_CONTRACT.md`:
-  - Routes: `/` → `<Navigate to="/gallery" replace />`, `/gallery` (lazy `PhotoGalleryLayout` + `<Suspense fallback={<GallerySkeleton />}>`), `*` → `<NotFoundState />`
-  - URL state: `photoId` is the **only** source of truth for the modal; `selectedPhoto` derived via `photos.find()` — no `useState` for open/closed
-  - Opening: thumbnail is a `<Link to={{ search: '?photoId=<id>' }}>` (keyboard + Back button work natively), other params preserved
-  - Closing: `onClose` deletes **only** `photoId` (`new URLSearchParams(prev)` + `delete`), and only if it is still present (no redundant navigation)
-  - Effect (legit: syncs React with the DOM `<dialog>` API): `showModal()` when a valid photo is selected and `!dialog.open`; `close()` when none and `dialog.open`; deps `[selectedPhoto]`
-  - Dialog a11y: `aria-labelledby` → `<h2>` photo title; `<figure>` + `<img alt width height>` + `<figcaption>`; close button `type="button"` "Close photo"; Esc closes (native `cancel` → `close`)
-  - Unknown `photoId`: dialog stays closed; `role="status"` notice "Photo not found." with a link back to `/gallery`
-  - Props: `PhotoGrid { photos = [] }`, `PhotoDialog { photo, onClose }`, `GallerySkeleton {}` (same grid dimensions, `aria-busy="true"`, `aria-live="polite"`)
-  - Test list (→ 2.1)
-  → commit `docs(hw3): gallery contract`
+- [x] **1.1 [Contract]** `docs/HW3_CONTRACT.md`: routes, URL state table, `searchFor()` keeps other params, `handleClose` (delete only `photoId`, guarded, `replace: true`, focus `#thumb-<id>`), legit `<dialog>` sync effect with `open` guards, component props (`PhotoGrid { photos, searchFor }`, `PhotoDialog { photo, onClose }`), a11y checklist, 11 test cases → commit `docs(hw3): gallery contract`
 
 ---
 
@@ -405,13 +395,14 @@ HW3/
   1. `/` redirects to `/gallery`; grid renders one link per photo with descriptive `alt`
   2. Clicking a thumbnail sets `?photoId=<id>` and the dialog is `open` with heading = photo title
   3. Deep link `/gallery?photoId=<id>` opens the dialog on first render
-  4. Close button → `photoId` removed, dialog closed
+  4. "Close photo" → `photoId` removed, dialog closed, focus on `#thumb-<id>`
   5. Native `close` event (Esc path) → `photoId` removed
-  6. Other params preserved: `?album=x&photoId=p1` → close → `?album=x`
+  6. `?album=x&photoId=<id>` → link keeps `album`; closing leaves `?album=x`
   7. Unknown `photoId` → dialog closed + "Photo not found." status
-  8. Removing `photoId` from the URL (Back) closes the dialog
+  8. URL loses `photoId` (Back) → dialog closes without an extra navigation
   9. Dialog has `aria-labelledby` pointing to its heading; close button is `type="button"`
   10. Skeleton has `aria-busy="true"` and `aria-live="polite"`
+  11. Unknown route → 404 page
   → run (all fail on assertions) → commit `test(hw3): gallery tests (red)`
 - [ ] 📸 **S-fail** — Terminal showing the failing gallery tests
 
@@ -463,7 +454,7 @@ HW3/
 
 | # | Workstream | Status |
 |---|---|---|
-| 0 | Setup | ⬜ |
+| 0 | Setup | ✅ |
 | 1 | Contract | ⬜ |
 | 2 | Tests (red) | ⬜ |
 | 3 | Implement | ⬜ |
