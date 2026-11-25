@@ -106,6 +106,22 @@ The client and the server import the same files, so the rules and messages are i
 | `AppealHistory` | `GET /api/appeals/:playerId` (refetch after a successful submit) |
 | `useForumMessages(forum)` | `GET /api/messages/:forum` (AbortController) + `postMessage()` → `POST` then refetch |
 
+### `useForumMessages(forum)` contract
+
+```js
+useForumMessages(forum) → {
+  data,          // message[] for the current forum ([] while the first load is pending or after an error)
+  loading,       // derived: last settled request ≠ { forum, reloadKey }
+  error,         // null | 'Could not load messages.'
+  postMessage,   // async (payload) → { ok: true } | { ok: false, message, fields? } — never throws
+}
+```
+- One `AbortController` per GET; cleanup aborts it (forum change, refetch, unmount)
+- After every `await`, `if (signal.aborted) return` → stale responses never overwrite newer data
+- `AbortError` is ignored (not an error state, not logged)
+- `postMessage` → `POST /api/messages/:forum`; on `201` bump `reloadKey` → GET refetch; on failure return the server `error`/`fields`
+- During a refetch on the same forum, the previous messages stay visible
+
 ## 7. Test Cases (→ WBS 4.2, supertest + in-memory Mongo)
 
 **Appeals**
