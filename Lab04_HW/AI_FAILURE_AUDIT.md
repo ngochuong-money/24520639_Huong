@@ -263,9 +263,125 @@ Additional workflow corrections: the first API contract included unrequested det
 - **Symptom:** The contract specified `FormContext.js`, but the file renders `<FormContext.Provider>`; Vite does not parse JSX in `.js` files, so the build would fail.
 - **Root cause:** AI copied the filename from the slide (`FormContext.js`) without checking it against the file's content and the Vite toolchain.
 - **Fix:** Renamed to `FormContext.jsx` in the contract and WBS before any implementation.
-- **Evidence:** Caught during contract review, before code was written; no runtime failure occurred. Build verification pending in WBS 2.3.
+- **Evidence:** Caught during contract review, before code was written; no runtime failure occurred. `npm.cmd run build` passed with `FormContext.jsx` in WBS 2.3 (commit `80671f5`).
+
+#### F-03 — Commit split lost the full route file
+
+- **Date / WBS task:** 2026-11-24 · 1.6
+- **AI prompt:**
+  > 1.6 [Refactor] … tests green → commits `feat(hw2): router layout`, `feat(hw2): detail route handling`
+- **Symptom:** After splitting the work into two commits, `feat(hw2): detail route handling` contained the layout-only `AppRoutes.jsx`; 4 routing tests failed (`4 failed | 12 passed`).
+- **Root cause:** The AI agent backed up the full `AppRoutes.jsx` into a scratch directory that did not exist; `cp` failed, the script did not stop, and the "restore" step silently had nothing to restore.
+- **Fix:** Rewrote the full `AppRoutes.jsx` (lazy `PersonDetail`/`AppealPage`, nested `:playerID/appeal`) and amended the unpushed commit. Lesson: verify the backup exists before overwriting, and run the tests before each commit of a split.
+- **Evidence:** Test run after the amend: `16 passed (16)`; build emitted separate `PersonDetail` and `AppealPage` chunks. Terminal output only, no screenshot.
+
+#### F-04 — `readFileSync(new URL(…, import.meta.url))` fails in jsdom
+
+- **Date / WBS task:** 2026-11-24 · 2.2 (repeated in 3.2 and 4.4)
+- **AI prompt:**
+  > 2.2 [Fail Test] … form component tests (… `useEffect` guard …)
+- **Symptom:** Test 10b (source must not contain `useEffect`) failed with `TypeError: The URL must be of scheme file` instead of reaching its assertion.
+- **Root cause:** AI assumed `import.meta.url` is a `file://` URL. Under Vitest's jsdom environment it is not, so `node:fs` rejects it. The same pattern was suggested again for the SLA hook test (3.2) and the forum hook test (4.4).
+- **Fix:** Read the source through Vite instead: `import source from '../src/context/FormContext.jsx?raw'`. Applied pre-emptively in 3.2 and 4.4.
+- **Evidence:** Test 10b passed for the right reason (stub had no `useEffect`) after the change; `useAppealSlaTimer` test 11 and `useForumMessages` test 9 used `?raw` from the start. Terminal output only.
+
+#### F-05 — Source-scanning test tripped by a code comment
+
+- **Date / WBS task:** 2026-11-25 · 2.3
+- **AI prompt:**
+  > 2.3 [Implement] `context/FormContext.jsx`: `createContext(null)` + `FormProvider` … + `useFormContext()`
+- **Symptom:** With the AI-supplied `FormContext.jsx`, test 10b failed: the file contained no `useEffect` call, only the comment `// Derived during render — never stored, never synced with useEffect`.
+- **Root cause:** The AI-generated test checks the raw source with a regex, and the AI-generated implementation mentioned the forbidden word in a comment. The two outputs were never checked against each other.
+- **Fix:** Reworded the comment to `never stored in state, never synced by an effect`; no logic changed.
+- **Evidence:** `appealForm` went from `8 failed | 1 passed` to the expected `7 failed | 2 passed` (10b and 16). Terminal output only.
+
+#### F-06 — `curl.exe` command loses JSON quotes in Windows PowerShell
+
+- **Date / WBS task:** 2026-11-26 · 4.3
+- **AI prompt:**
+  > Manual check for S4a: `curl.exe -i -X POST http://localhost:3001/api/appeals -H "Content-Type: application/json" -d $ok`
+- **Symptom:** A valid appeal payload returned `HTTP/1.1 400 Bad Request` with `{"error":"Malformed JSON body."}`.
+- **Root cause:** Windows PowerShell 5.1 strips embedded double quotes when passing a string argument to a native executable, so the server received invalid JSON. The AI wrote a command that only works in bash or PowerShell 7.
+- **Fix:** Pipe the body through stdin: `$ok | curl.exe … --data-binary "@-"`.
+- **Evidence:** Same payload then returned `201 Created`; the 400 and 409 cases behaved as specified. Screenshot of the malformed-JSON response kept as a side effect proving the error handler returns JSON without a stack trace.
+
+#### F-07 — Synchronous query on a lazy-loaded route
+
+- **Date / WBS task:** 2026-11-26 · 4.5
+- **AI prompt:**
+  > 4.5 [Integrate] … appeal history from `GET /api/appeals/:playerId`, refreshed after submit
+- **Symptom:** Integration test d failed after the feature was implemented: `Unable to find a label with the text of: Email`; the DOM showed the dossier but not yet the appeal form.
+- **Root cause:** `AppealPage` is loaded with `React.lazy`. The AI-written test waited for the appeal history, then used synchronous `getByLabelText`, which ran before the lazy chunk resolved — a rule the project had already fixed in Sprint 1 (use `findBy*` for lazy content).
+- **Fix:** `await screen.findByLabelText('Email')` in the test; production code unchanged (commit `495adb0`).
+- **Evidence:** Full client suite `78 passed (78)` on three consecutive runs.
+
+> Not logged (not AI-caused): npm resolving `react-router` to v8 (pinned to v7), the `d:` vs `D:` drive-letter casing that loaded two Vitest instances in the agent's shell, and an install interrupted by the user.
 
 ---
 
 ### Architecture Analysis
-_Written in WBS 5.3 after implementation._
+
+#### 1. Routing tree (React Router v7, declarative)
+
+```text
+<BrowserRouter>
+└── App (header <h1>)
+    └── AppRoutes
+        ├── /                      → <Navigate to="/dossier" replace />
+        ├── /dossier               → PeopleLayout (<nav> NavLink sidebar + <main><Suspense><Outlet/>)
+        │   ├── index              → SelectCase
+        │   └── :playerID          → PersonDetail (lazy)  — useParams() → players.find()
+        │       └── appeal         → AppealPage (lazy)    — useOutletContext()
+        └── *                      → NotFoundState (full page, no sidebar)
+```
+
+- Unknown `:playerID` renders `NotFoundState` **inside** the layout, so navigation never disappears.
+- `NavLink` provides `aria-current="page"`; styling uses the `className` function, not `activeClassName`.
+- Two `Suspense` boundaries: one for the dossier, one inside `PersonDetail` for the appeal chunk, so opening the form never blanks the case file. Skeletons reuse the real classes (CLS ≈ 0).
+
+#### 2. Form data flow (Context, derived errors)
+
+```text
+SimpleForm ──validate=validateAppeal──▶ FormProvider
+                                         state:   values, touched, submitAttempted, status, serverMessage, serverErrors
+                                         derived: errors = validate(values)   ← every render, no useEffect
+                                                  isValid, visibleErrors (touched || submitAttempted, + serverErrors)
+             InputField × 7 ◀── useFormContext() ── value / onChange / onBlur / aria-invalid / aria-describedby
+             ShowData       ◀── { ...values, isValid, status, isExpired }
+```
+
+- Errors are never stored, so they cannot drift from `values`; one keystroke = one render.
+- Invalid submit: no request, all errors shown, focus moved to the first invalid control (inside the event handler).
+- `MessageForm` reuses the same provider with `validateMessage` — one form engine for both forms.
+
+#### 3. Clock-delta timer (`useAppealSlaTimer`)
+
+```text
+offset      = serverNow − (t0 + t1) / 2          GET /api/time, midpoint cancels latency
+remainingMs = max(0, deadline − (tickNow + offset))   recomputed in render, never decremented
+tick        = setTimeout to the next whole second; stops at 0; re-sync on visibilitychange
+```
+
+- State holds only `tickNow`, `offset`, `isSynced`, `syncKey`; `remainingMs`, `isExpired`, `parts` are derived.
+- A throttled or sleeping tab cannot accumulate error: the zero-drift test jumps the clock 30 s without ticks and expects the next tick to show the full 31 s.
+- The hook runs once in `PersonDetail`; `isExpired` flows to the form through Outlet context, and the server enforces the same deadline (`409`).
+
+#### 4. Request cancellation
+
+- `useAbortableGet(url, { reloadKey })`: one `AbortController` per request, `return () => controller.abort()` on URL change, refetch or unmount.
+- After each `await`, `if (signal.aborted) return`; `AbortError` is ignored — no `didCancel` flags.
+- The last settled result is tagged with `{ url, reloadKey }`; `loading`, `data` and `error` are derived from that tag, so a late response from an old channel can never overwrite the current one.
+- `useForumMessages` and `AppealHistory` both build on this hook; posting bumps `reloadKey` for a fresh, abortable GET.
+
+#### 5. Validation parity (client ↔ server)
+
+```text
+shared/validateAppeal.js  ─┬─▶ client: FormProvider (render pass)
+shared/validateMessage.js ─┘
+                            └─▶ server: POST handlers → 400 { error, fields }
+```
+
+- Both sides import the same pure functions, so messages are identical by construction.
+- Server tests assert `res.body.fields` **equals** `validateAppeal(payload)` / `validateMessage(payload)`.
+- The server additionally enforces what the client cannot be trusted with: player existence (`404`), the deadline on the server clock (`409`), a field whitelist (no `...req.body`), a 10 kb body limit (`413`), and a central error handler that never leaks stack traces (`500`).
+

@@ -298,21 +298,19 @@ HW2/
 - [x] **4.2 [Fail Test]** `mongodb-memory-server` + supertest: `appeals.test.js` (1–7), `messages.test.js` (8–11), `robustness.test.js` (12, 12b, 13, 14); parity via shared validators; Date-only fake timers → commit `test(hw2): api tests (red)`
 - [x] **4.3 [Implement]** `server.js`: `cors({ origin: process.env.CLIENT_ORIGIN })`, `express.json()`, models `Appeal` + `Message`, `async/await` + `.exec()`, `MONGODB_URI` from `process.env`, reuse `shared/validateAppeal.js` (validation parity), central error handler → commit `feat(hw2): api endpoints`
 - [x] **4.4 [Implement]** `hooks/useForumMessages.js` (contract → red → green): `AbortController` per GET, `return () => controller.abort()`, ignore `AbortError`, `signal.aborted` guard after each `await`; `loading` derived from the last settled request (no `setLoading` in the effect body); `postMessage()` → refetch → commits `test(hw2): forum hook tests (red)`, `feat(hw2): forum messages hook`
-- [x] **4.5 [Integrate]** `AppealHistory` + `TribunalChannels` (`aria-pressed` switcher, message list, `MessageForm` reusing `FormProvider` + `validateMessage`); shared `useAbortableGet` (forum hook refactored, tests unchanged); history refetch via `onAppealSubmitted` → commits `test(hw2): hook tests` (red), `feat(hw2): tribunal channels and appeal history`
-- [ ] 📸 **S4a** — Postman/Thunder: 201, 400 (with `fields`), 409
-- [ ] 📸 **S4b** — Slow 3G Network tab: rapid channel switching → stale requests **(canceled)**
-- [ ] 📸 **S4c** — MongoDB Compass/Atlas showing saved appeals + messages
-- [ ] 📸 **S4d** — Appeal history + channel messages in the UI
+- [x] **4.5 [Integrate]** Channel switcher + message list/post form in the dossier; appeal history from `GET /api/appeals/:playerId`, refreshed after submit → commit `test(hw2): hook tests`
+- [x] 📸 **S4a** — Postman/Thunder: 201, 400 (with `fields`), 409
+- [x] 📸 **S4b** — Slow 3G Network tab: rapid channel switching → stale requests **(canceled)**
+- [x] 📸 **S4c** — MongoDB Compass/Atlas showing saved appeals + messages
+- [x] 📸 **S4d** — Appeal history + channel messages in the UI
 
 ---
 
 ### 5. Post-Mortem `AI_FAILURE_AUDIT.md` (P0 · Req #4)
 
-- [ ] **5.1** Log each real AI failure when it occurs: *Prompt → Symptom → Root cause → Fix → Evidence*
-- [ ] **5.2** Do not fabricate failures; if a Slide 29 category never occurred, leave it out
-- [ ] **5.3** Write the **Architecture Analysis**: routing tree, form data flow, clock-delta timer design, request cancellation, validation parity → commit `docs(hw2): ai failure audit`
-- [ ] 📸 **S5** — Before/after evidence for each logged failure, pasted into the report under its F-xx entry
-
+- [x] **5.1** Log each real AI failure when it occurs: *Prompt → Symptom → Root cause → Fix → Evidence*
+- [x] **5.2** Do not fabricate failures; if a Slide 29 category never occurred, leave it out
+- [x] **5.3** Write the **Architecture Analysis**: routing tree, form data flow, clock-delta timer design, request cancellation, validation parity → commit `docs(hw2): ai failure audit`
 ---
 
 ### 6. Acceptance & Submission (P2)
@@ -339,7 +337,7 @@ HW2/
 | 1 | Dossier Routing | #1 | ✅ |
 | 2 | Appeal Form Engine | #2 | ✅ |
 | 3 | SLA Timer | #3 | ✅ |
-| 4 | Backend + Hook | Rules | ✅ |
+| 4 | Backend + Hook | Rules | ⬜ |
 | 5 | AI Failure Audit | #4 | ⬜ |
 | 6 | Acceptance | — | ⬜ |
 
