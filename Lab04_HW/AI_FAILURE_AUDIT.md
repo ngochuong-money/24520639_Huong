@@ -385,3 +385,27 @@ shared/validateMessage.js ─┘
 - Server tests assert `res.body.fields` **equals** `validateAppeal(payload)` / `validateMessage(payload)`.
 - The server additionally enforces what the client cannot be trusted with: player existence (`404`), the deadline on the server clock (`409`), a field whitelist (no `...req.body`), a 10 kb body limit (`413`), and a central error handler that never leaks stack traces (`500`).
 
+
+## Homework 3
+
+> Only real AI-caused failures encountered during development and verification are logged here.
+> No failures are staged or fabricated.
+
+### Failure Log
+
+<!-- Copy this template for each real failure -->
+
+#### H3-F01 — <short title>
+
+- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 3.2>
+- **AI prompt:**
+  > <exact prompt that produced the faulty code>
+- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
+- **Root cause:** <why the AI output was wrong>
+- **Fix:** <what was changed manually>
+- **Evidence:** <test name / DevTools observation> — screenshot in report, section H3-F01
+
+---
+
+### Architecture Analysis
+_Written in WBS 5.2 after implementation._

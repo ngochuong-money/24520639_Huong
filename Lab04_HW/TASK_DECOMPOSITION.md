@@ -317,15 +317,15 @@ HW2/
 
 - [x] **6.1** End-to-end flow: dossier → appeal → submit → history updates → channel discussion
 - [x] **6.2** Responsive at 375 / 768 / 1440 px with no horizontal scroll (CSS Grid + `@media`)
-- [ ] **6.3** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean; keyboard-only navigation with visible focus
-- [ ] **6.4** No Console warnings; client: `npm run lint`, `npm run test:run`, `npm run build` pass; server: `npm run lint`, `npm run test:run` pass (plain Node ESM, no build step)
-- [ ] **6.5** Prohibited-pattern sweep: `<Switch>`, `<Redirect>`, `exact`, `activeClassName`, `var`, `keyCode`, `keypress`, `defaultProps`, `didCancel`, `window.alert`, index keys, hardcoded URIs
-- [ ] **6.6** `git log --graph --oneline --decorate` shows every required commit
-- [ ] **6.7** Live-defense prep (Slide 28): `useSearchParams` sync, cross-field validation, exponential-backoff retry respecting `AbortController`, protected route guard
-- [ ] 📸 **S6a** — Lighthouse 100/100
-- [ ] 📸 **S6b** — 375 px mobile + 1440 px desktop
-- [ ] 📸 **S6c** — Terminal: lint, test, build passing
-- [ ] 📸 **S6d** — `git log --graph`
+- [x] **6.3** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean; keyboard-only navigation with visible focus
+- [x] **6.4** No Console warnings; `npm.cmd run lint`, `npm.cmd test`, `npm.cmd run build` pass for client and server
+- [x] **6.5** Prohibited-pattern sweep: `<Switch>`, `<Redirect>`, `exact`, `activeClassName`, `var`, `keyCode`, `keypress`, `defaultProps`, `didCancel`, `window.alert`, index keys, hardcoded URIs
+- [x] **6.6** `git log --graph --oneline --decorate` shows every required commit
+
+- [x] 📸 **S6a** — Lighthouse 100/100
+- [x] 📸 **S6b** — 375 px mobile + 1440 px desktop
+- [x] 📸 **S6c** — Terminal: lint, test, build passing
+- [x] 📸 **S6d** — `git log --graph`
 
 ---
 
@@ -342,3 +342,133 @@ HW2/
 | 6 | Acceptance | — | ⬜ |
 
 **Report screenshots:** S0 · S1a–d · S2a–d · S3a–c · S4a–d · S5 · S6a–d (24 total)
+
+## Homework 3 — Photo Gallery with URL-Synced Native `<dialog>` Modal
+
+> Source: Slide 30 — `PhotoGalleryLayout.jsx` & Native HTML5 `<dialog>` Modal (useSearchParams + WCAG 2.2 AA focus management)
+> Location: `Lab04_HW/HW3/` — all paths relative to `HW3/` unless stated otherwise
+> Stack: React 19 + Vite + React Router v7 (frontend only)
+> Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
+> Commit scope: `type(hw3): message` · Shell: PowerShell (`npm.cmd`, `npx.cmd`)
+> 📸 = take a screenshot and paste it directly into the Word report (caption = screenshot ID)
+
+**Definition of Done:** `/gallery` shows a responsive photo grid. Activating a thumbnail sets `?photoId=<id>` and opens a native `<dialog>` via `showModal()` with focus trapped inside. Esc, the close button or browser Back removes only `photoId` from the URL and returns focus to the thumbnail. Reloading or sharing `/gallery?photoId=<id>` reopens the same photo; an unknown id shows a non-blocking notice. Every real AI failure is logged in `AI_FAILURE_AUDIT.md` under `## Homework 3`.
+
+### Folder Structure
+
+~~~text
+HW3/
+├── client/
+│   ├── public/photos/        # your own / CC0 images (+ width/height known)
+│   ├── src/
+│   │   ├── components/       # PhotoGalleryLayout, PhotoGrid, PhotoDialog, GallerySkeleton, NotFoundState
+│   │   ├── data/photos.js
+│   │   └── routes/AppRoutes.jsx
+│   └── tests/
+├── docs/HW3_CONTRACT.md
+└── README.md
+~~~
+
+---
+
+### 0. Setup
+
+- [ ] **0.1** Scaffold `client/` (React 19 + Vite, `createRoot`, `<StrictMode>`); install `react-router@7`, Vitest, jsdom, Testing Library, user-event
+- [ ] **0.2** Copy the HW2 test config: `vite.config.js` (`defineConfig` from `'vitest/config'`), `tests/setup.js` (`expect.extend(matchers)`)
+- [ ] **0.3** Add a `<dialog>` polyfill to `tests/setup.js` (jsdom lacks `showModal`/`close`): `showModal` sets `open`, `close` clears `open` and dispatches `close`
+- [ ] **0.4** Seed `src/data/photos.js` (6–9 items: `id`, `title`, `alt`, `src`, `width`, `height`, `credit`) + images in `public/photos/`
+- [ ] **0.5** `README.md` (run/test); add `## Homework 3` section to the root `AI_FAILURE_AUDIT.md`
+- [ ] **0.6** Run the app, confirm a clean Console → commit `init(hw3): project setup`
+- [ ] 📸 **S0** — App running, Console clean
+
+---
+
+### 1. Contract
+
+- [ ] **1.1 [Contract]** `docs/HW3_CONTRACT.md`:
+  - Routes: `/` → `<Navigate to="/gallery" replace />`, `/gallery` (lazy `PhotoGalleryLayout` + `<Suspense fallback={<GallerySkeleton />}>`), `*` → `<NotFoundState />`
+  - URL state: `photoId` is the **only** source of truth for the modal; `selectedPhoto` derived via `photos.find()` — no `useState` for open/closed
+  - Opening: thumbnail is a `<Link to={{ search: '?photoId=<id>' }}>` (keyboard + Back button work natively), other params preserved
+  - Closing: `onClose` deletes **only** `photoId` (`new URLSearchParams(prev)` + `delete`), and only if it is still present (no redundant navigation)
+  - Effect (legit: syncs React with the DOM `<dialog>` API): `showModal()` when a valid photo is selected and `!dialog.open`; `close()` when none and `dialog.open`; deps `[selectedPhoto]`
+  - Dialog a11y: `aria-labelledby` → `<h2>` photo title; `<figure>` + `<img alt width height>` + `<figcaption>`; close button `type="button"` "Close photo"; Esc closes (native `cancel` → `close`)
+  - Unknown `photoId`: dialog stays closed; `role="status"` notice "Photo not found." with a link back to `/gallery`
+  - Props: `PhotoGrid { photos = [] }`, `PhotoDialog { photo, onClose }`, `GallerySkeleton {}` (same grid dimensions, `aria-busy="true"`, `aria-live="polite"`)
+  - Test list (→ 2.1)
+  → commit `docs(hw3): gallery contract`
+
+---
+
+### 2. Tests (red)
+
+- [ ] **2.1 [Fail Test]** `tests/gallery.test.jsx` (MemoryRouter + location probe):
+  1. `/` redirects to `/gallery`; grid renders one link per photo with descriptive `alt`
+  2. Clicking a thumbnail sets `?photoId=<id>` and the dialog is `open` with heading = photo title
+  3. Deep link `/gallery?photoId=<id>` opens the dialog on first render
+  4. Close button → `photoId` removed, dialog closed
+  5. Native `close` event (Esc path) → `photoId` removed
+  6. Other params preserved: `?album=x&photoId=p1` → close → `?album=x`
+  7. Unknown `photoId` → dialog closed + "Photo not found." status
+  8. Removing `photoId` from the URL (Back) closes the dialog
+  9. Dialog has `aria-labelledby` pointing to its heading; close button is `type="button"`
+  10. Skeleton has `aria-busy="true"` and `aria-live="polite"`
+  → run (all fail on assertions) → commit `test(hw3): gallery tests (red)`
+- [ ] 📸 **S-fail** — Terminal showing the failing gallery tests
+
+---
+
+### 3. Implement
+
+- [ ] **3.1 [Implement]** `PhotoGrid.jsx`: `<ul>` grid (CSS Grid + `@media`, 375–1440 px), `<li key={photo.id}>` → `<Link>` → `<img loading="lazy" width height alt>`; visible focus ring
+- [ ] **3.2 [Implement]** `PhotoDialog.jsx`: `<dialog ref aria-labelledby onClose>` → `<h2>` + `<figure>` + close button; `useEffect` open/close sync with `dialog.open` guards; `::backdrop` styling
+- [ ] **3.3 [Implement]** `PhotoGalleryLayout.jsx`: `useSearchParams()` → `selectedPhoto` derived; `handleClose` removes only `photoId` when present; renders `<main>` → `<h1>` + `PhotoGrid` + `PhotoDialog` + not-found status → commit `feat(hw3): gallery layout`
+- [ ] **3.4 [Implement]** `AppRoutes.jsx` with lazy layout + `GallerySkeleton` (CLS = 0) → commit `feat(hw3): url-synced dialog`
+- [ ] 📸 **S1** — Gallery grid (desktop)
+- [ ] 📸 **S2** — Dialog open with `?photoId=…` visible in the address bar
+- [ ] 📸 **S3** — DevTools Accessibility Tree: dialog role, accessible name, focus inside the dialog
+- [ ] 📸 **S4** — Reload on `/gallery?photoId=…` keeps the dialog open; Back closes it (2 shots)
+- [ ] 📸 **S5** — After Esc: URL without `photoId` and focus ring back on the thumbnail
+
+---
+
+### 4. Refactor & Verification
+
+- [ ] **4.1 [Refactor]** Zero div-soup, no index keys, no prohibited patterns (`git grep` sweep); tests green
+- [ ] **4.2** Keyboard only: Tab to thumbnail → Enter opens → Tab cycles inside the dialog → Esc closes → focus returns
+- [ ] **4.3** Responsive at 375 / 768 / 1440 px, no horizontal scroll; images keep aspect ratio (no CLS)
+- [ ] **4.4** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
+- [ ] **4.5** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` all pass
+- [ ] 📸 **S-pass** — All gallery tests passing (pair with S-fail)
+- [ ] 📸 **S6** — Lighthouse 100/100
+- [ ] 📸 **S7** — 375 px mobile + 1440 px desktop
+
+---
+
+### 5. AI Failure Audit (`## Homework 3`)
+
+- [ ] **5.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence*
+- [ ] **5.2** Short **Architecture Analysis**: URL as single source of truth, why this `useEffect` is legitimate (external DOM API) vs. forbidden derived-state effects, native focus trap vs. custom trap → commit `docs(hw3): ai failure audit`
+
+---
+
+### 6. Submission
+
+- [ ] **6.1** `git log --graph --oneline --decorate` shows all HW3 commits in order (contract → tests → feat)
+- [ ] **6.2** Defense prep: explain `useSearchParams` vs `useState`, `showModal()` vs `show()`, why `onClose` deletes only `photoId`, how focus returns
+- [ ] 📸 **S8** — `git log --graph` for HW3
+
+---
+
+### Progress
+
+| # | Workstream | Status |
+|---|---|---|
+| 0 | Setup | ⬜ |
+| 1 | Contract | ⬜ |
+| 2 | Tests (red) | ⬜ |
+| 3 | Implement | ⬜ |
+| 4 | Verification | ⬜ |
+| 5 | AI Failure Audit | ⬜ |
+| 6 | Submission | ⬜ |
+
+**Report screenshots:** S0 · S-fail · S1–S5 · S-pass · S6 · S7 · S8

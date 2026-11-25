@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.page { padding: 1.5rem; max-width: 72rem; margin: 0 auto; }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
