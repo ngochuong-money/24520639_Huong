@@ -391,19 +391,7 @@ HW3/
 
 ### 2. Tests (red)
 
-- [ ] **2.1 [Fail Test]** `tests/gallery.test.jsx` (MemoryRouter + location probe):
-  1. `/` redirects to `/gallery`; grid renders one link per photo with descriptive `alt`
-  2. Clicking a thumbnail sets `?photoId=<id>` and the dialog is `open` with heading = photo title
-  3. Deep link `/gallery?photoId=<id>` opens the dialog on first render
-  4. "Close photo" → `photoId` removed, dialog closed, focus on `#thumb-<id>`
-  5. Native `close` event (Esc path) → `photoId` removed
-  6. `?album=x&photoId=<id>` → link keeps `album`; closing leaves `?album=x`
-  7. Unknown `photoId` → dialog closed + "Photo not found." status
-  8. URL loses `photoId` (Back) → dialog closes without an extra navigation
-  9. Dialog has `aria-labelledby` pointing to its heading; close button is `type="button"`
-  10. Skeleton has `aria-busy="true"` and `aria-live="polite"`
-  11. Unknown route → 404 page
-  → run (all fail on assertions) → commit `test(hw3): gallery tests (red)`
+- [ ] **2.1 [Fail Test]** `tests/gallery.test.jsx` (MemoryRouter + `LocationProbe` with test-only Back/Forward buttons): 11 cases from `HW3_CONTRACT.md` §6 — redirect + grid, open via click, deep link, close button (+ focus return), native close (Esc path), other params preserved, unknown id, Back closes without extra navigation, dialog labelling, skeleton a11y, 404 → run (fail on assertions) → commit `test(hw3): gallery tests (red)`
 - [ ] 📸 **S-fail** — Terminal showing the failing gallery tests
 
 ---
