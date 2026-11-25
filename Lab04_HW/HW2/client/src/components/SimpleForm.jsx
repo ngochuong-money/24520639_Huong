@@ -24,11 +24,15 @@ async function submitAppeal(payload) {
   }
 }
 
-function AppealFormBody() {
+function AppealFormBody({ isExpired }) {
   const { values, isValid, status, serverMessage, handleSubmit } = useFormContext();
   const statusId = useId();
   const statementLength = values.statement.trim().length;
   const isSubmitting = status === 'submitting';
+
+  let statusText = serverMessage;
+  if (isExpired) statusText = 'The appeal window has closed.';
+  else if (isSubmitting) statusText = 'Submitting appeal…';
 
   return (
     <>
@@ -63,21 +67,26 @@ function AppealFormBody() {
           />
         </fieldset>
 
-        <button type="submit" className="action-link" disabled={isSubmitting}>
+        <button type="submit" className="action-link" disabled={isSubmitting || isExpired}>
           Submit appeal
         </button>
 
-        <p id={statusId} role="status" aria-live="polite" className={`form-status form-status--${status}`}>
-          {isSubmitting ? 'Submitting appeal…' : serverMessage}
+        <p
+          id={statusId}
+          role="status"
+          aria-live="polite"
+          className={`form-status form-status--${isExpired ? 'error' : status}`}
+        >
+          {statusText}
         </p>
       </form>
 
-      <ShowData data={{ ...values, isValid, status }} />
+      <ShowData data={{ ...values, isValid, status, isExpired }} />
     </>
   );
 }
 
-export default function SimpleForm({ player }) {
+export default function SimpleForm({ player, isExpired = false }) {
   const initialValues = {
     playerId: player.id,
     matchId: player.matchId,
@@ -90,7 +99,7 @@ export default function SimpleForm({ player }) {
 
   return (
     <FormProvider key={player.id} initialValues={initialValues} validate={validateAppeal} onSubmit={submitAppeal}>
-      <AppealFormBody />
+      <AppealFormBody isExpired={isExpired} />
     </FormProvider>
   );
 }

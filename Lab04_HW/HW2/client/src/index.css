@@ -205,3 +205,20 @@ textarea.field-control { min-height: 8rem; resize: vertical; }
   .json-inspector dl { grid-template-columns: 9rem minmax(0, 1fr); }
   .json-inspector dd { margin: 0; }
 }
+
+.sla {
+  display: inline-block;
+  margin: 0 0 1rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 999px;
+  background: #ecfeff;
+  border: 1px solid #0e7490;
+  color: #0f172a;
+}
+.sla-time {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.sla-note { color: #475569; }
+.sla--expired { background: #fef2f2; border-color: #b91c1c; color: #b91c1c; font-weight: 600; }
