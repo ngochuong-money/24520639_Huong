@@ -268,8 +268,8 @@ HW2/
 - [x] **2.3 [Implement]** `context/FormContext.jsx`: `createContext(null)` + `FormProvider` (values, touched, `handleChange`, `handleBlur`, `handleSubmit`) + `useFormContext()` → commit `feat(hw2): form context`
 - [x] **2.4 [Implement]** `errors`/`isValid` derived synchronously in render via `validateAppeal(values)` (`useMemo` if needed) — **no `useEffect`**
 - [x] **2.5 [Implement]** `InputField.jsx` (red → green via `tests/inputField.test.jsx`): `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby` (hint + error), error `<p role="alert">`, input/textarea/select, Fragment wrapper → commit `feat(hw2): input field validation`
-- [ ] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
-- [ ] **2.7 [Implement]** `ShowData.jsx`: live state inspector, `<dl>` with keyed `<Fragment>` → commit `feat(hw2): inspector output`
+- [x] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
+- [x] **2.7 [Implement]** `ShowData.jsx`: live state inspector, `<dl>` with keyed `<Fragment>` → commit `feat(hw2): inspector output`
 - [ ] 📸 **S2a** — Real-time error state
 - [ ] 📸 **S2b** — Valid form + `<ShowData />` inspector
 - [ ] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
@@ -348,7 +348,7 @@ HW2/
 |---|---|---|---|
 | 0 | Setup | — | ✅ |
 | 1 | Dossier Routing | #1 | ✅ |
-| 2 | Appeal Form Engine | #2 | ⬜ |
+| 2 | Appeal Form Engine | #2 | ✅ |
 | 3 | SLA Timer | #3 | ⬜ |
 | 4 | Backend + Hook | Rules | ⬜ |
 | 5 | AI Failure Audit | #4 | ⬜ |
