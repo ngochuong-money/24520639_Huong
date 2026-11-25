@@ -267,13 +267,13 @@ HW2/
 - [x] **2.2 [Fail Test]** `validateAppeal` unit tests (rules, boundaries, cross-field email) + form component tests (real-time errors, `isValid` in ShowData, invalid submit focuses first error, `aria-invalid`/`aria-describedby`, fetch payload, server field errors, context guard) → commit `test(hw2): sprint 2 form tests (red)`
 - [x] **2.3 [Implement]** `context/FormContext.jsx`: `createContext(null)` + `FormProvider` (values, touched, `handleChange`, `handleBlur`, `handleSubmit`) + `useFormContext()` → commit `feat(hw2): form context`
 - [x] **2.4 [Implement]** `errors`/`isValid` derived synchronously in render via `validateAppeal(values)` (`useMemo` if needed) — **no `useEffect`**
-- [ ] **2.5 [Implement]** `InputField.jsx` (red → green via `tests/inputField.test.jsx`): `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby` (hint + error), error `<p role="alert">`, input/textarea/select, Fragment wrapper → commit `feat(hw2): input field validation`
+- [x] **2.5 [Implement]** `InputField.jsx` (red → green via `tests/inputField.test.jsx`): `useId()`, `<label htmlFor>`, `aria-invalid`, `aria-describedby` (hint + error), error `<p role="alert">`, input/textarea/select, Fragment wrapper → commit `feat(hw2): input field validation`
 - [ ] **2.6 [Implement]** `SimpleForm.jsx`: `<form noValidate>` + `<fieldset>`/`<legend>`, `try/catch` submit to `POST /api/appeals`, maps server `fields` errors, accessible status message (no `alert()`)
 - [ ] **2.7 [Implement]** `ShowData.jsx`: live state inspector, `<dl>` with keyed `<Fragment>` → commit `feat(hw2): inspector output`
 - [ ] 📸 **S2a** — Real-time error state
 - [ ] 📸 **S2b** — Valid form + `<ShowData />` inspector
 - [ ] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
-- [ ] 📸 **S2d** — Successful submission message
+- [ ] 📸 **S2d** — Successful submission message (taken after WBS 4.3, once `POST /api/appeals` exists)
 
 ---
 

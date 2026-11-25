@@ -5,6 +5,8 @@
 ## Base URL
 `http://localhost:3001/api`
 
+Client calls relative `/api/...`; in development Vite proxies `/api` → `http://localhost:3001`.
+
 ## Error Shape
 ```json
 { "error": "string", "fields": { "fieldName": "message" } }

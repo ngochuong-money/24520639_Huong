@@ -16,6 +16,9 @@ export default defineConfig({
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd()), sharedDir],
     },
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
   },
   test: {
     environment: 'jsdom',

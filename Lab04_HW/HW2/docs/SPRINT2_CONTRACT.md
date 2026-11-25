@@ -98,6 +98,7 @@ useFormContext() → {
 **Labels (exact):** `Player ID`, `Match ID`, `Email`, `Confirm email`, `Reason`, `Statement`, `Evidence URL (optional)`
 **Submit button:** `Submit appeal`
 **Field order (DOM):** Player ID → Contact fieldset (Email, Confirm email) → Appeal fieldset (Match ID, Reason, Statement, Evidence URL)
+**Note:** Player ID sits in its own `Case` fieldset (read-only), so the form has 3 fieldsets; DOM order is unchanged.
 
 ## 6. `ShowData` (`client/src/components/ShowData.jsx`)
 

@@ -49,7 +49,7 @@ export default function PersonDetail({ players = [] }) {
         File an appeal
       </Link>
       <Suspense fallback={<Skeleton variant="appeal" />}>
-        <Outlet />
+        <Outlet context={person} />
       </Suspense>
     </article>
   );

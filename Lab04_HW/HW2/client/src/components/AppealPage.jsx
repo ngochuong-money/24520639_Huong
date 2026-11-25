@@ -1,11 +1,15 @@
 import { useId } from 'react';
+import { useOutletContext } from 'react-router';
+import SimpleForm from './SimpleForm.jsx';
 
 export default function AppealPage() {
+  const player = useOutletContext();
   const headingId = useId();
+
   return (
     <section aria-labelledby={headingId} className="appeal">
       <h3 id={headingId}>File an appeal</h3>
-      <p>The appeal form will be available in Sprint 2.</p>
+      <SimpleForm player={player} />
     </section>
   );
 }
