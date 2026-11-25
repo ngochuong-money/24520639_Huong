@@ -122,6 +122,18 @@ useForumMessages(forum) → {
 - `postMessage` → `POST /api/messages/:forum`; on `201` bump `reloadKey` → GET refetch; on failure return the server `error`/`fields`
 - During a refetch on the same forum, the previous messages stay visible
 
+### Tribunal UI contract (inside `PersonDetail`)
+
+| Component | Data | Behaviour |
+|---|---|---|
+| `AppealHistory` `{ playerId, reloadKey }` | `useAbortableGet('/api/appeals/:playerId')` | `<section>` "Appeal history" → `<ol>` newest first (date, reason label, match ID, statement); empty → "No appeals filed yet."; error → `role="alert"` "Could not load appeal history." |
+| `TribunalChannels` | `useForumMessages(forum)` | `<section>` "Tribunal discussion" → `<fieldset><legend>Channel</legend>` with `<button type="button" aria-pressed>` per channel (default `esports-tribunal`) → `<ol>` messages → `MessageForm` |
+| `MessageForm` `{ postMessage }` | `FormProvider` + `validateMessage` | Labels `Your name`, `Message`; button `Post message`; success status "Message posted."; reset when the channel changes (`key={forum}`) |
+
+- `PersonDetail` holds `historyKey`; Outlet context adds `onAppealSubmitted` → `SimpleForm` calls it after a `201` → history refetches
+- Components accept only arrays from the hooks (`Array.isArray` guard)
+- `useAbortableGet(url, { reloadKey, errorMessage })` → `{ data, loading, error }`, the same abort/derived-state rules as `useForumMessages`, which now uses it
+
 ## 7. Test Cases (→ WBS 4.2, supertest + in-memory Mongo)
 
 **Appeals**
