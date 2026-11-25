@@ -18,7 +18,7 @@ function setupServer() {
     if (url === '/api/time') return json(200, { now: Date.now() });
     if (url === '/api/appeals/himass') return json(200, appeals);
     if (url === '/api/appeals' && options.method === 'POST') {
-      const { confirmEmail, email, ...rest } = JSON.parse(options.body);
+      const { confirmEmail: _confirmEmail, email, ...rest } = JSON.parse(options.body);
       const created = { id: 'a2', ...rest, createdAt: NOW.toISOString() };
       appeals = [created, ...appeals];
       return json(201, { ...created, email });
@@ -107,7 +107,7 @@ describe('Sprint 3 — tribunal integration', () => {
     const history = await screen.findByRole('region', { name: 'Appeal history' });
     expect(await within(history).findByText('Earlier appeal about the macro detection.')).toBeInTheDocument();
 
-    await user.type(screen.getByLabelText('Email'), 'player@team.gg');
+    await user.type(await screen.findByLabelText('Email'), 'player@team.gg'); // AppealPage is lazy-loaded
     await user.type(screen.getByLabelText('Confirm email'), 'player@team.gg');
     await user.selectOptions(screen.getByLabelText('Reason'), 'new-evidence');
     await user.type(screen.getByLabelText('Statement'), 'New replay footage clears the flagged input.');
