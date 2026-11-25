@@ -1,9 +1,11 @@
-import { Fragment, Suspense, useId } from 'react';
+import { Fragment, Suspense, useId, useState } from 'react';
 import { useParams, Link, Outlet } from 'react-router';
 import NotFoundState from './NotFoundState.jsx';
 import Skeleton from './Skeleton.jsx';
 import SlaCountdown from './SlaCountdown.jsx';
 import { useAppealSlaTimer } from '../hooks/useAppealSlaTimer.js';
+import AppealHistory from './AppealHistory.jsx';
+import TribunalChannels from './TribunalChannels.jsx';
 
 const deadlineFormatter = new Intl.DateTimeFormat('en-GB', {
   dateStyle: 'medium',
@@ -14,6 +16,7 @@ const deadlineFormatter = new Intl.DateTimeFormat('en-GB', {
 export default function PersonDetail({ players = [] }) {
   const { playerID } = useParams();
   const headingId = useId();
+  const [historyKey, setHistoryKey] = useState(0);
   const person = players.find((p) => p.id === playerID);
   const sla = useAppealSlaTimer(person?.appealDeadline); // before any early return (Rules of Hooks)
 
@@ -49,12 +52,20 @@ export default function PersonDetail({ players = [] }) {
           </Fragment>
         ))}
       </dl>
+      <AppealHistory playerId={person.id} reloadKey={historyKey} />
       <Link to="appeal" className="action-link">
         File an appeal
       </Link>
       <Suspense fallback={<Skeleton variant="appeal" />}>
-        <Outlet context={{ player: person, isExpired: sla.isExpired }} />
+        <Outlet
+          context={{
+            player: person,
+            isExpired: sla.isExpired,
+            onAppealSubmitted: () => setHistoryKey((key) => key + 1),
+          }}
+        />
       </Suspense>
+      <TribunalChannels />
     </article>
   );
 }

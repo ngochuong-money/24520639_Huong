@@ -222,3 +222,49 @@ textarea.field-control { min-height: 8rem; resize: vertical; }
 }
 .sla-note { color: #475569; }
 .sla--expired { background: #fef2f2; border-color: #b91c1c; color: #b91c1c; font-weight: 600; }
+
+.history, .tribunal {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+.history-list, .message-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.history-list li, .message-list li {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background: #fff;
+  overflow-wrap: anywhere;
+}
+.history-list p, .message-list p { margin: 0; }
+.history-meta { font-size: 0.875rem; color: #475569; }
+
+.channel-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+.channel-switcher legend { font-weight: 600; margin-bottom: 0.5rem; }
+.channel-button {
+  padding: 0.375rem 0.75rem;
+  font: inherit;
+  border: 1px solid #0e7490;
+  border-radius: 999px;
+  background: #fff;
+  color: #0e7490;
+  cursor: pointer;
+}
+.channel-button[aria-pressed='true'] { background: #0e7490; color: #fff; font-weight: 600; }
+.channel-button:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+
+.message-panel { min-height: 6rem; margin-bottom: 1rem; }
+.message-form { margin-top: 0.5rem; }

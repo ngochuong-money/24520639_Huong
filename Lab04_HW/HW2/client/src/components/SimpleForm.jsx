@@ -86,7 +86,7 @@ function AppealFormBody({ isExpired }) {
   );
 }
 
-export default function SimpleForm({ player, isExpired = false }) {
+export default function SimpleForm({ player, isExpired = false, onSubmitted }) {
   const initialValues = {
     playerId: player.id,
     matchId: player.matchId,
@@ -97,8 +97,14 @@ export default function SimpleForm({ player, isExpired = false }) {
     evidenceUrl: '',
   };
 
+  const handleAppealSubmit = async (payload) => {
+    const result = await submitAppeal(payload);
+    if (result.ok) onSubmitted?.();
+    return result;
+  };
+
   return (
-    <FormProvider key={player.id} initialValues={initialValues} validate={validateAppeal} onSubmit={submitAppeal}>
+    <FormProvider key={player.id} initialValues={initialValues} validate={validateAppeal} onSubmit={handleAppealSubmit}>
       <AppealFormBody isExpired={isExpired} />
     </FormProvider>
   );
