@@ -297,8 +297,8 @@ HW2/
 - [x] **4.1 [Contract]** `docs/API_CONTRACT.md` (FINAL): conventions, error table (400/404/409/413/500), 6 endpoints with payloads and check order, shared `validateMessage` + `channels`, Mongoose models, client usage, 14 test cases → commit `docs(hw2): api contract`
 - [x] **4.2 [Fail Test]** `mongodb-memory-server` + supertest: `appeals.test.js` (1–7), `messages.test.js` (8–11), `robustness.test.js` (12, 12b, 13, 14); parity via shared validators; Date-only fake timers → commit `test(hw2): api tests (red)`
 - [x] **4.3 [Implement]** `server.js`: `cors({ origin: process.env.CLIENT_ORIGIN })`, `express.json()`, models `Appeal` + `Message`, `async/await` + `.exec()`, `MONGODB_URI` from `process.env`, reuse `shared/validateAppeal.js` (validation parity), central error handler → commit `feat(hw2): api endpoints`
-- [ ] **4.4 [Implement]** `hooks/useForumMessages.js` (contract → red → green): `AbortController` per GET, `return () => controller.abort()`, ignore `AbortError`, `signal.aborted` guard after each `await`; `loading` derived from the last settled request (no `setLoading` in the effect body); `postMessage()` → refetch → commits `test(hw2): forum hook tests (red)`, `feat(hw2): forum messages hook`
-- [ ] **4.5 [Integrate]** Channel switcher + message list/post form in the dossier; appeal history from `GET /api/appeals/:playerId`, refreshed after submit → commit `test(hw2): hook tests`
+- [x] **4.4 [Implement]** `hooks/useForumMessages.js` (contract → red → green): `AbortController` per GET, `return () => controller.abort()`, ignore `AbortError`, `signal.aborted` guard after each `await`; `loading` derived from the last settled request (no `setLoading` in the effect body); `postMessage()` → refetch → commits `test(hw2): forum hook tests (red)`, `feat(hw2): forum messages hook`
+- [x] **4.5 [Integrate]** `AppealHistory` + `TribunalChannels` (`aria-pressed` switcher, message list, `MessageForm` reusing `FormProvider` + `validateMessage`); shared `useAbortableGet` (forum hook refactored, tests unchanged); history refetch via `onAppealSubmitted` → commits `test(hw2): hook tests` (red), `feat(hw2): tribunal channels and appeal history`
 - [ ] 📸 **S4a** — Postman/Thunder: 201, 400 (with `fields`), 409
 - [ ] 📸 **S4b** — Slow 3G Network tab: rapid channel switching → stale requests **(canceled)**
 - [ ] 📸 **S4c** — MongoDB Compass/Atlas showing saved appeals + messages
@@ -339,7 +339,7 @@ HW2/
 | 1 | Dossier Routing | #1 | ✅ |
 | 2 | Appeal Form Engine | #2 | ✅ |
 | 3 | SLA Timer | #3 | ✅ |
-| 4 | Backend + Hook | Rules | ⬜ |
+| 4 | Backend + Hook | Rules | ✅ |
 | 5 | AI Failure Audit | #4 | ⬜ |
 | 6 | Acceptance | — | ⬜ |
 
