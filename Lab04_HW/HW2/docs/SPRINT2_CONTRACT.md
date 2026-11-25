@@ -67,6 +67,12 @@ useFormContext() → {
 - After that, the error updates **on every keystroke** in the same render pass
 - Server field errors (`400 { fields }`) are merged into `visibleErrors` until that field changes again
 
+### `onSubmit` contract
+- Receives the **trimmed** values
+- Resolves to `{ ok: true, message }` or `{ ok: false, message, fields? }`
+- If it throws, the provider sets `status = 'error'` and shows a generic message
+- On success the provider resets `values`, `touched` and `submitAttempted`
+
 ## 4. `InputField` (`client/src/components/InputField.jsx`)
 
 **Props:** `{ name, label, as = 'input', type = 'text', hint, options = [], ...rest }`
