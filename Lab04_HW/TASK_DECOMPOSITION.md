@@ -224,8 +224,10 @@ HW2/
 │   ├── .env.example
 │   └── server.js
 ├── shared/
+│   ├── channels.js
 │   ├── players.js
-│   └── validateAppeal.js
+│   ├── validateAppeal.js
+│   └── validateMessage.js
 ├── docs/
 │   ├── API_CONTRACT.md
 │   └── SPRINT1_CONTRACT.md
@@ -292,18 +294,8 @@ HW2/
 
 ### 4. Sprint 3 — Backend API + `useForumMessages` (P1 · rules; completes the full stack)
 
-- [ ] **4.1 [Contract]** Write `docs/API_CONTRACT.md` → commit `docs(hw2): api contract` **before any handler**
-
-  | Method | Route | Success | Errors |
-  |---|---|---|---|
-  | GET | `/api/time` | 200 `{ now }` | — |
-  | GET | `/api/appeals/:playerId` | 200 `[appeal]` | 404 |
-  | POST | `/api/appeals` | 201 `appeal` | 400 validation, 404 player, 409 expired |
-  | GET | `/api/messages/:forum` | 200 `[message]` | 404 unknown channel |
-  | POST | `/api/messages/:forum` | 201 `message` | 400, 404 |
-
-  Error shape: `{ error: string, fields?: { [name]: string } }` — never a stack trace. Channels: `nasa`, `esports-tribunal`, `notNasa`.
-- [ ] **4.2 [Fail Test]** supertest covers every row (valid, invalid payload, unknown ID, expired window) → commit `test(hw2): api tests`
+- [x] **4.1 [Contract]** `docs/API_CONTRACT.md` (FINAL): conventions, error table (400/404/409/413/500), 6 endpoints with payloads and check order, shared `validateMessage` + `channels`, Mongoose models, client usage, 14 test cases → commit `docs(hw2): api contract`
+- [x] **4.2 [Fail Test]** `mongodb-memory-server` + supertest: `appeals.test.js` (1–7), `messages.test.js` (8–11), `robustness.test.js` (12, 12b, 13, 14); parity via shared validators; Date-only fake timers → commit `test(hw2): api tests (red)`
 - [ ] **4.3 [Implement]** `server.js`: `cors({ origin: process.env.CLIENT_ORIGIN })`, `express.json()`, models `Appeal` + `Message`, `async/await` + `.exec()`, `MONGODB_URI` from `process.env`, reuse `shared/validateAppeal.js` (validation parity), central error handler → commit `feat(hw2): api endpoints`
 - [ ] **4.4 [Implement]** `hooks/useForumMessages.js`: `AbortController` per request, `return () => controller.abort()`, ignore `AbortError`, `try/catch/finally` with `signal.aborted` guards, `postMessage()` then refetch → commit `feat(hw2): forum messages hook`
 - [ ] **4.5 [Integrate]** Channel switcher + message list/post form in the dossier; appeal history from `GET /api/appeals/:playerId`, refreshed after submit → commit `test(hw2): hook tests`
