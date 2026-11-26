@@ -129,3 +129,34 @@ html:has(.photo-dialog[open]) { overflow: hidden; }
   color: #78350f;
 }
 .gallery-notice a { color: #0e7490; font-weight: 600; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sk-text,
+.sk-block {
+  border-radius: 0.25rem;
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+}
+.sk-text { color: transparent; justify-self: start; }
+.sk-block { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sk-text,
+  .sk-block { animation: sk-shimmer 1.2s ease-in-out infinite; }
+}
+
+@keyframes sk-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
