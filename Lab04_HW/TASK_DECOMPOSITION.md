@@ -501,16 +501,8 @@ HW4/
 
 ### 1. Contract
 
-- [ ] **1.1 [Contract]** `docs/HW4_CONTRACT.md`:
-  - Routes: `/` → `/swipe`; `AppLayout` (nav: Swipe · Himass · TanVuu via `NavLink`) → `/swipe`, `/dossier/:playerID` (lazy + Skeleton), `*` → 404
-  - Swipe model: directions `left` (NOPE, −5), `right` (LIKE, +10), `up` (SUPER, +15); `history` = LIFO stack of `{ id, profileId, direction }`
-  - Derived: `currentProfile = profiles[history.length]`, `score = computeScore(history)`, `isFinished`, `canUndo` — no index/score state
-  - Input map: ArrowLeft/ArrowRight/ArrowUp → swipe, Backspace → undo (`preventDefault`, ignored inside inputs/textarea); pointer drag with `useRef` start point, `setPointerCapture`, `pointercancel`, threshold 80 px (x) / 80 px (up); buttons Nope/Like/Super/Undo with `aria-label`
-  - Live region: polite announcement "Liked Linh. Score 25." after each swipe/undo
-  - Matrix: `computeMatrix(dossier)` → 5×5 grid (violation 1–5 × sanction 1–5) marking the case + precedents; `gap = sanction − violation`; verdict `Disproportionate` when `gap ≥ 2` or above the precedent median by ≥ 2
-  - Test list (→ 2.x, 3.x, 4.x)
-  → commit `docs(hw4): contract`
-- [ ] **1.2 [Contract]** `docs/API_CONTRACT.md`: `GET /api/health`, `GET /api/time`, `GET /api/profiles`, `GET /api/swipes`, `POST /api/swipes` (201/400/404/409 duplicate), `DELETE /api/swipes/:id` (204/404); error shape `{ error, fields? }`; whitelisted persistence; shared `validateSwipe` → commit `docs(hw4): api contract`
+- [x] **1.1 [Contract]** `docs/HW4_CONTRACT.md`: routes + layout; swipe rules (`left −5`, `right +10`, `up +15`); `useSwipeDeck` with `history` as the only deck state (`currentProfile` = first unswiped profile, score/finished/canUndo derived), optimistic POST + rollback, LIFO undo with DELETE; focused-deck keyboard map with guards, ref-based pointer drag, always-visible buttons (WCAG 2.5.7); `computeMatrix` (5×5, gap, precedent median, verdict); dossier view; 20 test cases → commit `docs(hw4): contract`
+- [x] **1.2 [Contract]** `docs/API_CONTRACT.md`: `GET /api/health`, `GET /api/time`, `GET /api/profiles`, `GET /api/swipes`, `POST /api/swipes` (201/400/404/409 duplicate), `DELETE /api/swipes/:id` (204/404); error shape `{ error, fields? }`; whitelisted persistence; shared `validateSwipe` → commit `docs(hw4): api contract`
 
 ---
 
@@ -518,9 +510,6 @@ HW4/
 
 - [ ] **2.1 [Fail Test]** supertest + in-memory Mongo: profiles list (`.lean().exec()`, no `_id`), swipe 201 + parity with `validateSwipe`, unknown profile 404, duplicate swipe 409, mass-assignment ignored, DELETE 204/404, malformed JSON 400, DB failure 500 without leaks → commit `test(hw4): api tests (red)`
 - [ ] **2.2 [Implement]** Models `Profile`, `Swipe`; routes with `async/await` + `.exec()` + `try/catch → next(err)`; central error handler; `cors({ origin })`; `express.json({ limit })` → commit `feat(hw4): api endpoints`
-- [ ] 📸 **S1** — Thunder Client: POST 201, POST 400 (`fields`), DELETE 204
-- [ ] 📸 **S1b** — Server tests: red → green (2 shots)
-
 ---
 
 ### 3. Sprint B — SwipeDeck State (LIFO + derived score)
@@ -585,7 +574,7 @@ HW4/
 
 | # | Workstream | Status |
 |---|---|---|
-| 0 | Setup | ⬜ |
+| 0 | Setup | ✅ |
 | 1 | Contract | ⬜ |
 | 2 | Backend API | ⬜ |
 | 3 | Swipe State | ⬜ |
