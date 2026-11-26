@@ -12,8 +12,8 @@
 - Kept the existing accessible skip link and primary navigation.
 
 ### Source Code
-- [HTML](../Lab_01/Ex_1/index.html)
-- [CSS](../Lab_01/Ex_2/style.css)
+- [HTML](../Exercise/Ex_1/index.html)
+- [CSS](../Exercise/Ex_2/style.css)
 ### Result
 ✅ WCAG 2.2 AA contrast and landmark audit completed.
 
@@ -31,9 +31,9 @@
 - Improved the visible focus indicator for the `Retry` button.
 
 ### Source Code
-- [HTML — Dialog Structure](../Lab_01/Ex_1/index.html)
-- [JavaScript — Dialog Focus Management](../Lab_01/Ex_2/script.js)
-- [CSS — Focus Indicator](../Lab_01/Ex_2/style.css)
+- [HTML — Dialog Structure](../Exercise/Ex_1/index.html)
+- [JavaScript — Dialog Focus Management](../Exercise/Ex_2/script.js)
+- [CSS — Focus Indicator](../Exercise/Ex_2/style.css)
 
 ### Result
 ✅ Keyboard navigation and focus trap audit completed.
@@ -50,8 +50,8 @@
 - Kept event handling inside `script.js` using `addEventListener()`.
 
 ### Source Code
-- [HTML — Content Security Policy](../Lab_01/Ex_1/index.html)
-- [JavaScript — External Event Handlers](../Lab_01/Ex_2/script.js)
+- [HTML — Content Security Policy](../Exercise/Ex_1/index.html)
+- [JavaScript — External Event Handlers](../Exercise/Ex_2/script.js)
 
 ### Result
 ✅ Strict CSP and zero inline handlers completed.
@@ -70,7 +70,7 @@
 - Verified that the portfolio maintains a Lighthouse Performance score of 100.
 
 ### Source Code
-- [HTML — Meta Description](../Lab_01/Ex_1/index.html)
+- [HTML — Meta Description](../Exercise/Ex_1/index.html)
 
 ### Result
 ✅ Lighthouse audit completed with 100 scores across all categories.

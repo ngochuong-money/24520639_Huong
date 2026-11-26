@@ -200,7 +200,7 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
 ## Homework 2 — Full-Stack Esports Fair-Play Appeal Tribunal
 
 > Case study: Himass & TanVuu · Lab 4 · React 19 + Vite + React Router v7 + Express + MongoDB (Mongoose 8)
-> Location: `Lab04_HW/HW2/` — all paths below are relative to `HW2/` unless stated otherwise
+> Location: `Lab04/Homework/HW2/` — all paths below are relative to `HW2/` unless stated otherwise
 > Priority: **P0 = assignment requirements** → **P1 = project rules** → **P2 = acceptance & submission**
 > Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
 > Commit scope: `type(hw2): message`
@@ -346,7 +346,7 @@ HW2/
 ## Homework 3 — Photo Gallery with URL-Synced Native `<dialog>` Modal
 
 > Source: Slide 30 — `PhotoGalleryLayout.jsx` & Native HTML5 `<dialog>` Modal (useSearchParams + WCAG 2.2 AA focus management)
-> Location: `Lab04_HW/HW3/` — all paths relative to `HW3/` unless stated otherwise
+> Location: `Lab04/Homework/HW3/` — all paths relative to `HW3/` unless stated otherwise
 > Stack: React 19 + Vite + React Router v7 (frontend only)
 > Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
 > Commit scope: `type(hw3): message` · Shell: PowerShell (`npm.cmd`, `npx.cmd`)
@@ -450,7 +450,7 @@ HW3/
 ## Homework 4 — "Hen Ho Nhung Khong Yeu" SwipeDeck + Fair-Play Appeal Portal
 
 > Source: Slides 31–33 (reference only — implementation follows project rules, not the slide code verbatim)
-> Location: `Lab04_HW/HW4/` — all paths relative to `HW4/` unless stated otherwise
+> Location: `Lab04/Homework/HW4/` — all paths relative to `HW4/` unless stated otherwise
 > Stack: React 19 + Vite + React Router v7 · Express + Mongoose 8 · shared validation
 > Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
 > Commit scope: `type(hw4): message` (types: init, docs, feat, test, fix) · Shell: PowerShell (`npm.cmd`, `npx.cmd`)
