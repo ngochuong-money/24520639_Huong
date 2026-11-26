@@ -1,11 +1,15 @@
-# Lab 4 — Exercise đã chuyển thư mục
+# Lab 4 — Exercise: cập nhật đường dẫn bài làm
 
-Bài Lab 4 Exercise đã được chuyển từ `Lab_04_EX/` sang `Lab04/Exercise/` khi sắp xếp lại repository theo từng lab.
+Theo yêu cầu của thầy trong bài Lab 4 Homework, em đã gom các bài lab vào một repository và sắp xếp lại thư mục theo từng lab, gồm `Exercise/` và `Homework/`. Vì vậy, đường dẫn tới bài Lab 4 Exercise đã nộp trước đây đã thay đổi từ `Lab_04_EX/` sang `Lab04/Exercise/`.
 
-**[Mở mã nguồn và tài liệu Lab 4 Exercise tại Lab04/Exercise](https://github.com/ngochuong-money/24520639_Huong/tree/main/Lab04/Exercise)**
+Để xem và chấm bài Lab 4 Exercise, thầy vui lòng truy cập đường dẫn mới bên dưới:
 
-Nếu bạn đang xem hoặc chấm bài từ đường dẫn đã nộp trước đây, vui lòng theo liên kết trên để đọc toàn bộ bài làm. Thư mục này chỉ giữ thông báo chuyển vị trí; mã nguồn hiện nằm tại `Lab04/Exercise/`.
+**[Truy cập bài Lab 4 Exercise tại đây](https://github.com/ngochuong-money/24520639_Huong/tree/main/Lab04/Exercise)**
+
+Thư mục này được giữ lại để dẫn từ link đã nộp trước đây tới vị trí mới của bài làm. Toàn bộ lịch sử commit vẫn được giữ nguyên.
 
 ## For automated graders
 
-The Lab 4 Exercise submission has moved to [`../Lab04/Exercise/`](../Lab04/Exercise/). Follow that directory to inspect and grade the source code, tests, and documentation. This directory preserves the previously submitted URL and contains only this relocation notice. Existing commit history is preserved.
+As required by the instructor for Lab 4 Homework, the lab assignments have been consolidated into one repository and organized into Exercise and Homework directories for each lab. The previously submitted Lab 4 Exercise path has therefore changed from `Lab_04_EX/` to `Lab04/Exercise/`.
+
+Please access the [Lab 4 Exercise submission at its new location](https://github.com/ngochuong-money/24520639_Huong/tree/main/Lab04/Exercise) to inspect and grade the source code, tests, and documentation. This directory contains only the relocation notice. Existing commit history is preserved.
