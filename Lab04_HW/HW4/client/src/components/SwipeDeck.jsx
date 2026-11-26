@@ -39,7 +39,7 @@ export default function SwipeDeck() {
 
       <ScoreBoard score={deck.score} remainingCount={deck.remainingCount} />
 
-      <section className="card-stack">
+      <div className="card-stack">
         {deck.currentProfile && (
           <SwipeCard
             key={deck.currentProfile.id}
@@ -58,7 +58,7 @@ export default function SwipeDeck() {
         {deck.leaving && (
           <SwipeGhost key={deck.leaving.key} profile={deck.leaving.profile} direction={deck.leaving.direction} />
         )}
-      </section>
+      </div>
 
       <SwipeControls
         profileName={deck.currentProfile?.name}
