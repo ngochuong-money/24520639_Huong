@@ -85,16 +85,18 @@ describe('SwipeDeck UI', () => {
     expect(liveText()).toBe('Undid swipe on Ana. Score 0.');
   });
 
-  test('D4. buttons have accessible names; Undo starts disabled; clicking Like works', async () => {
+  test('D4. buttons have accessible names; Undo starts unavailable but focusable; clicking Like works', async () => {
     makeServer();
     const { user } = await renderDeck();
     expect(screen.getByRole('button', { name: 'Pass on Ana' })).toHaveAttribute('type', 'button');
-    expect(screen.getByRole('button', { name: 'Super like Ana' })).toBeEnabled();
-    expect(screen.getByRole('button', { name: 'Undo last swipe' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Super like Ana' })).not.toHaveAttribute('aria-disabled');
+    const undo = screen.getByRole('button', { name: 'Undo last swipe' });
+    expect(undo).toHaveAttribute('aria-disabled', 'true');
+    expect(undo).not.toBeDisabled(); // stays focusable
 
     await user.click(screen.getByRole('button', { name: 'Like Ana' }));
     expect(await screen.findByRole('article', { name: 'Binh, 25' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Undo last swipe' })).toBeEnabled();
+    expect(screen.getByRole('button', { name: 'Undo last swipe' })).not.toHaveAttribute('aria-disabled');
   });
 
   test('D5. dragging the card past the threshold swipes it', async () => {
@@ -129,5 +131,50 @@ describe('SwipeDeck UI', () => {
     makeServer({ profilesStatus: 500 });
     render(<SwipeDeck />);
     expect(await screen.findByRole('alert')).toHaveTextContent('Could not load profiles.');
+  });
+
+  test('D8. a decorative ghost flies out after a swipe and disappears after undo', async () => {
+    makeServer();
+    const { user, deck } = await renderDeck();
+    act(() => deck.focus());
+    await user.keyboard('{ArrowRight}');
+    await screen.findByRole('article', { name: 'Binh, 25' });
+
+    const ghost = document.querySelector('.swipe-ghost');
+    expect(ghost).toHaveClass('swipe-ghost--right');
+    expect(ghost).toHaveAttribute('aria-hidden', 'true');
+    expect(ghost).toHaveAttribute('inert');
+    expect(ghost.querySelector('img')).toHaveAttribute('alt', '');
+
+    await user.keyboard('{Backspace}');
+    await screen.findByRole('article', { name: 'Ana, 24' });
+    expect(document.querySelector('.swipe-ghost')).toBeNull();
+  });
+
+  test('D9. pressing Undo until unavailable keeps focus on the button', async () => {
+    makeServer();
+    const { user } = await renderDeck();
+    await user.click(screen.getByRole('button', { name: 'Like Ana' }));
+    const undo = await screen.findByRole('button', { name: 'Undo last swipe' });
+
+    await user.click(undo);
+    await screen.findByRole('article', { name: 'Ana, 24' });
+    expect(undo).toHaveAttribute('aria-disabled', 'true');
+    expect(undo).toHaveFocus();
+
+    await user.click(undo); // no-op while unavailable
+    expect(screen.getByRole('article', { name: 'Ana, 24' })).toBeInTheDocument();
+  });
+
+  test('D10. Start over moves focus back to the deck', async () => {
+    makeServer();
+    const { user, deck } = await renderDeck();
+    await user.click(screen.getByRole('button', { name: 'Like Ana' }));
+    await user.click(await screen.findByRole('button', { name: 'Like Binh' }));
+    await user.click(await screen.findByRole('button', { name: 'Like Chi' }));
+
+    await user.click(await screen.findByRole('button', { name: 'Start over' }));
+    await screen.findByRole('article', { name: 'Ana, 24' });
+    expect(deck).toHaveFocus();
   });
 });

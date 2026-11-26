@@ -35,6 +35,16 @@ export function useSwipeDeck() {
   const isFinished = profiles.length > 0 && !currentProfile;
   const canUndo = history.length > 0 && !history.at(-1).pending;
 
+  const lastEntry = history.at(-1);
+  const leaving =
+    lastAction?.type === 'swipe' && lastEntry?.profileId === lastAction.profileId
+      ? {
+          key: `${lastEntry.profileId}-${history.length}`,
+          profile: profiles.find((p) => p.id === lastEntry.profileId),
+          direction: lastEntry.direction,
+        }
+      : null;
+
   const nameOf = (profileId) => profiles.find((p) => p.id === profileId)?.name ?? 'this profile';
   let announcement = '';
   if (lastAction?.type === 'error') announcement = lastAction.message;
@@ -103,6 +113,6 @@ export function useSwipeDeck() {
   return {
     profiles, loading, error, history,
     currentProfile, score, isFinished, canUndo, remainingCount,
-    announcement, swipe, undo, reset,
+    announcement, leaving, swipe, undo, reset,
   };
 }

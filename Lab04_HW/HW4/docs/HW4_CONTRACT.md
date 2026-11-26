@@ -107,6 +107,16 @@ Ignored when: `event.repeat`, any of `altKey`/`ctrlKey`/`metaKey`, the target is
 - Finished: `You have seen everyone.` + button `Start over`
 - Load error: `role="alert"` with the hook error text
 
+### Motion
+- Drag: `transform: translate() rotate()` follows `dragOffset`; snap-back transition only under `prefers-reduced-motion: no-preference`
+- Exit: after a swipe, a decorative ghost of the swiped card (`aria-hidden`, `inert`, `alt=""`) flies out left/right/up; not rendered visibly under `prefers-reduced-motion: reduce`
+- `useSwipeDeck` exposes derived `leaving = { key, profile, direction } | null` (last action was a successful/optimistic swipe)
+
+### Focus management
+- Control buttons use `aria-disabled="true"` (not `disabled`) so focus is never dropped to `<body>` when an action becomes unavailable; clicks on them are no-ops
+- After `Start over`, focus moves to the deck `<section>`
+- Visible `:focus-visible` ring on the deck and every button (≥ 3px, contrast ≥ 3:1)
+
 ## 5. Components
 
 | Component | Props | Renders |
