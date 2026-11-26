@@ -521,16 +521,16 @@ HW4/
 
 ### 4. Sprint C — SwipeDeck UI & Input
 
-- [ ] **4.1 [Fail Test]** Component tests: card is `<article>` with name/age/bio + avatar `alt`; keyboard arrows swipe; Backspace undoes but not while typing in an input; buttons have accessible names; pointer drag past threshold swipes, short drag does not, `pointercancel` resets; score + live region update; finished screen with "Start over" → commit `test(hw4): swipe ui tests (red)`
-- [ ] **4.2 [Implement]** `SwipeDeck` (`<section aria-labelledby>` focusable via `tabIndex={0}` for keys, no div wrappers), `SwipeCard`, `SwipeControls` (Nope/Like/Super/Undo, `type="button"`), `ScoreBoard`, `useSwipeGestures` (refs, pointer capture, `keydown` + `event.key`) → commit `feat(hw4): swipe deck ui`
-- [ ] **4.3** Motion: card drag transform + exit animation only under `prefers-reduced-motion: no-preference`; visible focus ring
+- [x] **4.1 [Fail Test]** Component tests: card is `<article>` with name/age/bio + avatar `alt`; keyboard arrows swipe; Backspace undoes but not while typing in an input; buttons have accessible names; pointer drag past threshold swipes, short drag does not, `pointercancel` resets; score + live region update; finished screen with "Start over" → commit `test(hw4): swipe ui tests (red)`
+- [x] **4.2 [Implement]** `SwipeDeck` (`<section aria-labelledby>` focusable via `tabIndex={0}` for keys, no div wrappers), `SwipeCard`, `SwipeControls` (Nope/Like/Super/Undo, `type="button"`), `ScoreBoard`, `useSwipeGestures` (refs, pointer capture, `keydown` + `event.key`) → commit `feat(hw4): swipe deck ui`
+- [x] **4.3** Motion: card drag transform + exit animation only under `prefers-reduced-motion: no-preference`; visible focus ring
 
 ---
 
 ### 5. Sprint D — Fair-Play Appeal Portal
 
-- [ ] **5.1 [Fail Test]** `computeMatrix` unit tests (grid shape, case/precedent cells, gap, verdict boundaries); routing tests (`/dossier/himass`, `/dossier/tanvuu`, unknown → 404 inside layout); matrix renders as `<table>` with `<caption>`, `<th scope>`; timer tests reused from HW2 (visibility listener removed on unmount) → commit `test(hw4): appeal portal tests (red)`
-- [ ] **5.2 [Implement]** `DossierView` via dynamic `/dossier/:playerID` + `useParams` + `find()`; `DisproportionalityMatrix` (`useMemo(() => computeMatrix(dossier), [dossier])`, accessible table, verdict text not colour-only); port `useAppealSlaTimer` + `SlaCountdown` from HW2 → commit `feat(hw4): appeal portal`
+- [x] **5.1 [Fail Test]** `computeMatrix` unit tests (grid shape, case/precedent cells, gap, verdict boundaries); routing tests (`/dossier/himass`, `/dossier/tanvuu`, unknown → 404 inside layout); matrix renders as `<table>` with `<caption>`, `<th scope>`; timer tests reused from HW2 (visibility listener removed on unmount) → commit `test(hw4): appeal portal tests (red)`
+- [x] **5.2 [Implement]** `DossierView` via dynamic `/dossier/:playerID` + `useParams` + `find()`; `DisproportionalityMatrix` (`useMemo(() => computeMatrix(dossier), [dossier])`, accessible table, verdict text not colour-only); port `useAppealSlaTimer` + `SlaCountdown` from HW2 → commit `feat(hw4): appeal portal`
 
 ---
 
@@ -572,7 +572,7 @@ HW4/
 | 1 | Contract | ✅ |
 | 2 | Backend API | ✅ |
 | 3 | Swipe State | ✅ |
-| 4 | Swipe UI & Input | ⬜ |
+| 4 | Swipe UI & Input | ✅ |
 | 5 | Appeal Portal | ⬜ |
 | 6 | Verification | ⬜ |
 | 7 | AI Failure Audit | ⬜ |

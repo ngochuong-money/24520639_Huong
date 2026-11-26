@@ -471,6 +471,16 @@ useSearchParams() ─▶ photoId = searchParams.get('photoId')
 - **Fix:** The space is now a separate text node before the hidden span (`Pass{' '}<span className="visually-hidden">on Ana</span>`), via a small `suffix()` helper in `SwipeControls.jsx`.
 - **Evidence:** D4 and D6 pass; client suite `34 passed (34)` on two consecutive runs. Terminal output only.
 
+#### H4-F02 — Disabled controls dropped keyboard focus to `<body>`
+
+- **Date / WBS task:** 2026-11-26 · 4.2 (found and fixed in 4.3)
+- **AI prompt:**
+  > 4.2 [Implement] … always-visible buttons … Disabled when there is no current profile / `!canUndo`
+- **Symptom:** With the 4.2 code, new tests failed against the existing UI. D10 (Start over) reported `Expected element with focus: <section aria-labelledby=…>` but `Received element with focus: <body>`. D9 showed the Undo button switched to the native `disabled` state, which removes it from the focus order the moment the last undo is used.
+- **Root cause:** The AI used the native `disabled` attribute for controls that become unavailable *as a result of being pressed* (last Undo, last Like) and removed the "Start over" button after it was pressed, without moving focus. Browsers then drop focus to `<body>`, so keyboard and screen-reader users lose their place (WCAG 2.4.3 Focus Order).
+- **Fix:** Controls use `aria-disabled="true"` with a no-op click instead of `disabled`, and `SwipeDeck` moves focus to the deck `<section>` after `reset()` resolves. The H4-F01 spacing fix was kept (the 4.3 guide's `SwipeControls` snippet had reintroduced the space inside the hidden span).
+- **Evidence:** D9 and D10 failed before the change and pass after it; client suite `37 passed (37)` on two consecutive runs. Terminal output only.
+
 ---
 
 ### Architecture Analysis
