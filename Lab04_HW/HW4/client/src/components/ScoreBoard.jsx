@@ -1,4 +1,10 @@
-// Stub — implemented in WBS 4.2
-export default function ScoreBoard() {
-  return null;
+export default function ScoreBoard({ score = 0, remainingCount = 0 }) {
+  return (
+    <dl className="scoreboard">
+      <dt>Score</dt>
+      <dd>{score}</dd>
+      <dt>Profiles left</dt>
+      <dd>{remainingCount}</dd>
+    </dl>
+  );
 }

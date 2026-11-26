@@ -101,7 +101,8 @@ Ignored when: `event.repeat`, any of `altKey`/`ctrlKey`/`metaKey`, the target is
 ### UI names (exact)
 - Deck region: `Profile deck` · keyboard hint: `Use ← to pass, → to like, ↑ to super like, Backspace to undo.`
 - Card: `<article>` named by `<h2>{name}, {age}</h2>`
-- Buttons: `Pass on {name}`, `Super like {name}`, `Like {name}`, `Undo last swipe`
+- Buttons: visible text `Pass` / `Super like` / `Like` / `Undo` + visually hidden ` on {name}` / ` last swipe` → accessible names `Pass on {name}`, `Super like {name}`, `Like {name}`, `Undo last swipe` (WCAG 2.5.3 Label in Name; no aria-label override)
+- `useSwipeGestures` `enabled` = deck loaded without error; `swipe()` itself ignores calls when there is no current profile, so Backspace still undoes on the finished screen
 - ScoreBoard `<dl>`: `Score`, `Profiles left`
 - Finished: `You have seen everyone.` + button `Start over`
 - Load error: `role="alert"` with the hook error text
