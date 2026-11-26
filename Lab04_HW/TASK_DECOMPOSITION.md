@@ -391,22 +391,17 @@ HW3/
 
 ### 2. Tests (red)
 
-- [ ] **2.1 [Fail Test]** `tests/gallery.test.jsx` (MemoryRouter + `LocationProbe` with test-only Back/Forward buttons): 11 cases from `HW3_CONTRACT.md` §6 — redirect + grid, open via click, deep link, close button (+ focus return), native close (Esc path), other params preserved, unknown id, Back closes without extra navigation, dialog labelling, skeleton a11y, 404 → run (fail on assertions) → commit `test(hw3): gallery tests (red)`
-- [ ] 📸 **S-fail** — Terminal showing the failing gallery tests
+- [x] **2.1 [Fail Test]** `tests/gallery.test.jsx` (MemoryRouter + `LocationProbe` with test-only Back/Forward buttons): 11 cases from `HW3_CONTRACT.md` §6 — redirect + grid, open via click, deep link, close button (+ focus return), native close (Esc path), other params preserved, unknown id, Back closes without extra navigation, dialog labelling, skeleton a11y, 404 → run (fail on assertions) → commit `test(hw3): gallery tests (red)`
+- [x] 📸 **S-fail** — Terminal showing the failing gallery tests
 
 ---
 
 ### 3. Implement
 
-- [ ] **3.1 [Implement]** `PhotoGrid.jsx`: `<ul>` grid (CSS Grid + `@media`, 375–1440 px), `<li key={photo.id}>` → `<Link>` → `<img loading="lazy" width height alt>`; visible focus ring
-- [ ] **3.2 [Implement]** `PhotoDialog.jsx`: `<dialog ref aria-labelledby onClose>` → `<h2>` + `<figure>` + close button; `useEffect` open/close sync with `dialog.open` guards; `::backdrop` styling
-- [ ] **3.3 [Implement]** `PhotoGalleryLayout.jsx`: `useSearchParams()` → `selectedPhoto` derived; `handleClose` removes only `photoId` when present; renders `<main>` → `<h1>` + `PhotoGrid` + `PhotoDialog` + not-found status → commit `feat(hw3): gallery layout`
-- [ ] **3.4 [Implement]** `AppRoutes.jsx` with lazy layout + `GallerySkeleton` (CLS = 0) → commit `feat(hw3): url-synced dialog`
-- [ ] 📸 **S1** — Gallery grid (desktop)
-- [ ] 📸 **S2** — Dialog open with `?photoId=…` visible in the address bar
-- [ ] 📸 **S3** — DevTools Accessibility Tree: dialog role, accessible name, focus inside the dialog
-- [ ] 📸 **S4** — Reload on `/gallery?photoId=…` keeps the dialog open; Back closes it (2 shots)
-- [ ] 📸 **S5** — After Esc: URL without `photoId` and focus ring back on the thumbnail
+- [x] **3.1 [Implement]** `PhotoGrid.jsx` (red → green via `tests/photoGrid.test.jsx`): `<ul>` grid (CSS Grid + `@media` 1/2/3/4 columns, 375–1440 px), `<li key={photo.id}>` → `<Link id="thumb-<id>" to={{ search: searchFor(id) }}>` → `<img alt width height loading="lazy">` + title; uniform 3:2 thumbnails; visible focus ring
+- [x] **3.2 [Implement]** `PhotoDialog.jsx` (red → green via `tests/photoDialog.test.jsx`): always-rendered `<dialog ref aria-labelledby onClose>`; `<header>` `<h2>` + "Close photo" button calling native `close()`; `<figure>` + `<img alt width height>` + `<figcaption>`; sync effect with `dialog.open` guards (StrictMode-safe); `::backdrop` + scroll lock
+- [ ] **3.3 [Implement]** `PhotoGalleryLayout.jsx`: `useSearchParams()` → derived `selectedPhoto`/`isUnknown`; `searchFor()` keeps other params; `handleClose` (guarded, deletes only `photoId`, `replace: true`, focus `#thumb-<id>`); not-found status; minimal routes + `BrowserRouter` → commits `feat(hw3): url-synced dialog`, `feat(hw3): gallery layout`
+- [ ] **3.4 [Implement]** `AppRoutes.jsx`: `React.lazy` layout + `<Suspense fallback={<GallerySkeleton />}>` (CLS = 0) + `*` → `NotFoundState` → commit `feat(hw3): lazy routes and skeleton`
 
 ---
 

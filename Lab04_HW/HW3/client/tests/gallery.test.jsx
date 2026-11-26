@@ -13,7 +13,7 @@ function LocationProbe() {
   const navigate = useNavigate();
   return (
     <>
-      <output data-testid="location">{location.pathname + location.search}</output>
+      <span data-testid="location">{location.pathname + location.search}</span>
       <button type="button" onClick={() => navigate(-1)}>test-back</button>
       <button type="button" onClick={() => navigate(1)}>test-forward</button>
     </>

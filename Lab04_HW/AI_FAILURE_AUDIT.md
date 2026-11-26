@@ -393,17 +393,17 @@ shared/validateMessage.js ─┘
 
 ### Failure Log
 
-<!-- Copy this template for each real failure -->
+<!-- Template per real failure: Date / WBS task · AI prompt · Symptom · Root cause · Fix · Evidence -->
 
-#### H3-F01 — <short title>
+#### H3-F01 — Test helper `<output>` collides with `role="status"`
 
-- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 3.2>
+- **Date / WBS task:** 2026-11-26 · 2.1 (surfaced in 3.3)
 - **AI prompt:**
-  > <exact prompt that produced the faulty code>
-- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
-- **Root cause:** <why the AI output was wrong>
-- **Fix:** <what was changed manually>
-- **Evidence:** <test name / DevTools observation> — screenshot in report, section H3-F01
+  > 2.1 [Fail Test] `tests/gallery.test.jsx` (MemoryRouter + `LocationProbe` with test-only Back/Forward buttons): 11 cases …
+- **Symptom:** After `PhotoGalleryLayout` was implemented, test 7 (unknown `photoId`) still failed with `TestingLibraryElementError: Found multiple elements with the role "status"`, although the app rendered exactly one status notice.
+- **Root cause:** The AI-written test helper `LocationProbe` displayed the current URL in an `<output>` element. `<output>` has the implicit ARIA role `status`, so `getByRole('status')` matched both the helper and the real "Photo not found." notice.
+- **Fix:** The helper now uses `<span data-testid="location">`; production code unchanged.
+- **Evidence:** Gallery tests 1–9 pass after the change (two consecutive runs); tests 10–11 remain red until WBS 3.4 as planned. Terminal output only.
 
 ---
 
