@@ -92,6 +92,20 @@ Ignored when: `event.repeat`, any of `altKey`/`ctrlKey`/`metaKey`, the target is
 ### Buttons (always visible — WCAG 2.2 · 2.5.7 Dragging Movements)
 `<button type="button">` with visible text + icon (`aria-hidden`) and `aria-label`: `Pass on {name}`, `Super like {name}`, `Like {name}`, `Undo last swipe`. Disabled when there is no current profile / `!canUndo`.
 
+### `useSwipeGestures({ onSwipe, onUndo, enabled = true, threshold = 80 })`
+→ `{ keyHandlers: { onKeyDown }, pointerHandlers: { onPointerDown, onPointerMove, onPointerUp, onPointerCancel, onLostPointerCapture }, dragOffset: { x, y }, isDragging }`
+- `keyHandlers` go on the deck `<section>`, `pointerHandlers` on the card `<article>`
+- `dragOffset` is the only gesture state (visual); the start point lives in a ref
+- `enabled = false` (no current profile) → handlers do nothing
+
+### UI names (exact)
+- Deck region: `Profile deck` · keyboard hint: `Use ← to pass, → to like, ↑ to super like, Backspace to undo.`
+- Card: `<article>` named by `<h2>{name}, {age}</h2>`
+- Buttons: `Pass on {name}`, `Super like {name}`, `Like {name}`, `Undo last swipe`
+- ScoreBoard `<dl>`: `Score`, `Profiles left`
+- Finished: `You have seen everyone.` + button `Start over`
+- Load error: `role="alert"` with the hook error text
+
 ## 5. Components
 
 | Component | Props | Renders |
