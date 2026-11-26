@@ -18,11 +18,11 @@ Update this table whenever a section is finished (count checked tasks / total).
 | 2. Backend | 7 / 7 |
 | 3. Routing & Layout | 4 / 4 |
 | 4. Gallery | 8 / 8 |
-| 5. Swipe Deck | 8 / 9 |
+| 5. Swipe Deck | 9 / 9 |
 | 6. Persistence Integration | 4 / 4 |
 | 7. Accessibility & Performance | 6 / 6 |
-| 8. Verification | 0 / 6 |
-| 9. Documentation & Git | 0 / 3 |
+| 8. Verification | 6 / 6 |
+| 9. Documentation & Git | 2 / 2 |
 
 **How to tick:** a task is `[x]` only when its commit is made AND verification evidence exists (test output, DevTools screenshot, Lighthouse report). For code tasks, tick the 4 sub-boxes in order: `C` Contract, `T` Fail Test, `I` Implement, `R` Refactor.
 
@@ -33,8 +33,8 @@ Update this table whenever a section is finished (count checked tasks / total).
   - **Swipe Deck:** dual keyboard/pointer event listener, LIFO undo stack, asymmetric score calculation via purely derived state, and a full-stack persistence layer (Express + Mongoose 8, async/await).
 - Out of scope: Sprint 2 Form/Context work (`FormContext`, `SimpleForm`, `InputField`, `<ShowData />`).
 - Open items to confirm against the original assignment:
-  - [ ] Exact asymmetric scoring formula
-  - [ ] Whether deck cards are the same data as gallery photos or a separate dataset
+  - [x] Exact asymmetric scoring formula
+  - [x] Whether deck cards are the same data as gallery photos or a separate dataset
 
 ## Global Rules (apply to EVERY task)
 
@@ -139,8 +139,8 @@ Implementation order: complete 4.8 (`usePhotos`) before 4.2 so loaded photos are
   - [x] C  [x] T  [x] I  [x] R
 - [x] **5.6** Keyboard: `keydown` + `event.key` (ArrowLeft / ArrowRight swipe, `Z` / Backspace undo); equivalent `type="button"` controls; pointer and keyboard dispatch the same reducer action — commit `feat: keyboard swipe`
   - [x] C  [x] T  [x] I  [x] R
-- [ ] **5.7** Undo button disabled when stack is empty; results announced via `aria-live="polite"` (no `alert()`) — commit `feat: undo control`
-  - [x] C  [x] T  [ ] I  [ ] R
+- [x] **5.7** Undo button disabled when stack is empty; results announced via `aria-live="polite"` (no `alert()`) — commit `feat: undo control`
+  - [x] C  [x] T  [x] I  [x] R
   - Reopened by screenshot review (2026-11-20): Undo state is correct, and useDeckActions module tests passed earlier, but the persistence DeckPage has empty status after swipe/undo. Wire per-action announcements before accepting page integration; finished status already works.
 - [x] **5.8** End-of-deck results summary using `<dl>` with keyed `<Fragment>` groups — commit `feat: results summary`
   - [x] C  [x] T  [x] I  [x] R
@@ -275,7 +275,7 @@ HW2/
 - [x] 📸 **S2a** — Real-time error state
 - [x] 📸 **S2b** — Valid form + `<ShowData />` inspector
 - [x] 📸 **S2c** — DevTools Accessibility Tree: input name, `aria-invalid`, description
-- [ ] 📸 **S2d** — Successful submission message (taken after WBS 4.3, once `POST /api/appeals` exists)
+- [x] 📸 **S2d** — Successful submission message (taken after WBS 4.3, once `POST /api/appeals` exists)
 
 ---
 
@@ -427,9 +427,9 @@ HW3/
 
 ### 6. Submission
 
-- [ ] **6.1** `git log --graph --oneline --decorate` shows all HW3 commits in order (contract → tests → feat)
-- [ ] **6.2** Defense prep: explain `useSearchParams` vs `useState`, `showModal()` vs `show()`, why `onClose` deletes only `photoId`, how focus returns
-- [ ] 📸 **S8** — `git log --graph` for HW3
+- [x] **6.1** `git log --graph --oneline --decorate` shows all HW3 commits in order (contract → tests → feat)
+- [x] **6.2** Defense prep: explain `useSearchParams` vs `useState`, `showModal()` vs `show()`, why `onClose` deletes only `photoId`, how focus returns
+- [x] 📸 **S8** — `git log --graph` for HW3
 
 ---
 
