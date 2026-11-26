@@ -131,7 +131,7 @@ Ignored when: `event.repeat`, any of `altKey`/`ctrlKey`/`metaKey`, the target is
 
 ```js
 computeMatrix({ name, violationSeverity, sanctionSeverity, precedents }) → {
-  rows,              // sanction 5 → 1 (top = severe), each: { sanction, cells: [{ violation, isCase, precedentIds, band }] } for violation 1 → 5
+  rows,              // sanction 5 → 1 (top = severe), each: { sanction, cells: [{ violation, sanction, isCase, precedentIds, band }] } for violation 1 → 5
   gap,               // sanctionSeverity − violationSeverity
   precedentMedianGap,// median of (s − v) over precedents (0 when none)
   verdict,           // 'Disproportionate' | 'Proportionate'

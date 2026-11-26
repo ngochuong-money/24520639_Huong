@@ -1,5 +1,5 @@
-import SwipePage from './components/SwipePage.jsx';
+import AppRoutes from './routes/AppRoutes.jsx';
 
 export default function App() {
-  return <SwipePage />;
+  return <AppRoutes />;
 }
