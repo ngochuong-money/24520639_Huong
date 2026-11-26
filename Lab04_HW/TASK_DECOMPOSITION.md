@@ -571,7 +571,7 @@ HW4/
 | 0 | Setup | ✅ |
 | 1 | Contract | ✅ |
 | 2 | Backend API | ✅ |
-| 3 | Swipe State | ⬜ |
+| 3 | Swipe State | ✅ |
 | 4 | Swipe UI & Input | ⬜ |
 | 5 | Appeal Portal | ⬜ |
 | 6 | Verification | ⬜ |
