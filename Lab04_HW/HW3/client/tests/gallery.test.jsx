@@ -145,4 +145,17 @@ describe('HW3 — photo gallery with URL-synced <dialog>', () => {
     renderAt(['/nope']);
     expect(await screen.findByRole('heading', { name: /404/ })).toBeInTheDocument();
   });
+
+  test('12. keyboard: Tab to a thumbnail and press Enter opens the dialog', async () => {
+    const user = renderAt(['/gallery']);
+    await screen.findByRole('heading', { level: 1, name: 'Photo Gallery' });
+
+    const firstThumb = document.getElementById(`thumb-${photos[0].id}`);
+    await user.tab();
+    expect(firstThumb).toHaveFocus();
+
+    await user.keyboard('{Enter}');
+    expect(currentUrl()).toBe(`/gallery?photoId=${photos[0].id}`);
+    expect(getDialog()).toHaveAttribute('open');
+  });
 });
