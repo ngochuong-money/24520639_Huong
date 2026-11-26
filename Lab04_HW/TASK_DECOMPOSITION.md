@@ -337,9 +337,9 @@ HW2/
 | 1 | Dossier Routing | #1 | ✅ |
 | 2 | Appeal Form Engine | #2 | ✅ |
 | 3 | SLA Timer | #3 | ✅ |
-| 4 | Backend + Hook | Rules | ⬜ |
-| 5 | AI Failure Audit | #4 | ⬜ |
-| 6 | Acceptance | — | ⬜ |
+| 4 | Backend + Hook | Rules | ✅ |
+| 5 | AI Failure Audit | #4 | ✅ |
+| 6 | Acceptance | — | ✅ |
 
 **Report screenshots:** S0 · S1a–d · S2a–d · S3a–c · S4a–d · S5 · S6a–d (24 total)
 
@@ -441,9 +441,9 @@ HW3/
 | 1 | Contract | ✅ |
 | 2 | Tests (red) | ✅ |
 | 3 | Implement | ✅ |
-| 4 | Verification | ⬜ |
+| 4 | Verification | ✅ |
 | 5 | AI Failure Audit | ✅ |
-| 6 | Submission | ⬜ |
+| 6 | Submission | ✅ |
 
 **Report screenshots:** S0 · S-fail · S1–S5 · S-pass · S6 · S7 · S8
 
@@ -564,7 +564,7 @@ HW4/
 | 3 | Swipe State | ✅ |
 | 4 | Swipe UI & Input | ✅ |
 | 5 | Appeal Portal | ✅ |
-| 6 | Verification | ⬜ |
+| 6 | Verification | ✅ |
 | 7 | AI Failure Audit | ✅ |
 
 
