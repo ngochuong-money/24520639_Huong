@@ -405,7 +405,48 @@ shared/validateMessage.js ─┘
 - **Fix:** The helper now uses `<span data-testid="location">`; production code unchanged.
 - **Evidence:** Gallery tests 1–9 pass after the change (two consecutive runs); tests 10–11 remain red until WBS 3.4 as planned. Terminal output only.
 
+> Not logged (not failures): the guide predicted "5 failed" for the red `PhotoGrid` run, but the empty-list case legitimately passed against the `null` stub (4 failed | 1 passed); the guide also referred to an `eslint.config.js`, while the Vite template uses oxlint. Neither produced faulty code.
+
 ---
 
 ### Architecture Analysis
-_Written in WBS 5.2 after implementation._
+
+#### 1. The URL is the single source of truth
+
+```text
+/gallery?album=x&photoId=arena-stage
+          │
+useSearchParams() ─▶ photoId = searchParams.get('photoId')
+                     selectedPhoto = findPhoto(photoId)        ← derived, no useState
+                     isUnknown     = photoId !== null && !selectedPhoto
+          │
+          ├─▶ PhotoGrid    <Link to={{ search: searchFor(id) }}>   (push: Back closes)
+          └─▶ PhotoDialog  photo={selectedPhoto} onClose={handleClose}
+```
+
+- There is **no `useState`** anywhere in the app (`git grep useState` is empty). Open/closed is a pure function of the URL, so a shared link, a reload (F5) and Back/Forward all produce the correct view without extra code.
+- `searchFor()` / `withoutPhoto()` (`utils/photoSearch.js`) always copy the current params into a **new** `URLSearchParams`, so other params such as `album` survive and the router's object is never mutated.
+- Closing uses `{ replace: true }`, so closing does not add a history entry; the `has('photoId')` guard prevents a second navigation when the close was *caused* by Back (test 8 checks that Forward still reopens the photo).
+- An unknown `photoId` never opens an empty dialog: a `role="status"` notice offers "Show all photos".
+
+#### 2. Why this one `useEffect` is legitimate
+
+| Effect kind | Example | Verdict |
+|---|---|---|
+| Sync React → **external imperative API** | `dialog.showModal()` / `dialog.close()` when `photo` changes | ✅ Allowed — the DOM `<dialog>` has no declarative "open" prop that gives modal behaviour |
+| Sync **derived state** | `useEffect(() => setIsOpen(!!photoId), [photoId])` | ❌ Forbidden — an extra render and a second source of truth; compute it during render instead |
+
+- The effect only calls DOM methods, never `setState`, and depends on `[photo]` (a frozen seed object, so it re-runs only when the photo really changes).
+- `open` guards in both directions make it **StrictMode-safe**: `showModal()` throws `InvalidStateError` on an already-open dialog, and `close()` on a closed dialog would emit a spurious `close` event. The test polyfill reproduces both rules, so a missing guard fails a test.
+- The `<dialog>` is always rendered (stable ref); only its children depend on `photo`.
+
+#### 3. Native focus management vs. a custom trap
+
+- `showModal()` makes the rest of the page **inert**, moves focus to the first focusable element (the "Close photo" button) and maps **Esc** to the native `cancel` → `close`. No `keydown` listeners and no hand-written focus trap are needed, so there is less code to get wrong and it matches platform behaviour (including WCAG 2.1.2: the user can still reach the browser UI).
+- One close path: the button calls the native `close()`, Esc triggers it natively and Back removes `photoId`, which makes the effect call `close()`. All three end in the `close` event → `handleClose`, the only place that updates the URL and restores focus.
+- Focus is returned explicitly to `#thumb-<id>` inside the event handler. The browser already restores focus when the dialog was opened from a thumbnail, but after a **deep link or reload** nothing was focused before opening, so the explicit call keeps focus from falling back to the top of the page.
+
+#### 4. Loading and layout stability
+
+- `PhotoGalleryLayout` is `React.lazy`; `<Suspense fallback={<GallerySkeleton />}>` shows a skeleton that reuses `.page`, `.photo-grid`, `.photo-card`, `.photo-thumb`, so the real grid replaces it without moving (CLS ≈ 0). The skeleton exposes `aria-busy="true"` + `aria-live="polite"` and hides its fake content with `aria-hidden`.
+- Every `<img>` carries intrinsic `width`/`height`; thumbnails use `aspect-ratio: 3 / 2` + `object-fit: cover`, the dialog uses `object-fit: contain` + `max-height: 70vh` so portrait photos fit a 375 px screen.

@@ -407,21 +407,21 @@ HW3/
 
 ### 4. Refactor & Verification
 
-- [ ] **4.1 [Refactor]** Zero div-soup, no index keys, no prohibited patterns (`git grep` sweep); tests green
-- [ ] **4.2** Keyboard only: Tab to thumbnail → Enter opens → Tab cycles inside the dialog → Esc closes → focus returns
-- [ ] **4.3** Responsive at 375 / 768 / 1440 px, no horizontal scroll; images keep aspect ratio (no CLS)
-- [ ] **4.4** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
-- [ ] **4.5** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` all pass
-- [ ] 📸 **S-pass** — All gallery tests passing (pair with S-fail)
-- [ ] 📸 **S6** — Lighthouse 100/100
-- [ ] 📸 **S7** — 375 px mobile + 1440 px desktop
+- [x] **4.1 [Refactor]** Zero div-soup, no index keys, no prohibited patterns (`git grep` sweep); tests green
+- [x] **4.2** Keyboard only: Tab to thumbnail → Enter opens → Tab cycles inside the dialog → Esc closes → focus returns
+- [x] **4.3** Responsive at 375 / 768 / 1440 px, no horizontal scroll; images keep aspect ratio (no CLS)
+- [x] **4.4** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
+- [x] **4.5** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` all pass
+- [x] 📸 **S-pass** — All gallery tests passing (pair with S-fail)
+- [x] 📸 **S6** — Lighthouse 100/100
+- [x] 📸 **S7** — 375 px mobile + 1440 px desktop
 
 ---
 
 ### 5. AI Failure Audit (`## Homework 3`)
 
-- [ ] **5.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence*
-- [ ] **5.2** Short **Architecture Analysis**: URL as single source of truth, why this `useEffect` is legitimate (external DOM API) vs. forbidden derived-state effects, native focus trap vs. custom trap → commit `docs(hw3): ai failure audit`
+- [x] **5.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence*
+- [x] **5.2** Short **Architecture Analysis**: URL as single source of truth, why this `useEffect` is legitimate (external DOM API) vs. forbidden derived-state effects, native focus trap vs. custom trap → commit `docs(hw3): ai failure audit`
 
 ---
 
@@ -442,7 +442,7 @@ HW3/
 | 2 | Tests (red) | ✅ |
 | 3 | Implement | ✅ |
 | 4 | Verification | ⬜ |
-| 5 | AI Failure Audit | ⬜ |
+| 5 | AI Failure Audit | ✅ |
 | 6 | Submission | ⬜ |
 
 **Report screenshots:** S0 · S-fail · S1–S5 · S-pass · S6 · S7 · S8
