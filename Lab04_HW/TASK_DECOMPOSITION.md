@@ -514,8 +514,8 @@ HW4/
 
 ### 3. Sprint B — SwipeDeck State (LIFO + derived score)
 
-- [ ] **3.1 [Fail Test]** `shared/computeScore.js` unit tests (asymmetric weights, empty = 0) + `useSwipeDeck` hook tests: swipe pushes, undo pops last only (LIFO), `currentProfile` follows `history.length`, finished state, optimistic POST with rollback on failure, undo calls DELETE, AbortController on profile load → commit `test(hw4): swipe state tests (red)`
-- [ ] **3.2 [Implement]** `computeScore` (pure `reduce`); `useSwipeDeck` (immutable push/pop, derived values, abortable load via `useAbortableGet`, `swipe()`/`undo()` with `try/catch`) → commit `feat(hw4): swipe deck state`
+- [x] **3.1 [Fail Test]** `shared/computeScore.js` unit tests (asymmetric weights, empty = 0) + `useSwipeDeck` hook tests: swipe pushes, undo pops last only (LIFO), `currentProfile` follows `history.length`, finished state, optimistic POST with rollback on failure, undo calls DELETE, AbortController on profile load → commit `test(hw4): swipe state tests (red)`
+- [x] **3.2 [Implement]** `computeScore` (pure `reduce`); `useSwipeDeck` (immutable push/pop, derived values, abortable load via `useAbortableGet`, `swipe()`/`undo()` with `try/catch`) → commit `feat(hw4): swipe deck state`
 
 ---
 
@@ -575,8 +575,8 @@ HW4/
 | # | Workstream | Status |
 |---|---|---|
 | 0 | Setup | ✅ |
-| 1 | Contract | ⬜ |
-| 2 | Backend API | ⬜ |
+| 1 | Contract | ✅ |
+| 2 | Backend API | ✅ |
 | 3 | Swipe State | ⬜ |
 | 4 | Swipe UI & Input | ⬜ |
 | 5 | Appeal Portal | ⬜ |

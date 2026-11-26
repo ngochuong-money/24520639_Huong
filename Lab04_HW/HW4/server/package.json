@@ -7,7 +7,8 @@
     "dev": "node --watch --env-file=.env server.js",
     "start": "node --env-file=.env server.js",
     "test:run": "vitest run",
-    "test": "vitest"
+    "test": "vitest",
+    "seed": "node --env-file=.env seed/seed.js"
   },
   "keywords": [],
   "author": "",
