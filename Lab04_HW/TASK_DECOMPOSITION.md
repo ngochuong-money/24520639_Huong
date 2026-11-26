@@ -502,14 +502,14 @@ HW4/
 ### 1. Contract
 
 - [x] **1.1 [Contract]** `docs/HW4_CONTRACT.md`: routes + layout; swipe rules (`left −5`, `right +10`, `up +15`); `useSwipeDeck` with `history` as the only deck state (`currentProfile` = first unswiped profile, score/finished/canUndo derived), optimistic POST + rollback, LIFO undo with DELETE; focused-deck keyboard map with guards, ref-based pointer drag, always-visible buttons (WCAG 2.5.7); `computeMatrix` (5×5, gap, precedent median, verdict); dossier view; 20 test cases → commit `docs(hw4): contract`
-- [x] **1.2 [Contract]** `docs/API_CONTRACT.md`: `GET /api/health`, `GET /api/time`, `GET /api/profiles`, `GET /api/swipes`, `POST /api/swipes` (201/400/404/409 duplicate), `DELETE /api/swipes/:id` (204/404); error shape `{ error, fields? }`; whitelisted persistence; shared `validateSwipe` → commit `docs(hw4): api contract`
+- [x] **1.2 [Contract]** `docs/API_CONTRACT.md` (FINAL): conventions (`.lean()` + `select('-_id -__v')`, whitelist, fail-fast env), error table (400/404/409/413/500), endpoints `health`, `time`, `profiles`, `swipes` GET/POST/DELETE `:id`/DELETE all, POST check order 400 → 404 → 409 → 201, shared `validateSwipe`, models + unique `profileId`, idempotent seed, 12 test cases → commit `docs(hw4): api contract`
 
 ---
 
 ### 2. Sprint A — Backend API
 
-- [ ] **2.1 [Fail Test]** supertest + in-memory Mongo: profiles list (`.lean().exec()`, no `_id`), swipe 201 + parity with `validateSwipe`, unknown profile 404, duplicate swipe 409, mass-assignment ignored, DELETE 204/404, malformed JSON 400, DB failure 500 without leaks → commit `test(hw4): api tests (red)`
-- [ ] **2.2 [Implement]** Models `Profile`, `Swipe`; routes with `async/await` + `.exec()` + `try/catch → next(err)`; central error handler; `cors({ origin })`; `express.json({ limit })` → commit `feat(hw4): api endpoints`
+- [x] **2.1 [Fail Test]** supertest + in-memory Mongo: profiles list (`.lean().exec()`, no `_id`), swipe 201 + parity with `validateSwipe`, unknown profile 404, duplicate swipe 409, mass-assignment ignored, DELETE 204/404, malformed JSON 400, DB failure 500 without leaks → commit `test(hw4): api tests (red)`
+- [x] **2.2 [Implement]** Models `Profile`, `Swipe`; routes with `async/await` + `.exec()` + `try/catch → next(err)`; central error handler; `cors({ origin })`; `express.json({ limit })` → commit `feat(hw4): api endpoints`
 ---
 
 ### 3. Sprint B — SwipeDeck State (LIFO + derived score)
