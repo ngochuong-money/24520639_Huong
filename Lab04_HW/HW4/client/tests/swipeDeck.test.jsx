@@ -166,6 +166,17 @@ describe('SwipeDeck UI', () => {
     expect(screen.getByRole('article', { name: 'Ana, 24' })).toBeInTheDocument();
   });
 
+  test('D11. swiping logs no React errors (e.g. key spread into JSX)', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    makeServer();
+    const { user, deck } = await renderDeck();
+    act(() => deck.focus());
+    await user.keyboard('{ArrowRight}');
+    await screen.findByRole('article', { name: 'Binh, 25' });
+    expect(errorSpy).not.toHaveBeenCalled();
+    errorSpy.mockRestore();
+  });
+
   test('D10. Start over moves focus back to the deck', async () => {
     makeServer();
     const { user, deck } = await renderDeck();

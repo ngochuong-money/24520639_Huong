@@ -55,7 +55,9 @@ export default function SwipeDeck() {
             <button type="button" className="control control--reset" onClick={handleReset}>Start over</button>
           </p>
         )}
-        {deck.leaving && <SwipeGhost key={deck.leaving.key} {...deck.leaving} />}
+        {deck.leaving && (
+          <SwipeGhost key={deck.leaving.key} profile={deck.leaving.profile} direction={deck.leaving.direction} />
+        )}
       </section>
 
       <SwipeControls
