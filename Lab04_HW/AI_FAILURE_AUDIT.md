@@ -459,17 +459,17 @@ useSearchParams() ─▶ photoId = searchParams.get('photoId')
 
 ### Failure Log
 
-<!-- Copy this template for each real failure -->
+<!-- Template per real failure: Date / WBS task · AI prompt · Symptom · Root cause · Fix · Evidence -->
 
-#### H4-F01 — <short title>
+#### H4-F01 — Visually-hidden button suffix lost its space ("Passon Ana")
 
-- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 4.2>
+- **Date / WBS task:** 2026-11-26 · 4.2
 - **AI prompt:**
-  > <exact prompt that produced the faulty code>
-- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
-- **Root cause:** <why the AI output was wrong>
-- **Fix:** <what was changed manually>
-- **Evidence:** <test name / DevTools observation> — screenshot in report, section H4-F01
+  > 4.2 [Implement] … `SwipeControls`: visible text `Pass` / `Super like` / `Like` / `Undo` + visually hidden ` on {name}` / ` last swipe` (WCAG 2.5.3 Label in Name)
+- **Symptom:** `swipeDeck` tests D4 and D6 failed: `Unable to find an accessible element with the role "button" and name "Pass on Ana"`. The role dump showed the computed name `Passon Ana` (likewise `Super likeAna`, `Undolast swipe`).
+- **Root cause:** The AI put the separating space *inside* the visually-hidden `<span>` (`Pass<span> on Ana</span>`). Accessible-name computation trims leading whitespace of each child element's text, so the visible and hidden parts were glued together. The intended WCAG 2.5.3 fix would have produced wrong names for screen-reader and voice-control users.
+- **Fix:** The space is now a separate text node before the hidden span (`Pass{' '}<span className="visually-hidden">on Ana</span>`), via a small `suffix()` helper in `SwipeControls.jsx`.
+- **Evidence:** D4 and D6 pass; client suite `34 passed (34)` on two consecutive runs. Terminal output only.
 
 ---
 
