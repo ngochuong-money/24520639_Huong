@@ -1,15 +1,16 @@
-# Lab 4 — Exercise: cập nhật đường dẫn bài làm
+# React + Vite
 
-Theo yêu cầu của thầy trong bài Lab 4 Homework, em đã gom các bài lab vào một repository và sắp xếp lại thư mục theo từng lab, gồm `Exercise/` và `Homework/`. Vì vậy, đường dẫn tới bài Lab 4 Exercise đã nộp trước đây đã thay đổi từ `Lab_04_EX/` sang `Lab04/Exercise/`.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Để xem và chấm bài Lab 4 Exercise, thầy vui lòng truy cập đường dẫn mới bên dưới:
+Currently, two official plugins are available:
 
-**[Truy cập bài Lab 4 Exercise tại đây](https://github.com/ngochuong-money/24520639_Huong/tree/main/Lab04/Exercise)**
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-Thư mục này được giữ lại để dẫn từ link đã nộp trước đây tới vị trí mới của bài làm. Toàn bộ lịch sử commit vẫn được giữ nguyên.
+## React Compiler
 
-## For automated graders
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-As required by the instructor for Lab 4 Homework, the lab assignments have been consolidated into one repository and organized into Exercise and Homework directories for each lab. The previously submitted Lab 4 Exercise path has therefore changed from `Lab_04_EX/` to `Lab04/Exercise/`.
+## Expanding the ESLint configuration
 
-Please access the [Lab 4 Exercise submission at its new location](https://github.com/ngochuong-money/24520639_Huong/tree/main/Lab04/Exercise) to inspect and grade the source code, tests, and documentation. This directory contains only the relocation notice. Existing commit history is preserved.
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
