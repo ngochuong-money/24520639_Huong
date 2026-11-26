@@ -524,10 +524,6 @@ HW4/
 - [ ] **4.1 [Fail Test]** Component tests: card is `<article>` with name/age/bio + avatar `alt`; keyboard arrows swipe; Backspace undoes but not while typing in an input; buttons have accessible names; pointer drag past threshold swipes, short drag does not, `pointercancel` resets; score + live region update; finished screen with "Start over" → commit `test(hw4): swipe ui tests (red)`
 - [ ] **4.2 [Implement]** `SwipeDeck` (`<section aria-labelledby>` focusable via `tabIndex={0}` for keys, no div wrappers), `SwipeCard`, `SwipeControls` (Nope/Like/Super/Undo, `type="button"`), `ScoreBoard`, `useSwipeGestures` (refs, pointer capture, `keydown` + `event.key`) → commit `feat(hw4): swipe deck ui`
 - [ ] **4.3** Motion: card drag transform + exit animation only under `prefers-reduced-motion: no-preference`; visible focus ring
-- [ ] 📸 **S2** — Deck with card, controls and score
-- [ ] 📸 **S3** — Mid-drag card (tilt) and after swipe (score changed)
-- [ ] 📸 **S4** — Undo via Backspace: card returns, score reverted, Network shows `DELETE /api/swipes/:id` 204
-- [ ] 📸 **S5** — Accessibility Tree: buttons named, live region text
 
 ---
 
@@ -535,8 +531,6 @@ HW4/
 
 - [ ] **5.1 [Fail Test]** `computeMatrix` unit tests (grid shape, case/precedent cells, gap, verdict boundaries); routing tests (`/dossier/himass`, `/dossier/tanvuu`, unknown → 404 inside layout); matrix renders as `<table>` with `<caption>`, `<th scope>`; timer tests reused from HW2 (visibility listener removed on unmount) → commit `test(hw4): appeal portal tests (red)`
 - [ ] **5.2 [Implement]** `DossierView` via dynamic `/dossier/:playerID` + `useParams` + `find()`; `DisproportionalityMatrix` (`useMemo(() => computeMatrix(dossier), [dossier])`, accessible table, verdict text not colour-only); port `useAppealSlaTimer` + `SlaCountdown` from HW2 → commit `feat(hw4): appeal portal`
-- [ ] 📸 **S6** — `/dossier/himass`: case file + matrix + countdown
-- [ ] 📸 **S7** — `/dossier/tanvuu` (different verdict) and unknown id 404 (2 shots)
 
 ---
 

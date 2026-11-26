@@ -67,6 +67,7 @@ No `currentIndex`, `score` or `isFinished` state exists.
 
 ### Announcement (polite live region, visually hidden)
 `{action text} Score {score}.` e.g. `Liked Linh. Score 25.` · undo: `Undid swipe on Linh. Score 15.` · finished: append ` No more profiles.`
+Failed undo: `Could not undo. Please try again.`
 
 ## 4. Input Map
 
