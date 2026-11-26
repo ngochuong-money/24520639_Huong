@@ -400,8 +400,8 @@ HW3/
 
 - [x] **3.1 [Implement]** `PhotoGrid.jsx` (red → green via `tests/photoGrid.test.jsx`): `<ul>` grid (CSS Grid + `@media` 1/2/3/4 columns, 375–1440 px), `<li key={photo.id}>` → `<Link id="thumb-<id>" to={{ search: searchFor(id) }}>` → `<img alt width height loading="lazy">` + title; uniform 3:2 thumbnails; visible focus ring
 - [x] **3.2 [Implement]** `PhotoDialog.jsx` (red → green via `tests/photoDialog.test.jsx`): always-rendered `<dialog ref aria-labelledby onClose>`; `<header>` `<h2>` + "Close photo" button calling native `close()`; `<figure>` + `<img alt width height>` + `<figcaption>`; sync effect with `dialog.open` guards (StrictMode-safe); `::backdrop` + scroll lock
-- [ ] **3.3 [Implement]** `PhotoGalleryLayout.jsx`: `useSearchParams()` → derived `selectedPhoto`/`isUnknown`; `searchFor()` keeps other params; `handleClose` (guarded, deletes only `photoId`, `replace: true`, focus `#thumb-<id>`); not-found status; minimal routes + `BrowserRouter` → commits `feat(hw3): url-synced dialog`, `feat(hw3): gallery layout`
-- [ ] **3.4 [Implement]** `AppRoutes.jsx`: `React.lazy` layout + `<Suspense fallback={<GallerySkeleton />}>` (CLS = 0) + `*` → `NotFoundState` → commit `feat(hw3): lazy routes and skeleton`
+- [x] **3.3 [Implement]** `PhotoGalleryLayout.jsx`: `useSearchParams()` → derived `selectedPhoto`/`isUnknown`; `searchFor()` keeps other params; `handleClose` (guarded, deletes only `photoId`, `replace: true`, focus `#thumb-<id>`); not-found status; minimal routes + `BrowserRouter` → commits `feat(hw3): url-synced dialog`, `feat(hw3): gallery layout`
+- [x] **3.4 [Implement]** `AppRoutes.jsx`: `React.lazy` layout + `<Suspense fallback={<GallerySkeleton />}>` (CLS = 0) + `*` → `NotFoundState` → commit `feat(hw3): lazy routes and skeleton`
 
 ---
 
@@ -438,9 +438,9 @@ HW3/
 | # | Workstream | Status |
 |---|---|---|
 | 0 | Setup | ✅ |
-| 1 | Contract | ⬜ |
-| 2 | Tests (red) | ⬜ |
-| 3 | Implement | ⬜ |
+| 1 | Contract | ✅ |
+| 2 | Tests (red) | ✅ |
+| 3 | Implement | ✅ |
 | 4 | Verification | ⬜ |
 | 5 | AI Failure Audit | ⬜ |
 | 6 | Submission | ⬜ |
