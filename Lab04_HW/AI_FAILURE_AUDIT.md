@@ -481,7 +481,70 @@ useSearchParams() ─▶ photoId = searchParams.get('photoId')
 - **Fix:** Controls use `aria-disabled="true"` with a no-op click instead of `disabled`, and `SwipeDeck` moves focus to the deck `<section>` after `reset()` resolves. The H4-F01 spacing fix was kept (the 4.3 guide's `SwipeControls` snippet had reintroduced the space inside the hidden span).
 - **Evidence:** D9 and D10 failed before the change and pass after it; client suite `37 passed (37)` on two consecutive runs. Terminal output only.
 
----
+#### H4-F03 — `key` spread into JSX (`<SwipeGhost key={…} {...leaving} />`)
+
+- **Date / WBS task:** 2026-11-26 · 4.3 (found in the browser during 6.2)
+- **AI prompt:**
+  > 4.3 … `useSwipeDeck` exposes derived `leaving = { key, profile, direction }` … `{deck.leaving && <SwipeGhost key={deck.leaving.key} {...deck.leaving} />}`
+- **Symptom:** The browser Console showed `A props object containing a "key" prop is being spread into JSX … React keys must be passed directly to JSX without using spread` after the first swipe. All 37 tests were green, because none of them watched `console.error`.
+- **Root cause:** The AI put `key` inside the derived `leaving` object and then spread that object into the component. React 19 rejects a `key` arriving through a spread (keys are not props).
+- **Fix:** Pass the props explicitly — `<SwipeGhost key={deck.leaving.key} profile={deck.leaving.profile} direction={deck.leaving.direction} />` — and add regression test D11, which spies on `console.error` while swiping.
+- **Evidence:** D11 failed against the old `SwipeDeck.jsx` with the exact React message and passes after the fix; client suite `62 passed (62)` on two consecutive runs. Console screenshot (before) in the report.
+
+> Not logged as new failures: the HW2 `readFileSync(new URL(…, import.meta.url))` pattern (F-04) was suggested again for the swipe-state test and replaced with `?raw` up front; test 16b expected a `sanction` field the contract's cell shape did not have — the field was added to each cell before running, so no failure occurred.
 
 ### Architecture Analysis
-_Written in WBS 7.2 after implementation._
+
+#### 1. Derived state vs stored state (SwipeDeck)
+
+| Kind | Name | Notes |
+|---|---|---|
+| State | `localHistory` | `null` until the user acts; then the LIFO stack `{ id, profileId, direction, pending }` |
+| State | `lastAction` | drives the live-region announcement |
+| State | `dragOffset` (`useSwipeGestures`) | visual only; the pointer start point lives in a **ref** |
+| Derived | `history = localHistory ?? serverHistory` | server history is only the initial value — **no effect copies it into state** |
+| Derived | `currentProfile`, `remainingCount`, `isFinished` | first profile not in `swipedIds` (robust after reload or a failed request) |
+| Derived | `score = computeScore(history)` | pure `reduce`, asymmetric weights (+10 / +15 / −5) |
+| Derived | `canUndo`, `announcement`, `leaving` | computed every render |
+
+There is no `currentIndex`, `score` or `isFinished` state, so these values can never disagree. The only `useEffect`s in the client are in `useAbortableGet` (abortable fetch) and `useAppealSlaTimer` (timer + `visibilitychange`), both synchronising with external systems and both cleaned up.
+
+#### 2. LIFO undo with server sync
+
+```text
+swipe(d):  push { id: pending-uuid, pending: true }  → POST /api/swipes → 201: replace with server id
+                                                    └→ error: filter it out (rollback) + "Could not save your swipe."
+undo():    only if canUndo (last entry not pending)  → slice(0, -1)  → DELETE /api/swipes/:id
+                                                    └→ error: push it back + "Could not undo."
+reset():   DELETE /api/swipes → history = []         → focus returns to the deck
+```
+
+- Every update is immutable (`[...h, e]`, `slice`, `map`, `filter`); every async action has `try/catch`.
+- The server enforces one swipe per profile twice: a pre-check (`409`) and a unique index on `profileId` (duplicate-key `E11000` → `409`), so concurrent duplicates cannot both persist. `GET /api/swipes` sorts by `{ createdAt, _id }` so the restored stack is stable.
+
+#### 3. Pointer / keyboard / button parity (WCAG 2.5.7, 2.1.1, 2.5.3)
+
+- All three inputs call the same `swipe()` / `undo()`.
+- **Keyboard:** `keydown` + `event.key` on the focused, labelled deck `<section tabIndex={0}>` (with `aria-describedby` → key hint). Arrows and Backspace `preventDefault()`; repeats, Ctrl/Alt/Meta combos and typing inside inputs are ignored, so Backspace never steals editing or browser-back.
+- **Pointer:** `setPointerCapture`, primary button only, `pointercancel`/`lostpointercapture` reset, threshold 80 px, up-swipe when `|dy| > |dx|`; `touch-action: none` on the card.
+- **Buttons:** always visible (dragging is never the only way), ≥ 44 px, visible text + visually hidden suffix (`Like Linh`) so the accessible name contains the visible label; `aria-disabled` instead of `disabled` so focus is not dropped (H4-F01, H4-F02).
+- Exit animation is a decorative `aria-hidden` + `inert` ghost and is removed under `prefers-reduced-motion: reduce`; screen-reader users get the polite announcement instead.
+
+#### 4. Disproportionality matrix as a pure function
+
+- `computeMatrix(dossier)` (shared) validates severities (`RangeError`), builds the 5×5 grid (sanction 5 → 1, violation 1 → 5), bands each cell, and returns `gap`, `precedentMedianGap`, `verdict`, `reason`. It never mutates input (`[...values].sort`).
+- `DisproportionalityMatrix` calls it in `useMemo` during render — no state, no effect. The table has a `<caption>`, `scope="col"`/`scope="row"` headers, and text markers (`Case`, `P×n` + visually hidden precedent labels), so colour is never the only signal (WCAG 1.4.1). Seed: Himass **Proportionate** (gap +1, median 0), TanVuu **Disproportionate** (gap +2).
+
+#### 5. Why the slide code was not copied verbatim
+
+| Slide pattern | Problem | This implementation |
+|---|---|---|
+| `<div tabIndex={0} onKeyDown>` | unnamed focus stop, div-soup | labelled `<section tabIndex={0}>` with `aria-describedby` hint |
+| Backspace always undoes | breaks typing and browser-back | guarded: editable targets, repeats, modifiers ignored; `preventDefault()` |
+| pointer start in `useState` | re-render per touch; no capture/cancel | start point in a ref, pointer capture, cancel handling, up-swipe |
+| `Swipe.create(req.body)` | mass assignment | only `{ profileId, direction }` persisted (test 7) |
+| `res.status(400).json({ error: err.message })` | leaks internals; DB errors mislabelled as 400 | business errors 400/404/409, central handler returns generic `500` (test 12) |
+| `Profile.find().lean()` | leaks `_id`/`__v` (lean skips `toJSON`) | `.select('-_id -__v').lean().exec()` (test 1) |
+| `throw new Error('MONGODB_URI missing')` at top level | stack trace, untestable | pure `loadConfig()` + one-line message + exit code 1 |
+| timer `visibilitychange` without cleanup | listener leak on every visit | `removeEventListener` in the effect cleanup (timer test 8) |
+| hard-coded `/dossier/himass`, `/dossier/tanvuu` routes | not data-driven | dynamic `/dossier/:playerID` with in-layout 404 |

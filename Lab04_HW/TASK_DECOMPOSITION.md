@@ -536,31 +536,21 @@ HW4/
 
 ### 6. Verification
 
-- [ ] **6.1** `git grep` sweep: no `<div`, index keys, `keyCode`, `keypress`, `var`, `defaultProps`, `didCancel`, `window.alert`, `dangerouslySetInnerHTML`, hard-coded URIs, deprecated Mongoose flags
-- [ ] **6.2** Keyboard-only run: nav → deck → arrows → Backspace → buttons → dossier links; visible focus everywhere
-- [ ] **6.3** Slow 3G: switch quickly between Swipe and dossiers → in-flight GETs **(canceled)**; skeletons with CLS ≈ 0
-- [ ] **6.4** Responsive 375 / 768 / 1440 px, no horizontal scroll; touch drag works in Device Toolbar
-- [ ] **6.5** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
-- [ ] **6.6** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` pass (client + server)
-- [ ] 📸 **S8** — Slow 3G canceled requests
-- [ ] 📸 **S9** — Lighthouse 100/100
-- [ ] 📸 **S10** — 375 px + 1440 px
-- [ ] 📸 **S-pass** — All client + server tests passing
-
+- [x] **6.1** `git grep` sweep: no `<div`, index keys, `keyCode`, `keypress`, `var`, `defaultProps`, `didCancel`, `window.alert`, `dangerouslySetInnerHTML`, hard-coded URIs, deprecated Mongoose flags
+- [x] **6.2** Keyboard-only run: nav → deck → arrows → Backspace → buttons → dossier links; visible focus everywhere
+- [x] **6.3** Slow 3G: switch quickly between Swipe and dossiers → in-flight GETs **(canceled)**; skeletons with CLS ≈ 0
+- [x] **6.4** Responsive 375 / 768 / 1440 px, no horizontal scroll; touch drag works in Device Toolbar
+- [x] **6.5** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
+- [x] **6.6** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` pass (client + server)
 ---
 
 ### 7. AI Failure Audit (`## Homework 4`)
 
-- [ ] **7.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence* (IDs `H4-Fxx`)
-- [ ] **7.2** Architecture Analysis: derived state (score, current card) vs stored state, LIFO undo with server sync, pointer/keyboard/button parity (WCAG 2.5.7), matrix as pure function, why the slide code was not copied verbatim (div with tabIndex, `req.body` spread, `err.message` leak, missing listener cleanup) → commit `docs(hw4): ai failure audit`
+- [x] **7.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence* (IDs `H4-Fxx`)
+- [x] **7.2** Architecture Analysis: derived state (score, current card) vs stored state, LIFO undo with server sync, pointer/keyboard/button parity (WCAG 2.5.7), matrix as pure function, why the slide code was not copied verbatim (div with tabIndex, `req.body` spread, `err.message` leak, missing listener cleanup) → commit `docs(hw4): ai failure audit`
 
 ---
 
-### 8. Submission
-
-- [ ] **8.1** `git log --graph --oneline --decorate`: contract → tests (red) → feat, per sprint
-- [ ] **8.2** Defense prep: explain derived score/index, LIFO undo, `event.key` handling and the Backspace guard, pointer capture, `.lean()` vs documents, fail-fast env check, matrix verdict rule
-- [ ] 📸 **S11** — `git log --graph` for HW4
 
 ---
 
@@ -575,7 +565,6 @@ HW4/
 | 4 | Swipe UI & Input | ✅ |
 | 5 | Appeal Portal | ✅ |
 | 6 | Verification | ⬜ |
-| 7 | AI Failure Audit | ⬜ |
-| 8 | Submission | ⬜ |
+| 7 | AI Failure Audit | ✅ |
 
-**Report screenshots:** S0 · S1 · S1b · S2–S5 · S6 · S7 · S8–S10 · S-pass · S11
+
