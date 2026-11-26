@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["../shared/*"]
+    }
+  },
+  "include": ["src", "tests", "../shared"]
+}

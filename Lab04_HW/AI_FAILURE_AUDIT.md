@@ -450,3 +450,28 @@ useSearchParams() ─▶ photoId = searchParams.get('photoId')
 
 - `PhotoGalleryLayout` is `React.lazy`; `<Suspense fallback={<GallerySkeleton />}>` shows a skeleton that reuses `.page`, `.photo-grid`, `.photo-card`, `.photo-thumb`, so the real grid replaces it without moving (CLS ≈ 0). The skeleton exposes `aria-busy="true"` + `aria-live="polite"` and hides its fake content with `aria-hidden`.
 - Every `<img>` carries intrinsic `width`/`height`; thumbnails use `aspect-ratio: 3 / 2` + `object-fit: cover`, the dialog uses `object-fit: contain` + `max-height: 70vh` so portrait photos fit a 375 px screen.
+
+## Homework 4
+
+> Only real AI-caused failures encountered during development and verification are logged here.
+> No failures are staged or fabricated.
+> Slide 31–33 code was treated as reference only; deliberate deviations are explained in the Architecture Analysis.
+
+### Failure Log
+
+<!-- Copy this template for each real failure -->
+
+#### H4-F01 — <short title>
+
+- **Date / WBS task:** YYYY-MM-DD · <task id, e.g. 4.2>
+- **AI prompt:**
+  > <exact prompt that produced the faulty code>
+- **Symptom:** <what went wrong: console error, failing test, wrong UI, etc.>
+- **Root cause:** <why the AI output was wrong>
+- **Fix:** <what was changed manually>
+- **Evidence:** <test name / DevTools observation> — screenshot in report, section H4-F01
+
+---
+
+### Architecture Analysis
+_Written in WBS 7.2 after implementation._

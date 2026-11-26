@@ -446,3 +446,153 @@ HW3/
 | 6 | Submission | ⬜ |
 
 **Report screenshots:** S0 · S-fail · S1–S5 · S-pass · S6 · S7 · S8
+
+## Homework 4 — "Hen Ho Nhung Khong Yeu" SwipeDeck + Fair-Play Appeal Portal
+
+> Source: Slides 31–33 (reference only — implementation follows project rules, not the slide code verbatim)
+> Location: `Lab04_HW/HW4/` — all paths relative to `HW4/` unless stated otherwise
+> Stack: React 19 + Vite + React Router v7 · Express + Mongoose 8 · shared validation
+> Every task follows: **[Contract] → [Fail Test] → [Implement] → [Refactor]**
+> Commit scope: `type(hw4): message` (types: init, docs, feat, test, fix) · Shell: PowerShell (`npm.cmd`, `npx.cmd`)
+> 📸 = take a screenshot and paste it directly into the Word report (caption = screenshot ID)
+
+**Definition of Done:** `/swipe` shows a deck of profiles loaded from `GET /api/profiles`. Each card can be swiped left/right/up by pointer drag, by ArrowLeft/ArrowRight/ArrowUp, or by visible Nope/Like/Super buttons (WCAG 2.2 — 2.5.7). Every swipe is persisted with `POST /api/swipes`. Backspace or an Undo button pops the last swipe (LIFO) and deletes it on the server. The asymmetric score and the current card are derived from the history — never stored. `/dossier/:playerID` shows the Himass/TanVuu case files with a derived Disproportionality Matrix and the zero-drift SLA countdown (visibility re-sync with cleanup). Every real AI failure is logged in `AI_FAILURE_AUDIT.md` under `## Homework 4`.
+
+### Folder Structure
+
+~~~text
+HW4/
+├── client/
+│   ├── public/avatars/            # generated placeholder SVGs
+│   ├── src/
+│   │   ├── components/            # AppLayout, SwipeDeck, SwipeCard, SwipeControls, ScoreBoard,
+│   │   │                          # DossierView, DisproportionalityMatrix, SlaCountdown, Skeleton, NotFoundState
+│   │   ├── hooks/                 # useSwipeDeck.js, useSwipeGestures.js, useAppealSlaTimer.js, useAbortableGet.js
+│   │   ├── routes/AppRoutes.jsx
+│   │   └── utils/
+│   └── tests/
+├── server/
+│   ├── models/  routes/  middleware/  tests/
+│   ├── .env.example
+│   ├── app.js
+│   └── server.js
+├── shared/
+│   ├── swipeRules.js              # directions, score weights, validateSwipe
+│   ├── computeScore.js
+│   ├── computeMatrix.js
+│   └── players.js                 # Himass, TanVuu (+ severity, precedents)
+├── docs/HW4_CONTRACT.md  docs/API_CONTRACT.md
+└── README.md
+~~~
+
+---
+
+### 0. Setup
+
+- [x] **0.1** Scaffold `client/` (React 19 + Vite, `createRoot`, `<StrictMode>`, `react-router@7`, Vitest + jsdom + Testing Library + user-event) and `server/` (Express, `cors`, Mongoose 8, Vitest, supertest, `mongodb-memory-server`, ESM)
+- [x] **0.2** Copy the proven HW2 config: `vite.config.js` (`vitest/config`, `@shared` alias, `fs.allow`, `/api` proxy), `tests/setup.js` (`expect.extend(matchers)`), `server/vitest.config.js`, `tests/helpers/db.js`
+- [x] **0.3** `server/.env.example` (`MONGODB_URI`, `PORT`, `CLIENT_ORIGIN`); git-ignore `.env`; `server.js` **fails fast** when `MONGODB_URI` is missing
+- [x] **0.4** Seed `shared/players.js` (HW2 + `violationSeverity`, `sanctionSeverity`, `precedents[]`), `server/seed/profiles.data.js` (8 fictional adult profiles) + `client/scripts/generate-avatars.mjs`; DB seed script follows the model in 2.2
+- [x] **0.5** `README.md`; add `## Homework 4` to the root `AI_FAILURE_AUDIT.md`
+- [x] **0.6** Run client + server, clean Console → commit `init(hw4): project setup`
+- [x] 📸 **S0** — Client + server running, Console clean
+
+---
+
+### 1. Contract
+
+- [ ] **1.1 [Contract]** `docs/HW4_CONTRACT.md`:
+  - Routes: `/` → `/swipe`; `AppLayout` (nav: Swipe · Himass · TanVuu via `NavLink`) → `/swipe`, `/dossier/:playerID` (lazy + Skeleton), `*` → 404
+  - Swipe model: directions `left` (NOPE, −5), `right` (LIKE, +10), `up` (SUPER, +15); `history` = LIFO stack of `{ id, profileId, direction }`
+  - Derived: `currentProfile = profiles[history.length]`, `score = computeScore(history)`, `isFinished`, `canUndo` — no index/score state
+  - Input map: ArrowLeft/ArrowRight/ArrowUp → swipe, Backspace → undo (`preventDefault`, ignored inside inputs/textarea); pointer drag with `useRef` start point, `setPointerCapture`, `pointercancel`, threshold 80 px (x) / 80 px (up); buttons Nope/Like/Super/Undo with `aria-label`
+  - Live region: polite announcement "Liked Linh. Score 25." after each swipe/undo
+  - Matrix: `computeMatrix(dossier)` → 5×5 grid (violation 1–5 × sanction 1–5) marking the case + precedents; `gap = sanction − violation`; verdict `Disproportionate` when `gap ≥ 2` or above the precedent median by ≥ 2
+  - Test list (→ 2.x, 3.x, 4.x)
+  → commit `docs(hw4): contract`
+- [ ] **1.2 [Contract]** `docs/API_CONTRACT.md`: `GET /api/health`, `GET /api/time`, `GET /api/profiles`, `GET /api/swipes`, `POST /api/swipes` (201/400/404/409 duplicate), `DELETE /api/swipes/:id` (204/404); error shape `{ error, fields? }`; whitelisted persistence; shared `validateSwipe` → commit `docs(hw4): api contract`
+
+---
+
+### 2. Sprint A — Backend API
+
+- [ ] **2.1 [Fail Test]** supertest + in-memory Mongo: profiles list (`.lean().exec()`, no `_id`), swipe 201 + parity with `validateSwipe`, unknown profile 404, duplicate swipe 409, mass-assignment ignored, DELETE 204/404, malformed JSON 400, DB failure 500 without leaks → commit `test(hw4): api tests (red)`
+- [ ] **2.2 [Implement]** Models `Profile`, `Swipe`; routes with `async/await` + `.exec()` + `try/catch → next(err)`; central error handler; `cors({ origin })`; `express.json({ limit })` → commit `feat(hw4): api endpoints`
+- [ ] 📸 **S1** — Thunder Client: POST 201, POST 400 (`fields`), DELETE 204
+- [ ] 📸 **S1b** — Server tests: red → green (2 shots)
+
+---
+
+### 3. Sprint B — SwipeDeck State (LIFO + derived score)
+
+- [ ] **3.1 [Fail Test]** `shared/computeScore.js` unit tests (asymmetric weights, empty = 0) + `useSwipeDeck` hook tests: swipe pushes, undo pops last only (LIFO), `currentProfile` follows `history.length`, finished state, optimistic POST with rollback on failure, undo calls DELETE, AbortController on profile load → commit `test(hw4): swipe state tests (red)`
+- [ ] **3.2 [Implement]** `computeScore` (pure `reduce`); `useSwipeDeck` (immutable push/pop, derived values, abortable load via `useAbortableGet`, `swipe()`/`undo()` with `try/catch`) → commit `feat(hw4): swipe deck state`
+
+---
+
+### 4. Sprint C — SwipeDeck UI & Input
+
+- [ ] **4.1 [Fail Test]** Component tests: card is `<article>` with name/age/bio + avatar `alt`; keyboard arrows swipe; Backspace undoes but not while typing in an input; buttons have accessible names; pointer drag past threshold swipes, short drag does not, `pointercancel` resets; score + live region update; finished screen with "Start over" → commit `test(hw4): swipe ui tests (red)`
+- [ ] **4.2 [Implement]** `SwipeDeck` (`<section aria-labelledby>` focusable via `tabIndex={0}` for keys, no div wrappers), `SwipeCard`, `SwipeControls` (Nope/Like/Super/Undo, `type="button"`), `ScoreBoard`, `useSwipeGestures` (refs, pointer capture, `keydown` + `event.key`) → commit `feat(hw4): swipe deck ui`
+- [ ] **4.3** Motion: card drag transform + exit animation only under `prefers-reduced-motion: no-preference`; visible focus ring
+- [ ] 📸 **S2** — Deck with card, controls and score
+- [ ] 📸 **S3** — Mid-drag card (tilt) and after swipe (score changed)
+- [ ] 📸 **S4** — Undo via Backspace: card returns, score reverted, Network shows `DELETE /api/swipes/:id` 204
+- [ ] 📸 **S5** — Accessibility Tree: buttons named, live region text
+
+---
+
+### 5. Sprint D — Fair-Play Appeal Portal
+
+- [ ] **5.1 [Fail Test]** `computeMatrix` unit tests (grid shape, case/precedent cells, gap, verdict boundaries); routing tests (`/dossier/himass`, `/dossier/tanvuu`, unknown → 404 inside layout); matrix renders as `<table>` with `<caption>`, `<th scope>`; timer tests reused from HW2 (visibility listener removed on unmount) → commit `test(hw4): appeal portal tests (red)`
+- [ ] **5.2 [Implement]** `DossierView` via dynamic `/dossier/:playerID` + `useParams` + `find()`; `DisproportionalityMatrix` (`useMemo(() => computeMatrix(dossier), [dossier])`, accessible table, verdict text not colour-only); port `useAppealSlaTimer` + `SlaCountdown` from HW2 → commit `feat(hw4): appeal portal`
+- [ ] 📸 **S6** — `/dossier/himass`: case file + matrix + countdown
+- [ ] 📸 **S7** — `/dossier/tanvuu` (different verdict) and unknown id 404 (2 shots)
+
+---
+
+### 6. Verification
+
+- [ ] **6.1** `git grep` sweep: no `<div`, index keys, `keyCode`, `keypress`, `var`, `defaultProps`, `didCancel`, `window.alert`, `dangerouslySetInnerHTML`, hard-coded URIs, deprecated Mongoose flags
+- [ ] **6.2** Keyboard-only run: nav → deck → arrows → Backspace → buttons → dossier links; visible focus everywhere
+- [ ] **6.3** Slow 3G: switch quickly between Swipe and dossiers → in-flight GETs **(canceled)**; skeletons with CLS ≈ 0
+- [ ] **6.4** Responsive 375 / 768 / 1440 px, no horizontal scroll; touch drag works in Device Toolbar
+- [ ] **6.5** Lighthouse Accessibility + Best Practices 100/100; W3C Nu Checker clean
+- [ ] **6.6** `npm.cmd run lint`, `npm.cmd run test:run`, `npm.cmd run build` pass (client + server)
+- [ ] 📸 **S8** — Slow 3G canceled requests
+- [ ] 📸 **S9** — Lighthouse 100/100
+- [ ] 📸 **S10** — 375 px + 1440 px
+- [ ] 📸 **S-pass** — All client + server tests passing
+
+---
+
+### 7. AI Failure Audit (`## Homework 4`)
+
+- [ ] **7.1** Log only real AI failures as they occur: *Prompt → Symptom → Root cause → Fix → Evidence* (IDs `H4-Fxx`)
+- [ ] **7.2** Architecture Analysis: derived state (score, current card) vs stored state, LIFO undo with server sync, pointer/keyboard/button parity (WCAG 2.5.7), matrix as pure function, why the slide code was not copied verbatim (div with tabIndex, `req.body` spread, `err.message` leak, missing listener cleanup) → commit `docs(hw4): ai failure audit`
+
+---
+
+### 8. Submission
+
+- [ ] **8.1** `git log --graph --oneline --decorate`: contract → tests (red) → feat, per sprint
+- [ ] **8.2** Defense prep: explain derived score/index, LIFO undo, `event.key` handling and the Backspace guard, pointer capture, `.lean()` vs documents, fail-fast env check, matrix verdict rule
+- [ ] 📸 **S11** — `git log --graph` for HW4
+
+---
+
+### Progress
+
+| # | Workstream | Status |
+|---|---|---|
+| 0 | Setup | ⬜ |
+| 1 | Contract | ⬜ |
+| 2 | Backend API | ⬜ |
+| 3 | Swipe State | ⬜ |
+| 4 | Swipe UI & Input | ⬜ |
+| 5 | Appeal Portal | ⬜ |
+| 6 | Verification | ⬜ |
+| 7 | AI Failure Audit | ⬜ |
+| 8 | Submission | ⬜ |
+
+**Report screenshots:** S0 · S1 · S1b · S2–S5 · S6 · S7 · S8–S10 · S-pass · S11
