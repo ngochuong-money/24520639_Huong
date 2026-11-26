@@ -573,7 +573,7 @@ HW4/
 | 2 | Backend API | ✅ |
 | 3 | Swipe State | ✅ |
 | 4 | Swipe UI & Input | ✅ |
-| 5 | Appeal Portal | ⬜ |
+| 5 | Appeal Portal | ✅ |
 | 6 | Verification | ⬜ |
 | 7 | AI Failure Audit | ⬜ |
 | 8 | Submission | ⬜ |
